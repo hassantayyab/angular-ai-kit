@@ -84,7 +84,7 @@ export class ClickOutsideDirective {
         }
 
         const clickedInside = this.elementRef.nativeElement.contains(
-          mouseEvent.target,
+          mouseEvent.target
         );
 
         if (clickedInside) {
@@ -94,7 +94,7 @@ export class ClickOutsideDirective {
         // Check excluded elements
         const excludedElements = this.exclude();
         const clickedOnExcluded = excludedElements.some((element) =>
-          element?.contains(mouseEvent.target as Node),
+          element?.contains(mouseEvent.target as Node)
         );
 
         if (clickedOnExcluded) {
@@ -103,7 +103,7 @@ export class ClickOutsideDirective {
 
         this.clickOutside.emit(mouseEvent);
       },
-      true, // Use capture phase
+      true // Use capture phase
     ) as unknown as () => void;
   }
 
@@ -115,7 +115,7 @@ export class ClickOutsideDirective {
       this.document.removeEventListener(
         'click',
         this.clickListener as never,
-        true,
+        true
       );
     }
   }

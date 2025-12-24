@@ -71,7 +71,12 @@ template: `
     </div>
 
     <form role="search" (submit)="handleSubmit()">
-      <input type="text" role="searchbox" [attr.aria-label]="'Type your message'" [attr.aria-describedby]="'message-hint'" />
+      <input
+        type="text"
+        role="searchbox"
+        [attr.aria-label]="'Type your message'"
+        [attr.aria-describedby]="'message-hint'"
+      />
       <button type="submit" [attr.aria-label]="'Send message'">Send</button>
     </form>
   `,
@@ -218,7 +223,11 @@ export class ModalComponent implements AfterViewInit {
 @Component({
   selector: 'ai-dialog',
   template: `
-    <div role="dialog" [attr.aria-modal]="true" (keydown.tab)="handleTab($event)">
+    <div
+      role="dialog"
+      [attr.aria-modal]="true"
+      (keydown.tab)="handleTab($event)"
+    >
       <button #firstFocusable>First</button>
       <!-- Content -->
       <button #lastFocusable>Last</button>
@@ -402,7 +411,14 @@ export class AnimatedComponent {
         }
       </label>
 
-      <input [id]="inputId()" [type]="type()" [required]="required()" [attr.aria-describedby]="errorId()" [attr.aria-invalid]="hasError()" [attr.aria-required]="required()" />
+      <input
+        [id]="inputId()"
+        [type]="type()"
+        [required]="required()"
+        [attr.aria-describedby]="errorId()"
+        [attr.aria-invalid]="hasError()"
+        [attr.aria-required]="required()"
+      />
 
       @if (hasError()) {
         <div [id]="errorId()" role="alert" class="text-red-600">
@@ -425,7 +441,9 @@ export class FormFieldComponent {
   error = input<string>('');
   hint = input<string>('');
 
-  inputId = computed(() => `ai-input-${Math.random().toString(36).substr(2, 9)}`);
+  inputId = computed(
+    () => `ai-input-${Math.random().toString(36).substr(2, 9)}`
+  );
   errorId = computed(() => `${this.inputId()}-error`);
   hintId = computed(() => `${this.inputId()}-hint`);
   hasError = computed(() => this.error().length > 0);

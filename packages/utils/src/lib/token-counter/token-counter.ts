@@ -45,7 +45,7 @@ const TOKEN_RATIOS: Record<TokenModel, number> = {
  */
 export function countTokens(
   text: string,
-  model: TokenModel = 'default',
+  model: TokenModel = 'default'
 ): number {
   if (!text || text.length === 0) {
     return 0;
@@ -78,7 +78,7 @@ export function countTokens(
  */
 export function countMessagesTokens(
   messages: string[],
-  model: TokenModel = 'default',
+  model: TokenModel = 'default'
 ): number {
   return messages.reduce((total, message) => {
     return total + countTokens(message, model);
@@ -102,7 +102,7 @@ export function countMessagesTokens(
 export function exceedsTokenLimit(
   text: string,
   limit: number,
-  model: TokenModel = 'default',
+  model: TokenModel = 'default'
 ): boolean {
   return countTokens(text, model) > limit;
 }
@@ -126,7 +126,7 @@ export function truncateToTokenLimit(
   text: string,
   limit: number,
   model: TokenModel = 'default',
-  suffix = '...',
+  suffix = '...'
 ): string {
   if (countTokens(text, model) <= limit) {
     return text;

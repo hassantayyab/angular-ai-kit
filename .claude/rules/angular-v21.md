@@ -115,7 +115,8 @@ disabled = input(false, {
 
 // Transform string to number
 count = input(0, {
-  transform: (value: string | number) => (typeof value === 'string' ? parseInt(value, 10) : value),
+  transform: (value: string | number) =>
+    typeof value === 'string' ? parseInt(value, 10) : value,
 });
 ```
 

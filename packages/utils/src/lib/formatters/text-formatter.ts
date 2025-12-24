@@ -10,7 +10,7 @@
 export function truncate(
   text: string,
   maxLength: number,
-  suffix = '...',
+  suffix = '...'
 ): string {
   if (text.length <= maxLength) {
     return text;
@@ -69,7 +69,7 @@ export function stripHtml(html: string): string {
 export function highlight(
   text: string,
   search: string,
-  className = 'highlight',
+  className = 'highlight'
 ): string {
   if (!search) return text;
   const regex = new RegExp(`(${search})`, 'gi');

@@ -3,7 +3,9 @@
   "version": "0.0.1",
   "license": "MIT",
   "scripts": {
-    "prepare": "husky"
+    "prepare": "husky",
+    "format": "prettier --write \"**/*.{ts,js,json,md,html,css}\"",
+    "format:check": "prettier --check \"**/*.{ts,js,json,md,html,css}\""
   },
   "private": true,
   "dependencies": {

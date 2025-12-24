@@ -15,7 +15,7 @@ export interface ValidationResult {
  */
 export function validateMessage(
   content: string,
-  maxLength = 10000,
+  maxLength = 10000
 ): ValidationResult {
   if (!content || content.trim().length === 0) {
     return { valid: false, error: 'Message cannot be empty' };

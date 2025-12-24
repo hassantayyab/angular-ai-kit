@@ -120,7 +120,7 @@ export function formatWithSeparators(num: number, separator = ','): string {
 export function formatCurrency(
   amount: number,
   currency = '$',
-  decimals = 2,
+  decimals = 2
 ): string {
   const fixedAmount = amount.toFixed(decimals);
   const parts = fixedAmount.split('.');

@@ -28,7 +28,10 @@ paths: '**/*.ts'
 
 ```typescript
 // Good: Type-safe message handling
-export type ChatMessage = { role: 'user'; content: string; timestamp: Date } | { role: 'assistant'; content: string; timestamp: Date; model?: string } | { role: 'system'; content: string; timestamp: Date };
+export type ChatMessage =
+  | { role: 'user'; content: string; timestamp: Date }
+  | { role: 'assistant'; content: string; timestamp: Date; model?: string }
+  | { role: 'system'; content: string; timestamp: Date };
 
 // Usage
 function processMessage(message: ChatMessage) {
@@ -77,7 +80,9 @@ export function isUserMessage(message: ChatMessage): message is UserMessage {
   return message.role === 'user';
 }
 
-export function isAssistantMessage(message: ChatMessage): message is AssistantMessage {
+export function isAssistantMessage(
+  message: ChatMessage
+): message is AssistantMessage {
   return message.role === 'assistant';
 }
 
@@ -155,7 +160,7 @@ export class ChatError extends Error {
   constructor(
     message: string,
     public code: 'NETWORK_ERROR' | 'VALIDATION_ERROR' | 'UNKNOWN_ERROR',
-    public details?: unknown,
+    public details?: unknown
   ) {
     super(message);
     this.name = 'ChatError';

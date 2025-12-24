@@ -87,7 +87,7 @@ export function isUserMessage(message: ChatMessage): message is UserMessage {
  * Type guard for assistant message
  */
 export function isAssistantMessage(
-  message: ChatMessage,
+  message: ChatMessage
 ): message is AssistantMessage {
   return message.role === 'assistant';
 }
@@ -96,7 +96,7 @@ export function isAssistantMessage(
  * Type guard for system message
  */
 export function isSystemMessage(
-  message: ChatMessage,
+  message: ChatMessage
 ): message is SystemMessage {
   return message.role === 'system';
 }

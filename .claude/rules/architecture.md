@@ -301,7 +301,8 @@ export class MessageComponent {
 export const routes: Routes = [
   {
     path: 'chat',
-    loadComponent: () => import('./chat/chat.component').then((m) => m.ChatComponent),
+    loadComponent: () =>
+      import('./chat/chat.component').then((m) => m.ChatComponent),
   },
 ];
 ```

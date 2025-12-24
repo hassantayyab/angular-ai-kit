@@ -193,7 +193,7 @@ export class FocusTrapDirective {
     ].join(', ');
 
     const elements = Array.from(
-      this.elementRef.nativeElement.querySelectorAll(focusableSelectors),
+      this.elementRef.nativeElement.querySelectorAll(focusableSelectors)
     ) as HTMLElement[];
 
     return elements.filter((el) => this.isVisible(el));

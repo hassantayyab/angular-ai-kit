@@ -13,7 +13,7 @@ console.log('1. Testing cn() utility:');
 const result1 = cn(
   'base-class',
   { active: true, disabled: false },
-  'extra-class',
+  'extra-class'
 );
 console.log(`   cn('base-class', { active: true }, 'extra-class')`);
 console.log(`   Result: "${result1}"`);
@@ -51,5 +51,5 @@ console.log(`   ✅ Expected: true\n`);
 
 console.log('✅ All utility tests completed!\n');
 console.log(
-  'If you see this message without errors, your utilities are working correctly.',
+  'If you see this message without errors, your utilities are working correctly.'
 );

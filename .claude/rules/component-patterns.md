@@ -7,7 +7,16 @@ paths: '**/*.component.ts'
 ## Standard Component Template
 
 ```typescript
-import { Component, ChangeDetectionStrategy, ViewEncapsulation, computed, input, output, signal, inject } from '@angular/core';
+import {
+  Component,
+  ChangeDetectionStrategy,
+  ViewEncapsulation,
+  computed,
+  input,
+  output,
+  signal,
+  inject,
+} from '@angular/core';
 import { cn } from '@angular-ai-kit/utils';
 
 @Component({
@@ -57,7 +66,11 @@ export class ComponentName {
 
   // Computed signals (dynamic classes, derived state)
   containerClasses = computed(() => {
-    return cn('ai-component-base', { 'ai-component-disabled': this.disabled() }, this.customClasses());
+    return cn(
+      'ai-component-base',
+      { 'ai-component-disabled': this.disabled() },
+      this.customClasses()
+    );
   });
 
   hostClasses = computed(() => 'ai-component-wrapper');
@@ -140,12 +153,14 @@ disabled = input(false, {
 
 // Number coercion
 maxLength = input(1000, {
-  transform: (value: string | number) => (typeof value === 'string' ? parseInt(value, 10) : value),
+  transform: (value: string | number) =>
+    typeof value === 'string' ? parseInt(value, 10) : value,
 });
 
 // Array normalization
 items = input<string[]>([], {
-  transform: (value: string | string[]) => (Array.isArray(value) ? value : [value]),
+  transform: (value: string | string[]) =>
+    Array.isArray(value) ? value : [value],
 });
 ```
 
@@ -160,7 +175,7 @@ containerClasses = computed(() => {
   return cn(
     'base-classes',
     { 'conditional-class': this.condition() },
-    this.customClasses(), // Parent override
+    this.customClasses() // Parent override
   );
 });
 ```
@@ -230,7 +245,7 @@ containerClasses = computed(() => {
     },
 
     // Parent override
-    this.customClasses(),
+    this.customClasses()
   );
 });
 ```
@@ -484,7 +499,13 @@ template: `
 // Container (smart component)
 @Component({
   selector: 'ai-chat-container',
-  template: ` <ai-chat-view [messages]="messages()" [loading]="loading()" (messageSubmit)="handleMessageSubmit($event)" /> `,
+  template: `
+    <ai-chat-view
+      [messages]="messages()"
+      [loading]="loading()"
+      (messageSubmit)="handleMessageSubmit($event)"
+    />
+  `,
 })
 export class ChatContainerComponent {
   private chatService = inject(ChatService);
@@ -505,7 +526,10 @@ export class ChatContainerComponent {
   selector: 'ai-chat-view',
   template: `
     <ai-message-list [messages]="messages()" />
-    <ai-message-input [disabled]="loading()" (messageSubmit)="messageSubmit.emit($event)" />
+    <ai-message-input
+      [disabled]="loading()"
+      (messageSubmit)="messageSubmit.emit($event)"
+    />
   `,
 })
 export class ChatViewComponent {

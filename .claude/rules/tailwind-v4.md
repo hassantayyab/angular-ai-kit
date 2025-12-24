@@ -89,7 +89,7 @@ classes = computed(() => {
       'conditional-class': this.condition(),
       'active:ring-2': this.isActive(),
     },
-    this.customClasses(), // Allow class override from parent
+    this.customClasses() // Allow class override from parent
   );
 });
 ```
@@ -143,7 +143,13 @@ classes = computed(() => {
 ## Example Component with Tailwind
 
 ```typescript
-import { Component, ChangeDetectionStrategy, ViewEncapsulation, computed, input } from '@angular/core';
+import {
+  Component,
+  ChangeDetectionStrategy,
+  ViewEncapsulation,
+  computed,
+  input,
+} from '@angular/core';
 import { cn } from '@angular-ai-kit/utils';
 
 @Component({
@@ -170,11 +176,12 @@ export class MessageBubbleComponent {
       // Conditional styles
       {
         'bg-blue-500 text-white': this.role() === 'user',
-        'bg-gray-100 text-gray-900 dark:bg-gray-800 dark:text-gray-100': this.role() === 'assistant',
+        'bg-gray-100 text-gray-900 dark:bg-gray-800 dark:text-gray-100':
+          this.role() === 'assistant',
       },
 
       // Allow override
-      this.customClasses(),
+      this.customClasses()
     );
   });
 }
@@ -224,7 +231,7 @@ containerClasses = computed(() => {
     // Tablet
     'md:flex-row md:gap-4 md:p-6',
     // Desktop
-    'lg:gap-6 lg:p-8',
+    'lg:gap-6 lg:p-8'
   );
 });
 ```

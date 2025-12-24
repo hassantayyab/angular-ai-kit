@@ -64,7 +64,7 @@ export const CHAT_SERVICE = new InjectionToken<ChatService>('CHAT_SERVICE', {
   providedIn: 'root',
   factory: () => {
     throw new Error(
-      'CHAT_SERVICE not provided. Please provide a ChatService implementation.',
+      'CHAT_SERVICE not provided. Please provide a ChatService implementation.'
     );
   },
 });
@@ -87,10 +87,10 @@ export const STREAMING_SERVICE = new InjectionToken<StreamingService>(
     providedIn: 'root',
     factory: () => {
       throw new Error(
-        'STREAMING_SERVICE not provided. Please provide a StreamingService implementation.',
+        'STREAMING_SERVICE not provided. Please provide a StreamingService implementation.'
       );
     },
-  },
+  }
 );
 
 /**
@@ -113,7 +113,7 @@ export const TOKEN_COUNTER = new InjectionToken<TokenCounterFn>(
       // Default implementation: approximate GPT tokens (1 token ≈ 4 characters)
       return (text: string) => Math.ceil(text.length / 4);
     },
-  },
+  }
 );
 
 /**
@@ -142,7 +142,7 @@ export const MARKDOWN_OPTIONS = new InjectionToken<MarkdownOptions>(
       sanitize: true,
       highlight: true,
     }),
-  },
+  }
 );
 
 /**

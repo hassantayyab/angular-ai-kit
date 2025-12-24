@@ -9,7 +9,7 @@ import type { ValidationResult } from './message-validator';
  */
 export function validateFileSize(
   file: File,
-  maxSizeInBytes: number,
+  maxSizeInBytes: number
 ): ValidationResult {
   if (file.size > maxSizeInBytes) {
     const maxSizeMB = (maxSizeInBytes / (1024 * 1024)).toFixed(1);
@@ -23,7 +23,7 @@ export function validateFileSize(
  */
 export function validateFileType(
   file: File,
-  allowedTypes: string[],
+  allowedTypes: string[]
 ): ValidationResult {
   const fileType = file.type;
   const fileExt = `.${file.name.split('.').pop()?.toLowerCase()}`;
