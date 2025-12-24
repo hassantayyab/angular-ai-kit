@@ -64,7 +64,8 @@
       "unitTestRunner": "vitest-angular"
     },
     "@nx/angular:component": {
-      "style": "css"
+      "style": "css",
+      "skipTests": true
     }
   },
   "release": {
