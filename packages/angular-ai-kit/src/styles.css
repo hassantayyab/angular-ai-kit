@@ -1,0 +1,15 @@
+@import 'tailwindcss';
+@source '../../../packages'; /* Watch all libs for classes */
+
+/* Tailwind layers */
+@layer base {
+  /* Base styles will go here */
+}
+
+@layer components {
+  /* Component styles will go here */
+}
+
+@layer utilities {
+  /* Custom utilities will go here */
+}

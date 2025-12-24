@@ -1,0 +1,33 @@
+{
+  "name": "@angular-ai-kit/tokens",
+  "version": "0.0.1",
+  "description": "Design tokens and theming for Angular AI Kit - CSS custom properties and TypeScript interfaces",
+  "keywords": [
+    "angular",
+    "design-tokens",
+    "theming",
+    "css-variables",
+    "tailwind",
+    "typescript"
+  ],
+  "author": "Your Name <your.email@example.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/angular-ai-kit"
+  },
+  "homepage": "https://github.com/yourusername/angular-ai-kit#readme",
+  "bugs": {
+    "url": "https://github.com/yourusername/angular-ai-kit/issues"
+  },
+  "peerDependencies": {
+    "@angular/core": "^21.0.0"
+  },
+  "dependencies": {},
+  "sideEffects": [
+    "*.css"
+  ],
+  "publishConfig": {
+    "access": "public"
+  }
+}

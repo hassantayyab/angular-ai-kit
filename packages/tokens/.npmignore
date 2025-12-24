@@ -1,0 +1,28 @@
+# Source files
+src/
+tsconfig.*.json
+ng-package.json
+
+# Tests
+*.spec.ts
+**/*.spec.ts
+
+# Development
+.editorconfig
+.eslintrc.json
+.prettierrc
+
+# Build artifacts
+*.tsbuildinfo
+.nx/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db

@@ -1,0 +1,39 @@
+{
+  "name": "@angular-ai-kit/core",
+  "version": "0.0.1",
+  "description": "AI-focused UI components for Angular v21 - Chat interfaces, streaming text, and more",
+  "keywords": [
+    "angular",
+    "angular21",
+    "ai",
+    "chat",
+    "ui",
+    "components",
+    "chatgpt",
+    "openai",
+    "anthropic",
+    "streaming",
+    "typescript",
+    "tailwind"
+  ],
+  "author": "Your Name <your.email@example.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/angular-ai-kit"
+  },
+  "homepage": "https://github.com/yourusername/angular-ai-kit#readme",
+  "bugs": {
+    "url": "https://github.com/yourusername/angular-ai-kit/issues"
+  },
+  "peerDependencies": {
+    "@angular/common": "^21.0.0",
+    "@angular/core": "^21.0.0",
+    "@angular-ai-kit/tokens": "0.0.1"
+  },
+  "dependencies": {},
+  "sideEffects": false,
+  "publishConfig": {
+    "access": "public"
+  }
+}
