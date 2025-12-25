@@ -2,6 +2,9 @@
  * Angular AI Kit - Public API
  */
 
+// Components
+export * from './lib/components';
+
 // Directives
 export * from './lib/directives';
 

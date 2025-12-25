@@ -29,7 +29,8 @@
   "peerDependencies": {
     "@angular/common": "^21.0.0",
     "@angular/core": "^21.0.0",
-    "@angular-ai-kit/tokens": "0.0.1"
+    "@angular-ai-kit/tokens": "0.0.1",
+    "@angular-ai-kit/utils": "0.0.1"
   },
   "dependencies": {},
   "sideEffects": false,
