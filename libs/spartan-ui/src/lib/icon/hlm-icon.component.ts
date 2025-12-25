@@ -1,12 +1,12 @@
+import { type VariantProps, cva } from 'class-variance-authority';
+import { cn } from '@angular-ai-kit/utils';
 import {
-  Component,
   ChangeDetectionStrategy,
+  Component,
   ViewEncapsulation,
   computed,
   input,
 } from '@angular/core';
-import { cva, type VariantProps } from 'class-variance-authority';
-import { cn } from '@angular-ai-kit/utils';
 
 export const iconVariants = cva('inline-flex shrink-0', {
   variants: {

@@ -1,15 +1,15 @@
+import { ChatContainerComponent, ChatMessage } from '@angular-ai-kit/core';
+import { HlmButtonDirective } from '@angular-ai-kit/spartan-ui';
+import { cn } from '@angular-ai-kit/utils';
 import {
-  Component,
   ChangeDetectionStrategy,
+  Component,
   ViewEncapsulation,
   computed,
   inject,
   input,
   output,
 } from '@angular/core';
-import { cn } from '@angular-ai-kit/utils';
-import { HlmButtonDirective } from '@angular-ai-kit/spartan-ui';
-import { ChatContainerComponent, ChatMessage } from '@angular-ai-kit/core';
 import { ChatService } from '../../services/chat.service';
 import { ChatInputComponent } from '../chat-input/chat-input.component';
 import { EmptyStateComponent } from '../empty-state/empty-state.component';

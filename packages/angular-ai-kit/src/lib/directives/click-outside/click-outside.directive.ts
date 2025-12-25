@@ -11,18 +11,18 @@
  * </div>
  * ```
  */
+import { DOCUMENT, isPlatformBrowser } from '@angular/common';
 import {
+  DestroyRef,
   Directive,
   ElementRef,
-  output,
-  inject,
   PLATFORM_ID,
   afterNextRender,
-  DestroyRef,
-  signal,
+  inject,
   input,
+  output,
+  signal,
 } from '@angular/core';
-import { isPlatformBrowser, DOCUMENT } from '@angular/common';
 
 /**
  * Directive for detecting clicks outside an element

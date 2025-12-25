@@ -1,14 +1,14 @@
+import { cn } from '@angular-ai-kit/utils';
 import {
-  Component,
   ChangeDetectionStrategy,
+  Component,
   ViewEncapsulation,
+  computed,
   input,
   output,
-  computed,
 } from '@angular/core';
-import { MessageListComponent } from '../message-list';
 import { ChatMessage } from '../../../types';
-import { cn } from '@angular-ai-kit/utils';
+import { MessageListComponent } from '../message-list';
 
 /**
  * ChatContainer Component

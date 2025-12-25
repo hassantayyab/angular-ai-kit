@@ -1,21 +1,21 @@
+import { cn } from '@angular-ai-kit/utils';
+import { isPlatformBrowser } from '@angular/common';
 import {
-  Component,
+  AfterViewInit,
   ChangeDetectionStrategy,
+  Component,
+  ElementRef,
+  PLATFORM_ID,
   ViewEncapsulation,
-  input,
-  output,
   computed,
   effect,
-  viewChild,
-  ElementRef,
-  AfterViewInit,
-  PLATFORM_ID,
   inject,
+  input,
+  output,
+  viewChild,
 } from '@angular/core';
-import { isPlatformBrowser } from '@angular/common';
-import { MessageBubbleComponent } from '../message-bubble';
 import { ChatMessage } from '../../../types';
-import { cn } from '@angular-ai-kit/utils';
+import { MessageBubbleComponent } from '../message-bubble';
 
 /**
  * MessageList Component

@@ -14,17 +14,17 @@
  * </textarea>
  * ```
  */
+import { isPlatformBrowser } from '@angular/common';
 import {
   Directive,
   ElementRef,
-  Renderer2,
-  input,
-  inject,
-  effect,
   PLATFORM_ID,
+  Renderer2,
   afterNextRender,
+  effect,
+  inject,
+  input,
 } from '@angular/core';
-import { isPlatformBrowser } from '@angular/common';
 
 /**
  * Directive for auto-resizing textareas

@@ -1,20 +1,20 @@
-import {
-  Component,
-  ChangeDetectionStrategy,
-  ViewEncapsulation,
-  signal,
-  computed,
-  output,
-  input,
-  ElementRef,
-  viewChild,
-  afterNextRender,
-  inject,
-  PLATFORM_ID,
-} from '@angular/core';
-import { isPlatformBrowser } from '@angular/common';
-import { cn } from '@angular-ai-kit/utils';
 import { HlmButtonDirective } from '@angular-ai-kit/spartan-ui';
+import { cn } from '@angular-ai-kit/utils';
+import { isPlatformBrowser } from '@angular/common';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  ElementRef,
+  PLATFORM_ID,
+  ViewEncapsulation,
+  afterNextRender,
+  computed,
+  inject,
+  input,
+  output,
+  signal,
+  viewChild,
+} from '@angular/core';
 
 /**
  * ChatInputComponent

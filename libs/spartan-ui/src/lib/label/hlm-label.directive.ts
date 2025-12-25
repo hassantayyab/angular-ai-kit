@@ -1,6 +1,6 @@
-import { computed, Directive, input } from '@angular/core';
-import { cva, type VariantProps } from 'class-variance-authority';
+import { type VariantProps, cva } from 'class-variance-authority';
 import { cn } from '@angular-ai-kit/utils';
+import { Directive, computed, input } from '@angular/core';
 
 export const labelVariants = cva(
   'text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70',

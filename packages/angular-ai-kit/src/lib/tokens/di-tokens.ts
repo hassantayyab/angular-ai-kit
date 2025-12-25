@@ -4,7 +4,6 @@
  * These injection tokens provide extensibility points for services and configuration.
  * They allow users to provide their own implementations without modifying the library.
  */
-
 import { InjectionToken } from '@angular/core';
 import type { MarkdownOptions, ThemeConfig } from '../types';
 

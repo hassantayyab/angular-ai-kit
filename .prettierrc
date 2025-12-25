@@ -4,5 +4,19 @@
   "tabWidth": 2,
   "semi": true,
   "printWidth": 80,
-  "plugins": ["prettier-plugin-tailwindcss"]
+  "plugins": [
+    "@trivago/prettier-plugin-sort-imports",
+    "prettier-plugin-tailwindcss"
+  ],
+  "importOrder": [
+    "^@angular-ai-kit/(.*)$",
+    "^@angular/(.*)$",
+    "^@nx/(.*)$",
+    "^@spartan-ng/(.*)$",
+    "^rxjs(.*)$",
+    "^[./]"
+  ],
+  "importOrderSeparation": false,
+  "importOrderSortSpecifiers": true,
+  "importOrderParserPlugins": ["typescript", "decorators-legacy"]
 }

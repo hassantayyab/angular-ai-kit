@@ -1,11 +1,11 @@
+import { cn } from '@angular-ai-kit/utils';
 import {
-  Component,
   ChangeDetectionStrategy,
+  Component,
   ViewEncapsulation,
   computed,
   input,
 } from '@angular/core';
-import { cn } from '@angular-ai-kit/utils';
 
 @Component({
   selector: 'hlm-scroll-area',

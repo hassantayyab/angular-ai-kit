@@ -1,14 +1,14 @@
 import { cn } from '@angular-ai-kit/utils';
 import { isPlatformBrowser } from '@angular/common';
 import {
-  afterNextRender,
   ChangeDetectionStrategy,
   Component,
+  PLATFORM_ID,
+  ViewEncapsulation,
+  afterNextRender,
   computed,
   inject,
-  PLATFORM_ID,
   signal,
-  ViewEncapsulation,
 } from '@angular/core';
 import { ChatViewComponent } from '../../components/chat-view/chat-view.component';
 import { SidebarComponent } from '../../components/sidebar/sidebar.component';

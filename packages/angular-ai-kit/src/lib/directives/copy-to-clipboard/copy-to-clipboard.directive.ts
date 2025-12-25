@@ -11,8 +11,8 @@
  * </button>
  * ```
  */
-import { Directive, input, output, inject, PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
+import { Directive, PLATFORM_ID, inject, input, output } from '@angular/core';
 
 /**
  * Directive for copying text to clipboard

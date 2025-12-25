@@ -1,13 +1,13 @@
+import { ChatMessage } from '@angular-ai-kit/core';
+import { isPlatformBrowser } from '@angular/common';
 import {
   Injectable,
-  signal,
-  computed,
-  inject,
   PLATFORM_ID,
+  computed,
   effect,
+  inject,
+  signal,
 } from '@angular/core';
-import { isPlatformBrowser } from '@angular/common';
-import { ChatMessage } from '@angular-ai-kit/core';
 
 /**
  * Conversation interface for chat history

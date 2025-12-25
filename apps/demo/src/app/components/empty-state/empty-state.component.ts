@@ -1,13 +1,13 @@
+import { HlmCardDirective } from '@angular-ai-kit/spartan-ui';
+import { cn } from '@angular-ai-kit/utils';
 import {
-  Component,
   ChangeDetectionStrategy,
+  Component,
   ViewEncapsulation,
-  signal,
   computed,
   output,
+  signal,
 } from '@angular/core';
-import { cn } from '@angular-ai-kit/utils';
-import { HlmCardDirective } from '@angular-ai-kit/spartan-ui';
 
 /**
  * Suggested prompt interface

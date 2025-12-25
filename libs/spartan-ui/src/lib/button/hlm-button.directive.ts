@@ -1,6 +1,6 @@
+import { type VariantProps, cva } from 'class-variance-authority';
 import { cn } from '@angular-ai-kit/utils';
-import { computed, Directive, input } from '@angular/core';
-import { cva, type VariantProps } from 'class-variance-authority';
+import { Directive, computed, input } from '@angular/core';
 
 // Button variants using class-variance-authority
 export const buttonVariants = cva(

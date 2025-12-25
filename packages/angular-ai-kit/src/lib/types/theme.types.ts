@@ -1,7 +1,6 @@
 /**
  * Angular AI Kit - Theme Types
  */
-
 import type { ColorPalette } from '@angular-ai-kit/tokens';
 
 /**

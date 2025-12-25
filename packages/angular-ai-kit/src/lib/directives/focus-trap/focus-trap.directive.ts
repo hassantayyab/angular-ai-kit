@@ -13,19 +13,19 @@
  * </div>
  * ```
  */
+import { DOCUMENT, isPlatformBrowser } from '@angular/common';
 import {
+  DestroyRef,
   Directive,
   ElementRef,
-  input,
-  output,
-  inject,
+  HostListener,
   PLATFORM_ID,
   afterNextRender,
-  DestroyRef,
   effect,
-  HostListener,
+  inject,
+  input,
+  output,
 } from '@angular/core';
-import { isPlatformBrowser, DOCUMENT } from '@angular/common';
 
 /**
  * Directive for trapping focus within an element
