@@ -15,6 +15,7 @@ import { isPlatformBrowser } from '@angular/common';
 import { cn } from '@angular-ai-kit/utils';
 import { ChatService, Conversation } from '../../services/chat.service';
 import { ThemeToggleComponent } from '../theme-toggle/theme-toggle.component';
+import { SidenavToggleComponent } from '../sidenav-toggle/sidenav-toggle.component';
 
 /**
  * Conversation group interface for display
@@ -52,7 +53,7 @@ interface ConversationDisplay {
   selector: 'app-sidebar',
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
-  imports: [ThemeToggleComponent],
+  imports: [ThemeToggleComponent, SidenavToggleComponent],
   host: {
     class: 'app-sidebar-host shrink-0',
     ngSkipHydration: 'true',
@@ -73,31 +74,42 @@ interface ConversationDisplay {
 
     <!-- Sidebar -->
     <aside [class]="sidebarClasses()">
-      <!-- Header: Logo & New Chat Button -->
+      <!-- Header: Logo, Toggle & New Chat Button -->
       <div [class]="headerClasses()">
-        <!-- Logo (when expanded) -->
-        @if (!collapsed()) {
-          <div class="mb-3 flex items-center gap-2 px-1">
-            <div [class]="logoClasses()">
-              <svg
-                class="h-5 w-5"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="1.5"
+        <!-- Top row: Logo + Toggle button -->
+        <div [class]="headerTopRowClasses()">
+          @if (!collapsed()) {
+            <!-- Logo (when expanded) -->
+            <div class="flex items-center gap-2">
+              <div [class]="logoClasses()">
+                <svg
+                  class="h-5 w-5"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456z"
+                  />
+                </svg>
+              </div>
+              <span class="text-sm font-semibold text-[var(--foreground)]"
+                >Angular AI Kit</span
               >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456z"
-                />
-              </svg>
             </div>
-            <span class="text-sm font-semibold text-[var(--foreground)]"
-              >Angular AI Kit</span
-            >
-          </div>
-        }
+
+            <!-- Toggle button (collapse) - desktop only -->
+            <app-sidenav-toggle
+              class="hidden md:block"
+              [collapsed]="collapsed()"
+              [variant]="'sidebar'"
+              (toggle)="handleToggle()"
+            />
+          }
+        </div>
 
         <!-- New Chat Button -->
         <button
@@ -397,6 +409,12 @@ export class SidebarComponent {
     return cn('shrink-0', 'border-b border-[var(--border)]', 'p-3');
   });
 
+  headerTopRowClasses = computed(() => {
+    return cn('flex items-center justify-between', 'mb-3', {
+      'justify-center': this.collapsed(),
+    });
+  });
+
   logoClasses = computed(() => {
     return cn(
       'flex items-center justify-center',
@@ -465,6 +483,10 @@ export class SidebarComponent {
 
   collapse(): void {
     this.collapsedChange.emit(true);
+  }
+
+  handleToggle(): void {
+    this.collapsedChange.emit(!this.collapsed());
   }
 
   handleNewConversation(): void {

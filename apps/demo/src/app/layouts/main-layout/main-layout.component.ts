@@ -12,6 +12,7 @@ import {
 } from '@angular/core';
 import { ChatViewComponent } from '../../components/chat-view/chat-view.component';
 import { SidebarComponent } from '../../components/sidebar/sidebar.component';
+import { SidenavToggleComponent } from '../../components/sidenav-toggle/sidenav-toggle.component';
 
 /**
  * MainLayout Component
@@ -29,7 +30,7 @@ import { SidebarComponent } from '../../components/sidebar/sidebar.component';
   selector: 'app-main-layout',
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
-  imports: [SidebarComponent, ChatViewComponent],
+  imports: [SidebarComponent, ChatViewComponent, SidenavToggleComponent],
   host: {
     class: 'app-main-layout-host block h-screen',
     ngSkipHydration: 'true',
@@ -44,6 +45,17 @@ import { SidebarComponent } from '../../components/sidebar/sidebar.component';
 
       <!-- Main Content Area -->
       <main [class]="contentClasses()">
+        <!-- Floating toggle button (visible when sidebar is collapsed on desktop) -->
+        @if (showFloatingToggle()) {
+          <div [class]="floatingToggleContainerClasses()">
+            <app-sidenav-toggle
+              [collapsed]="sidebarCollapsed()"
+              [variant]="'floating'"
+              (toggle)="toggleSidebar()"
+            />
+          </div>
+        }
+
         <app-chat-view
           [showMobileMenuButton]="isMobile()"
           (mobileMenuClick)="openSidebar()"
@@ -83,6 +95,18 @@ export class MainLayoutComponent {
   // Computed
   isMobile = computed(() => this.isMobileSignal());
 
+  // Show floating toggle only when sidebar is collapsed and not on mobile
+  showFloatingToggle = computed(() => {
+    return this.sidebarCollapsed() && !this.isMobile();
+  });
+
+  floatingToggleContainerClasses = computed(() => {
+    return cn('absolute top-4 left-4 z-10', 'transition-opacity duration-200', {
+      'opacity-100': this.showFloatingToggle(),
+      'opacity-0 pointer-events-none': !this.showFloatingToggle(),
+    });
+  });
+
   layoutClasses = computed(() => {
     return cn(
       'app-main-layout',
@@ -95,6 +119,7 @@ export class MainLayoutComponent {
   contentClasses = computed(() => {
     return cn(
       'app-main-content',
+      'relative', // For floating toggle button positioning
       'flex flex-col flex-1 min-w-0 min-h-0',
       'overflow-hidden',
       'bg-[var(--background)]'
@@ -114,5 +139,9 @@ export class MainLayoutComponent {
 
   openSidebar(): void {
     this.sidebarCollapsed.set(false);
+  }
+
+  toggleSidebar(): void {
+    this.sidebarCollapsed.update((collapsed) => !collapsed);
   }
 }
