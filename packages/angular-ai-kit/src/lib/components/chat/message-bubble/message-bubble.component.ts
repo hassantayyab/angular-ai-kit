@@ -35,67 +35,12 @@ import { ChatMessage } from '../../../types';
  */
 @Component({
   selector: 'ai-message-bubble',
+  templateUrl: './message-bubble.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
   host: {
     class: 'ai-message-bubble-host',
   },
-  template: `
-    <article
-      [class]="containerClasses()"
-      [attr.role]="'article'"
-      [attr.aria-label]="ariaLabel()"
-    >
-      <!-- Avatar section -->
-      @if (showAvatar()) {
-        <div [class]="avatarClasses()">
-          @if (message().role === 'user') {
-            <span class="text-xl" aria-hidden="true">👤</span>
-          } @else if (message().role === 'assistant') {
-            <span class="text-xl" aria-hidden="true">🤖</span>
-          } @else {
-            <span class="text-xl" aria-hidden="true">⚙️</span>
-          }
-        </div>
-      }
-
-      <!-- Content section -->
-      <div class="ai-message-bubble-content-wrapper min-w-0 flex-1">
-        <div [class]="contentClasses()">
-          {{ message().content }}
-        </div>
-
-        <!-- Actions section (shown on hover or when showActions is true) -->
-        @if (showActions() || isHovered()) {
-          <div [class]="actionsClasses()">
-            <!-- Copy button -->
-            <button
-              type="button"
-              [attr.aria-label]="'Copy message'"
-              (click)="handleCopy()"
-              [class]="buttonClasses()"
-            >
-              <span class="text-xs">📋</span>
-              <span class="sr-only">Copy</span>
-            </button>
-
-            <!-- Regenerate button (only for assistant messages) -->
-            @if (message().role === 'assistant') {
-              <button
-                type="button"
-                [attr.aria-label]="'Regenerate message'"
-                (click)="handleRegenerate()"
-                [class]="buttonClasses()"
-              >
-                <span class="text-xs">🔄</span>
-                <span class="sr-only">Regenerate</span>
-              </button>
-            }
-          </div>
-        }
-      </div>
-    </article>
-  `,
 })
 export class MessageBubbleComponent {
   // ==========================================

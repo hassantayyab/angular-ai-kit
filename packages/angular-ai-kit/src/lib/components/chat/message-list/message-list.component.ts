@@ -41,68 +41,13 @@ import { cn } from '@angular-ai-kit/utils';
  */
 @Component({
   selector: 'ai-message-list',
+  templateUrl: './message-list.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
   imports: [MessageBubbleComponent],
   host: {
     class: 'ai-message-list-host',
   },
-  template: `
-    <div
-      [class]="containerClasses()"
-      [style.max-height]="maxHeight()"
-      role="log"
-      aria-live="polite"
-      aria-atomic="false"
-      [attr.aria-label]="'Chat message list'"
-      #scrollContainer
-    >
-      <!-- Messages -->
-      @if (messages().length > 0) {
-        @for (message of messages(); track message.id) {
-          <ai-message-bubble
-            [message]="message"
-            [showAvatar]="showAvatars()"
-            [showActions]="true"
-            (copied)="handleMessageCopy($event, message)"
-            (regenerate)="handleMessageRegenerate(message)"
-          />
-        }
-      } @else {
-        <!-- Empty state -->
-        <div [class]="emptyStateClasses()">
-          <p class="text-gray-500 dark:text-gray-400">
-            {{ emptyMessage() }}
-          </p>
-        </div>
-      }
-
-      <!-- Loading indicator -->
-      @if (loading()) {
-        <div [class]="typingIndicatorClasses()" role="status">
-          <div class="flex items-center gap-2">
-            <div class="flex gap-1">
-              <span
-                class="h-2 w-2 animate-bounce rounded-full bg-gray-400"
-                style="animation-delay: 0ms"
-              ></span>
-              <span
-                class="h-2 w-2 animate-bounce rounded-full bg-gray-400"
-                style="animation-delay: 150ms"
-              ></span>
-              <span
-                class="h-2 w-2 animate-bounce rounded-full bg-gray-400"
-                style="animation-delay: 300ms"
-              ></span>
-            </div>
-            <span class="text-sm text-gray-500 dark:text-gray-400"
-              >AI is thinking...</span
-            >
-          </div>
-        </div>
-      }
-    </div>
-  `,
 })
 export class MessageListComponent implements AfterViewInit {
   // ==========================================

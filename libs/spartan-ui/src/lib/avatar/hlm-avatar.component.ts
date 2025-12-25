@@ -29,12 +29,12 @@ export type AvatarVariants = VariantProps<typeof avatarVariants>;
 
 @Component({
   selector: 'hlm-avatar',
+  templateUrl: './hlm-avatar.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
   host: {
     '[class]': 'computedClass()',
   },
-  template: `<ng-content />`,
 })
 export class HlmAvatarComponent {
   size = input<AvatarVariants['size']>('default');
@@ -47,19 +47,12 @@ export class HlmAvatarComponent {
 
 @Component({
   selector: 'hlm-avatar-image',
+  templateUrl: './hlm-avatar-image.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
   host: {
     '[class]': 'computedClass()',
   },
-  template: `
-    <img
-      [src]="src()"
-      [alt]="alt()"
-      class="aspect-square h-full w-full object-cover"
-      (error)="onError()"
-    />
-  `,
 })
 export class HlmAvatarImageComponent {
   src = input.required<string>();
@@ -77,12 +70,12 @@ export class HlmAvatarImageComponent {
 
 @Component({
   selector: 'hlm-avatar-fallback',
+  templateUrl: './hlm-avatar-fallback.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
   host: {
     '[class]': 'computedClass()',
   },
-  template: `<ng-content />`,
 })
 export class HlmAvatarFallbackComponent {
   class = input<string>('');

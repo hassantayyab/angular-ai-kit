@@ -26,13 +26,13 @@ export type IconVariants = VariantProps<typeof iconVariants>;
 
 @Component({
   selector: 'hlm-icon',
+  templateUrl: './hlm-icon.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
   host: {
     '[class]': 'computedClass()',
     '[attr.aria-hidden]': 'true',
   },
-  template: `<ng-content />`,
 })
 export class HlmIconComponent {
   size = input<IconVariants['size']>('default');

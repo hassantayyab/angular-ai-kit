@@ -38,67 +38,13 @@ import { cn } from '@angular-ai-kit/utils';
  */
 @Component({
   selector: 'ai-chat-container',
+  templateUrl: './chat-container.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
   imports: [MessageListComponent],
   host: {
     class: 'ai-chat-container-host',
   },
-  template: `
-    <div
-      [class]="containerClasses()"
-      role="region"
-      [attr.aria-label]="'Chat conversation'"
-    >
-      <!-- Header (optional) -->
-      @if (showHeader()) {
-        <header [class]="headerClasses()">
-          <div class="flex items-center justify-between">
-            <h2 class="text-lg font-semibold text-gray-900 dark:text-gray-100">
-              {{ title() || 'Chat' }}
-            </h2>
-            @if (showHeaderActions()) {
-              <div class="flex gap-2">
-                <!-- Slot for header actions (future) -->
-                <ng-content select="[header-actions]" />
-              </div>
-            }
-          </div>
-        </header>
-      }
-
-      <!-- Messages section -->
-      <div [class]="messagesWrapperClasses()">
-        <ai-message-list
-          [messages]="messages()"
-          [loading]="loading()"
-          [autoScroll]="autoScroll()"
-          [showAvatars]="showAvatars()"
-          [emptyMessage]="emptyMessage()"
-          [maxHeight]="messagesMaxHeight()"
-          (messageCopy)="handleMessageCopy($event)"
-          (messageRegenerate)="handleMessageRegenerate($event)"
-        />
-      </div>
-
-      <!-- Footer (input section placeholder) -->
-      @if (showFooter()) {
-        <footer [class]="footerClasses()">
-          <div class="flex items-center justify-center">
-            <!-- Slot for input components (Phase 0.3) -->
-            <ng-content select="[footer-content]" />
-
-            <!-- Default placeholder -->
-            @if (!hasFooterContent()) {
-              <div class="py-4 text-sm text-gray-500 dark:text-gray-400">
-                Input component will be added in Phase 0.3
-              </div>
-            }
-          </div>
-        </footer>
-      }
-    </div>
-  `,
 })
 export class ChatContainerComponent {
   // ==========================================

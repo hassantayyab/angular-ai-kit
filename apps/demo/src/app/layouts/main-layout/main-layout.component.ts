@@ -28,6 +28,7 @@ import { SidenavToggleComponent } from '../../components/sidenav-toggle/sidenav-
  */
 @Component({
   selector: 'app-main-layout',
+  templateUrl: './main-layout.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
   imports: [SidebarComponent, ChatViewComponent, SidenavToggleComponent],
@@ -35,34 +36,6 @@ import { SidenavToggleComponent } from '../../components/sidenav-toggle/sidenav-
     class: 'app-main-layout-host block h-screen',
     ngSkipHydration: 'true',
   },
-  template: `
-    <div [class]="layoutClasses()">
-      <!-- Sidebar -->
-      <app-sidebar
-        [collapsed]="sidebarCollapsed()"
-        (collapsedChange)="handleSidebarCollapsedChange($event)"
-      />
-
-      <!-- Main Content Area -->
-      <main [class]="contentClasses()">
-        <!-- Floating toggle button (visible when sidebar is collapsed on desktop) -->
-        @if (showFloatingToggle()) {
-          <div [class]="floatingToggleContainerClasses()">
-            <app-sidenav-toggle
-              [collapsed]="sidebarCollapsed()"
-              [variant]="'floating'"
-              (toggle)="toggleSidebar()"
-            />
-          </div>
-        }
-
-        <app-chat-view
-          [showMobileMenuButton]="isMobile()"
-          (mobileMenuClick)="openSidebar()"
-        />
-      </main>
-    </div>
-  `,
 })
 export class MainLayoutComponent {
   private platformId = inject(PLATFORM_ID);

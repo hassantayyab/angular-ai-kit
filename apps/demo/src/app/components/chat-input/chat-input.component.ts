@@ -14,6 +14,7 @@ import {
 } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { cn } from '@angular-ai-kit/utils';
+import { HlmButtonDirective } from '@angular-ai-kit/spartan-ui';
 
 /**
  * ChatInputComponent
@@ -32,66 +33,13 @@ import { cn } from '@angular-ai-kit/utils';
  */
 @Component({
   selector: 'app-chat-input',
+  templateUrl: './chat-input.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
-  imports: [],
+  imports: [HlmButtonDirective],
   host: {
     class: 'app-chat-input-host block',
   },
-  template: `
-    <div [class]="containerClasses()">
-      <div [class]="inputWrapperClasses()">
-        <!-- Textarea -->
-        <textarea
-          #textareaRef
-          [class]="textareaClasses()"
-          [placeholder]="placeholder()"
-          [disabled]="disabled()"
-          [value]="inputValue()"
-          (input)="handleInput($event)"
-          (keydown)="handleKeydown($event)"
-          rows="1"
-          aria-label="Message input"
-        ></textarea>
-
-        <!-- Send Button -->
-        <button
-          type="button"
-          [class]="sendButtonClasses()"
-          [disabled]="!canSend()"
-          (click)="handleSend()"
-          aria-label="Send message"
-        >
-          <svg
-            class="h-5 w-5"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"
-            />
-          </svg>
-        </button>
-      </div>
-
-      <!-- Hint Text -->
-      <p [class]="hintClasses()">
-        Press
-        <kbd class="rounded bg-[var(--muted)] px-1.5 py-0.5 font-mono text-xs"
-          >Enter</kbd
-        >
-        to send,
-        <kbd class="rounded bg-[var(--muted)] px-1.5 py-0.5 font-mono text-xs"
-          >Shift + Enter</kbd
-        >
-        for new line
-      </p>
-    </div>
-  `,
 })
 export class ChatInputComponent {
   private platformId = inject(PLATFORM_ID);

@@ -41,6 +41,7 @@ packages/angular-ai-kit/src/lib/
 │   ├── chat/
 │   │   ├── message-bubble/
 │   │   │   ├── message-bubble.component.ts (max 500 lines)
+│   │   │   ├── message-bubble.component.html (separate template)
 │   │   │   ├── message-bubble.types.ts (if complex types)
 │   │   │   └── index.ts (barrel export)
 │   ├── input/
@@ -52,9 +53,36 @@ packages/angular-ai-kit/src/lib/
 └── index.ts (public API)
 ```
 
+## Template Files (IMPORTANT)
+
+**ALWAYS use separate HTML template files for components. DO NOT use inline templates.**
+
+- Create a `.component.html` file alongside every `.component.ts` file
+- Reference the template using `templateUrl: './component-name.component.html'`
+- This improves readability, maintainability, and IDE support
+- Exception: Directives do not need template files (they don't have templates)
+
+```typescript
+// ✅ CORRECT: Use separate template file
+@Component({
+  selector: 'ai-message-bubble',
+  templateUrl: './message-bubble.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+})
+export class MessageBubbleComponent {}
+
+// ❌ WRONG: Inline template
+@Component({
+  selector: 'ai-message-bubble',
+  template: `<div>...</div>`,
+})
+export class MessageBubbleComponent {}
+```
+
 ## Naming Conventions
 
 - **Components:** `kebab-case.component.ts` (e.g., `message-bubble.component.ts`)
+- **Templates:** `kebab-case.component.html` (e.g., `message-bubble.component.html`)
 - **Directives:** `kebab-case.directive.ts` (e.g., `copy-to-clipboard.directive.ts`)
 - **Services:** `kebab-case.service.ts` (e.g., `chat.service.ts`)
 - **Types:** `kebab-case.types.ts` (e.g., `chat-message.types.ts`)

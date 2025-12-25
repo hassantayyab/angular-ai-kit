@@ -1,0 +1,55 @@
+<div [class]="containerClasses()">
+  <div [class]="inputWrapperClasses()">
+    <!-- Textarea -->
+    <textarea
+      #textareaRef
+      [class]="textareaClasses()"
+      [placeholder]="placeholder()"
+      [disabled]="disabled()"
+      [value]="inputValue()"
+      (input)="handleInput($event)"
+      (keydown)="handleKeydown($event)"
+      rows="1"
+      aria-label="Message input"
+    ></textarea>
+
+    <!-- Send Button -->
+    <button
+      type="button"
+      hlmBtn
+      [variant]="canSend() ? 'default' : 'secondary'"
+      size="icon"
+      [class]="'h-9 w-9 shrink-0 rounded-xl'"
+      [disabled]="!canSend()"
+      (click)="handleSend()"
+      aria-label="Send message"
+    >
+      <svg
+        class="h-5 w-5"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"
+        />
+      </svg>
+    </button>
+  </div>
+
+  <!-- Hint Text -->
+  <p [class]="hintClasses()">
+    Press
+    <kbd class="rounded bg-[var(--muted)] px-1.5 py-0.5 font-mono text-xs"
+      >Enter</kbd
+    >
+    to send,
+    <kbd class="rounded bg-[var(--muted)] px-1.5 py-0.5 font-mono text-xs"
+      >Shift + Enter</kbd
+    >
+    for new line
+  </p>
+</div>

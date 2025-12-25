@@ -7,6 +7,7 @@ import {
   output,
 } from '@angular/core';
 import { cn } from '@angular-ai-kit/utils';
+import { HlmCardDirective } from '@angular-ai-kit/spartan-ui';
 
 /**
  * Suggested prompt interface
@@ -32,63 +33,14 @@ interface SuggestedPrompt {
  */
 @Component({
   selector: 'app-empty-state',
+  templateUrl: './empty-state.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
-  imports: [],
+  imports: [HlmCardDirective],
   host: {
     class:
       'app-empty-state-host flex flex-col items-center justify-center flex-1 p-8',
   },
-  template: `
-    <div [class]="containerClasses()">
-      <!-- Logo/Icon -->
-      <div [class]="logoClasses()">
-        <svg
-          class="h-10 w-10"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="1.5"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456z"
-          />
-        </svg>
-      </div>
-
-      <!-- Welcome Text -->
-      <h2 [class]="titleClasses()">How can I help you today?</h2>
-      <p [class]="subtitleClasses()">
-        Start a conversation or choose a suggestion below
-      </p>
-
-      <!-- Suggested Prompts Grid -->
-      <div [class]="promptsGridClasses()">
-        @for (prompt of suggestedPrompts(); track prompt.title) {
-          <button
-            type="button"
-            [class]="promptCardClasses()"
-            (click)="handlePromptClick(prompt.prompt)"
-          >
-            <span [class]="promptIconClasses()">{{ prompt.icon }}</span>
-            <span class="text-sm font-medium text-[var(--foreground)]">
-              {{ prompt.title }}
-            </span>
-            <span class="line-clamp-2 text-xs text-[var(--foreground-muted)]">
-              {{ prompt.prompt }}
-            </span>
-          </button>
-        }
-      </div>
-
-      <!-- Disclaimer -->
-      <p [class]="disclaimerClasses()">
-        This is a demo with simulated AI responses. No real AI is connected.
-      </p>
-    </div>
-  `,
 })
 export class EmptyStateComponent {
   // Outputs

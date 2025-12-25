@@ -8,6 +8,7 @@ import {
   output,
 } from '@angular/core';
 import { cn } from '@angular-ai-kit/utils';
+import { HlmButtonDirective } from '@angular-ai-kit/spartan-ui';
 import { ChatContainerComponent, ChatMessage } from '@angular-ai-kit/core';
 import { ChatService } from '../../services/chat.service';
 import { ChatInputComponent } from '../chat-input/chat-input.component';
@@ -29,82 +30,18 @@ import { EmptyStateComponent } from '../empty-state/empty-state.component';
  */
 @Component({
   selector: 'app-chat-view',
+  templateUrl: './chat-view.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
-  imports: [ChatContainerComponent, ChatInputComponent, EmptyStateComponent],
+  imports: [
+    ChatContainerComponent,
+    ChatInputComponent,
+    EmptyStateComponent,
+    HlmButtonDirective,
+  ],
   host: {
     class: 'app-chat-view-host flex flex-col h-full',
   },
-  template: `
-    <div [class]="containerClasses()">
-      <!-- Header (Mobile only - shows menu button) -->
-      @if (showMobileMenuButton()) {
-        <header [class]="headerClasses()">
-          <button
-            type="button"
-            [class]="menuButtonClasses()"
-            (click)="handleMenuClick()"
-            aria-label="Open sidebar menu"
-          >
-            <svg
-              class="h-5 w-5"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M4 6h16M4 12h16M4 18h16"
-              />
-            </svg>
-          </button>
-
-          <h1
-            class="flex-1 truncate text-center text-sm font-medium text-[var(--foreground)]"
-          >
-            {{ conversationTitle() }}
-          </h1>
-
-          <!-- Spacer for centering -->
-          <div class="w-9"></div>
-        </header>
-      }
-
-      <!-- Main Chat Area -->
-      <div [class]="chatAreaClasses()">
-        @if (isEmpty()) {
-          <!-- Empty State -->
-          <app-empty-state (promptSelect)="handlePromptSelect($event)" />
-        } @else {
-          <!-- Chat Container with Messages -->
-          <ai-chat-container
-            [messages]="messages()"
-            [loading]="isLoading()"
-            [showHeader]="false"
-            [showFooter]="false"
-            [autoScroll]="true"
-            [showAvatars]="true"
-            [customClasses]="'flex-1 flex flex-col min-h-0'"
-            (messageCopy)="handleMessageCopy($event)"
-            (messageRegenerate)="handleMessageRegenerate($event)"
-          />
-        }
-      </div>
-
-      <!-- Input Area -->
-      <div [class]="inputAreaClasses()">
-        <div class="mx-auto w-full max-w-3xl">
-          <app-chat-input
-            [disabled]="isLoading()"
-            [placeholder]="'Message Angular AI Kit...'"
-            (messageSend)="handleSendMessage($event)"
-          />
-        </div>
-      </div>
-    </div>
-  `,
 })
 export class ChatViewComponent {
   private chatService = inject(ChatService);
