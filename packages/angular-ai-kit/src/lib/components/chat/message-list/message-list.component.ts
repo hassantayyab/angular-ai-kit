@@ -50,6 +50,7 @@ import { cn } from '@angular-ai-kit/utils';
   template: `
     <div
       [class]="containerClasses()"
+      [style.max-height]="maxHeight()"
       role="log"
       aria-live="polite"
       aria-atomic="false"
@@ -151,9 +152,9 @@ export class MessageListComponent implements AfterViewInit {
 
   /**
    * Maximum height of the message list
-   * @default '600px'
+   * @default '100%'
    */
-  maxHeight = input<string>('600px');
+  maxHeight = input<string>('100%');
 
   // ==========================================
   // Outputs
@@ -191,6 +192,7 @@ export class MessageListComponent implements AfterViewInit {
       'ai-message-list',
       'flex flex-col gap-4 p-4',
       'overflow-y-auto overflow-x-hidden',
+      'h-full', // Fill parent container height
       'scrollbar-thin scrollbar-thumb-gray-300 dark:scrollbar-thumb-gray-600',
       'scrollbar-track-transparent',
       this.customClasses()

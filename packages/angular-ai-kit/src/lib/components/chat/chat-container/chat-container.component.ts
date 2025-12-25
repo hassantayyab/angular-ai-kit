@@ -166,9 +166,9 @@ export class ChatContainerComponent {
 
   /**
    * Maximum height for the messages section
-   * @default 'calc(100vh - 200px)'
+   * @default '100%'
    */
-  messagesMaxHeight = input<string>('calc(100vh - 200px)');
+  messagesMaxHeight = input<string>('100%');
 
   /**
    * Whether the footer has content
@@ -229,7 +229,7 @@ export class ChatContainerComponent {
    * Messages wrapper classes
    */
   messagesWrapperClasses = computed(() => {
-    return cn('ai-chat-messages', 'flex-1 overflow-hidden', 'min-h-0');
+    return cn('ai-chat-messages', 'flex-1', 'min-h-0');
   });
 
   /**
