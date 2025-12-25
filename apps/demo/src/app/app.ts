@@ -1,9 +1,10 @@
+import { ChatContainerComponent, ChatMessage } from '@angular-ai-kit/core';
 import { Component, signal } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { ChatContainerComponent, ChatMessage } from '@angular-ai-kit/core';
+import { MainLayoutComponent } from './layouts/main-layout/main-layout.component';
 
 @Component({
-  imports: [RouterModule, ChatContainerComponent],
+  imports: [RouterModule, ChatContainerComponent, MainLayoutComponent],
   selector: 'app-root',
   templateUrl: './app.html',
   styleUrl: './app.css',

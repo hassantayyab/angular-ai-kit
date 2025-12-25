@@ -2,8 +2,8 @@
 
 ## 📊 Progress Summary
 
-**Current Phase:** Phase 0.2 - Core Chat Components
-**Status:** ✅ 100% Complete
+**Current Phase:** Phase 0.3 - Demo App UI/UX & Theme System
+**Status:** 🔄 In Progress (0%)
 **Last Updated:** December 25, 2025
 
 ### Completed ✅
@@ -27,7 +27,7 @@
 
 ### Next Up 🎯
 
-- Phase 0.3: Input Components (PromptInput, SubmitButton, FileUpload)
+- Phase 0.4: Input Components (PromptInput, SubmitButton, FileUpload)
 
 ---
 
@@ -223,7 +223,234 @@
 
 ---
 
-## 🎯 Phase 0.3: Input Components (Week 2, Days 1-3)
+## 🎯 Phase 0.3: Demo App UI/UX & Theme System (Week 1, Days 8-10) 🔄 IN PROGRESS
+
+**Priority:** Build a production-quality demo app with modern UI/UX BEFORE continuing with more components. This establishes the visual foundation and theme system for the entire library.
+
+**Status:** 🔄 In Progress (0% Complete) - Starting demo app transformation
+
+### Demo App Features
+
+#### 1. **Modern Layout Structure**
+
+Inspired by Claude, ChatGPT, Perplexity, and other modern AI chat applications:
+
+- [ ] **Responsive Layout Container**
+  - [ ] Mobile-first responsive design
+  - [ ] Fluid layout that adapts to screen size
+  - [ ] Proper breakpoints (mobile, tablet, desktop)
+  - [ ] Touch-friendly on mobile devices
+
+- [ ] **Top Navigation Bar**
+  - [ ] Logo/branding area
+  - [ ] Navigation menu items:
+    - [ ] Demo (chat interface)
+    - [ ] Components (documentation)
+    - [ ] Examples
+    - [ ] GitHub link
+  - [ ] Theme toggle (dark/light mode)
+  - [ ] Settings/preferences icon
+  - [ ] Mobile hamburger menu
+  - [ ] Sticky header on scroll
+
+- [ ] **Collapsible Sidebar (Chat History)**
+  - [ ] Collapsible/expandable with smooth animation
+  - [ ] Toggle button (hamburger/chevron)
+  - [ ] Persists state in localStorage
+  - [ ] Chat history list:
+    - [ ] Recent conversations grouped by date (Today, Yesterday, Last 7 days, etc.)
+    - [ ] Conversation preview (title + timestamp)
+    - [ ] Active conversation highlight
+    - [ ] Hover effects for interaction
+    - [ ] Delete/rename conversation actions
+  - [ ] New chat button (prominent, top of sidebar)
+  - [ ] Settings section at bottom:
+    - [ ] Model selector
+    - [ ] API key management (placeholder)
+    - [ ] Preferences
+  - [ ] Smooth collapse/expand animation
+  - [ ] Mobile: slide-in drawer overlay
+
+- [ ] **Main Chat Window**
+  - [ ] Uses Phase 0.2 components (ChatContainer, MessageList, MessageBubble)
+  - [ ] Clean, spacious layout
+  - [ ] Proper padding and spacing
+  - [ ] Message input area at bottom (placeholder for Phase 0.4)
+  - [ ] Welcome screen for new chats
+  - [ ] Empty state with suggestions/examples
+
+#### 2. **Theme System Implementation**
+
+- [ ] **Dark Mode**
+  - [ ] Full dark theme with proper color palette
+  - [ ] Smooth transitions between themes
+  - [ ] Persists preference in localStorage
+  - [ ] System preference detection (prefers-color-scheme)
+  - [ ] Dark mode optimized colors:
+    - [ ] Background gradients (subtle)
+    - [ ] Proper contrast ratios (WCAG AA)
+    - [ ] Accent colors that pop in dark mode
+    - [ ] Syntax highlighting theme
+
+- [ ] **Light Mode**
+  - [ ] Clean, bright light theme
+  - [ ] Professional color palette
+  - [ ] Accessibility-friendly colors
+  - [ ] Light mode optimized colors:
+    - [ ] White/light backgrounds
+    - [ ] Proper text contrast
+    - [ ] Subtle shadows and borders
+
+- [ ] **Theme Toggle Component**
+  - [ ] Animated sun/moon icon toggle
+  - [ ] Smooth theme transition
+  - [ ] Accessible (keyboard navigation)
+  - [ ] Visual feedback on click
+
+#### 3. **Modern UI Polish**
+
+- [ ] **Typography**
+  - [ ] Modern font stack (Inter, SF Pro, system fonts)
+  - [ ] Proper font sizes and line heights
+  - [ ] Font weight hierarchy (light, regular, medium, semibold, bold)
+  - [ ] Readable message text sizing
+
+- [ ] **Colors & Gradients**
+  - [ ] Modern color palette inspired by Claude/ChatGPT
+  - [ ] Subtle background gradients
+  - [ ] Accent colors for CTAs
+  - [ ] Semantic colors (success, error, warning, info)
+  - [ ] Brand colors defined in design tokens
+
+- [ ] **Shadows & Depth**
+  - [ ] Multi-layer shadows for depth
+  - [ ] Elevation system (cards, modals, dropdowns)
+  - [ ] Subtle inner shadows for inputs
+  - [ ] Glow effects for focus states
+
+- [ ] **Animations & Transitions**
+  - [ ] Smooth page transitions
+  - [ ] Sidebar slide animations
+  - [ ] Message fade-in animations
+  - [ ] Micro-interactions (hover, click, focus)
+  - [ ] Loading skeletons
+  - [ ] Respect prefers-reduced-motion
+
+- [ ] **Icons**
+  - [ ] Modern icon set (Heroicons, Lucide, or similar)
+  - [ ] Consistent icon sizing
+  - [ ] Icon-only buttons with tooltips
+  - [ ] Animated icons where appropriate
+
+#### 4. **Documentation Section**
+
+Inspired by Shadcn, Aceternity UI, and other modern component libraries:
+
+- [ ] **Component Documentation Page**
+  - [ ] Sidebar navigation with component list
+  - [ ] Search functionality
+  - [ ] Component categories/grouping
+
+- [ ] **Individual Component Pages**
+  - [ ] Component name and description
+  - [ ] Live preview/demo
+  - [ ] Props/API table:
+    - [ ] Input properties with types
+    - [ ] Output events
+    - [ ] Default values
+  - [ ] Code snippets:
+    - [ ] Installation instructions
+    - [ ] Basic usage example
+    - [ ] Advanced usage examples
+    - [ ] Copy-to-clipboard button
+  - [ ] Syntax highlighting (using highlight.js)
+  - [ ] Variants showcase
+  - [ ] Accessibility notes
+  - [ ] Browser compatibility
+
+- [ ] **Code Block Component** (for docs)
+  - [ ] Syntax highlighting
+  - [ ] Copy button
+  - [ ] Language indicator
+  - [ ] Line numbers (optional)
+  - [ ] Dark/light theme support
+
+#### 5. **Chat Functionality (Demo)**
+
+- [ ] **Mock Chat Integration**
+  - [ ] Simulated AI responses
+  - [ ] Typing indicator animation
+  - [ ] Message streaming effect (placeholder)
+  - [ ] Multiple conversation support
+  - [ ] Local state management (signals)
+
+- [ ] **Example Conversations**
+  - [ ] Pre-populated example chats
+  - [ ] Showcase different message types
+  - [ ] Demonstrate component features
+  - [ ] Code examples in messages (for Phase 0.5 CodeBlock)
+
+- [ ] **Conversation Management**
+  - [ ] Create new conversation
+  - [ ] Switch between conversations
+  - [ ] Delete conversations
+  - [ ] Rename conversations
+  - [ ] Export conversation (optional)
+
+#### 6. **Responsive Design**
+
+- [ ] **Mobile Optimization**
+  - [ ] Touch-friendly interface
+  - [ ] Hamburger menu for navigation
+  - [ ] Slide-out sidebar drawer
+  - [ ] Bottom navigation (optional)
+  - [ ] Mobile keyboard handling
+  - [ ] Proper viewport meta tags
+
+- [ ] **Tablet Optimization**
+  - [ ] Adaptive layout
+  - [ ] Sidebar visibility
+  - [ ] Touch and pointer input
+
+- [ ] **Desktop Optimization**
+  - [ ] Wide screen support
+  - [ ] Keyboard shortcuts
+  - [ ] Hover states
+  - [ ] Multi-column layouts
+
+#### 7. **Performance & UX**
+
+- [ ] **Loading States**
+  - [ ] Skeleton screens
+  - [ ] Loading spinners
+  - [ ] Progressive loading
+  - [ ] Optimistic UI updates
+
+- [ ] **Error Handling**
+  - [ ] Error boundaries
+  - [ ] User-friendly error messages
+  - [ ] Retry mechanisms
+  - [ ] Offline state handling
+
+- [ ] **State Management**
+  - [ ] Use signals for reactive state
+  - [ ] Persist chat history in localStorage
+  - [ ] Persist theme preference
+  - [ ] Persist sidebar state
+
+**Deliverable:** Production-quality demo app with modern UI/UX, complete theme system, collapsible sidebar, navigation, and documentation section. Sets the visual foundation for the entire library.
+
+**Why This Phase is Critical:**
+
+- Establishes the visual language and theme system EARLY
+- Provides a beautiful showcase for existing and future components
+- Creates a better development experience with proper documentation
+- Demonstrates the library's capabilities in a real-world context
+- Makes it easier to test new components in a production-like environment
+
+---
+
+## 🎯 Phase 0.4: Input Components (Week 2, Days 1-3)
 
 ### Input Components to Build
 

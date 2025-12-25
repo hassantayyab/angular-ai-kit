@@ -1,13 +1,13 @@
+import { cn } from '@angular-ai-kit/utils';
 import {
-  Component,
   ChangeDetectionStrategy,
+  Component,
   ViewEncapsulation,
+  computed,
   input,
   output,
-  computed,
 } from '@angular/core';
 import { ChatMessage } from '../../../types';
-import { cn } from '@angular-ai-kit/utils';
 
 /**
  * MessageBubble Component
@@ -155,10 +155,11 @@ export class MessageBubbleComponent {
       'transition-all duration-200',
       'hover:shadow-md',
       {
-        'bg-blue-500 text-white': role === 'user',
+        'bg-gray-800 text-white dark:bg-gray-700 dark:text-gray-100':
+          role === 'user',
         'bg-gray-100 text-gray-900 dark:bg-gray-800 dark:text-gray-100':
           role === 'assistant',
-        'bg-yellow-50 text-yellow-900 dark:bg-yellow-900/20 dark:text-yellow-100':
+        'bg-gray-200 text-gray-800 dark:bg-gray-700/50 dark:text-gray-200':
           role === 'system',
       },
       this.customClasses()
