@@ -41,6 +41,9 @@ class CopyableComponent extends InteractiveComponent {}
 **Example:**
 
 ```typescript
+// ❌ Avoid: Hardcoded dependencies
+import { SpecificChatService } from '../../../services/specific-chat.service';
+
 // ✅ Good: Use injection tokens
 export const CHAT_CONFIG = new InjectionToken<ChatConfig>('ChatConfig');
 
@@ -50,9 +53,6 @@ export const CHAT_CONFIG = new InjectionToken<ChatConfig>('ChatConfig');
 export class ChatComponent {
   private config = inject(CHAT_CONFIG);
 }
-
-// ❌ Avoid: Hardcoded dependencies
-import { SpecificChatService } from '../../../services/specific-chat.service';
 ```
 
 ### 3. Performance from Day One
@@ -209,18 +209,92 @@ export class ChatComponent {
 }
 ```
 
-## Barrel Exports (Tree-Shakable)
+## Barrel Exports (CRITICAL)
+
+**ALWAYS create an `index.ts` file in every folder that contains components, directives, services, or types.**
+
+### Why Barrel Exports?
+
+- Clean, organized imports for consumers
+- Single entry point for each module
+- Easy refactoring without breaking imports
+- Tree-shaking support
+
+### Rules
+
+1. **Every component/directive/service folder MUST have an `index.ts`**
+2. **Export only public API** - don't export internal helpers
+3. **Use named exports** - avoid default exports
+4. **Re-export from parent index.ts** - create a hierarchy
+
+### Examples
 
 ```typescript
-// index.ts - Public API
-export { ChatComponent } from './chat.component';
+// components/chat/message-bubble/index.ts
 export { MessageBubbleComponent } from './message-bubble.component';
-export type { ChatMessage, MessageRole } from './chat.types';
+export type { MessageBubbleConfig } from './message-bubble.types';
 
-// ❌ Don't re-export everything
-export * from './chat.component';
+// components/chat/index.ts
+export * from './message-bubble';
+export * from './message-list';
+export * from './chat-container';
+
+// components/index.ts
+export * from './chat';
+export * from './input';
+export * from './display';
+
+// Main library index.ts (public API)
+export * from './lib/components';
+export * from './lib/directives';
+export * from './lib/types';
+
+// ❌ Don't re-export internal helpers
 export * from './internal-helper'; // Keep internal
 ```
+
+### Folder Structure
+
+```text
+message-bubble/
+├── message-bubble.component.ts
+├── message-bubble.component.html
+├── message-bubble.types.ts (optional)
+└── index.ts                 ← REQUIRED
+```
+
+## Naming Conventions
+
+### Files
+
+- **Components:** `kebab-case.component.ts` (e.g., `message-bubble.component.ts`)
+- **Templates:** `kebab-case.component.html` (e.g., `message-bubble.component.html`)
+- **Directives:** `kebab-case.directive.ts` (e.g., `copy-to-clipboard.directive.ts`)
+- **Services:** `kebab-case.service.ts` (e.g., `chat.service.ts`)
+- **Types:** `kebab-case.types.ts` (e.g., `chat-message.types.ts`)
+- **Utils:** `kebab-case.ts` (e.g., `token-counter.ts`)
+- **Barrel exports:** `index.ts` in each folder
+
+### Classes & Interfaces
+
+- **Components:** `PascalCase` + `Component` suffix (e.g., `MessageBubbleComponent`)
+- **Directives:** `PascalCase` + `Directive` suffix (e.g., `CopyToClipboardDirective`)
+- **Services:** `PascalCase` + `Service` suffix (e.g., `ChatService`)
+- **Interfaces:** `PascalCase` (e.g., `ChatMessage`, `MessageRole`)
+
+### Selectors
+
+- **Components:** `ai-kebab-case` prefix (e.g., `ai-message-bubble`)
+- **Directives:** `aiCamelCase` prefix (e.g., `aiCopyToClipboard`)
+
+## File Size Limits
+
+- **Maximum 500 lines per file**
+- If a file exceeds 500 lines, refactor by:
+  - Extracting helper functions to separate files
+  - Splitting complex components into smaller ones
+  - Moving types to `.types.ts` files
+  - Creating utility functions in `@angular-ai-kit/utils`
 
 ## Component Communication Patterns
 

@@ -12,9 +12,9 @@ This is an **Angular v21** component library focused on AI chat interfaces. We'r
 
 - Angular v21 is the LATEST version with all modern features
 - Tailwind v4 uses NEW @tailwindcss/postcss plugin (not the old tailwindcss plugin)
-- We are creating a component library for Angular AI chat interfaces. Therefore, write code that is best suited for such library.
+- We are creating a component library for Angular AI chat interfaces
 - AI assistants often make mistakes with latest versions - ALWAYS verify against official docs
-- Please refer to the PLAN.md file for the project scope and requirements. Please note that this is only for reference and not to be followed blindly. Feel free to improve the plan and add more tasks as you see fit when working on a particular phase and add these tasks to the TODO.md file.
+- Refer to `PLAN.md` for project scope and requirements
 
 ## Project Scope
 
@@ -31,8 +31,6 @@ This is an **Angular v21** component library focused on AI chat interfaces. We'r
 - **TypeScript:** Latest with strict mode
 - **CSS ONLY** (NO SCSS)
 
-**Monorepo:** This project uses Nx for monorepo management. Reference: [Nx Angular Documentation](https://nx.dev/docs/technologies/angular)
-
 ## File Organization
 
 ```text
@@ -40,315 +38,106 @@ packages/angular-ai-kit/src/lib/
 ├── components/
 │   ├── chat/
 │   │   ├── message-bubble/
-│   │   │   ├── message-bubble.component.ts (max 500 lines)
-│   │   │   ├── message-bubble.component.html (separate template)
-│   │   │   ├── message-bubble.types.ts (if complex types)
+│   │   │   ├── message-bubble.component.ts
+│   │   │   ├── message-bubble.component.html
 │   │   │   └── index.ts (barrel export)
 │   ├── input/
 │   └── display/
 ├── directives/
 ├── services/
 ├── types/
-├── tokens/
 └── index.ts (public API)
 ```
 
-## Template Files (IMPORTANT)
+---
 
-**ALWAYS use separate HTML template files for components. DO NOT use inline templates.**
+## Rule Files (IMPORTANT)
 
-- Create a `.component.html` file alongside every `.component.ts` file
-- Reference the template using `templateUrl: './component-name.component.html'`
-- This improves readability, maintainability, and IDE support
-- Exception: Directives do not need template files (they don't have templates)
+**Detailed rules are organized in `.claude/rules/`. When adding new rules, put them in the appropriate file - NOT in this CLAUDE.md.**
 
-```typescript
-// ✅ CORRECT: Use separate template file
-@Component({
-  selector: 'ai-message-bubble',
-  templateUrl: './message-bubble.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
-})
-export class MessageBubbleComponent {}
+| File                    | Purpose                                                      |
+| ----------------------- | ------------------------------------------------------------ |
+| `accessibility.md`      | WCAG, ARIA, keyboard navigation, screen readers              |
+| `angular-v21.md`        | Angular-specific patterns, signals, standalone components    |
+| `architecture.md`       | Scalability, barrel exports, naming conventions, file limits |
+| `component-patterns.md` | Component structure, templates, inputs/outputs               |
+| `tailwind-v4.md`        | Styling, cn() utility, CSS variables, dark mode              |
+| `todo-management.md`    | Phase tracking, TODO.md management                           |
+| `typescript.md`         | Type safety, interfaces, error handling                      |
+| `ai-components.md`      | AI chat-specific component rules                             |
 
-// ❌ WRONG: Inline template
-@Component({
-  selector: 'ai-message-bubble',
-  template: `<div>...</div>`,
-})
-export class MessageBubbleComponent {}
-```
+### When to Update Which File
 
-## Naming Conventions
+- **Component structure questions?** → `component-patterns.md`
+- **Styling/Tailwind issues?** → `tailwind-v4.md`
+- **Angular patterns?** → `angular-v21.md`
+- **File organization/naming?** → `architecture.md`
+- **Accessibility?** → `accessibility.md`
+- **AI chat features?** → `ai-components.md`
+- **TypeScript types?** → `typescript.md`
+- **Task tracking?** → `todo-management.md`
 
-- **Components:** `kebab-case.component.ts` (e.g., `message-bubble.component.ts`)
-- **Templates:** `kebab-case.component.html` (e.g., `message-bubble.component.html`)
-- **Directives:** `kebab-case.directive.ts` (e.g., `copy-to-clipboard.directive.ts`)
-- **Services:** `kebab-case.service.ts` (e.g., `chat.service.ts`)
-- **Types:** `kebab-case.types.ts` (e.g., `chat-message.types.ts`)
-- **Utils:** `kebab-case.ts` (e.g., `token-counter.ts`)
-- **Barrel exports:** `index.ts` in each folder
+**DO NOT dump all rules into CLAUDE.md. Keep it lean and reference-focused.**
 
-## File Size Limits
+---
 
-- **Maximum 500 lines per file**
-- If a file exceeds 500 lines, refactor by:
-  - Extracting helper functions to separate files
-  - Splitting complex components into smaller ones
-  - Moving types to `.types.ts` files
-  - Creating utility functions in `@angular-ai-kit/utils`
+## Quick Reference: What NOT to Do
 
-## Git Conventions
-
-### Commit Messages
-
-- Use clear, descriptive messages
-- Format: `feat: add MessageBubble component`
-- Types: `feat`, `fix`, `docs`, `style`, `refactor`, `chore`
-
-### Branch Naming
-
-- `feature/component-name`
-- `fix/issue-description`
-- `docs/update-readme`
-
-## Dependencies
-
-- Only add dependencies when absolutely necessary
-- Prefer peer dependencies for Angular packages
-- Keep bundle size minimal
-- Document why each dependency is needed
-
-## Documentation
-
-- Add JSDoc comments for public APIs
-- Include usage examples in component files
-- Document inputs, outputs, and methods
-- Explain complex logic
-
-## Phase Management & Progress Tracking
-
-**CRITICAL: Always maintain TODO.md for tracking phase progress**
-
-### TODO.md Requirements
-
-- **Create FRESH TODO.md at the start of each NEW phase** with all tasks broken down
-- **Archive previous phase TODO** as `TODO-Phase-X.X.md` before starting new phase
-- **Update TODO.md in real-time** as tasks are completed
-- **Mark tasks as done immediately** after completion using [x]
-- **Include progress summary** showing percentage complete
-- **Update PLAN.md** to reflect completed phases and tasks
-- **Use consistent format** for task tracking across all phases
-
-### Phase Transition Process
-
-When completing a phase and starting the next:
-
-1. **Archive current TODO.md:**
-
-   ```bash
-   mv TODO.md TODO-Phase-0.1.md
-   git add TODO-Phase-0.1.md
-   git commit -m "docs: archive Phase 0.1 TODO (100% complete)"
-   ```
-
-2. **Create new TODO.md for next phase:**
-
-   ```bash
-   cp .claude/TODO-TEMPLATE.md TODO.md
-   # Customize for new phase
-   git add TODO.md
-   git commit -m "docs: create TODO.md for Phase 0.2"
-   ```
-
-3. **Update PLAN.md:**
-   - Mark completed phase with ✅ 100%
-   - Update new phase status to In Progress
-
-**Benefits of Fresh TODO per Phase:**
-
-- ✅ Each phase starts clean and focused
-- ✅ Easy to find historical progress for specific phases
-- ✅ Prevents TODO.md from becoming overwhelmingly long
-- ✅ Clear separation between phases
-- ✅ Archived TODOs serve as completion record
-
-### TODO.md Structure
-
-```markdown
-# Angular AI Kit - Phase X.X TODO List
-
-## ✅ Completed Tasks
-
-- [x] Task 1
-- [x] Task 2
-
-## 🔄 In Progress
-
-- [ ] Task 3
-- [ ] Task 4
-
-## 📊 Progress Summary
-
-**Total Tasks:** X
-**Completed:** Y (Z%)
-**In Progress:** A
-**Remaining:** B
-
-_Last Updated: YYYY-MM-DD_
-```
-
-### When to Update TODO.md
-
-- ✅ At the START of each phase - Create comprehensive task list
-- ✅ After COMPLETING each task - Mark as done immediately
-- ✅ When DISCOVERING new tasks - Add to appropriate section
-- ✅ At END of phase - Update progress summary, mark phase complete
-- ✅ Daily/Session end - Ensure TODO.md reflects current state
-
-### PLAN.md Integration
-
-- Update PLAN.md to match TODO.md progress
-- Mark completed phases with ✅
-- Update phase status (0%, 50%, 80%, 100%)
-- Keep both files synchronized
-
-## Performance
-
-- Use OnPush change detection
-- Minimize effect() usage
-- Use computed() for derived state
-- Avoid unnecessary re-renders
-- Optimize bundle size
-
-## Nx Monorepo Guidelines
-
-- This project uses Nx workspace for managing multiple projects (library, demo app, CLI, docs)
-- Use Nx generators to create new libraries/apps: `nx g @nx/angular:lib libs/libName` (or `nx generate @nx/angular:lib libs/libName`)
-- Use Nx commands for building: `nx build <project-name>`
-- Leverage Nx affected commands for CI/CD: `nx affected -t build`, `nx affected -t lint` (or use `nx run-many -t build --all` for all projects)
-- Enforce module boundaries to prevent circular dependencies
-- Use `nx graph` to visualize project dependencies
-- Configure proper tsconfig paths: `@angular-ai-kit/core`, `@angular-ai-kit/tokens`, `@angular-ai-kit/utils`
-- Reference: [Nx Angular Documentation](https://nx.dev/docs/technologies/angular)
-
-## AI Component Specific Rules
-
-### Chat Components
-
-- Always support both user and assistant messages
-- Include copy functionality for assistant messages
-- Support streaming text display
-- Handle empty states gracefully
-
-### Input Components
-
-- Support keyboard shortcuts (Enter to submit, Shift+Enter for new line)
-- Include loading/disabled states
-- Validate inputs when appropriate
-- Provide clear feedback
-
-### Display Components
-
-- Support markdown rendering
-- Include syntax highlighting for code
-- Provide copy-to-clipboard functionality
-- Handle long content (scrolling, truncation)
-
-### Control Components
-
-- Emit clear events
-- Support disabled states
-- Provide visual feedback
-- Maintain state properly
-
-## What NOT to Do
-
-- ❌ Don't use NgModules
+- ❌ Don't use NgModules (use standalone components)
 - ❌ Don't set `standalone: true` (it's default in Angular v20+)
-- ❌ Don't use `@HostBinding` and `@HostListener` decorators (use `host` object instead)
-- ❌ Don't use `ngClass` (use `class` bindings instead)
-- ❌ Don't use `ngStyle` (use `style` bindings instead)
-- ❌ Don't use `mutate` on signals (use `update` or `set` instead)
-- ❌ Don't use constructor injection (use `inject()` function instead)
-- ❌ Don't assume globals like `new Date()` are available in templates
-- ❌ Don't write arrow functions in templates
-- ❌ Don't use RxJS unless absolutely necessary (prefer signals, use toSignal/toObservable for interop)
-- ❌ Don't use Zone.js-dependent features
+- ❌ Don't use `@HostBinding`/`@HostListener` (use `host` object)
+- ❌ Don't use `ngClass`/`ngStyle` (use class/style bindings)
+- ❌ Don't use constructor injection (use `inject()` function)
+- ❌ Don't use inline templates (use separate `.component.html` files)
+- ❌ Don't forget barrel exports (`index.ts` in every folder)
 - ❌ **NEVER use SCSS - ONLY CSS**
-- ❌ Don't use ViewEncapsulation.Emulated or ShadowDom (use ViewEncapsulation.None for Tailwind)
-- ❌ Don't access DOM directly (use Renderer2 or inject(DOCUMENT) for SSR compatibility)
-- ❌ Don't create components that aren't AI-focused
-- ❌ Don't add unnecessary dependencies
-- ❌ Don't write tests (as per project requirements)
-- ❌ Don't use ChangeDetectionStrategy.Default
-- ❌ Don't create non-standalone components
-- ❌ Don't use template-driven forms (prefer Reactive forms)
-- ❌ Don't add features outside the scope of Phase 0
-- ❌ Don't forget SSR/hydration compatibility
-- ❌ Don't ignore accessibility (ARIA, keyboard nav, screen readers)
+- ❌ Don't use ViewEncapsulation.Emulated (use None for Tailwind)
+- ❌ Don't access DOM directly (use Renderer2 or inject(DOCUMENT))
+- ❌ Don't ignore accessibility (ARIA, keyboard nav)
 
 ## Code Review Checklist
 
 Before considering code complete:
 
-- [ ] Uses standalone components (without explicit `standalone: true`)
-- [ ] Uses signal-based inputs/outputs (input(), output(), computed())
-- [ ] Uses `inject()` function for services (no constructor injection)
+**Structure:**
+
+- [ ] Separate HTML template file (not inline)
+- [ ] Barrel export (`index.ts`) in folder
 - [ ] OnPush change detection
-- [ ] ViewEncapsulation.None for Tailwind compatibility
-- [ ] No `ngClass` or `ngStyle` (uses class/style bindings instead)
-- [ ] No `@HostBinding` or `@HostListener` (uses `host` object)
-- [ ] No `mutate` on signals (uses `update` or `set`)
-- [ ] Uses CSS only (no SCSS)
-- [ ] Uses Tailwind utility classes (utility-first approach)
-- [ ] Uses `cn()` utility for dynamic classes
-- [ ] Uses CSS custom properties for theming
-- [ ] SSR/Hydration compatible (no direct DOM access, uses inject(DOCUMENT))
-- [ ] Passes AXE accessibility checks
-- [ ] Follows WCAG AA minimums
-- [ ] Keyboard navigation works (Tab, Enter, Escape, Arrows)
-- [ ] ARIA labels and roles properly set
-- [ ] Focus management implemented
-- [ ] Supports prefers-reduced-motion
-- [ ] Dark mode support via CSS variables
-- [ ] No unnecessary dependencies
-- [ ] Responsive design (mobile-first)
-- [ ] Touch targets minimum 44x44px
-- [ ] Clean, readable code
-- [ ] Proper TypeScript types (no `any`, use `unknown` if needed)
-- [ ] No console.logs or debug code
+- [ ] ViewEncapsulation.None
+
+**Angular Patterns:**
+
+- [ ] Signal-based inputs/outputs
+- [ ] `inject()` function for services
+- [ ] Uses `host` object (not decorators)
+- [ ] No `mutate` on signals
+
+**Styling:**
+
+- [ ] CSS only (no SCSS)
+- [ ] Tailwind utility classes
+- [ ] `cn()` utility for dynamic classes
+- [ ] Dark mode support
+
+**Accessibility:**
+
+- [ ] ARIA labels and roles
+- [ ] Keyboard navigation
+- [ ] Focus management
+
+**Quality:**
+
+- [ ] TypeScript types (no `any`)
 - [ ] JSDoc comments for public APIs
-- [ ] Follows file organization structure
-- [ ] Input transforms used where appropriate
-- [ ] Allows customClasses input for override
-- [ ] Error states handled gracefully
-- [ ] **TODO.md updated with task completion status**
-- [ ] **PLAN.md updated to reflect completed work**
-- [ ] **Progress summary reflects current state**
+- [ ] No console.logs
+- [ ] Error states handled
 
-## Questions to Ask Before Implementation
+**Tracking:**
 
-When implementing a component:
-
-1. Is this component AI-focused?
-2. Does it use signals and OnPush?
-3. Is it accessible?
-4. Is it responsive?
-5. Does it follow the established patterns?
-6. Is the code clean and maintainable?
-7. **Have I updated TODO.md to track this task?**
-
-## Questions to Ask After Completing Work
-
-Before finishing a session:
-
-1. **Is TODO.md up to date with completed tasks?**
-2. **Is PLAN.md updated to reflect progress?**
-3. **Does the progress summary show accurate percentages?**
-4. **Are all completed tasks marked with [x]?**
-5. **Is the "Last Updated" timestamp current?**
+- [ ] TODO.md updated
+- [ ] PLAN.md reflects progress
 
 ---
 
-_See additional rules in `.claude/rules/` for specific topics._
+_For detailed rules, see `.claude/rules/` directory._

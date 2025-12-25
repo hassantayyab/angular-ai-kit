@@ -178,7 +178,7 @@ export class CodeBlockComponent {}
 ### RxJS Interop (Signals + Observables)
 
 ```typescript
-import { toSignal, toObservable } from '@angular/core/rxjs-interop';
+import { toObservable, toSignal } from '@angular/core/rxjs-interop';
 
 export class StreamingComponent {
   // Observable to Signal

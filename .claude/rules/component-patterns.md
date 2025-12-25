@@ -4,40 +4,64 @@ paths: '**/*.component.ts'
 
 # Component Structure & Patterns
 
+## Template Files (CRITICAL)
+
+**ALWAYS use separate HTML template files for components. DO NOT use inline templates.**
+
+### Rules
+
+1. Create a `.component.html` file alongside every `.component.ts` file
+2. Reference the template using `templateUrl: './component-name.component.html'`
+3. Exception: Directives do not need template files (they don't have templates)
+
+### Why Separate Templates?
+
+- Better readability and maintainability
+- Proper IDE support (syntax highlighting, Emmet, etc.)
+- Cleaner component files
+- Easier to review in PRs
+
+```typescript
+// ✅ CORRECT: Use separate template file
+@Component({
+  selector: 'ai-message-bubble',
+  templateUrl: './message-bubble.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+})
+export class MessageBubbleComponent {}
+
+// ❌ WRONG: Inline template
+@Component({
+  selector: 'ai-message-bubble',
+  template: `<div>...</div>`,
+})
+export class MessageBubbleComponent {}
+```
+
 ## Standard Component Template
 
 ```typescript
+import { cn } from '@angular-ai-kit/utils';
 import {
-  Component,
   ChangeDetectionStrategy,
+  Component,
   ViewEncapsulation,
   computed,
+  inject,
   input,
   output,
   signal,
-  inject,
 } from '@angular/core';
-import { cn } from '@angular-ai-kit/utils';
 
 @Component({
   selector: 'ai-component-name',
   // standalone is default in Angular v20+, don't set it explicitly
+  templateUrl: './component-name.component.html', // ALWAYS use separate template
   imports: [
     /* only what's needed */
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None, // Required for Tailwind
-  template: `
-    <div [class]="containerClasses()">
-      <!-- Content -->
-    </div>
-  `,
-  styles: [
-    `
-      /* Use CSS only, not SCSS */
-      /* Minimal styles - prefer Tailwind classes */
-    `,
-  ],
   // Use host object instead of @HostBinding/@HostListener
   host: {
     '[class]': 'hostClasses()',
