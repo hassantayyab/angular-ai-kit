@@ -46,6 +46,6 @@ module.exports = {
     ],
     'subject-case': [2, 'always', 'sentence-case'],
     'header-max-length': [2, 'always', 100],
-    'body-max-line-length': [2, 'always', 120], // Allow longer body lines for detailed descriptions
+    'body-max-line-length': [0], // Disable body line length limit - commit bodies can have longer descriptive lines
   },
 };
