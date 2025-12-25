@@ -1,160 +1,139 @@
-# Angular AI Kit - Phase 0.1 TODO List
+# Angular AI Kit - Phase 0.2 TODO List
 
 ## ✅ Completed Tasks
 
-- [x] Create directory structure in all libraries
-- [x] Install core dependencies (marked, highlight.js, clsx, tailwind-merge, dompurify)
-- [x] Install Tailwind CSS v4 with PostCSS plugin (@tailwindcss/postcss)
-- [x] Create PostCSS configuration (.postcssrc.json)
-- [x] Configure Tailwind in core library (packages/angular-ai-kit/src/styles.css)
-- [x] Configure Tailwind in demo app (apps/demo/src/styles.css)
-- [x] Create theme.css in tokens library with CSS custom properties
-- [x] Install ESLint with Angular rules and import sorting
-- [x] Install Prettier with Tailwind CSS class sorting plugin
-- [x] Install git hooks tools (husky, lint-staged, commitlint)
-- [x] Create base type definitions (ChatMessage, ChatRole, StreamingState, ModelInfo)
-- [x] Create token type definitions (DesignTokens interface)
-
-## ✅ Completed Phase 0.1 Tasks
-
-### 1. Complete Git Hooks Setup ✅
-
-- [x] .husky/pre-commit exists with lint-staged
-- [x] Create .husky/commit-msg with commitlint hook
-- [x] Create .lintstagedrc.json configuration
-- [x] Create commitlint.config.js configuration
-- [x] Verify hooks work with test commit
-
-### 2. Create DI Tokens ✅
-
-**Location:** `packages/angular-ai-kit/src/lib/tokens/`
-
-- [x] Create di-tokens.ts with:
-  - [x] CHAT_SERVICE token
-  - [x] STREAMING_SERVICE token
-  - [x] TOKEN_COUNTER token
-  - [x] MARKDOWN_OPTIONS token
-  - [x] THEME_CONFIG token
-- [x] Create index.ts barrel export
-
-### 3. Create Reusable Directives ✅
-
-**Location:** `packages/angular-ai-kit/src/lib/directives/`
-
-- [x] CopyToClipboardDirective
-  - [x] copy-to-clipboard.directive.ts
-  - [x] index.ts barrel export
-- [x] AutoResizeDirective
-  - [x] auto-resize.directive.ts
-  - [x] index.ts barrel export
-- [x] ClickOutsideDirective
-  - [x] click-outside.directive.ts
-  - [x] index.ts barrel export
-- [x] FocusTrapDirective
-  - [x] focus-trap.directive.ts
-  - [x] index.ts barrel export
-- [x] Create directives/index.ts master barrel export
-
-### 4. Create Utility Functions ✅
-
-**Location:** `packages/utils/src/lib/`
-
-- [x] Class name utility (cn)
-  - [x] cn/cn.ts (clsx + tailwind-merge wrapper)
-  - [x] cn/index.ts
-- [x] Token counter utility
-  - [x] token-counter/token-counter.ts
-  - [x] token-counter/index.ts
-- [x] Formatters
-  - [x] formatters/date-formatter.ts
-  - [x] formatters/number-formatter.ts
-  - [x] formatters/text-formatter.ts
-  - [x] formatters/index.ts
-- [x] Validators
-  - [x] validators/message-validator.ts
-  - [x] validators/file-validator.ts
-  - [x] validators/input-validator.ts
-  - [x] validators/index.ts
-
-### 5. Configure Library Builds ✅
-
-- [x] Update packages/angular-ai-kit/ng-package.json
-- [x] Update packages/tokens/ng-package.json
-- [x] Update packages/utils/ng-package.json
-- [x] Verify build configurations
-
-### 6. Setup NPM Publishing ✅
-
-- [x] Create .npmignore for angular-ai-kit package
-- [x] Create .npmignore for tokens package
-- [x] Create .npmignore for utils package
-- [x] Update package.json metadata (angular-ai-kit)
-- [x] Update package.json metadata (tokens)
-- [x] Update package.json metadata (utils)
-
-### 7. Update Public APIs ✅
-
-- [x] Update packages/angular-ai-kit/src/index.ts (export directives, types, tokens)
-- [x] Update packages/tokens/src/index.ts (export theme and types)
-- [x] Update packages/utils/src/index.ts (export all utilities)
-- [x] Verify tree-shakable exports
-
-### 8. Documentation Files ✅
-
-- [x] Update README.md with comprehensive info (219 lines)
-- [x] Create CONTRIBUTING.md
-- [x] Create LICENSE file (MIT)
+(none yet - phase just started)
 
 ## 🔄 In Progress
 
-### 9. Verification Checklist
+(none currently)
+
+## 📋 Pending Tasks
+
+### 1. MessageBubble Component
+
+- [ ] Create component directory structure (`packages/angular-ai-kit/src/lib/components/chat/message-bubble/`)
+- [ ] Implement message-bubble.component.ts with:
+  - [ ] Signal-based inputs (`message`, `showAvatar`, `customClasses`, `showActions`)
+  - [ ] Signal-based outputs (`copy`, `regenerate`)
+  - [ ] User/assistant message variants with role-based styling
+  - [ ] Avatar display (user icon 👤 vs AI icon 🤖)
+  - [ ] Copy button functionality (uses CopyToClipboardDirective)
+  - [ ] Regenerate button (assistant messages only)
+  - [ ] Hover actions for buttons
+  - [ ] OnPush change detection
+  - [ ] ViewEncapsulation.None
+  - [ ] Accessible with ARIA labels
+  - [ ] Dark mode support
+- [ ] Create message-bubble.types.ts (if needed for complex types >50 lines)
+- [ ] Create index.ts barrel export
+- [ ] Add JSDoc comments for public API
+- [ ] Test accessibility (keyboard navigation, screen reader)
+- [ ] Test responsiveness (mobile/tablet/desktop)
+- [ ] Update TODO.md progress
+
+### 2. MessageList Component
+
+- [ ] Create component directory structure (`packages/angular-ai-kit/src/lib/components/chat/message-list/`)
+- [ ] Implement message-list.component.ts with:
+  - [ ] Signal inputs (`messages`, `loading`, `customClasses`, `autoScroll`)
+  - [ ] Scrollable container with overflow-y-auto
+  - [ ] Auto-scroll to bottom on new messages (using effect())
+  - [ ] Uses @for to loop through messages with track message.id
+  - [ ] Loading state indicator (typing indicator)
+  - [ ] Uses MessageBubbleComponent for each message
+  - [ ] ViewChild for scroll container reference
+  - [ ] Accessible with role="log" for screen readers
+  - [ ] Max height: 600px (configurable)
+  - [ ] Custom scrollbar styling
+- [ ] Create message-list.types.ts (optional)
+- [ ] Create index.ts barrel export
+- [ ] Add JSDoc comments for public API
+- [ ] Test accessibility
+- [ ] Test responsiveness
+- [ ] Update TODO.md progress
+
+### 3. ChatContainer Component
+
+- [ ] Create component directory structure (`packages/angular-ai-kit/src/lib/components/chat/chat-container/`)
+- [ ] Implement chat-container.component.ts with:
+  - [ ] Signal inputs (`messages`, `title`, `loading`, `showHeader`, `customClasses`)
+  - [ ] Signal outputs (`messageSend`, `messageRegenerate`)
+  - [ ] Main layout wrapper with header, messages, footer
+  - [ ] Optional header with title
+  - [ ] Integrates MessageListComponent
+  - [ ] Placeholder for input section (Phase 0.3)
+  - [ ] Full-height layout (h-screen)
+  - [ ] Responsive flex design
+  - [ ] Dark mode support
+  - [ ] Border separation between sections
+- [ ] Create chat-container.types.ts (optional)
+- [ ] Create index.ts barrel export
+- [ ] Add JSDoc comments for public API
+- [ ] Test accessibility
+- [ ] Test responsiveness
+- [ ] Update TODO.md progress
+
+### 4. Integration & Exports
+
+- [ ] Create `/packages/angular-ai-kit/src/lib/components/chat/index.ts` barrel export
+- [ ] Export all 3 components in chat/index.ts
+- [ ] Update `/packages/angular-ai-kit/src/index.ts` to export chat components
+- [ ] Update public API documentation
+
+### 5. Demo App Integration
+
+- [ ] Import components in demo app
+- [ ] Create sample ChatMessage array with test data
+- [ ] Display full chat interface in demo app
+- [ ] Test MessageBubble standalone
+- [ ] Test MessageList with multiple messages
+- [ ] Test ChatContainer full layout
+- [ ] Verify responsiveness on mobile/tablet/desktop
+- [ ] Verify dark mode works correctly
+- [ ] Test accessibility with keyboard only
+- [ ] Verify no console errors
+
+### 6. Final Verification
 
 - [ ] Build all packages: `nx run-many --target=build --all`
-- [ ] Serve demo app: `nx serve demo`
 - [ ] Lint all packages: `nx run-many --target=lint --all`
 - [ ] Format check: `nx format:check`
-- [ ] Verify git hooks with test commit
-- [ ] Check TypeScript paths resolve correctly
-
-### 10. Final Phase 0.1 Cleanup
-
-- [ ] Update PLAN.md to mark Phase 0.1 as complete
-- [ ] Stage all new files
-- [ ] Review all changes
-- [ ] Ready for Phase 0.2
+- [ ] Verify component exports are tree-shakable
+- [ ] Update PLAN.md to mark Phase 0.2 as complete
+- [ ] All 3 components follow Angular v21 best practices
+- [ ] Code review checklist passed
 
 ---
 
 ## 📊 Progress Summary
 
-**Total Tasks:** 10 major categories
-**Completed:** 8 categories ✅
+**Phase:** 0.2 - Core Chat Components
+**Status:** In Progress
+**Overall Progress:** 0% Complete
 
-- [x] 1. Complete Git Hooks Setup
-- [x] 2. Create DI Tokens
-- [x] 3. Create Reusable Directives
-- [x] 4. Create Utility Functions
-- [x] 5. Configure Library Builds
-- [x] 6. Setup NPM Publishing
-- [x] 7. Update Public APIs
-- [x] 8. Documentation Files
-     **In Progress:** 2
-- [ ] 9. Verification Checklist
-- [ ] 10. Final Phase 0.1 Cleanup
+**Total Components:** 3
+**Completed:** 0 ✅
+**In Progress:** 0 🔄
+**Pending:** 3 ⏳
 
-**Overall Progress: 80% Complete**
+**Component Progress:**
+
+- [ ] MessageBubble Component (0% - Not started)
+- [ ] MessageList Component (0% - Not started)
+- [ ] ChatContainer Component (0% - Not started)
 
 ---
 
-## 🎯 Phase 0.2 Preview (Next Steps)
+## 🎯 Next Steps
 
-After completing Phase 0.1, we'll move to Phase 0.2:
-
-- MessageBubble Component
-- MessageList Component
-- ChatContainer Component
+1. Start with MessageBubble component (smallest, most independent)
+2. Build MessageList component (depends on MessageBubble)
+3. Build ChatContainer component (integrates both)
+4. Test all components in demo app
+5. Final verification and Phase 0.2 completion
 
 ---
 
-_Last Updated: 2025-12-24_
-_Phase 0.1: 80% Complete - All major tasks done, verification pending_
+_Last Updated: 2025-12-25_
+_Phase 0.2: 0% Complete - Starting component development_
