@@ -4,9 +4,7 @@ import {
   ViewEncapsulation,
   signal,
   computed,
-  output,
 } from '@angular/core';
-import { RouterModule } from '@angular/router';
 import { ThemeToggleComponent } from '../theme-toggle/theme-toggle.component';
 import { cn } from '@angular-ai-kit/utils';
 
@@ -15,100 +13,70 @@ import { cn } from '@angular-ai-kit/utils';
  */
 export interface NavItem {
   label: string;
-  path?: string;
-  href?: string;
-  icon?: string;
+  href: string;
+  external?: boolean;
 }
 
 /**
  * Navigation Component
  *
- * Top navigation bar with logo, menu items, theme toggle, and mobile hamburger menu.
- * Sticky on scroll with responsive design.
+ * Clean, minimal header with logo, nav items, and theme toggle.
+ * Sticky with frosted glass effect.
  *
  * @example
  * ```html
- * <app-navigation
- *   [sidebarCollapsed]="sidebarCollapsed()"
- *   (sidebarToggle)="handleSidebarToggle()" />
+ * <app-navigation />
  * ```
  */
 @Component({
   selector: 'app-navigation',
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
-  imports: [RouterModule, ThemeToggleComponent],
+  imports: [ThemeToggleComponent],
   host: {
-    class: 'app-navigation-host',
+    class: 'app-navigation-host block',
   },
   template: `
     <nav [class]="navClasses()">
       <div [class]="containerClasses()">
-        <!-- Left section: Logo + Brand -->
-        <div class="flex items-center gap-4">
-          <!-- Sidebar Toggle (Mobile & Desktop) -->
-          <button
-            type="button"
-            [class]="sidebarToggleClasses()"
-            (click)="handleSidebarToggle()"
-            aria-label="Toggle sidebar"
-          >
+        <!-- Left: Logo & Brand -->
+        <a href="/" class="group flex items-center gap-3">
+          <!-- Logo Icon - AI/Neural Network inspired -->
+          <div [class]="logoContainerClasses()">
             <svg
               class="h-6 w-6"
+              viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
-              viewBox="0 0 24 24"
+              stroke-width="1.5"
             >
               <path
                 stroke-linecap="round"
                 stroke-linejoin="round"
-                stroke-width="2"
-                d="M4 6h16M4 12h16M4 18h16"
+                d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456zM16.894 20.567L16.5 21.75l-.394-1.183a2.25 2.25 0 00-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 001.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 001.423 1.423l1.183.394-1.183.394a2.25 2.25 0 00-1.423 1.423z"
               />
             </svg>
-          </button>
-
-          <!-- Logo & Brand -->
-          <a
-            [routerLink]="['/']"
-            class="flex items-center gap-2 text-xl font-bold text-gray-900 transition-colors hover:text-gray-600 dark:text-gray-100 dark:hover:text-gray-300"
+          </div>
+          <span
+            class="text-lg font-semibold tracking-tight text-[var(--foreground)] transition-colors group-hover:text-[var(--foreground-secondary)]"
           >
-            <!-- Logo Icon -->
-            <svg
-              class="h-8 w-8 text-gray-900 dark:text-gray-100"
-              fill="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"
-              />
-            </svg>
-            <span class="hidden sm:inline">Angular AI Kit</span>
-          </a>
-        </div>
+            Angular AI Kit
+          </span>
+        </a>
 
-        <!-- Center section: Navigation items (Desktop) -->
+        <!-- Center: Nav Items (Desktop) -->
         <div class="hidden items-center gap-1 md:flex">
           @for (item of navItems(); track item.label) {
-            @if (item.path) {
-              <a
-                [routerLink]="[item.path]"
-                routerLinkActive="bg-gray-200 text-gray-900 dark:bg-gray-700 dark:text-gray-100"
-                [class]="navItemClasses()"
-              >
-                {{ item.label }}
-              </a>
-            } @else if (item.href) {
-              <a
-                [href]="item.href"
-                target="_blank"
-                rel="noopener noreferrer"
-                [class]="navItemClasses()"
-              >
-                {{ item.label }}
-                <!-- External link icon -->
+            <a
+              [href]="item.href"
+              [target]="item.external ? '_blank' : '_self'"
+              [rel]="item.external ? 'noopener noreferrer' : null"
+              [class]="navItemClasses()"
+            >
+              {{ item.label }}
+              @if (item.external) {
                 <svg
-                  class="h-4 w-4"
+                  class="h-3.5 w-3.5 opacity-50"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -120,13 +88,30 @@ export interface NavItem {
                     d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
                   />
                 </svg>
-              </a>
-            }
+              }
+            </a>
           }
         </div>
 
-        <!-- Right section: Theme toggle + Mobile menu -->
+        <!-- Right: Theme Toggle + Mobile Menu -->
         <div class="flex items-center gap-2">
+          <!-- GitHub Link (Desktop) -->
+          <a
+            href="https://github.com/angular-ai-kit"
+            target="_blank"
+            rel="noopener noreferrer"
+            [class]="iconButtonClasses()"
+            aria-label="View on GitHub"
+          >
+            <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+              <path
+                fill-rule="evenodd"
+                clip-rule="evenodd"
+                d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.17 6.839 9.49.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.604-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.464-1.11-1.464-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.167 22 16.418 22 12c0-5.523-4.477-10-10-10z"
+              />
+            </svg>
+          </a>
+
           <!-- Theme Toggle -->
           <app-theme-toggle />
 
@@ -135,13 +120,12 @@ export interface NavItem {
             type="button"
             [class]="mobileMenuButtonClasses()"
             (click)="toggleMobileMenu()"
-            aria-label="Toggle mobile menu"
-            class="md:hidden"
+            [attr.aria-expanded]="mobileMenuOpen()"
+            aria-label="Toggle navigation menu"
           >
             @if (mobileMenuOpen()) {
-              <!-- Close icon -->
               <svg
-                class="h-6 w-6"
+                class="h-5 w-5"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -154,9 +138,8 @@ export interface NavItem {
                 />
               </svg>
             } @else {
-              <!-- Menu icon -->
               <svg
-                class="h-6 w-6"
+                class="h-5 w-5"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -165,7 +148,7 @@ export interface NavItem {
                   stroke-linecap="round"
                   stroke-linejoin="round"
                   stroke-width="2"
-                  d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z"
+                  d="M4 6h16M4 12h16M4 18h16"
                 />
               </svg>
             }
@@ -177,26 +160,30 @@ export interface NavItem {
       @if (mobileMenuOpen()) {
         <div [class]="mobileMenuClasses()">
           @for (item of navItems(); track item.label) {
-            @if (item.path) {
-              <a
-                [routerLink]="[item.path]"
-                routerLinkActive="bg-gray-200 text-gray-900 dark:bg-gray-700 dark:text-gray-100"
-                [class]="mobileNavItemClasses()"
-                (click)="closeMobileMenu()"
-              >
-                {{ item.label }}
-              </a>
-            } @else if (item.href) {
-              <a
-                [href]="item.href"
-                target="_blank"
-                rel="noopener noreferrer"
-                [class]="mobileNavItemClasses()"
-                (click)="closeMobileMenu()"
-              >
-                {{ item.label }}
-              </a>
-            }
+            <a
+              [href]="item.href"
+              [target]="item.external ? '_blank' : '_self'"
+              [rel]="item.external ? 'noopener noreferrer' : null"
+              [class]="mobileNavItemClasses()"
+              (click)="closeMobileMenu()"
+            >
+              {{ item.label }}
+              @if (item.external) {
+                <svg
+                  class="h-4 w-4 opacity-50"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                  />
+                </svg>
+              }
+            </a>
           }
         </div>
       }
@@ -204,107 +191,102 @@ export interface NavItem {
   `,
 })
 export class NavigationComponent {
-  // Outputs
-  sidebarToggle = output<void>();
-
   // State
   mobileMenuOpen = signal(false);
 
   // Navigation items
   navItems = signal<NavItem[]>([
-    { label: 'Demo', path: '/' },
-    { label: 'Components', path: '/components' },
-    { label: 'Examples', path: '/examples' },
-    { label: 'GitHub', href: 'https://github.com/yourusername/angular-ai-kit' },
+    { label: 'Components', href: '#components' },
+    { label: 'Demo', href: '#demo' },
+    { label: 'Documentation', href: '#', external: false },
+    {
+      label: 'GitHub',
+      href: 'https://github.com/angular-ai-kit',
+      external: true,
+    },
   ]);
 
   // Computed classes
   navClasses = computed(() => {
     return cn(
       'app-navigation',
-      'flex-shrink-0 z-50',
-      'border-b border-gray-200 dark:border-gray-700',
-      'bg-white dark:bg-gray-900',
+      'sticky top-0 z-50',
+      'border-b border-[var(--border)]',
+      'bg-[var(--background)]/80 backdrop-blur-xl',
       'transition-all duration-200'
     );
   });
 
   containerClasses = computed(() => {
-    return cn(
-      'mx-auto flex items-center justify-between',
-      'px-4 py-3 sm:px-6 lg:px-8',
-      'max-w-7xl'
-    );
+    return cn('demo-section', 'flex items-center justify-between', 'py-4');
   });
 
-  sidebarToggleClasses = computed(() => {
+  logoContainerClasses = computed(() => {
     return cn(
       'flex items-center justify-center',
-      'rounded-lg p-2',
-      'text-gray-600 hover:text-gray-900',
-      'dark:text-gray-400 dark:hover:text-gray-100',
-      'hover:bg-gray-100 dark:hover:bg-gray-800',
-      'transition-colors duration-200',
-      'focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2',
-      'dark:focus:ring-offset-gray-900'
+      'h-9 w-9 rounded-lg',
+      'bg-[var(--foreground)] text-[var(--background)]',
+      'transition-transform duration-200',
+      'group-hover:scale-105'
     );
   });
 
   navItemClasses = computed(() => {
     return cn(
       'flex items-center gap-1.5',
-      'rounded-lg px-3 py-2',
+      'rounded-md px-3 py-2',
       'text-sm font-medium',
-      'text-gray-700 hover:text-gray-900',
-      'dark:text-gray-300 dark:hover:text-gray-100',
-      'hover:bg-gray-100 dark:hover:bg-gray-800',
+      'text-[var(--foreground-muted)]',
+      'hover:text-[var(--foreground)] hover:bg-[var(--accent)]',
       'transition-all duration-200',
-      'focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2',
-      'dark:focus:ring-offset-gray-900'
+      'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)]'
+    );
+  });
+
+  iconButtonClasses = computed(() => {
+    return cn(
+      'hidden sm:flex items-center justify-center',
+      'h-9 w-9 rounded-md',
+      'text-[var(--foreground-muted)]',
+      'hover:text-[var(--foreground)] hover:bg-[var(--accent)]',
+      'transition-all duration-200',
+      'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)]'
     );
   });
 
   mobileMenuButtonClasses = computed(() => {
     return cn(
-      'flex items-center justify-center',
-      'rounded-lg p-2',
-      'text-gray-600 hover:text-gray-900',
-      'dark:text-gray-400 dark:hover:text-gray-100',
-      'hover:bg-gray-100 dark:hover:bg-gray-800',
-      'transition-colors duration-200',
-      'focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2',
-      'dark:focus:ring-offset-gray-900'
+      'md:hidden flex items-center justify-center',
+      'h-9 w-9 rounded-md',
+      'text-[var(--foreground-muted)]',
+      'hover:text-[var(--foreground)] hover:bg-[var(--accent)]',
+      'transition-all duration-200',
+      'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)]'
     );
   });
 
   mobileMenuClasses = computed(() => {
     return cn(
       'md:hidden',
-      'border-t border-gray-200 dark:border-gray-700',
-      'bg-white dark:bg-gray-900',
+      'border-t border-[var(--border)]',
+      'bg-[var(--background)]',
       'px-4 py-3',
-      'space-y-1',
-      'animate-in slide-in-from-top duration-200'
+      'space-y-1'
     );
   });
 
   mobileNavItemClasses = computed(() => {
     return cn(
-      'block w-full',
-      'rounded-lg px-3 py-2',
+      'flex items-center gap-2 w-full',
+      'rounded-md px-3 py-2.5',
       'text-sm font-medium text-left',
-      'text-gray-700 hover:text-gray-900',
-      'dark:text-gray-300 dark:hover:text-gray-100',
-      'hover:bg-gray-100 dark:hover:bg-gray-800',
+      'text-[var(--foreground-muted)]',
+      'hover:text-[var(--foreground)] hover:bg-[var(--accent)]',
       'transition-colors duration-200'
     );
   });
 
   // Methods
-  handleSidebarToggle(): void {
-    this.sidebarToggle.emit();
-  }
-
   toggleMobileMenu(): void {
     this.mobileMenuOpen.update((open) => !open);
   }

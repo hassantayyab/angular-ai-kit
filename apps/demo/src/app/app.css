@@ -1,5 +1,26 @@
-/* Demo app styles */
+/* App Component Styles */
+
+/* Host element styling */
 :host {
   display: block;
-  height: 100vh;
+  min-height: 100vh;
+}
+
+/* Root container */
+.app-root-container {
+  background-color: var(--background);
+  color: var(--foreground);
+  transition:
+    background-color var(--transition-base),
+    color var(--transition-base);
+}
+
+/* Smooth scrolling for the page */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Scroll margin for anchor links (accounts for sticky header) */
+section[id] {
+  scroll-margin-top: 5rem;
 }

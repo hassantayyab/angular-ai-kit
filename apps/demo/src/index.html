@@ -2,10 +2,68 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <title>demo</title>
+    <title>Angular AI Kit - Modern AI Chat Components for Angular</title>
     <base href="/" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Angular AI Kit is a modern, signal-first component library for building AI chat interfaces in Angular v21. Features dark mode, accessibility, and Tailwind CSS styling."
+    />
+    <meta
+      name="theme-color"
+      content="#09090b"
+      media="(prefers-color-scheme: dark)"
+    />
+    <meta
+      name="theme-color"
+      content="#fafafa"
+      media="(prefers-color-scheme: light)"
+    />
     <link rel="icon" type="image/x-icon" href="favicon.ico" />
+
+    <!-- Preconnect to font CDN -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <!-- Geist Font (Inter as fallback since Geist requires self-hosting) -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Dark Mode Flash Prevention Script -->
+    <script>
+      (function () {
+        try {
+          var theme = localStorage.getItem('ai-kit-theme');
+          if (
+            theme === 'dark' ||
+            (!theme &&
+              window.matchMedia('(prefers-color-scheme: dark)').matches)
+          ) {
+            document.documentElement.classList.add('dark');
+          }
+        } catch (e) {}
+      })();
+    </script>
+
+    <style>
+      /* Critical CSS for preventing layout shift */
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        min-height: 100vh;
+      }
+
+      /* Initial background to prevent flash */
+      html {
+        background-color: #fafafa;
+      }
+      html.dark {
+        background-color: #09090b;
+      }
+    </style>
   </head>
   <body>
     <app-root></app-root>
