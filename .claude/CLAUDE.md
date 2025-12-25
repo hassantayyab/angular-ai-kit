@@ -12,6 +12,7 @@ This is an **Angular v21** component library focused on AI chat interfaces. We'r
 
 - Angular v21 is the LATEST version with all modern features
 - Tailwind v4 uses NEW @tailwindcss/postcss plugin (not the old tailwindcss plugin)
+- We are creating a component library for Angular AI chat interfaces. Therefore, write code that is best suited for such library.
 - AI assistants often make mistakes with latest versions - ALWAYS verify against official docs
 - Please refer to the PLAN.md file for the project scope and requirements. Please note that this is only for reference and not to be followed blindly. Feel free to improve the plan and add more tasks as you see fit when working on a particular phase and add these tasks to the TODO.md file.
 

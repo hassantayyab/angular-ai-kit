@@ -15,7 +15,9 @@ This is an **Angular v21** component library focused on AI chat interfaces. We'r
 
 - Angular v21 is the LATEST version with all modern features
 - Tailwind v4 uses NEW @tailwindcss/postcss plugin (not the old tailwindcss plugin)
+- We are creating a component library for Angular AI chat interfaces. Therefore, write code that is best suited for such library.
 - AI assistants often make mistakes with latest versions - ALWAYS verify against official docs
+- Please refer to the PLAN.md file for the project scope and requirements. Please note that this is only for reference and not to be followed blindly. Feel free to improve the plan and add more tasks as you see fit when working on a particular phase and add these tasks to the TODO.md file.
 
 **Project Scope:**
 
@@ -41,20 +43,17 @@ This is an **Angular v21** component library focused on AI chat interfaces. We'r
 ### Scalability Principles
 
 1. **Component Composition Over Inheritance**
-
    - Use `hostDirectives` for cross-cutting concerns
    - Prefer composition patterns over complex inheritance hierarchies
    - Keep components small and focused (single responsibility)
 
 2. **Module Boundaries & Dependency Management**
-
    - Enforce strict module boundaries in Nx
    - Prevent circular dependencies
    - Use DI tokens for extensibility (don't hardcode implementations)
    - Keep libraries loosely coupled
 
 3. **Performance from Day One**
-
    - OnPush change detection everywhere
    - Minimize signal computations (avoid nested computed signals)
    - Lazy load when possible
@@ -69,35 +68,30 @@ This is an **Angular v21** component library focused on AI chat interfaces. We'r
 ### Maintainability Principles
 
 1. **Code Organization**
-
    - Maximum 500 lines per file (refactor if larger)
    - Group related functionality into feature folders
    - Clear separation: components / directives / services / types / utils
    - Consistent file naming: `feature-name.component.ts`, `feature-name.service.ts`
 
 2. **Type Safety**
-
    - TypeScript strict mode enabled
    - No `any` types (use `unknown` if truly needed)
    - Use discriminated unions for complex types
    - Define clear interfaces for all public APIs
 
 3. **Documentation**
-
    - JSDoc comments for all public APIs
    - Include usage examples in comments
    - Document complex logic with inline comments
    - Keep README and PLAN.md up to date
 
 4. **Consistency**
-
    - Follow established patterns (don't invent new ones unnecessarily)
    - Use shared utilities from `@angular-ai-kit/utils`
    - Consistent naming conventions throughout
    - Automated formatting with Prettier
 
 5. **Error Handling**
-
    - Fail gracefully with user-friendly messages
    - Log errors appropriately (but remove before production)
    - Provide fallback UI states
@@ -212,7 +206,7 @@ export class ComponentName {
     return cn(
       'ai-component-base',
       { 'ai-component-disabled': this.disabled() },
-      this.customClasses(),
+      this.customClasses()
     );
   });
 
@@ -343,7 +337,7 @@ this.state.set({ ...this.state(), property: newValue });
 @import 'tailwindcss';
 
 /* Watch monorepo packages for Tailwind classes */
-@source "../../packages";
+@source '../../packages';
 
 /* Theme configuration using CSS */
 @layer base {
@@ -360,7 +354,7 @@ this.state.set({ ...this.state(), property: newValue });
 
 @layer components {
   .ai-button {
-    @apply px-4 py-2 rounded-lg bg-blue-500 text-white;
+    @apply rounded-lg bg-blue-500 px-4 py-2 text-white;
   }
 }
 ```
@@ -397,7 +391,7 @@ classes = computed(() => {
       'conditional-class': this.condition(),
       'active:ring-2': this.isActive(),
     },
-    this.customClasses(), // Allow class override from parent
+    this.customClasses() // Allow class override from parent
   );
 });
 ```
@@ -683,7 +677,8 @@ disabled = input(false, {
 
 // Transform string to number
 count = input(0, {
-  transform: (value: string | number) => (typeof value === 'string' ? parseInt(value, 10) : value),
+  transform: (value: string | number) =>
+    typeof value === 'string' ? parseInt(value, 10) : value,
 });
 ```
 
