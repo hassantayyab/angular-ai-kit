@@ -3,24 +3,12 @@
 /* Host element styling */
 :host {
   display: block;
-  min-height: 100vh;
+  height: 100vh;
+  overflow: hidden;
 }
 
-/* Root container */
+/* Root container - full viewport height */
 .app-root-container {
-  background-color: var(--background);
-  color: var(--foreground);
-  transition:
-    background-color var(--transition-base),
-    color var(--transition-base);
-}
-
-/* Smooth scrolling for the page */
-html {
-  scroll-behavior: smooth;
-}
-
-/* Scroll margin for anchor links (accounts for sticky header) */
-section[id] {
-  scroll-margin-top: 5rem;
+  height: 100vh;
+  overflow: hidden;
 }
