@@ -18,6 +18,7 @@
 - ✅ Git hooks, ESLint, Prettier
 - ✅ Documentation (README, CONTRIBUTING, LICENSE)
 - ✅ **Phase 0.2: Core Chat Components (MessageBubble, MessageList, ChatContainer)**
+- ✅ **Angular Spartan UI Integration** - Helm components library with 13 components
 
 ### In Progress 🔄
 
@@ -45,6 +46,7 @@
 
 - **Angular:** v21 (latest features with signals, control flow, and SSR)
 - **Tailwind CSS:** v4 (latest with @tailwindcss/postcss plugin)
+- **Spartan UI:** Angular-native shadcn/ui port for accessible UI primitives
 - **Nx:** Latest version for monorepo management
 - **TypeScript:** Latest with strict mode enabled
 - **CSS ONLY** (NO SCSS)

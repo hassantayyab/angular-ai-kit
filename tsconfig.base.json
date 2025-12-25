@@ -17,7 +17,8 @@
     "paths": {
       "@angular-ai-kit/core": ["packages/angular-ai-kit/src/index.ts"],
       "@angular-ai-kit/tokens": ["packages/tokens/src/index.ts"],
-      "@angular-ai-kit/utils": ["packages/utils/src/index.ts"]
+      "@angular-ai-kit/utils": ["packages/utils/src/index.ts"],
+      "@angular-ai-kit/spartan-ui": ["libs/spartan-ui/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

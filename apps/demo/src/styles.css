@@ -1,6 +1,11 @@
 /* Angular AI Kit Demo - Design System */
 
-@import 'tailwindcss';
+@layer theme, base, components, utilities;
+@import 'tailwindcss/theme.css' layer(theme);
+@import 'tailwindcss/preflight.css' layer(base);
+@import 'tailwindcss/utilities.css';
+@import '@spartan-ng/brain/hlm-tailwind-preset.css';
+
 @source '../../packages'; /* Watch packages for classes */
 
 /* ============================================
@@ -13,8 +18,15 @@
     /* Background Colors */
     --background: #fafafa; /* zinc-50 */
     --background-secondary: #f4f4f5; /* zinc-100 */
+
+    /* Card Colors */
     --card: #ffffff;
     --card-hover: #fafafa; /* zinc-50 */
+    --card-foreground: #09090b; /* zinc-950 */
+
+    /* Popover Colors (for tooltips, dropdowns) */
+    --popover: #ffffff;
+    --popover-foreground: #09090b; /* zinc-950 */
 
     /* Foreground Colors */
     --foreground: #09090b; /* zinc-950 */
@@ -28,11 +40,16 @@
     /* Border Colors */
     --border: #e4e4e7; /* zinc-200 */
     --border-hover: #d4d4d8; /* zinc-300 */
+    --input: #e4e4e7; /* zinc-200 - for input borders */
 
     /* Primary Colors */
     --primary: #18181b; /* zinc-900 */
     --primary-hover: #27272a; /* zinc-800 */
     --primary-foreground: #fafafa; /* zinc-50 */
+
+    /* Secondary Colors */
+    --secondary: #f4f4f5; /* zinc-100 */
+    --secondary-foreground: #18181b; /* zinc-900 */
 
     /* Accent Colors */
     --accent: #f4f4f5; /* zinc-100 */
@@ -48,6 +65,7 @@
     /* Ring/Focus Colors */
     --ring: #a1a1aa; /* zinc-400 */
     --ring-offset: #ffffff;
+    --ring-offset-background: #ffffff;
 
     /* Shadows */
     --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
@@ -86,8 +104,15 @@
     /* Background Colors */
     --background: #09090b; /* zinc-950 */
     --background-secondary: #18181b; /* zinc-900 */
+
+    /* Card Colors */
     --card: #18181b; /* zinc-900 */
     --card-hover: #27272a; /* zinc-800 */
+    --card-foreground: #fafafa; /* zinc-50 */
+
+    /* Popover Colors (for tooltips, dropdowns) */
+    --popover: #18181b; /* zinc-900 */
+    --popover-foreground: #fafafa; /* zinc-50 */
 
     /* Foreground Colors */
     --foreground: #fafafa; /* zinc-50 */
@@ -101,11 +126,16 @@
     /* Border Colors */
     --border: #27272a; /* zinc-800 */
     --border-hover: #3f3f46; /* zinc-700 */
+    --input: #27272a; /* zinc-800 - for input borders */
 
     /* Primary Colors */
     --primary: #fafafa; /* zinc-50 */
     --primary-hover: #e4e4e7; /* zinc-200 */
     --primary-foreground: #18181b; /* zinc-900 */
+
+    /* Secondary Colors */
+    --secondary: #27272a; /* zinc-800 */
+    --secondary-foreground: #fafafa; /* zinc-50 */
 
     /* Accent Colors */
     --accent: #27272a; /* zinc-800 */
@@ -115,6 +145,7 @@
     /* Ring/Focus Colors */
     --ring: #52525b; /* zinc-600 */
     --ring-offset: #09090b; /* zinc-950 */
+    --ring-offset-background: #09090b; /* zinc-950 */
 
     /* Shadows (darker for dark mode) */
     --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.3);
