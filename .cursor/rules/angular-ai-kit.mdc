@@ -657,9 +657,9 @@ When implementing a component:
 ## Nx Monorepo Guidelines
 
 - This project uses Nx workspace for managing multiple projects (library, demo app, CLI, docs)
-- Use Nx generators to create new libraries/apps: `nx generate @nx/angular:library <name>`
+- Use Nx generators to create new libraries/apps: `nx g @nx/angular:lib libs/libName` (or `nx generate @nx/angular:lib libs/libName`)
 - Use Nx commands for building: `nx build <project-name>`
-- Leverage Nx affected commands for CI/CD: `nx affected:build`, `nx affected:lint`
+- Leverage Nx affected commands for CI/CD: `nx affected -t build`, `nx affected -t lint` (or use `nx run-many -t build --all` for all projects)
 - Enforce module boundaries to prevent circular dependencies
 - Use `nx graph` to visualize project dependencies
 - Configure proper tsconfig paths: `@angular-ai-kit/core`, `@angular-ai-kit/tokens`, `@angular-ai-kit/utils`
