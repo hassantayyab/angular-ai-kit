@@ -357,68 +357,6 @@
     color: var(--foreground-secondary);
   }
 
-  /* Sidebar Customizations */
-  hlm-sidebar {
-    overflow-x: hidden !important;
-  }
-
-  hlm-sidebar [data-slot='sidebar-container'] {
-    border-right: none !important;
-    border-left: none !important;
-  }
-
-  hlm-sidebar [data-sidebar='sidebar'] {
-    overflow-x: hidden !important;
-  }
-
-  /* Improve sidebar padding */
-  hlm-sidebar [data-sidebar='header'] {
-    padding: 0.75rem 0.5rem;
-  }
-
-  hlm-sidebar [data-sidebar='content'] {
-    padding: 0.25rem 0.5rem;
-    overflow-x: hidden !important;
-  }
-
-  hlm-sidebar [data-sidebar='footer'] {
-    padding: 0.75rem;
-  }
-
-  hlm-sidebar [data-sidebar='group'] {
-    padding: 0.25rem 0;
-  }
-
-  /* Menu items padding */
-  hlm-sidebar [data-sidebar='menu-button'] {
-    padding: 0.5rem 0.625rem;
-  }
-
-  /* Sub menu items */
-  hlm-sidebar [data-sidebar='menu-sub'] {
-    padding-left: 0.5rem;
-  }
-
-  hlm-sidebar [data-sidebar='menu-sub-button'] {
-    padding: 0.375rem 0.5rem;
-  }
-
-  /* Hide horizontal scrollbar in sidebar */
-  hlm-sidebar,
-  hlm-sidebar * {
-    scrollbar-width: thin;
-  }
-
-  hlm-sidebar::-webkit-scrollbar {
-    width: 4px;
-    height: 0;
-  }
-
-  hlm-sidebar [data-sidebar='content']::-webkit-scrollbar {
-    width: 4px;
-    height: 0;
-  }
-
   /* Ensure no horizontal overflow */
   .app-sidebar-host {
     overflow-x: hidden !important;

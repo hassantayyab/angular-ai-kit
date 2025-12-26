@@ -1,7 +1,9 @@
 <hlm-sidebar [collapsible]="'icon'">
   <!-- Header -->
   <div hlmSidebarHeader>
-    <div class="flex items-center gap-2 pt-2 pr-1 pl-2">
+    <div
+      class="flex items-center gap-2 pt-2 pr-1 pl-2 group-data-[collapsible=icon]:justify-center group-data-[collapsible=icon]:p-0"
+    >
       <!-- Toggle button (only visible when collapsed) -->
       <button
         hlmSidebarTrigger
@@ -47,8 +49,8 @@
         Angular AI Kit
       </span>
 
-      <!-- Spacer -->
-      <div class="flex-1"></div>
+      <!-- Spacer (hidden when collapsed) -->
+      <div class="flex-1 group-data-[collapsible=icon]:hidden"></div>
 
       <!-- Sidebar Toggle -->
       <button hlmSidebarTrigger class="group-data-[collapsible=icon]:hidden">
