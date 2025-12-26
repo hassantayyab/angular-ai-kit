@@ -37,7 +37,7 @@
     </div>
   } @else {
     <!-- Empty state -->
-    <div [class]="emptyStateClasses()">
+    <div [class]="emptyStateClasses()" role="status" aria-live="polite">
       <p class="text-[var(--foreground-muted)]">
         {{ emptyMessage() }}
       </p>

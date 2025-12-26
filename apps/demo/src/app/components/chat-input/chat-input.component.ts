@@ -53,6 +53,7 @@ export class ChatInputComponent {
 
   // Outputs
   messageSend = output<string>();
+  inputCleared = output<void>();
 
   // State
   inputValue = signal('');
@@ -123,6 +124,19 @@ export class ChatInputComponent {
     if (event.key === 'Enter' && !event.shiftKey) {
       event.preventDefault();
       this.handleSend();
+    }
+    // Escape clears the input
+    if (event.key === 'Escape') {
+      this.handleClear();
+    }
+  }
+
+  /** Clear the input and emit inputCleared event */
+  handleClear(): void {
+    if (this.inputValue().length > 0) {
+      this.inputValue.set('');
+      this.resetTextarea();
+      this.inputCleared.emit();
     }
   }
 

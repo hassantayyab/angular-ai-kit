@@ -45,6 +45,8 @@ import {
     class: 'app-message-bubble-host block',
     '(mouseenter)': 'handleMouseEnter()',
     '(mouseleave)': 'handleMouseLeave()',
+    '(focusin)': 'handleFocusIn()',
+    '(focusout)': 'handleFocusOut()',
   },
 })
 export class MessageBubbleComponent {
@@ -82,6 +84,14 @@ export class MessageBubbleComponent {
 
   private _isHovered = signal(false);
   isHovered = this._isHovered.asReadonly();
+
+  private _isFocused = signal(false);
+  isFocused = this._isFocused.asReadonly();
+
+  /** Whether actions should be visible and focusable */
+  actionsVisible = computed(
+    () => this.showActions() || this.isHovered() || this.isFocused()
+  );
 
   // ==========================================
   // Computed Properties
@@ -155,15 +165,15 @@ export class MessageBubbleComponent {
 
   /** Actions container classes */
   actionsClasses = computed(() => {
-    const shouldShow = this.showActions() || this.isHovered();
+    const shouldShow = this.actionsVisible();
 
     return cn(
       'app-message-bubble-actions',
       'flex gap-1 mt-2',
       'transition-opacity duration-200',
       {
-        'opacity-100': shouldShow,
-        'opacity-0': !shouldShow,
+        'opacity-100 visible': shouldShow,
+        'opacity-0 invisible': !shouldShow,
       }
     );
   });
@@ -210,5 +220,15 @@ export class MessageBubbleComponent {
   /** Handle mouse leave event */
   handleMouseLeave(): void {
     this._isHovered.set(false);
+  }
+
+  /** Handle focus in event (any child element receives focus) */
+  handleFocusIn(): void {
+    this._isFocused.set(true);
+  }
+
+  /** Handle focus out event (focus leaves the component) */
+  handleFocusOut(): void {
+    this._isFocused.set(false);
   }
 }

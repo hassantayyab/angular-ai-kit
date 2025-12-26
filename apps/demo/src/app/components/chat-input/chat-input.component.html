@@ -27,7 +27,11 @@
         (keydown)="handleKeydown($event)"
         rows="1"
         aria-label="Message input"
+        aria-describedby="keyboard-hint"
       ></textarea>
+      <span id="keyboard-hint" class="sr-only">
+        Press Enter to send, Shift+Enter for new line, Escape to clear
+      </span>
     </div>
 
     <!-- Bottom: Toolbar -->
@@ -161,6 +165,7 @@
           size="icon"
           [class]="sendButtonClasses()"
           [disabled]="!canSend()"
+          [attr.aria-disabled]="!canSend()"
           (click)="handleSend()"
           aria-label="Send message"
         >

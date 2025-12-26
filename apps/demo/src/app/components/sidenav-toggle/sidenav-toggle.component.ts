@@ -45,6 +45,9 @@ export class SidenavToggleComponent {
    */
   variant = input<'sidebar' | 'floating'>('sidebar');
 
+  /** ID of the element this toggle controls (for aria-controls) */
+  controlsId = input<string>('app-sidebar');
+
   // Outputs
   toggled = output<void>();
 

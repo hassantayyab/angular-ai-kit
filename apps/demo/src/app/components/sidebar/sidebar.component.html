@@ -7,12 +7,13 @@
     tabindex="0"
     aria-label="Close sidebar"
     (keydown.enter)="collapse()"
+    (keydown.space)="collapse()"
     (keydown.escape)="collapse()"
   ></div>
 }
 
 <!-- Sidebar -->
-<aside [class]="sidebarClasses()">
+<aside id="app-sidebar" [class]="sidebarClasses()">
   <!-- Header -->
   <div [class]="headerClasses()">
     @if (!collapsed()) {
