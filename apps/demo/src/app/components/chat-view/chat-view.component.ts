@@ -1,4 +1,4 @@
-import { ChatContainerComponent, ChatMessage } from '@angular-ai-kit/core';
+import { ChatMessage } from '@angular-ai-kit/core';
 import { HlmButtonDirective } from '@angular-ai-kit/spartan-ui';
 import { cn } from '@angular-ai-kit/utils';
 import {
@@ -13,6 +13,7 @@ import {
 import { ChatService } from '../../services/chat.service';
 import { ChatInputComponent } from '../chat-input/chat-input.component';
 import { EmptyStateComponent } from '../empty-state/empty-state.component';
+import { MessageListComponent } from '../message-list';
 
 /**
  * ChatViewComponent
@@ -34,7 +35,7 @@ import { EmptyStateComponent } from '../empty-state/empty-state.component';
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
   imports: [
-    ChatContainerComponent,
+    MessageListComponent,
     ChatInputComponent,
     EmptyStateComponent,
     HlmButtonDirective,
@@ -115,11 +116,13 @@ export class ChatViewComponent {
     this.chatService.sendMessage(prompt);
   }
 
-  handleMessageCopy(event: { content: string; message: ChatMessage }): void {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  handleMessageCopy(_event: { content: string; message: ChatMessage }): void {
     // Copy handled by the component, could add toast notification here
   }
 
-  handleMessageRegenerate(message: ChatMessage): void {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  handleMessageRegenerate(_message: ChatMessage): void {
     this.chatService.regenerateLastMessage();
   }
 

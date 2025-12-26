@@ -6,6 +6,7 @@ import {
   computed,
   input,
   output,
+  signal,
 } from '@angular/core';
 import { ChatMessage } from '../../../types';
 
@@ -39,7 +40,9 @@ import { ChatMessage } from '../../../types';
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
   host: {
-    class: 'ai-message-bubble-host',
+    class: 'ai-message-bubble-host group',
+    '(mouseenter)': 'handleMouseEnter()',
+    '(mouseleave)': 'handleMouseLeave()',
   },
 })
 export class MessageBubbleComponent {
@@ -182,12 +185,12 @@ export class MessageBubbleComponent {
    * Track hover state for showing actions
    * @internal
    */
-  private _isHovered = false;
+  private _isHovered = signal(false);
 
   /**
-   * Whether the message is currently hovered
+   * Whether the message is currently hovered (readonly signal)
    */
-  isHovered = computed(() => this._isHovered);
+  isHovered = this._isHovered.asReadonly();
 
   // ==========================================
   // Methods
@@ -213,5 +216,21 @@ export class MessageBubbleComponent {
    */
   handleRegenerate(): void {
     this.regenerate.emit();
+  }
+
+  /**
+   * Handle mouse enter event
+   * @internal
+   */
+  handleMouseEnter(): void {
+    this._isHovered.set(true);
+  }
+
+  /**
+   * Handle mouse leave event
+   * @internal
+   */
+  handleMouseLeave(): void {
+    this._isHovered.set(false);
   }
 }

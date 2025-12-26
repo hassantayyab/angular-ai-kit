@@ -1,0 +1,48 @@
+<hlm-scroll-area [class]="containerClasses()">
+  <div
+    #scrollContainer
+    class="h-full overflow-y-auto"
+    role="log"
+    aria-live="polite"
+    aria-atomic="false"
+    aria-label="Chat messages"
+  >
+    @if (messages().length > 0) {
+      <!-- Messages -->
+      <div [class]="messagesWrapperClasses()">
+        @for (message of messages(); track message.id) {
+          <app-message-bubble
+            [message]="message"
+            [showAvatar]="showAvatars()"
+            [showActions]="false"
+            (copied)="handleMessageCopy($event, message)"
+            (regenerate)="handleMessageRegenerate(message)"
+          />
+        }
+
+        <!-- Loading indicator -->
+        @if (loading()) {
+          <div [class]="typingIndicatorClasses()" role="status">
+            <!-- Skeleton avatar -->
+            <div hlmSkeleton class="h-8 w-8 rounded-full"></div>
+
+            <!-- Skeleton lines -->
+            <div class="flex flex-1 flex-col gap-2">
+              <div hlmSkeleton class="h-4 w-3/4 rounded"></div>
+              <div hlmSkeleton class="h-4 w-1/2 rounded"></div>
+            </div>
+
+            <span class="sr-only">AI is thinking...</span>
+          </div>
+        }
+      </div>
+    } @else {
+      <!-- Empty state -->
+      <div [class]="emptyStateClasses()">
+        <p class="text-[var(--foreground-muted)]">
+          {{ emptyMessage() }}
+        </p>
+      </div>
+    }
+  </div>
+</hlm-scroll-area>

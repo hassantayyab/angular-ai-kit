@@ -1,3 +1,8 @@
+import { ChatMessage } from '@angular-ai-kit/core';
+import {
+  HlmScrollAreaComponent,
+  HlmSkeletonDirective,
+} from '@angular-ai-kit/spartan-ui';
 import { cn } from '@angular-ai-kit/utils';
 import { isPlatformBrowser } from '@angular/common';
 import {
@@ -14,17 +19,17 @@ import {
   output,
   viewChild,
 } from '@angular/core';
-import { ChatMessage } from '../../../types';
 import { MessageBubbleComponent } from '../message-bubble';
 
 /**
- * MessageList Component
+ * Demo MessageListComponent
  *
- * Displays a scrollable list of chat messages with auto-scroll functionality.
+ * Scrollable message list with Spartan UI components.
+ * Uses HlmScrollArea for smooth scrolling and HlmSkeleton for loading.
  *
  * @example
  * ```html
- * <ai-message-list
+ * <app-message-list
  *   [messages]="messages"
  *   [loading]="isLoading"
  *   [autoScroll]="true"
@@ -32,21 +37,19 @@ import { MessageBubbleComponent } from '../message-bubble';
  *   (messageRegenerate)="handleRegenerate($event)"
  * />
  * ```
- *
- * @usageNotes
- * - Automatically scrolls to bottom when new messages are added
- * - Shows typing indicator when loading is true
- * - Uses virtual scrolling for better performance with many messages
- * - Accessible with role="log" for screen reader announcements
  */
 @Component({
-  selector: 'ai-message-list',
+  selector: 'app-message-list',
   templateUrl: './message-list.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
-  imports: [MessageBubbleComponent],
+  imports: [
+    MessageBubbleComponent,
+    HlmScrollAreaComponent,
+    HlmSkeletonDirective,
+  ],
   host: {
-    class: 'ai-message-list-host',
+    class: 'app-message-list-host block h-full',
   },
 })
 export class MessageListComponent implements AfterViewInit {
@@ -60,127 +63,85 @@ export class MessageListComponent implements AfterViewInit {
   // Inputs
   // ==========================================
 
-  /**
-   * Array of chat messages to display
-   */
+  /** Array of chat messages to display */
   messages = input.required<ChatMessage[]>();
 
-  /**
-   * Whether to show loading/typing indicator
-   * @default false
-   */
+  /** Whether to show loading/typing indicator */
   loading = input<boolean>(false);
 
-  /**
-   * Custom CSS classes to apply to the message list container
-   * @default ''
-   */
+  /** Custom CSS classes to apply to the container */
   customClasses = input<string>('');
 
-  /**
-   * Whether to automatically scroll to bottom on new messages
-   * @default true
-   */
+  /** Whether to automatically scroll to bottom on new messages */
   autoScroll = input<boolean>(true);
 
-  /**
-   * Whether to show avatars for each message
-   * @default true
-   */
+  /** Whether to show avatars for each message */
   showAvatars = input<boolean>(true);
 
-  /**
-   * Message to show when there are no messages
-   * @default 'No messages yet'
-   */
+  /** Message to show when there are no messages */
   emptyMessage = input<string>('No messages yet');
-
-  /**
-   * Maximum height of the message list
-   * @default '100%'
-   */
-  maxHeight = input<string>('100%');
 
   // ==========================================
   // Outputs
   // ==========================================
 
-  /**
-   * Emitted when a message's copy button is clicked
-   */
+  /** Emitted when a message's copy button is clicked */
   messageCopy = output<{ content: string; message: ChatMessage }>();
 
-  /**
-   * Emitted when a message's regenerate button is clicked
-   */
+  /** Emitted when a message's regenerate button is clicked */
   messageRegenerate = output<ChatMessage>();
 
   // ==========================================
   // Template References
   // ==========================================
 
-  /**
-   * Reference to the scroll container element
-   * @internal
-   */
   scrollContainer = viewChild<ElementRef<HTMLDivElement>>('scrollContainer');
 
   // ==========================================
   // Computed Properties
   // ==========================================
 
-  /**
-   * Container classes
-   */
+  /** Container classes */
   containerClasses = computed(() => {
-    return cn(
-      'ai-message-list',
-      'flex flex-col gap-4 p-4',
-      'overflow-y-auto overflow-x-hidden',
-      'h-full', // Fill parent container height
-      'scrollbar-thin scrollbar-thumb-gray-300 dark:scrollbar-thumb-gray-600',
-      'scrollbar-track-transparent',
-      this.customClasses()
-    );
+    return cn('app-message-list', 'h-full', this.customClasses());
   });
 
-  /**
-   * Empty state classes
-   */
+  /** Messages wrapper classes */
+  messagesWrapperClasses = computed(() => {
+    return cn('flex flex-col gap-4', 'p-4');
+  });
+
+  /** Empty state classes */
   emptyStateClasses = computed(() => {
     return cn(
-      'ai-message-list-empty',
+      'app-message-list-empty',
       'flex items-center justify-center',
-      'min-h-[200px]',
+      'min-h-[200px] h-full',
       'text-center'
     );
   });
 
-  /**
-   * Typing indicator classes
-   */
+  /** Typing indicator classes */
   typingIndicatorClasses = computed(() => {
     return cn(
-      'ai-typing-indicator',
-      'p-4 rounded-lg',
-      'bg-gray-100 dark:bg-gray-800',
-      'transition-all duration-200'
+      'app-typing-indicator',
+      'flex items-center gap-3 p-4',
+      'rounded-xl',
+      'bg-[var(--card)] border border-[var(--border)]'
     );
   });
 
   // ==========================================
-  // Lifecycle Hooks
+  // Lifecycle
   // ==========================================
 
   constructor() {
     // Auto-scroll effect when messages change or loading state changes
     effect(() => {
       if (this.autoScroll()) {
-        // Access messages and loading to track changes
         const messagesCount = this.messages().length;
         const isLoading = this.loading();
 
-        // Trigger scroll when messages or loading changes
         if (messagesCount > 0 || isLoading) {
           this.scrollToBottom();
         }
@@ -189,7 +150,6 @@ export class MessageListComponent implements AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    // Initial scroll to bottom
     this.scrollToBottom();
   }
 
@@ -197,17 +157,12 @@ export class MessageListComponent implements AfterViewInit {
   // Methods
   // ==========================================
 
-  /**
-   * Scrolls the message list to the bottom
-   * @internal
-   */
+  /** Scrolls the message list to the bottom */
   private scrollToBottom(): void {
-    // Only run in browser environment
     if (!isPlatformBrowser(this.platformId)) {
       return;
     }
 
-    // Use requestAnimationFrame for smooth scroll after render
     requestAnimationFrame(() => {
       const container = this.scrollContainer()?.nativeElement;
       if (container) {
@@ -219,18 +174,12 @@ export class MessageListComponent implements AfterViewInit {
     });
   }
 
-  /**
-   * Handle message copy event
-   * @internal
-   */
+  /** Handle message copy event */
   handleMessageCopy(content: string, message: ChatMessage): void {
     this.messageCopy.emit({ content, message });
   }
 
-  /**
-   * Handle message regenerate event
-   * @internal
-   */
+  /** Handle message regenerate event */
   handleMessageRegenerate(message: ChatMessage): void {
     this.messageRegenerate.emit(message);
   }
