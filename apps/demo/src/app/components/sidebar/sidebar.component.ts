@@ -4,6 +4,7 @@ import { isPlatformBrowser } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
+  DestroyRef,
   PLATFORM_ID,
   ViewEncapsulation,
   afterNextRender,
@@ -70,6 +71,7 @@ interface ConversationDisplay {
 export class SidebarComponent {
   private platformId = inject(PLATFORM_ID);
   private chatService = inject(ChatService);
+  private destroyRef = inject(DestroyRef);
   private readonly STORAGE_KEY = 'ai-kit-sidebar-collapsed';
   private readonly MOBILE_BREAKPOINT = 768;
 
@@ -89,7 +91,13 @@ export class SidebarComponent {
   constructor() {
     afterNextRender(() => {
       this.checkIfMobile();
-      window.addEventListener('resize', () => this.checkIfMobile());
+      // Create named handler for proper cleanup
+      const resizeHandler = () => this.checkIfMobile();
+      window.addEventListener('resize', resizeHandler);
+      // Clean up listener when component is destroyed
+      this.destroyRef.onDestroy(() => {
+        window.removeEventListener('resize', resizeHandler);
+      });
     });
 
     effect(() => {

@@ -5,11 +5,14 @@ import {
 } from '@angular-ai-kit/spartan-ui/avatar';
 import { HlmButton } from '@angular-ai-kit/spartan-ui/button';
 import { cn } from '@angular-ai-kit/utils';
+import { isPlatformBrowser } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
+  PLATFORM_ID,
   ViewEncapsulation,
   computed,
+  inject,
   input,
   output,
   signal,
@@ -45,6 +48,8 @@ import {
   },
 })
 export class MessageBubbleComponent {
+  private platformId = inject(PLATFORM_ID);
+
   // ==========================================
   // Inputs
   // ==========================================
@@ -184,8 +189,8 @@ export class MessageBubbleComponent {
     const content = this.message().content;
     this.copied.emit(content);
 
-    // Copy to clipboard
-    if (typeof navigator !== 'undefined' && navigator.clipboard) {
+    // Copy to clipboard (SSR-safe)
+    if (isPlatformBrowser(this.platformId) && navigator.clipboard) {
       navigator.clipboard.writeText(content).catch(() => {
         // Silently fail - the copied event is still emitted
       });
