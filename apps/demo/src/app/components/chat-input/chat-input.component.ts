@@ -74,13 +74,11 @@ export class ChatInputComponent {
     return cn('app-chat-input', 'w-full', 'px-4 pb-4 pt-2');
   });
 
-  inputWrapperClasses = computed(() => {
+  cardClasses = computed(() => {
     return cn(
-      'relative flex items-end gap-2',
-      'rounded-2xl',
+      'rounded-3xl',
       'border border-[var(--border)]',
       'bg-[var(--card)]',
-      'px-4 py-3',
       'shadow-sm',
       'transition-all duration-200',
       'focus-within:border-[var(--border-hover)]',
@@ -90,13 +88,13 @@ export class ChatInputComponent {
 
   textareaClasses = computed(() => {
     return cn(
-      'flex-1',
+      'w-full',
       'resize-none',
       'bg-transparent',
       'text-[var(--foreground)]',
       'placeholder:text-[var(--foreground-muted)]',
       'focus:outline-none',
-      'text-sm leading-relaxed',
+      'text-base leading-relaxed',
       'max-h-[200px]',
       'scrollbar-thin',
       {
@@ -105,28 +103,23 @@ export class ChatInputComponent {
     );
   });
 
+  toolbarClasses = computed(() => {
+    return cn('flex items-center justify-between', 'px-3 pb-3 pt-1');
+  });
+
   sendButtonClasses = computed(() => {
     return cn(
       'flex items-center justify-center',
-      'h-9 w-9',
-      'rounded-xl',
+      'h-10 w-10',
+      'rounded-full',
       'transition-all duration-200',
       'shrink-0',
       {
-        'bg-[var(--primary)] text-[var(--primary-foreground)]': this.canSend(),
-        'hover:opacity-90': this.canSend(),
+        'bg-[var(--foreground)] text-[var(--background)]': this.canSend(),
+        'hover:opacity-80': this.canSend(),
         'bg-[var(--muted)] text-[var(--foreground-muted)]': !this.canSend(),
         'cursor-not-allowed': !this.canSend(),
       }
-    );
-  });
-
-  hintClasses = computed(() => {
-    return cn(
-      'mt-2',
-      'text-center',
-      'text-xs',
-      'text-[var(--foreground-muted)]'
     );
   });
 
