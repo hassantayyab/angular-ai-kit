@@ -149,7 +149,10 @@
           </li>
 
           <!-- Chat History (Collapsible) -->
-          <hlm-collapsible [expanded]="true" class="group/collapsible">
+          <hlm-collapsible
+            [expanded]="true"
+            class="group/collapsible group-data-[collapsible=icon]:hidden"
+          >
             <li hlmSidebarMenuItem>
               <button hlmCollapsibleTrigger hlmSidebarMenuButton class="w-full">
                 <svg
