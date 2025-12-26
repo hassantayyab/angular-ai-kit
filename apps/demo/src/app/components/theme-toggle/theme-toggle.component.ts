@@ -55,17 +55,27 @@ export class ThemeToggleComponent {
   });
 
   sunIconClasses = computed(() => {
-    return cn('absolute inset-0 h-5 w-5', 'transition-all duration-300', {
-      'opacity-100 rotate-0 scale-100': this.isDark(),
-      'opacity-0 rotate-90 scale-50': !this.isDark(),
-    });
+    return cn(
+      'absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2',
+      'h-[1.2rem] w-[1.2rem]',
+      'transition-all duration-300',
+      {
+        'opacity-100 rotate-0 scale-100': this.isDark(),
+        'opacity-0 rotate-90 scale-0': !this.isDark(),
+      }
+    );
   });
 
   moonIconClasses = computed(() => {
-    return cn('absolute inset-0 h-5 w-5', 'transition-all duration-300', {
-      'opacity-100 rotate-0 scale-100': !this.isDark(),
-      'opacity-0 -rotate-90 scale-50': this.isDark(),
-    });
+    return cn(
+      'absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2',
+      'h-[1.2rem] w-[1.2rem]',
+      'transition-all duration-300',
+      {
+        'opacity-100 rotate-0 scale-100': !this.isDark(),
+        'opacity-0 -rotate-90 scale-0': this.isDark(),
+      }
+    );
   });
 
   /**

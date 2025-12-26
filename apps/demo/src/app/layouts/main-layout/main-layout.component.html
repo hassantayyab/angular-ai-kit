@@ -7,17 +7,6 @@
 
   <!-- Main Content Area -->
   <main [class]="contentClasses()">
-    <!-- Floating toggle button (visible when sidebar is collapsed on desktop) -->
-    @if (showFloatingToggle()) {
-      <div [class]="floatingToggleContainerClasses()">
-        <app-sidenav-toggle
-          [collapsed]="sidebarCollapsed()"
-          [variant]="'floating'"
-          (toggle)="toggleSidebar()"
-        />
-      </div>
-    }
-
     <app-chat-view
       [showMobileMenuButton]="isMobile()"
       (mobileMenuClick)="openSidebar()"

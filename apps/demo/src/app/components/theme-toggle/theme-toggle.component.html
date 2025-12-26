@@ -3,12 +3,12 @@
   hlmBtn
   variant="ghost"
   size="icon"
-  class="h-9 w-9"
+  class="flex h-9 w-9 items-center justify-center"
   (click)="toggleTheme()"
   [attr.aria-label]="ariaLabel()"
   [attr.title]="ariaLabel()"
 >
-  <span class="relative h-5 w-5">
+  <span class="relative flex h-5 w-5 items-center justify-center">
     <!-- Sun Icon (shown in dark mode) -->
     <svg
       [class]="sunIconClasses()"

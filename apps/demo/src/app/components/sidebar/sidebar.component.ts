@@ -1,7 +1,7 @@
 import {
   HlmButtonDirective,
+  HlmInputDirective,
   HlmScrollAreaComponent,
-  HlmSeparatorDirective,
 } from '@angular-ai-kit/spartan-ui';
 import { cn } from '@angular-ai-kit/utils';
 import { isPlatformBrowser } from '@angular/common';
@@ -63,8 +63,8 @@ interface ConversationDisplay {
     ThemeToggleComponent,
     SidenavToggleComponent,
     HlmButtonDirective,
-    HlmSeparatorDirective,
     HlmScrollAreaComponent,
+    HlmInputDirective,
   ],
   host: {
     class: 'app-sidebar-host shrink-0',
@@ -77,6 +77,9 @@ export class SidebarComponent {
   private readonly STORAGE_KEY = 'ai-kit-sidebar-collapsed';
   private readonly MOBILE_BREAKPOINT = 768;
 
+  // App version
+  readonly appVersion = 'v0.1.0';
+
   // Inputs
   collapsed = input<boolean>(false);
 
@@ -85,6 +88,7 @@ export class SidebarComponent {
 
   // State
   private isMobileSignal = signal(false);
+  searchQuery = signal('');
 
   constructor() {
     afterNextRender(() => {
@@ -110,6 +114,7 @@ export class SidebarComponent {
 
   conversationGroups = computed(() => {
     const conversations = this.chatService.conversations();
+    const query = this.searchQuery().toLowerCase().trim();
     const groups: ConversationGroup[] = [];
 
     const getGroupLabel = (date: Date): string => {
@@ -119,14 +124,21 @@ export class SidebarComponent {
 
       if (diffDays === 0) return 'Today';
       if (diffDays === 1) return 'Yesterday';
-      if (diffDays <= 7) return 'Last 7 days';
-      if (diffDays <= 30) return 'Last 30 days';
+      if (diffDays <= 7) return 'Previous 7 days';
+      if (diffDays <= 30) return 'Previous 30 days';
       return 'Older';
     };
 
     const groupMap = new Map<string, ConversationDisplay[]>();
 
-    conversations.forEach((conv: Conversation) => {
+    // Filter by search query if present
+    const filteredConversations = query
+      ? conversations.filter((conv: Conversation) =>
+          conv.title.toLowerCase().includes(query)
+        )
+      : conversations;
+
+    filteredConversations.forEach((conv: Conversation) => {
       const label = getGroupLabel(conv.updatedAt);
       if (!groupMap.has(label)) {
         groupMap.set(label, []);
@@ -141,8 +153,8 @@ export class SidebarComponent {
     const groupOrder = [
       'Today',
       'Yesterday',
-      'Last 7 days',
-      'Last 30 days',
+      'Previous 7 days',
+      'Previous 30 days',
       'Older',
     ];
     groupOrder.forEach((label) => {
@@ -184,11 +196,12 @@ export class SidebarComponent {
   });
 
   headerClasses = computed(() => {
-    return cn('shrink-0', 'border-b border-[var(--border)]', 'p-3');
+    return cn('shrink-0', 'px-3 py-4');
   });
 
   headerTopRowClasses = computed(() => {
-    return cn('flex items-center justify-between', 'mb-3', {
+    return cn('flex items-center', {
+      'justify-between': !this.collapsed(),
       'justify-center': this.collapsed(),
     });
   });
@@ -197,7 +210,9 @@ export class SidebarComponent {
     return cn(
       'flex items-center justify-center',
       'h-8 w-8 rounded-lg',
-      'bg-[var(--foreground)] text-[var(--background)]'
+      'bg-gradient-to-br from-[var(--primary)] to-[var(--primary)]/80',
+      'text-[var(--primary-foreground)]',
+      'shadow-sm'
     );
   });
 
@@ -205,14 +220,27 @@ export class SidebarComponent {
     return cn(
       'flex items-center gap-2',
       'w-full',
-      'rounded-lg px-3 py-2.5',
-      'bg-[var(--primary)] hover:opacity-90',
-      'text-[var(--primary-foreground)] font-medium text-sm',
+      'rounded-lg px-3 py-2',
+      'border border-[var(--border)]',
+      'bg-transparent hover:bg-[var(--accent)]',
+      'text-[var(--foreground)] font-medium text-sm',
       'transition-all duration-200',
       'focus:outline-none focus:ring-2 focus:ring-[var(--ring)] focus:ring-offset-2',
       {
         'justify-center': this.collapsed(),
       }
+    );
+  });
+
+  searchInputClasses = computed(() => {
+    return cn(
+      'w-full',
+      'rounded-lg',
+      'border-[var(--border)]',
+      'bg-[var(--background)]',
+      'text-sm',
+      'placeholder:text-[var(--foreground-muted)]',
+      'focus:ring-1 focus:ring-[var(--ring)]'
     );
   });
 
@@ -224,7 +252,7 @@ export class SidebarComponent {
     const isActive = this.activeConversationId() === id;
 
     return cn(
-      'flex items-center gap-3 w-full',
+      'relative flex items-center w-full',
       'rounded-lg px-3 py-2',
       'text-left transition-colors duration-200',
       'group',
@@ -237,19 +265,32 @@ export class SidebarComponent {
   }
 
   footerClasses = computed(() => {
-    return cn('shrink-0', 'border-t border-[var(--border)]', 'p-3', {
-      'flex items-center justify-center': this.collapsed(),
-    });
+    return cn('shrink-0', 'border-t border-[var(--border)]', 'p-3');
   });
 
-  linkButtonClasses = computed(() => {
+  navLinkClasses = computed(() => {
     return cn(
       'flex items-center gap-3 w-full',
       'rounded-lg px-3 py-2',
       'text-sm text-[var(--foreground-muted)]',
       'transition-colors duration-200',
-      'hover:bg-[var(--accent)] hover:text-[var(--foreground)]'
+      'hover:bg-[var(--accent)] hover:text-[var(--foreground)]',
+      {
+        'justify-center': this.collapsed(),
+      }
     );
+  });
+
+  sectionLabelClasses = computed(() => {
+    return cn(
+      'px-3 py-2',
+      'text-[11px] font-medium uppercase tracking-wider',
+      'text-[var(--foreground-muted)]/70'
+    );
+  });
+
+  versionClasses = computed(() => {
+    return cn('text-xs text-[var(--foreground-muted)]/60', 'text-center py-2');
   });
 
   // Methods
@@ -286,5 +327,14 @@ export class SidebarComponent {
   handleDeleteConversation(event: Event, id: string): void {
     event.stopPropagation();
     this.chatService.deleteConversation(id);
+  }
+
+  handleSearchInput(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    this.searchQuery.set(input.value);
+  }
+
+  clearSearch(): void {
+    this.searchQuery.set('');
   }
 }
