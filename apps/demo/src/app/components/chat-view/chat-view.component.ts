@@ -1,5 +1,8 @@
 import { ChatMessage } from '@angular-ai-kit/core';
-import { HlmButton } from '@angular-ai-kit/spartan-ui/button';
+import {
+  HlmSidebarService,
+  HlmSidebarTrigger,
+} from '@angular-ai-kit/spartan-ui/sidebar';
 import { cn } from '@angular-ai-kit/utils';
 import {
   ChangeDetectionStrategy,
@@ -7,8 +10,6 @@ import {
   ViewEncapsulation,
   computed,
   inject,
-  input,
-  output,
 } from '@angular/core';
 import { ChatService } from '../../services/chat.service';
 import { ChatInputComponent } from '../chat-input/chat-input.component';
@@ -23,10 +24,7 @@ import { MessageListComponent } from '../message-list';
  *
  * @example
  * ```html
- * <app-chat-view
- *   [showMobileMenuButton]="true"
- *   (mobileMenuClick)="openSidebar()"
- * />
+ * <app-chat-view />
  * ```
  */
 @Component({
@@ -38,7 +36,7 @@ import { MessageListComponent } from '../message-list';
     MessageListComponent,
     ChatInputComponent,
     EmptyStateComponent,
-    HlmButton,
+    HlmSidebarTrigger,
   ],
   host: {
     class: 'app-chat-view-host flex flex-col h-full',
@@ -46,12 +44,7 @@ import { MessageListComponent } from '../message-list';
 })
 export class ChatViewComponent {
   private chatService = inject(ChatService);
-
-  // Inputs
-  showMobileMenuButton = input<boolean>(false);
-
-  // Outputs
-  mobileMenuClick = output<void>();
+  protected sidebarService = inject(HlmSidebarService);
 
   // Computed from service
   messages = this.chatService.messages;
@@ -62,6 +55,9 @@ export class ChatViewComponent {
     const conversation = this.chatService.activeConversation();
     return conversation?.title ?? 'New conversation';
   });
+
+  // Check if mobile
+  isMobile = this.sidebarService.isMobile;
 
   // Computed classes
   containerClasses = computed(() => {
@@ -80,18 +76,6 @@ export class ChatViewComponent {
       'border-b border-[var(--border)]',
       'bg-[var(--background)]',
       'md:hidden' // Only show on mobile
-    );
-  });
-
-  menuButtonClasses = computed(() => {
-    return cn(
-      'flex items-center justify-center',
-      'h-9 w-9',
-      'rounded-lg',
-      'text-[var(--foreground-muted)]',
-      'hover:text-[var(--foreground)]',
-      'hover:bg-[var(--accent)]',
-      'transition-colors duration-200'
     );
   });
 
@@ -124,9 +108,5 @@ export class ChatViewComponent {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   handleMessageRegenerate(_message: ChatMessage): void {
     this.chatService.regenerateLastMessage();
-  }
-
-  handleMenuClick(): void {
-    this.mobileMenuClick.emit();
   }
 }

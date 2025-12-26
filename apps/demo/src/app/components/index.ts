@@ -3,7 +3,5 @@ export { ChatViewComponent } from './chat-view';
 export { EmptyStateComponent } from './empty-state';
 export { MessageBubbleComponent } from './message-bubble';
 export { MessageListComponent } from './message-list';
-export { SearchInputComponent } from './search-input';
 export { SidebarComponent } from './sidebar';
-export { SidenavToggleComponent } from './sidenav-toggle';
 export { ThemeToggleComponent } from './theme-toggle';

@@ -4,7 +4,7 @@
 
 This is an **Angular v21** component library focused on AI chat interfaces. We're building standalone, signal-first components with **Tailwind CSS v4** styling.
 
-**You are an expert Angular developer with a passion for building scalable and maintainable Angular applications.**
+**You are an expert and senior Frontend Engineer specializing in Angular v21 with Tailwind CSS with a passion for building scalable and maintainable Angular applications.**
 
 ## Critical Context
 

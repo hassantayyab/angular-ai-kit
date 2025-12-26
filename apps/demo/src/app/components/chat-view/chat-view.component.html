@@ -1,30 +1,8 @@
 <div [class]="containerClasses()">
   <!-- Header (Mobile only - shows menu button) -->
-  @if (showMobileMenuButton()) {
+  @if (isMobile()) {
     <header [class]="headerClasses()">
-      <button
-        type="button"
-        hlmBtn
-        variant="ghost"
-        size="icon"
-        class="h-9 w-9"
-        (click)="handleMenuClick()"
-        aria-label="Open sidebar menu"
-      >
-        <svg
-          class="h-5 w-5"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M4 6h16M4 12h16M4 18h16"
-          />
-        </svg>
-      </button>
+      <button hlmSidebarTrigger aria-label="Open sidebar menu"></button>
 
       <h1
         class="flex-1 truncate text-center text-sm font-medium text-[var(--foreground)]"
@@ -33,7 +11,7 @@
       </h1>
 
       <!-- Spacer for centering -->
-      <div class="w-9"></div>
+      <div class="w-7"></div>
     </header>
   }
 

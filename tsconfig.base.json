@@ -54,7 +54,18 @@
       "@angular-ai-kit/spartan-ui/tooltip": [
         "libs/spartan-ui/tooltip/src/index.ts"
       ],
-      "@angular-ai-kit/spartan-ui/alert": ["libs/spartan-ui/alert/src/index.ts"]
+      "@angular-ai-kit/spartan-ui/alert": [
+        "libs/spartan-ui/alert/src/index.ts"
+      ],
+      "@angular-ai-kit/spartan-ui/sidebar": [
+        "libs/spartan-ui/sidebar/src/index.ts"
+      ],
+      "@angular-ai-kit/spartan-ui/sheet": [
+        "libs/spartan-ui/sheet/src/index.ts"
+      ],
+      "@angular-ai-kit/spartan-ui/collapsible": [
+        "packages/spartan-ui/collapsible/src/index.ts"
+      ]
     }
   },
   "exclude": ["node_modules", "tmp"]

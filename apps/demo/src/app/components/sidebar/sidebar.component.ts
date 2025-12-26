@@ -1,23 +1,37 @@
 import { HlmButton } from '@angular-ai-kit/spartan-ui/button';
-import { cn } from '@angular-ai-kit/utils';
-import { isPlatformBrowser } from '@angular/common';
+import {
+  HlmCollapsible,
+  HlmCollapsibleContent,
+  HlmCollapsibleTrigger,
+} from '@angular-ai-kit/spartan-ui/collapsible';
+import {
+  HlmSidebar,
+  HlmSidebarContent,
+  HlmSidebarFooter,
+  HlmSidebarGroup,
+  HlmSidebarGroupContent,
+  HlmSidebarGroupLabel,
+  HlmSidebarHeader,
+  HlmSidebarInput,
+  HlmSidebarMenu,
+  HlmSidebarMenuButton,
+  HlmSidebarMenuItem,
+  HlmSidebarMenuSub,
+  HlmSidebarMenuSubButton,
+  HlmSidebarMenuSubItem,
+  HlmSidebarSeparator,
+  HlmSidebarService,
+  HlmSidebarTrigger,
+} from '@angular-ai-kit/spartan-ui/sidebar';
 import {
   ChangeDetectionStrategy,
   Component,
-  DestroyRef,
-  PLATFORM_ID,
   ViewEncapsulation,
-  afterNextRender,
   computed,
-  effect,
   inject,
-  input,
-  output,
   signal,
 } from '@angular/core';
 import { ChatService, Conversation } from '../../services';
-import { SearchInputComponent } from '../search-input';
-import { SidenavToggleComponent } from '../sidenav-toggle';
 import { ThemeToggleComponent } from '../theme-toggle';
 
 /**
@@ -40,16 +54,12 @@ interface ConversationDisplay {
 /**
  * Sidebar Component
  *
- * Collapsible sidebar with chat history, grouped by date.
- * Integrates with ChatService for state management.
- * Supports mobile slide-in drawer and state persistence.
+ * Collapsible sidebar using Spartan UI components.
+ * Integrates with ChatService for conversation management.
  *
  * @example
  * ```html
- * <app-sidebar
- *   [collapsed]="sidebarCollapsed()"
- *   (collapsedChange)="handleCollapsedChange($event)"
- * />
+ * <app-sidebar />
  * ```
  */
 @Component({
@@ -58,63 +68,47 @@ interface ConversationDisplay {
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
   imports: [
-    ThemeToggleComponent,
-    SidenavToggleComponent,
-    SearchInputComponent,
+    HlmSidebar,
+    HlmSidebarHeader,
+    HlmSidebarContent,
+    HlmSidebarFooter,
+    HlmSidebarGroup,
+    HlmSidebarGroupLabel,
+    HlmSidebarGroupContent,
+    HlmSidebarMenu,
+    HlmSidebarMenuItem,
+    HlmSidebarMenuButton,
+    HlmSidebarMenuSub,
+    HlmSidebarMenuSubItem,
+    HlmSidebarMenuSubButton,
+    HlmSidebarSeparator,
+    HlmSidebarInput,
+    HlmSidebarTrigger,
+    HlmCollapsible,
+    HlmCollapsibleTrigger,
+    HlmCollapsibleContent,
     HlmButton,
+    ThemeToggleComponent,
   ],
   host: {
-    class: 'app-sidebar-host shrink-0',
-    ngSkipHydration: 'true',
+    class: 'app-sidebar-host',
   },
 })
 export class SidebarComponent {
-  private platformId = inject(PLATFORM_ID);
   private chatService = inject(ChatService);
-  private destroyRef = inject(DestroyRef);
-  private readonly STORAGE_KEY = 'ai-kit-sidebar-collapsed';
-  private readonly MOBILE_BREAKPOINT = 768;
+  protected sidebarService = inject(HlmSidebarService);
 
   // App version
   readonly appVersion = 'v0.1.0';
 
-  // Inputs
-  collapsed = input<boolean>(false);
-
-  // Outputs
-  collapsedChange = output<boolean>();
-
   // State
-  private isMobileSignal = signal(false);
   searchQuery = signal('');
-
-  constructor() {
-    afterNextRender(() => {
-      this.checkIfMobile();
-      // Create named handler for proper cleanup
-      const resizeHandler = () => this.checkIfMobile();
-      window.addEventListener('resize', resizeHandler);
-      // Clean up listener when component is destroyed
-      this.destroyRef.onDestroy(() => {
-        window.removeEventListener('resize', resizeHandler);
-      });
-    });
-
-    effect(() => {
-      if (isPlatformBrowser(this.platformId)) {
-        localStorage.setItem(
-          this.STORAGE_KEY,
-          this.collapsed() ? 'true' : 'false'
-        );
-      }
-    });
-  }
 
   // Computed from ChatService
   activeConversationId = this.chatService.activeConversationId;
 
-  // Computed properties
-  isMobile = computed(() => this.isMobileSignal());
+  // Computed: Check if sidebar is collapsed
+  isCollapsed = computed(() => this.sidebarService.state() === 'collapsed');
 
   conversationGroups = computed(() => {
     const conversations = this.chatService.conversations();
@@ -171,129 +165,20 @@ export class SidebarComponent {
     return groups;
   });
 
-  sidebarClasses = computed(() => {
-    const isMobile = this.isMobile();
-
-    return cn(
-      'app-sidebar',
-      'flex flex-col',
-      'border-r border-[var(--border)]',
-      'bg-[var(--card)]',
-      'transition-all duration-300 ease-in-out',
-      {
-        'w-64': !this.collapsed(),
-        'w-16': this.collapsed(),
-        'fixed inset-y-0 left-0 z-40 h-screen': isMobile,
-        'translate-x-0': isMobile && !this.collapsed(),
-        '-translate-x-full': isMobile && this.collapsed(),
-        'h-full': !isMobile,
-      }
-    );
-  });
-
-  backdropClasses = computed(() => {
-    return cn(
-      'fixed inset-0 z-30',
-      'bg-black/50',
-      'transition-opacity duration-300',
-      'md:hidden'
-    );
-  });
-
-  headerClasses = computed(() => {
-    return cn('shrink-0', 'px-3 py-4');
-  });
-
-  headerTopRowClasses = computed(() => {
-    return cn('flex items-center', {
-      'justify-between': !this.collapsed(),
-      'justify-center': this.collapsed(),
-    });
-  });
-
-  logoClasses = computed(() => {
-    return cn(
-      'flex items-center justify-center',
-      'h-8 w-8 rounded-lg',
-      'bg-gradient-to-br from-[var(--primary)] to-[var(--primary)]/80',
-      'text-[var(--primary-foreground)]',
-      'shadow-sm'
-    );
-  });
-
-  newChatButtonClasses = computed(() => {
-    return cn('w-full');
-  });
-
-  historyClasses = computed(() => {
-    return cn('flex-1 overflow-y-auto', 'p-3', 'scrollbar-thin');
-  });
-
-  getConversationItemClasses(id: string): string {
-    const isActive = this.activeConversationId() === id;
-
-    return cn('relative w-full text-left group', {
-      'bg-accent text-accent-foreground': isActive,
-    });
-  }
-
-  footerClasses = computed(() => {
-    return cn('shrink-0', 'border-t border-[var(--border)]', 'p-3');
-  });
-
-  navLinkClasses = computed(() => {
-    return cn(
-      'flex items-center gap-3 w-full',
-      'rounded-lg px-3 py-2',
-      'text-sm text-[var(--foreground-muted)]',
-      'transition-colors duration-200',
-      'hover:bg-[var(--accent)] hover:text-[var(--foreground)]',
-      {
-        'justify-center': this.collapsed(),
-      }
-    );
-  });
-
-  sectionLabelClasses = computed(() => {
-    return cn(
-      'px-3 py-2',
-      'text-[11px] font-medium uppercase tracking-wider',
-      'text-[var(--foreground-muted)]/70'
-    );
-  });
-
-  versionClasses = computed(() => {
-    return cn('text-xs text-[var(--foreground-muted)]/60', 'text-center py-2');
-  });
-
   // Methods
-  private checkIfMobile(): void {
-    if (isPlatformBrowser(this.platformId)) {
-      this.isMobileSignal.set(window.innerWidth < this.MOBILE_BREAKPOINT);
-    }
-  }
-
-  collapse(): void {
-    this.collapsedChange.emit(true);
-  }
-
-  handleToggle(): void {
-    this.collapsedChange.emit(!this.collapsed());
-  }
-
   handleNewConversation(): void {
     this.chatService.createConversation();
     // Close sidebar on mobile after creating new conversation
-    if (this.isMobile()) {
-      this.collapsedChange.emit(true);
+    if (this.sidebarService.isMobile()) {
+      this.sidebarService.setOpenMobile(false);
     }
   }
 
   handleConversationSelect(id: string): void {
     this.chatService.selectConversation(id);
     // Close sidebar on mobile after selecting
-    if (this.isMobile()) {
-      this.collapsedChange.emit(true);
+    if (this.sidebarService.isMobile()) {
+      this.sidebarService.setOpenMobile(false);
     }
   }
 
@@ -302,7 +187,12 @@ export class SidebarComponent {
     this.chatService.deleteConversation(id);
   }
 
-  handleSearchChange(value: string): void {
-    this.searchQuery.set(value);
+  handleSearchInput(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    this.searchQuery.set(input.value);
+  }
+
+  isActiveConversation(id: string): boolean {
+    return this.activeConversationId() === id;
   }
 }

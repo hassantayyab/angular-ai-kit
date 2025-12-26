@@ -8,6 +8,18 @@
 
 @source '../../packages'; /* Watch packages for classes */
 
+/* Sidebar Theme Colors (Tailwind v4) */
+@theme {
+  --color-sidebar: var(--sidebar-background);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+
 /* ============================================
    Design Tokens - CSS Custom Properties
    ============================================ */
@@ -97,6 +109,16 @@
     --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
     --transition-base: 200ms cubic-bezier(0.4, 0, 0.2, 1);
     --transition-slow: 300ms cubic-bezier(0.4, 0, 0.2, 1);
+
+    /* Sidebar Colors (Spartan UI) */
+    --sidebar-background: #ffffff;
+    --sidebar-foreground: #09090b;
+    --sidebar-primary: #18181b;
+    --sidebar-primary-foreground: #fafafa;
+    --sidebar-accent: #f4f4f5;
+    --sidebar-accent-foreground: #18181b;
+    --sidebar-border: #e4e4e7;
+    --sidebar-ring: #a1a1aa;
   }
 
   /* Dark Theme */
@@ -156,6 +178,16 @@
       0 10px 15px -3px rgb(0 0 0 / 0.4), 0 4px 6px -4px rgb(0 0 0 / 0.4);
     --shadow-xl:
       0 20px 25px -5px rgb(0 0 0 / 0.5), 0 8px 10px -6px rgb(0 0 0 / 0.5);
+
+    /* Sidebar Colors (Spartan UI) */
+    --sidebar-background: #18181b;
+    --sidebar-foreground: #fafafa;
+    --sidebar-primary: #fafafa;
+    --sidebar-primary-foreground: #18181b;
+    --sidebar-accent: #27272a;
+    --sidebar-accent-foreground: #fafafa;
+    --sidebar-border: #27272a;
+    --sidebar-ring: #52525b;
   }
 
   /* Base HTML Styles */
@@ -323,6 +355,73 @@
     border-radius: var(--radius-full);
     background-color: var(--muted);
     color: var(--foreground-secondary);
+  }
+
+  /* Sidebar Customizations */
+  hlm-sidebar {
+    overflow-x: hidden !important;
+  }
+
+  hlm-sidebar [data-slot='sidebar-container'] {
+    border-right: none !important;
+    border-left: none !important;
+  }
+
+  hlm-sidebar [data-sidebar='sidebar'] {
+    overflow-x: hidden !important;
+  }
+
+  /* Improve sidebar padding */
+  hlm-sidebar [data-sidebar='header'] {
+    padding: 0.75rem 0.5rem;
+  }
+
+  hlm-sidebar [data-sidebar='content'] {
+    padding: 0.25rem 0.5rem;
+    overflow-x: hidden !important;
+  }
+
+  hlm-sidebar [data-sidebar='footer'] {
+    padding: 0.75rem;
+  }
+
+  hlm-sidebar [data-sidebar='group'] {
+    padding: 0.25rem 0;
+  }
+
+  /* Menu items padding */
+  hlm-sidebar [data-sidebar='menu-button'] {
+    padding: 0.5rem 0.625rem;
+  }
+
+  /* Sub menu items */
+  hlm-sidebar [data-sidebar='menu-sub'] {
+    padding-left: 0.5rem;
+  }
+
+  hlm-sidebar [data-sidebar='menu-sub-button'] {
+    padding: 0.375rem 0.5rem;
+  }
+
+  /* Hide horizontal scrollbar in sidebar */
+  hlm-sidebar,
+  hlm-sidebar * {
+    scrollbar-width: thin;
+  }
+
+  hlm-sidebar::-webkit-scrollbar {
+    width: 4px;
+    height: 0;
+  }
+
+  hlm-sidebar [data-sidebar='content']::-webkit-scrollbar {
+    width: 4px;
+    height: 0;
+  }
+
+  /* Ensure no horizontal overflow */
+  .app-sidebar-host {
+    overflow-x: hidden !important;
   }
 }
 

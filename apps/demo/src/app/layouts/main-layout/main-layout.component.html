@@ -1,15 +1,9 @@
-<div [class]="layoutClasses()">
+<div hlmSidebarWrapper class="h-screen">
   <!-- Sidebar -->
-  <app-sidebar
-    [collapsed]="sidebarCollapsed()"
-    (collapsedChange)="handleSidebarCollapsedChange($event)"
-  />
+  <app-sidebar />
 
   <!-- Main Content Area -->
-  <main [class]="contentClasses()">
-    <app-chat-view
-      [showMobileMenuButton]="isMobile()"
-      (mobileMenuClick)="openSidebar()"
-    />
+  <main hlmSidebarInset class="flex h-full flex-col overflow-hidden">
+    <app-chat-view />
   </main>
 </div>
