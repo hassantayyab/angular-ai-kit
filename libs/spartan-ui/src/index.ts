@@ -1,38 +1,44 @@
+// Spartan UI - Generated with @spartan-ng/cli
+// Re-export all components for convenient imports
+
+// Utils
+export * from '@angular-ai-kit/spartan-ui/utils';
+
 // Button
-export * from './lib/button';
+export * from '@angular-ai-kit/spartan-ui/button';
 
 // Input
-export * from './lib/input';
-
-// Textarea
-export * from './lib/textarea';
-
-// Card
-export * from './lib/card';
+export * from '@angular-ai-kit/spartan-ui/input';
 
 // Avatar
-export * from './lib/avatar';
+export * from '@angular-ai-kit/spartan-ui/avatar';
 
 // Badge
-export * from './lib/badge';
+export * from '@angular-ai-kit/spartan-ui/badge';
 
-// Separator
-export * from './lib/separator';
-
-// Skeleton
-export * from './lib/skeleton';
+// Card
+export * from '@angular-ai-kit/spartan-ui/card';
 
 // Icon
-export * from './lib/icon';
-
-// Scroll Area
-export * from './lib/scroll-area';
-
-// Tooltip
-export * from './lib/tooltip';
-
-// Alert
-export * from './lib/alert';
+export * from '@angular-ai-kit/spartan-ui/icon';
 
 // Label
-export * from './lib/label';
+export * from '@angular-ai-kit/spartan-ui/label';
+
+// Scroll Area
+export * from '@angular-ai-kit/spartan-ui/scroll-area';
+
+// Separator
+export * from '@angular-ai-kit/spartan-ui/separator';
+
+// Skeleton
+export * from '@angular-ai-kit/spartan-ui/skeleton';
+
+// Textarea
+export * from '@angular-ai-kit/spartan-ui/textarea';
+
+// Tooltip
+export * from '@angular-ai-kit/spartan-ui/tooltip';
+
+// Alert
+export * from '@angular-ai-kit/spartan-ui/alert';

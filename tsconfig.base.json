@@ -18,7 +18,43 @@
       "@angular-ai-kit/core": ["packages/angular-ai-kit/src/index.ts"],
       "@angular-ai-kit/tokens": ["packages/tokens/src/index.ts"],
       "@angular-ai-kit/utils": ["packages/utils/src/index.ts"],
-      "@angular-ai-kit/spartan-ui": ["libs/spartan-ui/src/index.ts"]
+      "@angular-ai-kit/spartan-ui": ["libs/spartan-ui/src/index.ts"],
+      "@angular-ai-kit/spartan-ui/utils": [
+        "libs/spartan-ui/utils/src/index.ts"
+      ],
+      "@angular-ai-kit/spartan-ui/button": [
+        "libs/spartan-ui/button/src/index.ts"
+      ],
+      "@angular-ai-kit/spartan-ui/input": [
+        "libs/spartan-ui/input/src/index.ts"
+      ],
+      "@angular-ai-kit/spartan-ui/avatar": [
+        "libs/spartan-ui/avatar/src/index.ts"
+      ],
+      "@angular-ai-kit/spartan-ui/badge": [
+        "libs/spartan-ui/badge/src/index.ts"
+      ],
+      "@angular-ai-kit/spartan-ui/card": ["libs/spartan-ui/card/src/index.ts"],
+      "@angular-ai-kit/spartan-ui/icon": ["libs/spartan-ui/icon/src/index.ts"],
+      "@angular-ai-kit/spartan-ui/label": [
+        "libs/spartan-ui/label/src/index.ts"
+      ],
+      "@angular-ai-kit/spartan-ui/scroll-area": [
+        "libs/spartan-ui/scroll-area/src/index.ts"
+      ],
+      "@angular-ai-kit/spartan-ui/separator": [
+        "libs/spartan-ui/separator/src/index.ts"
+      ],
+      "@angular-ai-kit/spartan-ui/skeleton": [
+        "libs/spartan-ui/skeleton/src/index.ts"
+      ],
+      "@angular-ai-kit/spartan-ui/textarea": [
+        "libs/spartan-ui/textarea/src/index.ts"
+      ],
+      "@angular-ai-kit/spartan-ui/tooltip": [
+        "libs/spartan-ui/tooltip/src/index.ts"
+      ],
+      "@angular-ai-kit/spartan-ui/alert": ["libs/spartan-ui/alert/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

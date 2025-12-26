@@ -1,4 +1,4 @@
-import { HlmCardDirective } from '@angular-ai-kit/spartan-ui';
+import { HlmCard } from '@angular-ai-kit/spartan-ui/card';
 import { cn } from '@angular-ai-kit/utils';
 import {
   ChangeDetectionStrategy,
@@ -36,7 +36,7 @@ interface SuggestedPrompt {
   templateUrl: './empty-state.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
-  imports: [HlmCardDirective],
+  imports: [HlmCard],
   host: {
     class:
       'app-empty-state-host flex flex-col items-center justify-center flex-1 p-8',

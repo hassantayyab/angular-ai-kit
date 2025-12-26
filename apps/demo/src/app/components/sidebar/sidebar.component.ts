@@ -1,8 +1,4 @@
-import {
-  HlmButtonDirective,
-  HlmInputDirective,
-  HlmScrollAreaComponent,
-} from '@angular-ai-kit/spartan-ui';
+import { HlmButton } from '@angular-ai-kit/spartan-ui/button';
 import { cn } from '@angular-ai-kit/utils';
 import { isPlatformBrowser } from '@angular/common';
 import {
@@ -18,9 +14,10 @@ import {
   output,
   signal,
 } from '@angular/core';
-import { ChatService, Conversation } from '../../services/chat.service';
-import { SidenavToggleComponent } from '../sidenav-toggle/sidenav-toggle.component';
-import { ThemeToggleComponent } from '../theme-toggle/theme-toggle.component';
+import { ChatService, Conversation } from '../../services';
+import { SearchInputComponent } from '../search-input';
+import { SidenavToggleComponent } from '../sidenav-toggle';
+import { ThemeToggleComponent } from '../theme-toggle';
 
 /**
  * Conversation group interface for display
@@ -62,9 +59,8 @@ interface ConversationDisplay {
   imports: [
     ThemeToggleComponent,
     SidenavToggleComponent,
-    HlmButtonDirective,
-    HlmScrollAreaComponent,
-    HlmInputDirective,
+    SearchInputComponent,
+    HlmButton,
   ],
   host: {
     class: 'app-sidebar-host shrink-0',
@@ -143,7 +139,7 @@ export class SidebarComponent {
       if (!groupMap.has(label)) {
         groupMap.set(label, []);
       }
-      groupMap.get(label)!.push({
+      groupMap.get(label)?.push({
         id: conv.id,
         title: conv.title,
         updatedAt: conv.updatedAt,
@@ -158,8 +154,9 @@ export class SidebarComponent {
       'Older',
     ];
     groupOrder.forEach((label) => {
-      if (groupMap.has(label)) {
-        groups.push({ label, conversations: groupMap.get(label)! });
+      const conversations = groupMap.get(label);
+      if (conversations) {
+        groups.push({ label, conversations });
       }
     });
 
@@ -217,31 +214,7 @@ export class SidebarComponent {
   });
 
   newChatButtonClasses = computed(() => {
-    return cn(
-      'flex items-center gap-2',
-      'w-full',
-      'rounded-lg px-3 py-2',
-      'border border-[var(--border)]',
-      'bg-transparent hover:bg-[var(--accent)]',
-      'text-[var(--foreground)] font-medium text-sm',
-      'transition-all duration-200',
-      'focus:outline-none focus:ring-2 focus:ring-[var(--ring)] focus:ring-offset-2',
-      {
-        'justify-center': this.collapsed(),
-      }
-    );
-  });
-
-  searchInputClasses = computed(() => {
-    return cn(
-      'w-full',
-      'rounded-lg',
-      'border-[var(--border)]',
-      'bg-[var(--background)]',
-      'text-sm',
-      'placeholder:text-[var(--foreground-muted)]',
-      'focus:ring-1 focus:ring-[var(--ring)]'
-    );
+    return cn('w-full');
   });
 
   historyClasses = computed(() => {
@@ -251,17 +224,9 @@ export class SidebarComponent {
   getConversationItemClasses(id: string): string {
     const isActive = this.activeConversationId() === id;
 
-    return cn(
-      'relative flex items-center w-full',
-      'rounded-lg px-3 py-2',
-      'text-left transition-colors duration-200',
-      'group',
-      {
-        'bg-[var(--accent)] text-[var(--foreground)]': isActive,
-        'text-[var(--foreground-muted)] hover:bg-[var(--accent)] hover:text-[var(--foreground)]':
-          !isActive,
-      }
-    );
+    return cn('relative w-full text-left group', {
+      'bg-accent text-accent-foreground': isActive,
+    });
   }
 
   footerClasses = computed(() => {
@@ -329,12 +294,7 @@ export class SidebarComponent {
     this.chatService.deleteConversation(id);
   }
 
-  handleSearchInput(event: Event): void {
-    const input = event.target as HTMLInputElement;
-    this.searchQuery.set(input.value);
-  }
-
-  clearSearch(): void {
-    this.searchQuery.set('');
+  handleSearchChange(value: string): void {
+    this.searchQuery.set(value);
   }
 }

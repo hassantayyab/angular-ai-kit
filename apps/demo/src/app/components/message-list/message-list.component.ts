@@ -1,8 +1,5 @@
 import { ChatMessage } from '@angular-ai-kit/core';
-import {
-  HlmScrollAreaComponent,
-  HlmSkeletonDirective,
-} from '@angular-ai-kit/spartan-ui';
+import { HlmSkeleton } from '@angular-ai-kit/spartan-ui/skeleton';
 import { cn } from '@angular-ai-kit/utils';
 import { isPlatformBrowser } from '@angular/common';
 import {
@@ -25,7 +22,7 @@ import { MessageBubbleComponent } from '../message-bubble';
  * Demo MessageListComponent
  *
  * Scrollable message list with Spartan UI components.
- * Uses HlmScrollArea for smooth scrolling and HlmSkeleton for loading.
+ * Uses native scrolling and HlmSkeleton for loading.
  *
  * @example
  * ```html
@@ -43,11 +40,7 @@ import { MessageBubbleComponent } from '../message-bubble';
   templateUrl: './message-list.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
-  imports: [
-    MessageBubbleComponent,
-    HlmScrollAreaComponent,
-    HlmSkeletonDirective,
-  ],
+  imports: [MessageBubbleComponent, HlmSkeleton],
   host: {
     class: 'app-message-list-host block h-full',
   },

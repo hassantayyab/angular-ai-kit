@@ -1,4 +1,4 @@
-import { HlmButtonDirective } from '@angular-ai-kit/spartan-ui';
+import { HlmButton } from '@angular-ai-kit/spartan-ui/button';
 import { cn } from '@angular-ai-kit/utils';
 import {
   ChangeDetectionStrategy,
@@ -20,7 +20,7 @@ import {
  * <app-sidenav-toggle
  *   [collapsed]="sidebarCollapsed()"
  *   [variant]="'sidebar'"
- *   (toggle)="toggleSidebar()"
+ *   (toggled)="toggleSidebar()"
  * />
  * ```
  */
@@ -29,7 +29,7 @@ import {
   templateUrl: './sidenav-toggle.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
-  imports: [HlmButtonDirective],
+  imports: [HlmButton],
   host: {
     class: 'app-sidenav-toggle-host',
   },
@@ -46,45 +46,12 @@ export class SidenavToggleComponent {
   variant = input<'sidebar' | 'floating'>('sidebar');
 
   // Outputs
-  toggle = output<void>();
+  toggled = output<void>();
 
   // Computed
   ariaLabel = computed(() =>
     this.collapsed() ? 'Expand sidebar' : 'Collapse sidebar'
   );
-
-  buttonClasses = computed(() => {
-    const isSidebar = this.variant() === 'sidebar';
-
-    return cn(
-      // Base styles
-      'flex items-center justify-center',
-      'transition-all duration-200',
-      'focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)] focus-visible:ring-offset-2',
-
-      // Variant-specific styles
-      isSidebar
-        ? [
-            // Sidebar variant - subtle, integrated look
-            'h-8 w-8',
-            'rounded-lg',
-            'text-[var(--foreground-muted)]',
-            'hover:text-[var(--foreground)]',
-            'hover:bg-[var(--accent)]',
-          ]
-        : [
-            // Floating variant - more prominent, visible button
-            'h-10 w-10',
-            'rounded-lg',
-            'bg-[var(--card)]',
-            'border border-[var(--border)]',
-            'text-[var(--foreground-muted)]',
-            'hover:text-[var(--foreground)]',
-            'hover:bg-[var(--accent)]',
-            'shadow-sm hover:shadow-md',
-          ]
-    );
-  });
 
   iconClasses = computed(() => {
     const isSidebar = this.variant() === 'sidebar';
@@ -97,6 +64,6 @@ export class SidenavToggleComponent {
 
   // Methods
   handleClick(): void {
-    this.toggle.emit();
+    this.toggled.emit();
   }
 }

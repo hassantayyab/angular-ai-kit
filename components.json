@@ -1,0 +1,6 @@
+{
+  "componentsPath": "libs/spartan-ui",
+  "buildable": false,
+  "generateAs": "library",
+  "importAlias": "@angular-ai-kit/spartan-ui"
+}

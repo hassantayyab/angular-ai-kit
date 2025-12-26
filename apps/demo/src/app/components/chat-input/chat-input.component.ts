@@ -1,4 +1,4 @@
-import { HlmButtonDirective } from '@angular-ai-kit/spartan-ui';
+import { HlmButton } from '@angular-ai-kit/spartan-ui/button';
 import { cn } from '@angular-ai-kit/utils';
 import { isPlatformBrowser } from '@angular/common';
 import {
@@ -36,7 +36,7 @@ import {
   templateUrl: './chat-input.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
-  imports: [HlmButtonDirective],
+  imports: [HlmButton],
   host: {
     class: 'app-chat-input-host block',
   },
@@ -108,19 +108,7 @@ export class ChatInputComponent {
   });
 
   sendButtonClasses = computed(() => {
-    return cn(
-      'flex items-center justify-center',
-      'h-10 w-10',
-      'rounded-full',
-      'transition-all duration-200',
-      'shrink-0',
-      {
-        'bg-[var(--foreground)] text-[var(--background)]': this.canSend(),
-        'hover:opacity-80': this.canSend(),
-        'bg-[var(--muted)] text-[var(--foreground-muted)]': !this.canSend(),
-        'cursor-not-allowed': !this.canSend(),
-      }
-    );
+    return cn('rounded-full');
   });
 
   // Methods

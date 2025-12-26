@@ -1,9 +1,9 @@
 import { ChatMessage } from '@angular-ai-kit/core';
 import {
-  HlmAvatarComponent,
-  HlmAvatarFallbackComponent,
-  HlmButtonDirective,
-} from '@angular-ai-kit/spartan-ui';
+  HlmAvatar,
+  HlmAvatarFallback,
+} from '@angular-ai-kit/spartan-ui/avatar';
+import { HlmButton } from '@angular-ai-kit/spartan-ui/button';
 import { cn } from '@angular-ai-kit/utils';
 import {
   ChangeDetectionStrategy,
@@ -37,7 +37,7 @@ import {
   templateUrl: './message-bubble.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
-  imports: [HlmAvatarComponent, HlmAvatarFallbackComponent, HlmButtonDirective],
+  imports: [HlmAvatar, HlmAvatarFallback, HlmButton],
   host: {
     class: 'app-message-bubble-host block',
     '(mouseenter)': 'handleMouseEnter()',
@@ -165,12 +165,7 @@ export class MessageBubbleComponent {
 
   /** Button classes for action buttons */
   actionButtonClasses = computed(() => {
-    const role = this.message().role;
-
-    return cn('h-7 w-7 rounded-md', {
-      'hover:bg-[var(--primary-foreground)]/20': role === 'user',
-      'hover:bg-[var(--muted)]': role !== 'user',
-    });
+    return cn('h-7 w-7');
   });
 
   /** ARIA label for screen readers */

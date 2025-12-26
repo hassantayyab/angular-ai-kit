@@ -1,4 +1,4 @@
-import { HlmButtonDirective } from '@angular-ai-kit/spartan-ui';
+import { HlmButton } from '@angular-ai-kit/spartan-ui/button';
 import { cn } from '@angular-ai-kit/utils';
 import {
   ChangeDetectionStrategy,
@@ -7,7 +7,7 @@ import {
   computed,
   inject,
 } from '@angular/core';
-import { ThemeService } from '../../services/theme.service';
+import { ThemeService } from '../../services';
 
 /**
  * ThemeToggle Component
@@ -26,7 +26,7 @@ import { ThemeService } from '../../services/theme.service';
   styleUrl: './theme-toggle.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
-  imports: [HlmButtonDirective],
+  imports: [HlmButton],
   host: {
     class: 'app-theme-toggle-host inline-flex',
   },
@@ -40,19 +40,6 @@ export class ThemeToggleComponent {
   ariaLabel = computed(() =>
     this.isDark() ? 'Switch to light mode' : 'Switch to dark mode'
   );
-
-  buttonClasses = computed(() => {
-    return cn(
-      'app-theme-toggle',
-      'flex items-center justify-center',
-      'h-9 w-9 rounded-md',
-      'text-[var(--foreground-muted)]',
-      'hover:text-[var(--foreground)] hover:bg-[var(--accent)]',
-      'transition-all duration-200',
-      'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)]',
-      'active:scale-95'
-    );
-  });
 
   sunIconClasses = computed(() => {
     return cn(

@@ -1,5 +1,5 @@
 import { ChatMessage } from '@angular-ai-kit/core';
-import { HlmButtonDirective } from '@angular-ai-kit/spartan-ui';
+import { HlmButton } from '@angular-ai-kit/spartan-ui/button';
 import { cn } from '@angular-ai-kit/utils';
 import {
   ChangeDetectionStrategy,
@@ -38,7 +38,7 @@ import { MessageListComponent } from '../message-list';
     MessageListComponent,
     ChatInputComponent,
     EmptyStateComponent,
-    HlmButtonDirective,
+    HlmButton,
   ],
   host: {
     class: 'app-chat-view-host flex flex-col h-full',

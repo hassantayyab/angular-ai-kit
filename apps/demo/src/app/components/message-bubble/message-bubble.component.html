@@ -6,9 +6,9 @@
   <!-- Avatar -->
   @if (showAvatar()) {
     <hlm-avatar size="sm" class="shrink-0">
-      <hlm-avatar-fallback [class]="avatarFallbackClasses()">
+      <span hlmAvatarFallback [class]="avatarFallbackClasses()">
         {{ avatarInitials() }}
-      </hlm-avatar-fallback>
+      </span>
     </hlm-avatar>
   }
 
