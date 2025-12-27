@@ -41,13 +41,11 @@ export class CommandDialogComponent {
       label: 'Go to Chat',
       icon: 'chat',
       action: () => this.navigateTo('/'),
-      shortcut: '⌘C',
     },
     {
       label: 'Go to Documentation',
       icon: 'docs',
       action: () => this.navigateTo('/docs'),
-      shortcut: '⌘D',
     },
   ];
 
@@ -57,13 +55,11 @@ export class CommandDialogComponent {
       label: 'New Conversation',
       icon: 'plus',
       action: () => this.newConversation(),
-      shortcut: '⌘N',
     },
     {
       label: 'Toggle Theme',
       icon: 'theme',
       action: () => this.toggleTheme(),
-      shortcut: '⌘T',
     },
   ];
 

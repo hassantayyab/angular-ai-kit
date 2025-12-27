@@ -16,7 +16,6 @@ export interface CommandItem {
   label: string;
   icon: string;
   action: () => void;
-  shortcut?: string;
 }
 
 /**

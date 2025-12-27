@@ -58,13 +58,11 @@ export class SearchTriggerComponent {
         label: 'Go to Chat',
         icon: 'chat',
         action: () => this.router.navigate(['/']),
-        shortcut: '⌘C',
       },
       {
         label: 'Go to Documentation',
         icon: 'docs',
         action: () => this.router.navigate(['/docs']),
-        shortcut: '⌘D',
       },
     ];
   }
@@ -78,13 +76,11 @@ export class SearchTriggerComponent {
           this.chatService.createConversation();
           this.router.navigate(['/']);
         },
-        shortcut: '⌘N',
       },
       {
         label: 'Toggle Theme',
         icon: 'theme',
         action: () => document.documentElement.classList.toggle('dark'),
-        shortcut: '⌘T',
       },
     ];
   }
