@@ -31,8 +31,24 @@ import {
   inject,
   signal,
 } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
+import {
+  NavigationEnd,
+  Router,
+  RouterLink,
+  RouterLinkActive,
+} from '@angular/router';
+import { filter, map, startWith } from 'rxjs';
 import { ChatService, Conversation } from '../../services';
 import { ThemeToggleComponent } from '../theme-toggle';
+
+/**
+ * Component item for docs sidebar
+ */
+interface ComponentItem {
+  name: string;
+  route: string;
+}
 
 /**
  * Conversation group interface for display
@@ -89,6 +105,8 @@ interface ConversationDisplay {
     HlmCollapsibleContent,
     HlmButton,
     ThemeToggleComponent,
+    RouterLink,
+    RouterLinkActive,
   ],
   host: {
     class: 'app-sidebar-host',
@@ -96,6 +114,7 @@ interface ConversationDisplay {
 })
 export class SidebarComponent {
   private chatService = inject(ChatService);
+  private router = inject(Router);
   protected sidebarService = inject(HlmSidebarService);
 
   // App version
@@ -103,6 +122,31 @@ export class SidebarComponent {
 
   // State
   searchQuery = signal('');
+
+  // Route-based context detection
+  private currentUrl = toSignal(
+    this.router.events.pipe(
+      filter((event): event is NavigationEnd => event instanceof NavigationEnd),
+      map((event) => event.urlAfterRedirects),
+      startWith(this.router.url)
+    ),
+    { initialValue: this.router.url }
+  );
+
+  // Check if we're on the docs page
+  isDocsPage = computed(() => this.currentUrl()?.startsWith('/docs') ?? false);
+
+  // AI Components list for docs sidebar
+  readonly components: ComponentItem[] = [
+    { name: 'MessageBubble', route: '/docs/components/message-bubble' },
+    { name: 'MessageList', route: '/docs/components/message-list' },
+    { name: 'ChatContainer', route: '/docs/components/chat-container' },
+    { name: 'ChatInput', route: '/docs/components/chat-input' },
+    { name: 'StreamingText', route: '/docs/components/streaming-text' },
+    { name: 'TypingIndicator', route: '/docs/components/typing-indicator' },
+    { name: 'CodeBlock', route: '/docs/components/code-block' },
+    { name: 'TokenCounter', route: '/docs/components/token-counter' },
+  ];
 
   // Computed from ChatService
   activeConversationId = this.chatService.activeConversationId;
@@ -168,7 +212,19 @@ export class SidebarComponent {
   // Methods
   handleNewConversation(): void {
     this.chatService.createConversation();
+    // Navigate to chat if on docs page
+    if (this.isDocsPage()) {
+      this.router.navigate(['/']);
+    }
     // Close sidebar on mobile after creating new conversation
+    if (this.sidebarService.isMobile()) {
+      this.sidebarService.setOpenMobile(false);
+    }
+  }
+
+  handleComponentSelect(route: string): void {
+    this.router.navigate([route]);
+    // Close sidebar on mobile after selecting
     if (this.sidebarService.isMobile()) {
       this.sidebarService.setOpenMobile(false);
     }

@@ -27,28 +27,25 @@
     </div>
   }
 
-  <!-- Loading indicator -->
+  <!-- Loading indicator - skeleton pattern -->
   @if (loading()) {
     <div [class]="typingIndicatorClasses()" role="status">
-      <div class="flex items-center gap-2">
-        <div class="flex gap-1">
-          <span
-            class="h-2 w-2 animate-bounce rounded-full bg-gray-400"
-            style="animation-delay: 0ms"
-          ></span>
-          <span
-            class="h-2 w-2 animate-bounce rounded-full bg-gray-400"
-            style="animation-delay: 150ms"
-          ></span>
-          <span
-            class="h-2 w-2 animate-bounce rounded-full bg-gray-400"
-            style="animation-delay: 300ms"
-          ></span>
-        </div>
-        <span class="text-sm text-gray-500 dark:text-gray-400">
-          AI is thinking...
-        </span>
+      <!-- Skeleton avatar -->
+      <div
+        class="h-9 w-9 shrink-0 animate-pulse rounded-full bg-gray-200 dark:bg-gray-700"
+      ></div>
+
+      <!-- Skeleton content lines -->
+      <div class="flex flex-1 flex-col gap-2">
+        <div
+          class="h-4 w-3/4 animate-pulse rounded bg-gray-200 dark:bg-gray-700"
+        ></div>
+        <div
+          class="h-4 w-1/2 animate-pulse rounded bg-gray-200 dark:bg-gray-700"
+        ></div>
       </div>
+
+      <span class="sr-only">AI is thinking...</span>
     </div>
   }
 </div>

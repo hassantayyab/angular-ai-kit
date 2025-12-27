@@ -1,9 +1,19 @@
+import { NgIcon, provideIcons } from '@ng-icons/core';
+import {
+  lucideBot,
+  lucideCopy,
+  lucideRefreshCw,
+  lucideSettings,
+  lucideUser,
+} from '@ng-icons/lucide';
 import { ChatMessage } from '@angular-ai-kit/core';
 import {
   HlmAvatar,
   HlmAvatarFallback,
 } from '@angular-ai-kit/spartan-ui/avatar';
 import { HlmButton } from '@angular-ai-kit/spartan-ui/button';
+import { HlmIcon } from '@angular-ai-kit/spartan-ui/icon';
+import { HlmTooltipTrigger } from '@angular-ai-kit/spartan-ui/tooltip';
 import { cn } from '@angular-ai-kit/utils';
 import { isPlatformBrowser } from '@angular/common';
 import {
@@ -40,7 +50,23 @@ import {
   templateUrl: './message-bubble.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
-  imports: [HlmAvatar, HlmAvatarFallback, HlmButton],
+  imports: [
+    HlmAvatar,
+    HlmAvatarFallback,
+    HlmButton,
+    HlmIcon,
+    HlmTooltipTrigger,
+    NgIcon,
+  ],
+  viewProviders: [
+    provideIcons({
+      lucideCopy,
+      lucideRefreshCw,
+      lucideUser,
+      lucideBot,
+      lucideSettings,
+    }),
+  ],
   host: {
     class: 'app-message-bubble-host block',
     '(mouseenter)': 'handleMouseEnter()',
@@ -138,6 +164,21 @@ export class MessageBubbleComponent {
         return 'S';
       default:
         return '?';
+    }
+  });
+
+  /** Avatar icon name based on role */
+  avatarIcon = computed(() => {
+    const role = this.message().role;
+    switch (role) {
+      case 'user':
+        return 'lucideUser';
+      case 'assistant':
+        return 'lucideBot';
+      case 'system':
+        return 'lucideSettings';
+      default:
+        return 'lucideUser';
     }
   });
 

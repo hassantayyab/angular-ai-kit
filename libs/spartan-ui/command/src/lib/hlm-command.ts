@@ -1,0 +1,25 @@
+import { classes } from '@angular-ai-kit/spartan-ui/utils';
+import { Directive } from '@angular/core';
+import { BrnCommand } from '@spartan-ng/brain/command';
+
+@Directive({
+  selector: '[hlmCommand],hlm-command',
+  hostDirectives: [
+    {
+      directive: BrnCommand,
+      inputs: ['id', 'filter'],
+      outputs: ['valueChange'],
+    },
+  ],
+  host: {
+    'data-slot': 'command',
+  },
+})
+export class HlmCommand {
+  constructor() {
+    classes(
+      () =>
+        'bg-popover text-popover-foreground flex h-full w-full flex-col overflow-hidden rounded-md'
+    );
+  }
+}

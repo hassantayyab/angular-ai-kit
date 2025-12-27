@@ -25,29 +25,30 @@
         </svg>
       </button>
 
-      <!-- Logo (hidden when collapsed) -->
-      <div
-        class="bg-sidebar-primary text-sidebar-primary-foreground flex h-8 w-8 shrink-0 items-center justify-center rounded-lg group-data-[collapsible=icon]:hidden"
+      <!-- Logo + Title (clickable, hidden when collapsed) -->
+      <a
+        routerLink="/"
+        class="flex items-center gap-2 group-data-[collapsible=icon]:hidden"
       >
-        <svg
-          class="h-4 w-4"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
+        <div
+          class="bg-sidebar-primary text-sidebar-primary-foreground flex h-8 w-8 shrink-0 items-center justify-center rounded-lg"
         >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456z"
-          />
-        </svg>
-      </div>
-
-      <!-- Title (hidden when collapsed) -->
-      <span class="text-sm font-semibold group-data-[collapsible=icon]:hidden">
-        Angular AI Kit
-      </span>
+          <svg
+            class="h-4 w-4"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456z"
+            />
+          </svg>
+        </div>
+        <span class="text-sm font-semibold">Angular AI Kit</span>
+      </a>
 
       <!-- Spacer (hidden when collapsed) -->
       <div class="flex-1 group-data-[collapsible=icon]:hidden"></div>
@@ -63,7 +64,9 @@
       <input
         hlmSidebarInput
         type="search"
-        placeholder="Search chats..."
+        [placeholder]="
+          isDocsPage() ? 'Search components...' : 'Search chats...'
+        "
         [value]="searchQuery()"
         (input)="handleSearchInput($event)"
       />
@@ -80,9 +83,8 @@
           <li hlmSidebarMenuItem>
             <a
               hlmSidebarMenuButton
-              href="https://angular-ai-kit.dev/docs"
-              target="_blank"
-              rel="noopener noreferrer"
+              routerLink="/docs"
+              routerLinkActive="bg-sidebar-accent"
             >
               <svg
                 class="h-4 w-4"
@@ -125,38 +127,48 @@
 
     <div hlmSidebarSeparator class="mx-auto"></div>
 
-    <!-- Chat Section -->
-    <div hlmSidebarGroup class="flex-1">
-      <div hlmSidebarGroupLabel>Chat</div>
-      <div hlmSidebarGroupContent>
-        <ul hlmSidebarMenu>
-          <!-- New Chat Button -->
-          <li hlmSidebarMenuItem>
-            <button hlmSidebarMenuButton (click)="handleNewConversation()">
-              <svg
-                class="h-4 w-4"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M12 4v16m8-8H4"
-                />
-              </svg>
-              <span>New Chat</span>
-            </button>
-          </li>
-
-          <!-- Chat History (Collapsible) -->
-          <hlm-collapsible
-            [expanded]="true"
-            class="group/collapsible group-data-[collapsible=icon]:hidden"
-          >
+    @if (isDocsPage()) {
+      <!-- Components Section (for Docs page) -->
+      <div hlmSidebarGroup class="flex-1">
+        <div hlmSidebarGroupLabel>Components</div>
+        <div hlmSidebarGroupContent>
+          <ul hlmSidebarMenu>
+            @for (component of components; track component.name) {
+              <li hlmSidebarMenuItem>
+                <button
+                  hlmSidebarMenuButton
+                  [title]="component.name"
+                  (click)="handleComponentSelect(component.route)"
+                >
+                  <svg
+                    class="h-4 w-4"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="1.5"
+                      d="M14 10l-2 1m0 0l-2-1m2 1v2.5M20 7l-2 1m2-1l-2-1m2 1v2.5M14 4l-2-1-2 1M4 7l2-1M4 7l2 1M4 7v2.5M12 21l-2-1m2 1l2-1m-2 1v-2.5M6 18l-2-1v-2.5M18 18l2-1v-2.5"
+                    />
+                  </svg>
+                  <span>{{ component.name }}</span>
+                </button>
+              </li>
+            }
+          </ul>
+        </div>
+      </div>
+    } @else {
+      <!-- Chat Section (for Chat page) -->
+      <div hlmSidebarGroup class="flex-1">
+        <div hlmSidebarGroupLabel>Chat</div>
+        <div hlmSidebarGroupContent>
+          <ul hlmSidebarMenu>
+            <!-- New Chat Button -->
             <li hlmSidebarMenuItem>
-              <button hlmCollapsibleTrigger hlmSidebarMenuButton class="w-full">
+              <button hlmSidebarMenuButton (click)="handleNewConversation()">
                 <svg
                   class="h-4 w-4"
                   fill="none"
@@ -166,99 +178,128 @@
                   <path
                     stroke-linecap="round"
                     stroke-linejoin="round"
-                    stroke-width="1.5"
-                    d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
-                  />
-                </svg>
-                <span>Chat History</span>
-                <svg
-                  class="ml-auto h-4 w-4 transition-transform group-data-[state=open]/collapsible:rotate-90"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
                     stroke-width="2"
-                    d="M9 5l7 7-7 7"
+                    d="M12 4v16m8-8H4"
                   />
                 </svg>
+                <span>New Chat</span>
               </button>
+            </li>
 
-              <hlm-collapsible-content>
-                <ul hlmSidebarMenuSub>
-                  @for (group of conversationGroups(); track group.label) {
-                    @for (
-                      conversation of group.conversations;
-                      track conversation.id
-                    ) {
-                      <li hlmSidebarMenuSubItem class="group/item relative">
-                        <button
-                          hlmSidebarMenuSubButton
-                          [attr.data-active]="
-                            isActiveConversation(conversation.id)
-                          "
-                          [title]="conversation.title"
-                          (click)="handleConversationSelect(conversation.id)"
-                          class="w-full"
-                        >
-                          <span
-                            class="truncate transition-[padding] group-hover/item:pr-7"
-                          >
-                            {{ conversation.title }}
-                          </span>
-                        </button>
+            <!-- Chat History (Collapsible) -->
+            <hlm-collapsible
+              [expanded]="true"
+              class="group/collapsible group-data-[collapsible=icon]:hidden"
+            >
+              <li hlmSidebarMenuItem>
+                <button
+                  hlmCollapsibleTrigger
+                  hlmSidebarMenuButton
+                  class="w-full"
+                >
+                  <svg
+                    class="h-4 w-4"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="1.5"
+                      d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+                    />
+                  </svg>
+                  <span>Chat History</span>
+                  <svg
+                    class="ml-auto h-4 w-4 transition-transform group-data-[state=open]/collapsible:rotate-90"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M9 5l7 7-7 7"
+                    />
+                  </svg>
+                </button>
 
-                        <!-- Delete button (on hover) -->
-                        <button
-                          type="button"
-                          hlmBtn
-                          variant="ghost"
-                          size="icon"
-                          class="hover:bg-destructive/10 absolute top-1/2 right-1 hidden h-6 w-6 -translate-y-1/2 items-center justify-center group-hover/item:flex group-data-[collapsible=icon]:hidden"
-                          (click)="
-                            handleDeleteConversation($event, conversation.id)
-                          "
-                          aria-label="Delete conversation"
-                        >
-                          <svg
-                            class="text-muted-foreground hover:text-destructive h-3.5 w-3.5"
-                            fill="none"
-                            stroke="currentColor"
-                            viewBox="0 0 24 24"
+                <hlm-collapsible-content>
+                  <ul hlmSidebarMenuSub>
+                    @for (group of conversationGroups(); track group.label) {
+                      @for (
+                        conversation of group.conversations;
+                        track conversation.id
+                      ) {
+                        <li hlmSidebarMenuSubItem class="group/item relative">
+                          <button
+                            hlmSidebarMenuSubButton
+                            [attr.data-active]="
+                              isActiveConversation(conversation.id)
+                            "
+                            [title]="conversation.title"
+                            (click)="handleConversationSelect(conversation.id)"
+                            class="w-full"
                           >
-                            <path
-                              stroke-linecap="round"
-                              stroke-linejoin="round"
-                              stroke-width="2"
-                              d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
-                            />
-                          </svg>
-                        </button>
+                            <span
+                              class="truncate transition-[padding] group-hover/item:pr-7"
+                            >
+                              {{ conversation.title }}
+                            </span>
+                          </button>
+
+                          <!-- Delete button (on hover) -->
+                          <button
+                            type="button"
+                            hlmBtn
+                            variant="ghost"
+                            size="icon"
+                            class="hover:bg-destructive/10 absolute top-1/2 right-1 hidden h-6 w-6 -translate-y-1/2 items-center justify-center group-hover/item:flex group-data-[collapsible=icon]:hidden"
+                            (click)="
+                              handleDeleteConversation($event, conversation.id)
+                            "
+                            aria-label="Delete conversation"
+                          >
+                            <svg
+                              class="text-muted-foreground hover:text-destructive h-3.5 w-3.5"
+                              fill="none"
+                              stroke="currentColor"
+                              viewBox="0 0 24 24"
+                            >
+                              <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                stroke-width="2"
+                                d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
+                              />
+                            </svg>
+                          </button>
+                        </li>
+                      }
+                    } @empty {
+                      <!-- Empty state -->
+                      <li
+                        class="px-2 py-4 text-center group-data-[collapsible=icon]:hidden"
+                      >
+                        <p class="text-muted-foreground text-sm">
+                          @if (searchQuery()) {
+                            No matching conversations
+                          } @else {
+                            No conversations yet
+                          }
+                        </p>
                       </li>
                     }
-                  } @empty {
-                    <!-- Empty state -->
-                    <li
-                      class="px-2 py-4 text-center group-data-[collapsible=icon]:hidden"
-                    >
-                      <p class="text-muted-foreground text-sm">
-                        @if (searchQuery()) {
-                          No matching conversations
-                        } @else {
-                          No conversations yet
-                        }
-                      </p>
-                    </li>
-                  }
-                </ul>
-              </hlm-collapsible-content>
-            </li>
-          </hlm-collapsible>
-        </ul>
+                  </ul>
+                </hlm-collapsible-content>
+              </li>
+            </hlm-collapsible>
+          </ul>
+        </div>
       </div>
-    </div>
+    }
   </div>
 
   <!-- Footer -->

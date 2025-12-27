@@ -115,15 +115,23 @@ export class MessageBubbleComponent {
   });
 
   /**
-   * Avatar container classes
+   * Avatar container classes based on message role
    */
   avatarClasses = computed(() => {
+    const role = this.message().role;
+
     return cn(
       'ai-message-bubble-avatar',
       'flex items-center justify-center',
-      'w-10 h-10 rounded-full',
-      'bg-white/10 backdrop-blur-sm',
-      'flex-shrink-0'
+      'w-9 h-9 rounded-full',
+      'flex-shrink-0',
+      {
+        'bg-white/20 text-white': role === 'user',
+        'bg-gray-200 text-gray-700 dark:bg-gray-700 dark:text-gray-200':
+          role === 'assistant',
+        'bg-yellow-100 text-yellow-700 dark:bg-yellow-900/30 dark:text-yellow-400':
+          role === 'system',
+      }
     );
   });
 

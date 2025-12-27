@@ -1,0 +1,1426 @@
+{
+  "graph": {
+    "nodes": {
+      "collapsible": {
+        "name": "collapsible",
+        "type": "lib",
+        "data": {
+          "root": "packages/spartan-ui/collapsible",
+          "targets": {
+            "lint": {
+              "executor": "@nx/eslint:lint",
+              "options": {},
+              "configurations": {},
+              "parallelism": true,
+              "cache": true,
+              "inputs": [
+                "default",
+                "{workspaceRoot}/.eslintrc.json",
+                "{workspaceRoot}/.eslintignore",
+                "{workspaceRoot}/eslint.config.mjs"
+              ]
+            }
+          },
+          "name": "collapsible",
+          "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+          "sourceRoot": "packages/spartan-ui/collapsible/src",
+          "prefix": "hlm",
+          "projectType": "library",
+          "tags": [],
+          "implicitDependencies": []
+        }
+      },
+      "scroll-area": {
+        "name": "scroll-area",
+        "type": "lib",
+        "data": {
+          "root": "libs/spartan-ui/scroll-area",
+          "targets": {
+            "lint": {
+              "executor": "@nx/eslint:lint",
+              "options": {},
+              "configurations": {},
+              "parallelism": true,
+              "cache": true,
+              "inputs": [
+                "default",
+                "{workspaceRoot}/.eslintrc.json",
+                "{workspaceRoot}/.eslintignore",
+                "{workspaceRoot}/eslint.config.mjs"
+              ]
+            }
+          },
+          "name": "scroll-area",
+          "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+          "sourceRoot": "libs/spartan-ui/scroll-area/src",
+          "prefix": "hlm",
+          "projectType": "library",
+          "tags": [],
+          "implicitDependencies": []
+        }
+      },
+      "separator": {
+        "name": "separator",
+        "type": "lib",
+        "data": {
+          "root": "libs/spartan-ui/separator",
+          "targets": {
+            "lint": {
+              "executor": "@nx/eslint:lint",
+              "options": {},
+              "configurations": {},
+              "parallelism": true,
+              "cache": true,
+              "inputs": [
+                "default",
+                "{workspaceRoot}/.eslintrc.json",
+                "{workspaceRoot}/.eslintignore",
+                "{workspaceRoot}/eslint.config.mjs"
+              ]
+            }
+          },
+          "name": "separator",
+          "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+          "sourceRoot": "libs/spartan-ui/separator/src",
+          "prefix": "hlm",
+          "projectType": "library",
+          "tags": [],
+          "implicitDependencies": []
+        }
+      },
+      "skeleton": {
+        "name": "skeleton",
+        "type": "lib",
+        "data": {
+          "root": "libs/spartan-ui/skeleton",
+          "targets": {
+            "lint": {
+              "executor": "@nx/eslint:lint",
+              "options": {},
+              "configurations": {},
+              "parallelism": true,
+              "cache": true,
+              "inputs": [
+                "default",
+                "{workspaceRoot}/.eslintrc.json",
+                "{workspaceRoot}/.eslintignore",
+                "{workspaceRoot}/eslint.config.mjs"
+              ]
+            }
+          },
+          "name": "skeleton",
+          "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+          "sourceRoot": "libs/spartan-ui/skeleton/src",
+          "prefix": "hlm",
+          "projectType": "library",
+          "tags": [],
+          "implicitDependencies": []
+        }
+      },
+      "textarea": {
+        "name": "textarea",
+        "type": "lib",
+        "data": {
+          "root": "libs/spartan-ui/textarea",
+          "targets": {
+            "lint": {
+              "executor": "@nx/eslint:lint",
+              "options": {},
+              "configurations": {},
+              "parallelism": true,
+              "cache": true,
+              "inputs": [
+                "default",
+                "{workspaceRoot}/.eslintrc.json",
+                "{workspaceRoot}/.eslintignore",
+                "{workspaceRoot}/eslint.config.mjs"
+              ]
+            }
+          },
+          "name": "textarea",
+          "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+          "sourceRoot": "libs/spartan-ui/textarea/src",
+          "prefix": "hlm",
+          "projectType": "library",
+          "tags": [],
+          "implicitDependencies": []
+        }
+      },
+      "@angular-ai-kit/core": {
+        "name": "@angular-ai-kit/core",
+        "type": "lib",
+        "data": {
+          "root": "packages/angular-ai-kit",
+          "targets": {
+            "lint": {
+              "executor": "@nx/eslint:lint",
+              "options": {},
+              "configurations": {},
+              "parallelism": true,
+              "cache": true,
+              "inputs": [
+                "default",
+                "{workspaceRoot}/.eslintrc.json",
+                "{workspaceRoot}/.eslintignore",
+                "{workspaceRoot}/eslint.config.mjs"
+              ]
+            },
+            "nx-release-publish": {
+              "executor": "@nx/js:release-publish",
+              "dependsOn": ["^nx-release-publish"],
+              "options": {
+                "packageRoot": "dist/packages/angular-ai-kit"
+              },
+              "configurations": {},
+              "parallelism": true
+            },
+            "build": {
+              "executor": "@nx/angular:package",
+              "outputs": ["{workspaceRoot}/dist/{projectRoot}"],
+              "options": {
+                "project": "packages/angular-ai-kit/ng-package.json",
+                "tsConfig": "packages/angular-ai-kit/tsconfig.lib.json"
+              },
+              "configurations": {
+                "production": {
+                  "tsConfig": "packages/angular-ai-kit/tsconfig.lib.prod.json"
+                },
+                "development": {}
+              },
+              "defaultConfiguration": "production",
+              "parallelism": true,
+              "cache": true,
+              "dependsOn": ["^build"],
+              "inputs": ["production", "^production"]
+            },
+            "test": {
+              "executor": "@nx/angular:unit-test",
+              "options": {},
+              "configurations": {},
+              "parallelism": true,
+              "cache": true,
+              "inputs": ["default", "^production"]
+            }
+          },
+          "name": "@angular-ai-kit/core",
+          "tags": [
+            "npm:public",
+            "npm:angular",
+            "npm:angular21",
+            "npm:ai",
+            "npm:chat",
+            "npm:ui",
+            "npm:components",
+            "npm:chatgpt",
+            "npm:openai",
+            "npm:anthropic",
+            "npm:streaming",
+            "npm:typescript",
+            "npm:tailwind"
+          ],
+          "metadata": {
+            "targetGroups": {},
+            "description": "AI-focused UI components for Angular v21 - Chat interfaces, streaming text, and more",
+            "js": {
+              "packageName": "@angular-ai-kit/core",
+              "packageVersion": "0.0.1",
+              "isInPackageManagerWorkspaces": false
+            }
+          },
+          "$schema": "../../node_modules/nx/schemas/project-schema.json",
+          "sourceRoot": "packages/angular-ai-kit/src",
+          "prefix": "lib",
+          "projectType": "library",
+          "release": {
+            "version": {
+              "manifestRootsToUpdate": ["dist/{projectRoot}"],
+              "currentVersionResolver": "git-tag",
+              "fallbackCurrentVersionResolver": "disk"
+            }
+          },
+          "implicitDependencies": []
+        }
+      },
+      "command": {
+        "name": "command",
+        "type": "lib",
+        "data": {
+          "root": "libs/spartan-ui/command",
+          "targets": {
+            "lint": {
+              "executor": "@nx/eslint:lint",
+              "options": {},
+              "configurations": {},
+              "parallelism": true,
+              "cache": true,
+              "inputs": [
+                "default",
+                "{workspaceRoot}/.eslintrc.json",
+                "{workspaceRoot}/.eslintignore",
+                "{workspaceRoot}/eslint.config.mjs"
+              ]
+            }
+          },
+          "name": "command",
+          "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+          "sourceRoot": "libs/spartan-ui/command/src",
+          "prefix": "hlm",
+          "projectType": "library",
+          "tags": [],
+          "implicitDependencies": []
+        }
+      },
+      "sidebar": {
+        "name": "sidebar",
+        "type": "lib",
+        "data": {
+          "root": "libs/spartan-ui/sidebar",
+          "targets": {
+            "lint": {
+              "executor": "@nx/eslint:lint",
+              "options": {},
+              "configurations": {},
+              "parallelism": true,
+              "cache": true,
+              "inputs": [
+                "default",
+                "{workspaceRoot}/.eslintrc.json",
+                "{workspaceRoot}/.eslintignore",
+                "{workspaceRoot}/eslint.config.mjs"
+              ]
+            }
+          },
+          "name": "sidebar",
+          "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+          "sourceRoot": "libs/spartan-ui/sidebar/src",
+          "prefix": "hlm",
+          "projectType": "library",
+          "tags": [],
+          "implicitDependencies": []
+        }
+      },
+      "tooltip": {
+        "name": "tooltip",
+        "type": "lib",
+        "data": {
+          "root": "libs/spartan-ui/tooltip",
+          "targets": {
+            "lint": {
+              "executor": "@nx/eslint:lint",
+              "options": {},
+              "configurations": {},
+              "parallelism": true,
+              "cache": true,
+              "inputs": [
+                "default",
+                "{workspaceRoot}/.eslintrc.json",
+                "{workspaceRoot}/.eslintignore",
+                "{workspaceRoot}/eslint.config.mjs"
+              ]
+            }
+          },
+          "name": "tooltip",
+          "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+          "sourceRoot": "libs/spartan-ui/tooltip/src",
+          "prefix": "hlm",
+          "projectType": "library",
+          "tags": [],
+          "implicitDependencies": []
+        }
+      },
+      "avatar": {
+        "name": "avatar",
+        "type": "lib",
+        "data": {
+          "root": "libs/spartan-ui/avatar",
+          "targets": {
+            "lint": {
+              "executor": "@nx/eslint:lint",
+              "options": {},
+              "configurations": {},
+              "parallelism": true,
+              "cache": true,
+              "inputs": [
+                "default",
+                "{workspaceRoot}/.eslintrc.json",
+                "{workspaceRoot}/.eslintignore",
+                "{workspaceRoot}/eslint.config.mjs"
+              ]
+            }
+          },
+          "name": "avatar",
+          "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+          "sourceRoot": "libs/spartan-ui/avatar/src",
+          "prefix": "hlm",
+          "projectType": "library",
+          "tags": [],
+          "implicitDependencies": []
+        }
+      },
+      "button": {
+        "name": "button",
+        "type": "lib",
+        "data": {
+          "root": "libs/spartan-ui/button",
+          "targets": {
+            "lint": {
+              "executor": "@nx/eslint:lint",
+              "options": {},
+              "configurations": {},
+              "parallelism": true,
+              "cache": true,
+              "inputs": [
+                "default",
+                "{workspaceRoot}/.eslintrc.json",
+                "{workspaceRoot}/.eslintignore",
+                "{workspaceRoot}/eslint.config.mjs"
+              ]
+            }
+          },
+          "name": "button",
+          "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+          "sourceRoot": "libs/spartan-ui/button/src",
+          "prefix": "hlm",
+          "projectType": "library",
+          "tags": [],
+          "implicitDependencies": []
+        }
+      },
+      "alert": {
+        "name": "alert",
+        "type": "lib",
+        "data": {
+          "root": "libs/spartan-ui/alert",
+          "targets": {
+            "lint": {
+              "executor": "@nx/eslint:lint",
+              "options": {},
+              "configurations": {},
+              "parallelism": true,
+              "cache": true,
+              "inputs": [
+                "default",
+                "{workspaceRoot}/.eslintrc.json",
+                "{workspaceRoot}/.eslintignore",
+                "{workspaceRoot}/eslint.config.mjs"
+              ]
+            }
+          },
+          "name": "alert",
+          "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+          "sourceRoot": "libs/spartan-ui/alert/src",
+          "prefix": "hlm",
+          "projectType": "library",
+          "tags": [],
+          "implicitDependencies": []
+        }
+      },
+      "badge": {
+        "name": "badge",
+        "type": "lib",
+        "data": {
+          "root": "libs/spartan-ui/badge",
+          "targets": {
+            "lint": {
+              "executor": "@nx/eslint:lint",
+              "options": {},
+              "configurations": {},
+              "parallelism": true,
+              "cache": true,
+              "inputs": [
+                "default",
+                "{workspaceRoot}/.eslintrc.json",
+                "{workspaceRoot}/.eslintignore",
+                "{workspaceRoot}/eslint.config.mjs"
+              ]
+            }
+          },
+          "name": "badge",
+          "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+          "sourceRoot": "libs/spartan-ui/badge/src",
+          "prefix": "hlm",
+          "projectType": "library",
+          "tags": [],
+          "implicitDependencies": []
+        }
+      },
+      "input": {
+        "name": "input",
+        "type": "lib",
+        "data": {
+          "root": "libs/spartan-ui/input",
+          "targets": {
+            "lint": {
+              "executor": "@nx/eslint:lint",
+              "options": {},
+              "configurations": {},
+              "parallelism": true,
+              "cache": true,
+              "inputs": [
+                "default",
+                "{workspaceRoot}/.eslintrc.json",
+                "{workspaceRoot}/.eslintignore",
+                "{workspaceRoot}/eslint.config.mjs"
+              ]
+            }
+          },
+          "name": "input",
+          "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+          "sourceRoot": "libs/spartan-ui/input/src",
+          "prefix": "hlm",
+          "projectType": "library",
+          "tags": [],
+          "implicitDependencies": []
+        }
+      },
+      "label": {
+        "name": "label",
+        "type": "lib",
+        "data": {
+          "root": "libs/spartan-ui/label",
+          "targets": {
+            "lint": {
+              "executor": "@nx/eslint:lint",
+              "options": {},
+              "configurations": {},
+              "parallelism": true,
+              "cache": true,
+              "inputs": [
+                "default",
+                "{workspaceRoot}/.eslintrc.json",
+                "{workspaceRoot}/.eslintignore",
+                "{workspaceRoot}/eslint.config.mjs"
+              ]
+            }
+          },
+          "name": "label",
+          "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+          "sourceRoot": "libs/spartan-ui/label/src",
+          "prefix": "hlm",
+          "projectType": "library",
+          "tags": [],
+          "implicitDependencies": []
+        }
+      },
+      "sheet": {
+        "name": "sheet",
+        "type": "lib",
+        "data": {
+          "root": "libs/spartan-ui/sheet",
+          "targets": {
+            "lint": {
+              "executor": "@nx/eslint:lint",
+              "options": {},
+              "configurations": {},
+              "parallelism": true,
+              "cache": true,
+              "inputs": [
+                "default",
+                "{workspaceRoot}/.eslintrc.json",
+                "{workspaceRoot}/.eslintignore",
+                "{workspaceRoot}/eslint.config.mjs"
+              ]
+            }
+          },
+          "name": "sheet",
+          "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+          "sourceRoot": "libs/spartan-ui/sheet/src",
+          "prefix": "hlm",
+          "projectType": "library",
+          "tags": [],
+          "implicitDependencies": []
+        }
+      },
+      "utils": {
+        "name": "utils",
+        "type": "lib",
+        "data": {
+          "root": "libs/spartan-ui/utils",
+          "targets": {
+            "lint": {
+              "executor": "@nx/eslint:lint",
+              "options": {},
+              "configurations": {},
+              "parallelism": true,
+              "cache": true,
+              "inputs": [
+                "default",
+                "{workspaceRoot}/.eslintrc.json",
+                "{workspaceRoot}/.eslintignore",
+                "{workspaceRoot}/eslint.config.mjs"
+              ]
+            }
+          },
+          "name": "utils",
+          "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+          "sourceRoot": "libs/spartan-ui/utils/src",
+          "prefix": "hlm",
+          "projectType": "library",
+          "tags": [],
+          "implicitDependencies": []
+        }
+      },
+      "card": {
+        "name": "card",
+        "type": "lib",
+        "data": {
+          "root": "libs/spartan-ui/card",
+          "targets": {
+            "lint": {
+              "executor": "@nx/eslint:lint",
+              "options": {},
+              "configurations": {},
+              "parallelism": true,
+              "cache": true,
+              "inputs": [
+                "default",
+                "{workspaceRoot}/.eslintrc.json",
+                "{workspaceRoot}/.eslintignore",
+                "{workspaceRoot}/eslint.config.mjs"
+              ]
+            }
+          },
+          "name": "card",
+          "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+          "sourceRoot": "libs/spartan-ui/card/src",
+          "prefix": "hlm",
+          "projectType": "library",
+          "tags": [],
+          "implicitDependencies": []
+        }
+      },
+      "icon": {
+        "name": "icon",
+        "type": "lib",
+        "data": {
+          "root": "libs/spartan-ui/icon",
+          "targets": {
+            "lint": {
+              "executor": "@nx/eslint:lint",
+              "options": {},
+              "configurations": {},
+              "parallelism": true,
+              "cache": true,
+              "inputs": [
+                "default",
+                "{workspaceRoot}/.eslintrc.json",
+                "{workspaceRoot}/.eslintignore",
+                "{workspaceRoot}/eslint.config.mjs"
+              ]
+            }
+          },
+          "name": "icon",
+          "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+          "sourceRoot": "libs/spartan-ui/icon/src",
+          "prefix": "hlm",
+          "projectType": "library",
+          "tags": [],
+          "implicitDependencies": []
+        }
+      },
+      "@angular-ai-kit/tokens": {
+        "name": "@angular-ai-kit/tokens",
+        "type": "lib",
+        "data": {
+          "root": "packages/tokens",
+          "targets": {
+            "lint": {
+              "executor": "@nx/eslint:lint",
+              "options": {},
+              "configurations": {},
+              "parallelism": true,
+              "cache": true,
+              "inputs": [
+                "default",
+                "{workspaceRoot}/.eslintrc.json",
+                "{workspaceRoot}/.eslintignore",
+                "{workspaceRoot}/eslint.config.mjs"
+              ]
+            },
+            "nx-release-publish": {
+              "executor": "@nx/js:release-publish",
+              "dependsOn": ["^nx-release-publish"],
+              "options": {
+                "packageRoot": "dist/packages/tokens"
+              },
+              "configurations": {},
+              "parallelism": true
+            },
+            "build": {
+              "executor": "@nx/angular:package",
+              "outputs": ["{workspaceRoot}/dist/{projectRoot}"],
+              "options": {
+                "project": "packages/tokens/ng-package.json",
+                "tsConfig": "packages/tokens/tsconfig.lib.json"
+              },
+              "configurations": {
+                "production": {
+                  "tsConfig": "packages/tokens/tsconfig.lib.prod.json"
+                },
+                "development": {}
+              },
+              "defaultConfiguration": "production",
+              "parallelism": true,
+              "cache": true,
+              "dependsOn": ["^build"],
+              "inputs": ["production", "^production"]
+            },
+            "test": {
+              "executor": "@nx/angular:unit-test",
+              "options": {},
+              "configurations": {},
+              "parallelism": true,
+              "cache": true,
+              "inputs": ["default", "^production"]
+            }
+          },
+          "name": "@angular-ai-kit/tokens",
+          "tags": [
+            "npm:public",
+            "npm:angular",
+            "npm:design-tokens",
+            "npm:theming",
+            "npm:css-variables",
+            "npm:tailwind",
+            "npm:typescript"
+          ],
+          "metadata": {
+            "targetGroups": {},
+            "description": "Design tokens and theming for Angular AI Kit - CSS custom properties and TypeScript interfaces",
+            "js": {
+              "packageName": "@angular-ai-kit/tokens",
+              "packageVersion": "0.0.1",
+              "isInPackageManagerWorkspaces": false
+            }
+          },
+          "$schema": "../../node_modules/nx/schemas/project-schema.json",
+          "sourceRoot": "packages/tokens/src",
+          "prefix": "lib",
+          "projectType": "library",
+          "release": {
+            "version": {
+              "manifestRootsToUpdate": ["dist/{projectRoot}"],
+              "currentVersionResolver": "git-tag",
+              "fallbackCurrentVersionResolver": "disk"
+            }
+          },
+          "implicitDependencies": []
+        }
+      },
+      "@angular-ai-kit/utils": {
+        "name": "@angular-ai-kit/utils",
+        "type": "lib",
+        "data": {
+          "root": "packages/utils",
+          "targets": {
+            "lint": {
+              "executor": "@nx/eslint:lint",
+              "options": {},
+              "configurations": {},
+              "parallelism": true,
+              "cache": true,
+              "inputs": [
+                "default",
+                "{workspaceRoot}/.eslintrc.json",
+                "{workspaceRoot}/.eslintignore",
+                "{workspaceRoot}/eslint.config.mjs"
+              ]
+            },
+            "nx-release-publish": {
+              "executor": "@nx/js:release-publish",
+              "dependsOn": ["^nx-release-publish"],
+              "options": {
+                "packageRoot": "dist/packages/utils"
+              },
+              "configurations": {},
+              "parallelism": true
+            },
+            "build": {
+              "executor": "@nx/angular:package",
+              "outputs": ["{workspaceRoot}/dist/{projectRoot}"],
+              "options": {
+                "project": "packages/utils/ng-package.json",
+                "tsConfig": "packages/utils/tsconfig.lib.json"
+              },
+              "configurations": {
+                "production": {
+                  "tsConfig": "packages/utils/tsconfig.lib.prod.json"
+                },
+                "development": {}
+              },
+              "defaultConfiguration": "production",
+              "parallelism": true,
+              "cache": true,
+              "dependsOn": ["^build"],
+              "inputs": ["production", "^production"]
+            },
+            "test": {
+              "executor": "@nx/angular:unit-test",
+              "options": {},
+              "configurations": {},
+              "parallelism": true,
+              "cache": true,
+              "inputs": ["default", "^production"]
+            }
+          },
+          "name": "@angular-ai-kit/utils",
+          "tags": [
+            "npm:public",
+            "npm:angular",
+            "npm:utilities",
+            "npm:helpers",
+            "npm:formatters",
+            "npm:validators",
+            "npm:token-counter",
+            "npm:tailwind",
+            "npm:typescript"
+          ],
+          "metadata": {
+            "targetGroups": {},
+            "description": "Utility functions for Angular AI Kit - Class names, formatters, validators, and token counting",
+            "js": {
+              "packageName": "@angular-ai-kit/utils",
+              "packageVersion": "0.0.1",
+              "isInPackageManagerWorkspaces": false
+            }
+          },
+          "$schema": "../../node_modules/nx/schemas/project-schema.json",
+          "sourceRoot": "packages/utils/src",
+          "prefix": "lib",
+          "projectType": "library",
+          "release": {
+            "version": {
+              "manifestRootsToUpdate": ["dist/{projectRoot}"],
+              "currentVersionResolver": "git-tag",
+              "fallbackCurrentVersionResolver": "disk"
+            }
+          },
+          "implicitDependencies": []
+        }
+      },
+      "demo-e2e": {
+        "name": "demo-e2e",
+        "type": "e2e",
+        "data": {
+          "root": "apps/demo-e2e",
+          "metadata": {
+            "targetGroups": {
+              "E2E (CI)": ["e2e-ci", "e2e-ci--merge-reports"]
+            }
+          },
+          "targets": {
+            "e2e": {
+              "options": {
+                "cwd": "apps/demo-e2e",
+                "command": "playwright test"
+              },
+              "metadata": {
+                "technologies": ["playwright"],
+                "description": "Runs Playwright Tests",
+                "help": {
+                  "command": "npx playwright test --help",
+                  "example": {
+                    "options": {
+                      "workers": 1
+                    }
+                  }
+                }
+              },
+              "dependsOn": [
+                {
+                  "projects": ["demo"],
+                  "target": "serve"
+                }
+              ],
+              "cache": true,
+              "inputs": [
+                "default",
+                "^production",
+                {
+                  "externalDependencies": ["@playwright/test"]
+                }
+              ],
+              "outputs": [
+                "{workspaceRoot}/dist/.playwright/apps/demo-e2e/test-output",
+                "{workspaceRoot}/dist/.playwright/apps/demo-e2e/playwright-report"
+              ],
+              "executor": "nx:run-commands",
+              "configurations": {},
+              "parallelism": true
+            },
+            "e2e-ci": {
+              "executor": "nx:noop",
+              "cache": true,
+              "inputs": [
+                "default",
+                "^production",
+                {
+                  "externalDependencies": ["@playwright/test"]
+                }
+              ],
+              "outputs": [
+                "{workspaceRoot}/dist/.playwright/apps/demo-e2e/test-output",
+                "{workspaceRoot}/dist/.playwright/apps/demo-e2e/playwright-report"
+              ],
+              "dependsOn": [],
+              "metadata": {
+                "technologies": ["playwright"],
+                "description": "Runs Playwright Tests in CI",
+                "nonAtomizedTarget": "e2e",
+                "help": {
+                  "command": "npx playwright test --help",
+                  "example": {
+                    "options": {
+                      "workers": 1
+                    }
+                  }
+                }
+              },
+              "configurations": {},
+              "options": {},
+              "parallelism": true
+            },
+            "e2e-ci--merge-reports": {
+              "executor": "@nx/playwright:merge-reports",
+              "cache": true,
+              "inputs": [
+                "default",
+                "^production",
+                {
+                  "externalDependencies": ["@playwright/test"]
+                }
+              ],
+              "outputs": [
+                "{workspaceRoot}/dist/.playwright/apps/demo-e2e/playwright-report"
+              ],
+              "options": {
+                "config": "playwright.config.ts",
+                "expectedSuites": 0
+              },
+              "metadata": {
+                "technologies": ["playwright"],
+                "description": "Merges Playwright blob reports from atomized tasks to produce unified reports for the configured reporters."
+              },
+              "configurations": {},
+              "parallelism": true
+            },
+            "lint": {
+              "cache": true,
+              "options": {
+                "cwd": "apps/demo-e2e",
+                "command": "eslint ."
+              },
+              "inputs": [
+                "default",
+                "^default",
+                "{workspaceRoot}/eslint.config.mjs",
+                "{workspaceRoot}/apps/demo-e2e/eslint.config.mjs",
+                "{workspaceRoot}/tools/eslint-rules/**/*",
+                {
+                  "externalDependencies": ["eslint"]
+                }
+              ],
+              "outputs": ["{options.outputFile}"],
+              "metadata": {
+                "technologies": ["eslint"],
+                "description": "Runs ESLint on project",
+                "help": {
+                  "command": "npx eslint --help",
+                  "example": {
+                    "options": {
+                      "max-warnings": 0
+                    }
+                  }
+                }
+              },
+              "executor": "nx:run-commands",
+              "configurations": {},
+              "parallelism": true
+            }
+          },
+          "name": "demo-e2e",
+          "$schema": "../../node_modules/nx/schemas/project-schema.json",
+          "projectType": "application",
+          "sourceRoot": "apps/demo-e2e/src",
+          "implicitDependencies": ["demo"],
+          "tags": []
+        }
+      },
+      "demo": {
+        "name": "demo",
+        "type": "app",
+        "data": {
+          "root": "apps/demo",
+          "targets": {
+            "lint": {
+              "executor": "@nx/eslint:lint",
+              "options": {},
+              "configurations": {},
+              "parallelism": true,
+              "cache": true,
+              "inputs": [
+                "default",
+                "{workspaceRoot}/.eslintrc.json",
+                "{workspaceRoot}/.eslintignore",
+                "{workspaceRoot}/eslint.config.mjs"
+              ]
+            },
+            "build": {
+              "executor": "@angular/build:application",
+              "outputs": ["{options.outputPath}"],
+              "options": {
+                "outputPath": "dist/apps/demo",
+                "browser": "apps/demo/src/main.ts",
+                "tsConfig": "apps/demo/tsconfig.app.json",
+                "assets": [
+                  {
+                    "glob": "**/*",
+                    "input": "apps/demo/public"
+                  }
+                ],
+                "styles": ["apps/demo/src/styles.css"],
+                "server": "apps/demo/src/main.server.ts",
+                "ssr": {
+                  "entry": "apps/demo/src/server.ts"
+                },
+                "outputMode": "server"
+              },
+              "configurations": {
+                "production": {
+                  "budgets": [
+                    {
+                      "type": "initial",
+                      "maximumWarning": "500kb",
+                      "maximumError": "1mb"
+                    },
+                    {
+                      "type": "anyComponentStyle",
+                      "maximumWarning": "4kb",
+                      "maximumError": "8kb"
+                    }
+                  ],
+                  "outputHashing": "all"
+                },
+                "development": {
+                  "optimization": false,
+                  "extractLicenses": false,
+                  "sourceMap": true
+                }
+              },
+              "defaultConfiguration": "production",
+              "parallelism": true,
+              "cache": true,
+              "dependsOn": ["^build"],
+              "inputs": ["production", "^production"]
+            },
+            "serve": {
+              "continuous": true,
+              "executor": "@angular/build:dev-server",
+              "configurations": {
+                "production": {
+                  "buildTarget": "demo:build:production"
+                },
+                "development": {
+                  "buildTarget": "demo:build:development"
+                }
+              },
+              "defaultConfiguration": "development",
+              "options": {},
+              "parallelism": true
+            },
+            "test": {
+              "executor": "@angular/build:unit-test",
+              "options": {},
+              "configurations": {},
+              "parallelism": true,
+              "cache": true,
+              "inputs": ["default", "^production"]
+            },
+            "serve-static": {
+              "continuous": true,
+              "executor": "@nx/web:file-server",
+              "options": {
+                "buildTarget": "demo:build",
+                "port": 4200,
+                "staticFilePath": "dist/apps/demo/browser",
+                "spa": true
+              },
+              "configurations": {},
+              "parallelism": true
+            }
+          },
+          "name": "demo",
+          "$schema": "../../node_modules/nx/schemas/project-schema.json",
+          "projectType": "application",
+          "prefix": "app",
+          "sourceRoot": "apps/demo/src",
+          "tags": [],
+          "implicitDependencies": []
+        }
+      },
+      "angular-ai-kit": {
+        "name": "angular-ai-kit",
+        "type": "app",
+        "data": {
+          "root": ".",
+          "name": "angular-ai-kit",
+          "includedScripts": [],
+          "tags": ["npm:private"],
+          "metadata": {
+            "targetGroups": {},
+            "js": {
+              "packageName": "angular-ai-kit",
+              "packageVersion": "0.0.1",
+              "isInPackageManagerWorkspaces": true
+            }
+          },
+          "targets": {
+            "local-registry": {
+              "executor": "@nx/js:verdaccio",
+              "options": {
+                "port": 4873,
+                "config": ".verdaccio/config.yml",
+                "storage": "tmp/local-registry/storage"
+              },
+              "configurations": {},
+              "parallelism": true,
+              "continuous": true
+            }
+          },
+          "$schema": "node_modules/nx/schemas/project-schema.json",
+          "implicitDependencies": []
+        }
+      }
+    },
+    "dependencies": {
+      "collapsible": [
+        {
+          "source": "collapsible",
+          "target": "utils",
+          "type": "static"
+        }
+      ],
+      "scroll-area": [
+        {
+          "source": "scroll-area",
+          "target": "utils",
+          "type": "static"
+        }
+      ],
+      "separator": [
+        {
+          "source": "separator",
+          "target": "utils",
+          "type": "static"
+        }
+      ],
+      "skeleton": [
+        {
+          "source": "skeleton",
+          "target": "utils",
+          "type": "static"
+        }
+      ],
+      "textarea": [
+        {
+          "source": "textarea",
+          "target": "utils",
+          "type": "static"
+        }
+      ],
+      "@angular-ai-kit/core": [
+        {
+          "source": "@angular-ai-kit/core",
+          "target": "@angular-ai-kit/tokens",
+          "type": "static"
+        },
+        {
+          "source": "@angular-ai-kit/core",
+          "target": "@angular-ai-kit/utils",
+          "type": "static"
+        },
+        {
+          "source": "@angular-ai-kit/core",
+          "target": "avatar",
+          "type": "static"
+        },
+        {
+          "source": "@angular-ai-kit/core",
+          "target": "button",
+          "type": "static"
+        },
+        {
+          "source": "@angular-ai-kit/core",
+          "target": "tooltip",
+          "type": "static"
+        },
+        {
+          "source": "@angular-ai-kit/core",
+          "target": "icon",
+          "type": "static"
+        }
+      ],
+      "command": [
+        {
+          "source": "command",
+          "target": "button",
+          "type": "static"
+        },
+        {
+          "source": "command",
+          "target": "icon",
+          "type": "static"
+        },
+        {
+          "source": "command",
+          "target": "utils",
+          "type": "static"
+        }
+      ],
+      "sidebar": [
+        {
+          "source": "sidebar",
+          "target": "utils",
+          "type": "static"
+        },
+        {
+          "source": "sidebar",
+          "target": "input",
+          "type": "static"
+        },
+        {
+          "source": "sidebar",
+          "target": "tooltip",
+          "type": "static"
+        },
+        {
+          "source": "sidebar",
+          "target": "skeleton",
+          "type": "static"
+        },
+        {
+          "source": "sidebar",
+          "target": "separator",
+          "type": "static"
+        },
+        {
+          "source": "sidebar",
+          "target": "button",
+          "type": "static"
+        },
+        {
+          "source": "sidebar",
+          "target": "icon",
+          "type": "static"
+        },
+        {
+          "source": "sidebar",
+          "target": "sheet",
+          "type": "static"
+        }
+      ],
+      "tooltip": [],
+      "avatar": [
+        {
+          "source": "avatar",
+          "target": "utils",
+          "type": "static"
+        }
+      ],
+      "button": [
+        {
+          "source": "button",
+          "target": "utils",
+          "type": "static"
+        }
+      ],
+      "alert": [
+        {
+          "source": "alert",
+          "target": "utils",
+          "type": "static"
+        },
+        {
+          "source": "alert",
+          "target": "icon",
+          "type": "static"
+        }
+      ],
+      "badge": [
+        {
+          "source": "badge",
+          "target": "utils",
+          "type": "static"
+        }
+      ],
+      "input": [
+        {
+          "source": "input",
+          "target": "utils",
+          "type": "static"
+        }
+      ],
+      "label": [
+        {
+          "source": "label",
+          "target": "utils",
+          "type": "static"
+        }
+      ],
+      "sheet": [
+        {
+          "source": "sheet",
+          "target": "utils",
+          "type": "static"
+        },
+        {
+          "source": "sheet",
+          "target": "icon",
+          "type": "static"
+        }
+      ],
+      "utils": [],
+      "card": [
+        {
+          "source": "card",
+          "target": "utils",
+          "type": "static"
+        }
+      ],
+      "icon": [],
+      "@angular-ai-kit/tokens": [],
+      "@angular-ai-kit/utils": [],
+      "demo-e2e": [
+        {
+          "source": "demo-e2e",
+          "target": "demo",
+          "type": "implicit"
+        }
+      ],
+      "demo": [
+        {
+          "source": "demo",
+          "target": "button",
+          "type": "static"
+        },
+        {
+          "source": "demo",
+          "target": "@angular-ai-kit/utils",
+          "type": "static"
+        },
+        {
+          "source": "demo",
+          "target": "@angular-ai-kit/core",
+          "type": "static"
+        },
+        {
+          "source": "demo",
+          "target": "sidebar",
+          "type": "static"
+        },
+        {
+          "source": "demo",
+          "target": "command",
+          "type": "static"
+        },
+        {
+          "source": "demo",
+          "target": "card",
+          "type": "static"
+        },
+        {
+          "source": "demo",
+          "target": "avatar",
+          "type": "static"
+        },
+        {
+          "source": "demo",
+          "target": "skeleton",
+          "type": "static"
+        },
+        {
+          "source": "demo",
+          "target": "collapsible",
+          "type": "static"
+        }
+      ],
+      "angular-ai-kit": [
+        {
+          "source": "angular-ai-kit",
+          "target": "utils",
+          "type": "static"
+        },
+        {
+          "source": "angular-ai-kit",
+          "target": "button",
+          "type": "static"
+        },
+        {
+          "source": "angular-ai-kit",
+          "target": "input",
+          "type": "static"
+        },
+        {
+          "source": "angular-ai-kit",
+          "target": "avatar",
+          "type": "static"
+        },
+        {
+          "source": "angular-ai-kit",
+          "target": "badge",
+          "type": "static"
+        },
+        {
+          "source": "angular-ai-kit",
+          "target": "card",
+          "type": "static"
+        },
+        {
+          "source": "angular-ai-kit",
+          "target": "icon",
+          "type": "static"
+        },
+        {
+          "source": "angular-ai-kit",
+          "target": "label",
+          "type": "static"
+        },
+        {
+          "source": "angular-ai-kit",
+          "target": "scroll-area",
+          "type": "static"
+        },
+        {
+          "source": "angular-ai-kit",
+          "target": "separator",
+          "type": "static"
+        },
+        {
+          "source": "angular-ai-kit",
+          "target": "skeleton",
+          "type": "static"
+        },
+        {
+          "source": "angular-ai-kit",
+          "target": "textarea",
+          "type": "static"
+        },
+        {
+          "source": "angular-ai-kit",
+          "target": "tooltip",
+          "type": "static"
+        },
+        {
+          "source": "angular-ai-kit",
+          "target": "alert",
+          "type": "static"
+        },
+        {
+          "source": "angular-ai-kit",
+          "target": "@angular-ai-kit/utils",
+          "type": "static"
+        }
+      ]
+    }
+  }
+}

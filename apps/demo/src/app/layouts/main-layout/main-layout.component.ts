@@ -7,7 +7,8 @@ import {
   Component,
   ViewEncapsulation,
 } from '@angular/core';
-import { ChatViewComponent } from '../../components/chat-view/chat-view.component';
+import { RouterOutlet } from '@angular/router';
+import { CommandDialogComponent } from '../../components/command-dialog';
 import { SidebarComponent } from '../../components/sidebar/sidebar.component';
 
 /**
@@ -30,7 +31,8 @@ import { SidebarComponent } from '../../components/sidebar/sidebar.component';
     HlmSidebarWrapper,
     HlmSidebarInset,
     SidebarComponent,
-    ChatViewComponent,
+    RouterOutlet,
+    CommandDialogComponent,
   ],
   host: {
     class: 'app-main-layout-host block h-screen',

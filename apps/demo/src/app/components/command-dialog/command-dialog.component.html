@@ -1,0 +1,217 @@
+@if (isOpen()) {
+  <!-- Overlay -->
+  <div
+    class="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm"
+    (click)="handleOverlayClick($event)"
+  >
+    <!-- Dialog Content -->
+    <div
+      class="bg-background border-border fixed top-[20%] left-1/2 z-50 w-full max-w-lg -translate-x-1/2 overflow-hidden rounded-xl border shadow-lg"
+      (click)="$event.stopPropagation()"
+    >
+      <div hlmCommand>
+        <!-- Search -->
+        <div
+          hlmCommandSearch
+          class="border-border flex items-center border-b px-3"
+        >
+          <svg
+            class="text-muted-foreground mr-2 h-4 w-4 shrink-0 opacity-50"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+            />
+          </svg>
+          <input
+            hlmCommandSearchInput
+            type="text"
+            placeholder="Type a command or search..."
+            class="placeholder:text-muted-foreground flex h-11 w-full rounded-md bg-transparent py-3 text-sm outline-none disabled:cursor-not-allowed disabled:opacity-50"
+          />
+          <kbd
+            class="bg-muted text-muted-foreground pointer-events-none ml-auto hidden h-5 items-center gap-1 rounded border px-1.5 font-mono text-[10px] font-medium select-none sm:flex"
+          >
+            ESC
+          </kbd>
+        </div>
+
+        <!-- Command List -->
+        <div
+          hlmCommandList
+          class="max-h-[300px] overflow-x-hidden overflow-y-auto p-2"
+        >
+          <!-- Empty state -->
+          <div hlmCommandEmpty class="py-6 text-center text-sm">
+            No results found.
+          </div>
+
+          <!-- Navigation Group -->
+          <div hlmCommandGroup>
+            <div
+              hlmCommandGroupLabel
+              class="text-muted-foreground px-2 py-1.5 text-xs font-medium"
+            >
+              Navigation
+            </div>
+            @for (item of navigationItems; track item.label) {
+              <button
+                type="button"
+                class="hover:bg-accent hover:text-accent-foreground relative flex w-full cursor-pointer items-center rounded-sm px-2 py-1.5 text-sm outline-none select-none"
+                (click)="executeItem(item)"
+              >
+                <span hlmCommandIcon class="mr-2">
+                  @switch (item.icon) {
+                    @case ('chat') {
+                      <svg
+                        class="h-4 w-4"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="1.5"
+                          d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"
+                        />
+                      </svg>
+                    }
+                    @case ('docs') {
+                      <svg
+                        class="h-4 w-4"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="1.5"
+                          d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"
+                        />
+                      </svg>
+                    }
+                  }
+                </span>
+                <span>{{ item.label }}</span>
+                @if (item.shortcut) {
+                  <span
+                    hlmCommandShortcut
+                    class="text-muted-foreground ml-auto text-xs tracking-widest"
+                  >
+                    {{ item.shortcut }}
+                  </span>
+                }
+              </button>
+            }
+          </div>
+
+          <div hlmCommandSeparator class="bg-border -mx-1 my-1 h-px"></div>
+
+          <!-- Actions Group -->
+          <div hlmCommandGroup>
+            <div
+              hlmCommandGroupLabel
+              class="text-muted-foreground px-2 py-1.5 text-xs font-medium"
+            >
+              Actions
+            </div>
+            @for (item of actionItems; track item.label) {
+              <button
+                type="button"
+                class="hover:bg-accent hover:text-accent-foreground relative flex w-full cursor-pointer items-center rounded-sm px-2 py-1.5 text-sm outline-none select-none"
+                (click)="executeItem(item)"
+              >
+                <span hlmCommandIcon class="mr-2">
+                  @switch (item.icon) {
+                    @case ('plus') {
+                      <svg
+                        class="h-4 w-4"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          d="M12 4v16m8-8H4"
+                        />
+                      </svg>
+                    }
+                    @case ('theme') {
+                      <svg
+                        class="h-4 w-4"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="1.5"
+                          d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"
+                        />
+                      </svg>
+                    }
+                  }
+                </span>
+                <span>{{ item.label }}</span>
+                @if (item.shortcut) {
+                  <span
+                    hlmCommandShortcut
+                    class="text-muted-foreground ml-auto text-xs tracking-widest"
+                  >
+                    {{ item.shortcut }}
+                  </span>
+                }
+              </button>
+            }
+          </div>
+
+          <div hlmCommandSeparator class="bg-border -mx-1 my-1 h-px"></div>
+
+          <!-- Components Group -->
+          <div hlmCommandGroup>
+            <div
+              hlmCommandGroupLabel
+              class="text-muted-foreground px-2 py-1.5 text-xs font-medium"
+            >
+              Components
+            </div>
+            @for (item of componentItems; track item.label) {
+              <button
+                type="button"
+                class="hover:bg-accent hover:text-accent-foreground relative flex w-full cursor-pointer items-center rounded-sm px-2 py-1.5 text-sm outline-none select-none"
+                (click)="executeItem(item)"
+              >
+                <span hlmCommandIcon class="mr-2">
+                  <svg
+                    class="h-4 w-4"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="1.5"
+                      d="M14 10l-2 1m0 0l-2-1m2 1v2.5M20 7l-2 1m2-1l-2-1m2 1v2.5M14 4l-2-1-2 1M4 7l2-1M4 7l2 1M4 7v2.5M12 21l-2-1m2 1l2-1m-2 1v-2.5M6 18l-2-1v-2.5M18 18l2-1v-2.5"
+                    />
+                  </svg>
+                </span>
+                <span>{{ item.label }}</span>
+              </button>
+            }
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+}

@@ -1,15 +1,15 @@
 import { Component } from '@angular/core';
-import { MainLayoutComponent } from './layouts/main-layout/main-layout.component';
+import { RouterOutlet } from '@angular/router';
 
 /**
  * App Component
  *
  * Root component for the Angular AI Kit demo application.
- * Renders the main chat interface layout.
+ * Uses router-outlet to render pages based on routes.
  */
 @Component({
   selector: 'app-root',
-  imports: [MainLayoutComponent],
+  imports: [RouterOutlet],
   templateUrl: './app.html',
   styleUrl: './app.css',
 })
