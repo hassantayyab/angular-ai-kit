@@ -1,8 +1,10 @@
 export { ChatInputComponent } from './chat-input';
 export { ChatViewComponent } from './chat-view';
 export { EmptyStateComponent } from './empty-state';
+export { KbdComponent } from './kbd';
 export { MessageBubbleComponent } from './message-bubble';
 export { MessageListComponent } from './message-list';
+export { SearchTriggerComponent } from './search-trigger';
 export { SidebarComponent } from './sidebar';
 export { StreamingTextComponent } from './streaming-text';
 export { ThemeToggleComponent } from './theme-toggle';

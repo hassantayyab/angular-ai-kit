@@ -59,17 +59,9 @@
       </button>
     </div>
 
-    <!-- Search Input (hidden when collapsed) -->
+    <!-- Search Trigger (hidden when collapsed) -->
     <div class="px-2 pt-2 group-data-[collapsible=icon]:hidden">
-      <input
-        hlmSidebarInput
-        type="search"
-        [placeholder]="
-          isDocsPage() ? 'Search components...' : 'Search chats...'
-        "
-        [value]="searchQuery()"
-        (input)="handleSearchInput($event)"
-      />
+      <app-search-trigger />
     </div>
   </div>
 
@@ -284,11 +276,7 @@
                         class="px-2 py-4 text-center group-data-[collapsible=icon]:hidden"
                       >
                         <p class="text-muted-foreground text-sm">
-                          @if (searchQuery()) {
-                            No matching conversations
-                          } @else {
-                            No conversations yet
-                          }
+                          No conversations yet
                         </p>
                       </li>
                     }

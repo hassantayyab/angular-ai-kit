@@ -58,6 +58,7 @@ packages/angular-ai-kit/src/lib/
 | File                    | Purpose                                                      |
 | ----------------------- | ------------------------------------------------------------ |
 | `accessibility.md`      | WCAG, ARIA, keyboard navigation, screen readers              |
+| `angular-cdk.md`        | Angular CDK primitives for dialogs, overlays, a11y           |
 | `angular-v21.md`        | Angular-specific patterns, signals, standalone components    |
 | `architecture.md`       | Scalability, barrel exports, naming conventions, file limits |
 | `component-patterns.md` | Component structure, templates, inputs/outputs               |
@@ -76,6 +77,7 @@ packages/angular-ai-kit/src/lib/
 - **AI chat features?** → `ai-components.md`
 - **TypeScript types?** → `typescript.md`
 - **Task tracking?** → `todo-management.md`
+- **Dialogs/Overlays/Focus?** → `angular-cdk.md`
 
 **DO NOT dump all rules into CLAUDE.md. Keep it lean and reference-focused.**
 

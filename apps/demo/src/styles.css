@@ -249,6 +249,29 @@
    ============================================ */
 
 @layer components {
+  /* CDK Dialog Styles */
+  .cdk-overlay-dark-backdrop {
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(4px);
+  }
+
+  .command-dialog-panel {
+    background-color: var(--background);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-lg);
+    overflow: hidden;
+    outline: none;
+  }
+
+  /* Center the CDK overlay pane */
+  .cdk-global-overlay-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding-top: 15vh;
+  }
+
   /* Card Component */
   .demo-card {
     background-color: var(--card);

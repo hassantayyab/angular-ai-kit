@@ -55,9 +55,11 @@ export class ComponentCardComponent {
       'bg-card',
       'transition-all duration-200',
       {
-        // Active state - clickable with subtle ring glow
+        // Active link state - clickable with subtle ring glow
         'cursor-pointer border-border hover:ring-2 hover:ring-primary/20 hover:shadow-md':
-          !this.disabled(),
+          this.isLink(),
+        // Non-link active state
+        'border-border': !this.isLink() && !this.disabled(),
         // Disabled state
         'border-border opacity-60': this.disabled(),
       }

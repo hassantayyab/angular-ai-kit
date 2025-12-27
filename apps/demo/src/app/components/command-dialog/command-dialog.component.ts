@@ -1,69 +1,39 @@
-import {
-  HlmCommand,
-  HlmCommandEmpty,
-  HlmCommandGroup,
-  HlmCommandGroupLabel,
-  HlmCommandIcon,
-  HlmCommandList,
-  HlmCommandSearch,
-  HlmCommandSearchInput,
-  HlmCommandSeparator,
-  HlmCommandShortcut,
-} from '@angular-ai-kit/spartan-ui/command';
+import { Dialog, DialogModule } from '@angular/cdk/dialog';
 import {
   ChangeDetectionStrategy,
   Component,
-  HostListener,
   ViewEncapsulation,
   inject,
-  signal,
 } from '@angular/core';
 import { Router } from '@angular/router';
 import { ChatService } from '../../services';
-
-/**
- * Command item interface
- */
-interface CommandItem {
-  label: string;
-  icon: string;
-  action: () => void;
-  shortcut?: string;
-}
+import {
+  CommandDialogContentComponent,
+  CommandDialogData,
+  CommandItem,
+} from './command-dialog-content.component';
 
 /**
  * CommandDialog Component
  *
  * A cmd+k command palette for quick navigation and actions.
- * Uses Spartan UI command components.
+ * Uses Angular CDK Dialog for proper accessibility and focus management.
  */
 @Component({
   selector: 'app-command-dialog',
-  templateUrl: './command-dialog.component.html',
+  template: '',
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
-  imports: [
-    HlmCommand,
-    HlmCommandEmpty,
-    HlmCommandGroup,
-    HlmCommandGroupLabel,
-    HlmCommandIcon,
-    HlmCommandList,
-    HlmCommandSearch,
-    HlmCommandSearchInput,
-    HlmCommandSeparator,
-    HlmCommandShortcut,
-  ],
+  imports: [DialogModule],
   host: {
     class: 'app-command-dialog-host',
+    '(window:keydown)': 'handleKeydown($event)',
   },
 })
 export class CommandDialogComponent {
+  private dialog = inject(Dialog);
   private router = inject(Router);
   private chatService = inject(ChatService);
-
-  // Dialog state
-  isOpen = signal(false);
 
   // Navigation items
   readonly navigationItems: CommandItem[] = [
@@ -131,43 +101,29 @@ export class CommandDialogComponent {
     },
   ];
 
-  // Keyboard listener for cmd+k
-  @HostListener('window:keydown', ['$event'])
   handleKeydown(event: KeyboardEvent): void {
     // Open with cmd+k or ctrl+k
     if ((event.metaKey || event.ctrlKey) && event.key === 'k') {
       event.preventDefault();
-      this.toggle();
-    }
-    // Close with escape
-    if (event.key === 'Escape' && this.isOpen()) {
-      event.preventDefault();
-      this.close();
+      this.openDialog();
     }
   }
 
-  toggle(): void {
-    this.isOpen.update((open) => !open);
-  }
+  openDialog(): void {
+    const dialogData: CommandDialogData = {
+      navigationItems: this.navigationItems,
+      actionItems: this.actionItems,
+      componentItems: this.componentItems,
+    };
 
-  open(): void {
-    this.isOpen.set(true);
-  }
-
-  close(): void {
-    this.isOpen.set(false);
-  }
-
-  handleOverlayClick(event: MouseEvent): void {
-    // Close if clicking on the overlay (not the content)
-    if (event.target === event.currentTarget) {
-      this.close();
-    }
-  }
-
-  executeItem(item: CommandItem): void {
-    item.action();
-    this.close();
+    this.dialog.open<void, CommandDialogData>(CommandDialogContentComponent, {
+      data: dialogData,
+      hasBackdrop: true,
+      backdropClass: 'cdk-overlay-dark-backdrop',
+      panelClass: 'command-dialog-panel',
+      width: '500px',
+      maxWidth: '90vw',
+    });
   }
 
   private navigateTo(route: string): void {

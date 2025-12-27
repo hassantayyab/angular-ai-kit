@@ -12,7 +12,6 @@ import {
   HlmSidebarGroupContent,
   HlmSidebarGroupLabel,
   HlmSidebarHeader,
-  HlmSidebarInput,
   HlmSidebarMenu,
   HlmSidebarMenuButton,
   HlmSidebarMenuItem,
@@ -29,7 +28,6 @@ import {
   ViewEncapsulation,
   computed,
   inject,
-  signal,
 } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import {
@@ -40,6 +38,7 @@ import {
 } from '@angular/router';
 import { filter, map, startWith } from 'rxjs';
 import { ChatService, Conversation } from '../../services';
+import { SearchTriggerComponent } from '../search-trigger';
 import { ThemeToggleComponent } from '../theme-toggle';
 
 /**
@@ -98,13 +97,13 @@ interface ConversationDisplay {
     HlmSidebarMenuSubItem,
     HlmSidebarMenuSubButton,
     HlmSidebarSeparator,
-    HlmSidebarInput,
     HlmSidebarTrigger,
     HlmCollapsible,
     HlmCollapsibleTrigger,
     HlmCollapsibleContent,
     HlmButton,
     ThemeToggleComponent,
+    SearchTriggerComponent,
     RouterLink,
     RouterLinkActive,
   ],
@@ -119,9 +118,6 @@ export class SidebarComponent {
 
   // App version
   readonly appVersion = 'v0.1.0';
-
-  // State
-  searchQuery = signal('');
 
   // Route-based context detection
   private currentUrl = toSignal(
@@ -156,7 +152,6 @@ export class SidebarComponent {
 
   conversationGroups = computed(() => {
     const conversations = this.chatService.conversations();
-    const query = this.searchQuery().toLowerCase().trim();
     const groups: ConversationGroup[] = [];
 
     const getGroupLabel = (date: Date): string => {
@@ -173,14 +168,7 @@ export class SidebarComponent {
 
     const groupMap = new Map<string, ConversationDisplay[]>();
 
-    // Filter by search query if present
-    const filteredConversations = query
-      ? conversations.filter((conv: Conversation) =>
-          conv.title.toLowerCase().includes(query)
-        )
-      : conversations;
-
-    filteredConversations.forEach((conv: Conversation) => {
+    conversations.forEach((conv: Conversation) => {
       const label = getGroupLabel(conv.updatedAt);
       if (!groupMap.has(label)) {
         groupMap.set(label, []);
@@ -241,11 +229,6 @@ export class SidebarComponent {
   handleDeleteConversation(event: Event, id: string): void {
     event.stopPropagation();
     this.chatService.deleteConversation(id);
-  }
-
-  handleSearchInput(event: Event): void {
-    const input = event.target as HTMLInputElement;
-    this.searchQuery.set(input.value);
   }
 
   isActiveConversation(id: string): boolean {

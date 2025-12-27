@@ -1,9 +1,10 @@
-<label
+<div
   class="flex cursor-pointer items-center justify-between rounded-lg px-3 py-2.5 transition-colors hover:bg-black/5 dark:hover:bg-white/5"
 >
   <span class="text-sm">{{ label() }}</span>
   <hlm-switch
     [checked]="checked()"
     (checkedChange)="checkedChange.emit($event)"
+    [attr.aria-label]="label()"
   />
-</label>
+</div>
