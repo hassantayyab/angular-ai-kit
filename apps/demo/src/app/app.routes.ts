@@ -35,20 +35,6 @@ export const appRoutes: Route[] = [
               ).then((m) => m.MessageBubbleDocComponent),
           },
           {
-            path: 'components/message-list',
-            loadComponent: () =>
-              import(
-                './pages/docs/components/message-list/message-list-doc.component'
-              ).then((m) => m.MessageListDocComponent),
-          },
-          {
-            path: 'components/chat-container',
-            loadComponent: () =>
-              import(
-                './pages/docs/components/chat-container/chat-container-doc.component'
-              ).then((m) => m.ChatContainerDocComponent),
-          },
-          {
             path: 'components/chat-input',
             loadComponent: () =>
               import(

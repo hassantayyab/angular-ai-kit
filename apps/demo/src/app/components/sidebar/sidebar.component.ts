@@ -46,6 +46,7 @@ import { ThemeToggleComponent } from '../theme-toggle';
  */
 interface ComponentItem {
   name: string;
+  label: string;
   route: string;
 }
 
@@ -134,14 +135,26 @@ export class SidebarComponent {
 
   // AI Components list for docs sidebar
   readonly components: ComponentItem[] = [
-    { name: 'MessageBubble', route: '/docs/components/message-bubble' },
-    { name: 'MessageList', route: '/docs/components/message-list' },
-    { name: 'ChatContainer', route: '/docs/components/chat-container' },
-    { name: 'ChatInput', route: '/docs/components/chat-input' },
-    { name: 'StreamingText', route: '/docs/components/streaming-text' },
-    { name: 'TypingIndicator', route: '/docs/components/typing-indicator' },
-    { name: 'CodeBlock', route: '/docs/components/code-block' },
-    { name: 'TokenCounter', route: '/docs/components/token-counter' },
+    {
+      name: 'MessageBubble',
+      label: 'Message Bubble',
+      route: '/docs/components/message-bubble',
+    },
+    {
+      name: 'ChatInput',
+      label: 'Chat Input',
+      route: '/docs/components/chat-input',
+    },
+    {
+      name: 'StreamingText',
+      label: 'Streaming Text',
+      route: '/docs/components/streaming-text',
+    },
+    {
+      name: 'TypingIndicator',
+      label: 'Typing Indicator',
+      route: '/docs/components/typing-indicator',
+    },
   ];
 
   // Computed from ChatService

@@ -57,42 +57,28 @@ export class DocsOverviewComponent {
   coreComponents: ComponentInfo[] = [
     {
       iconPath: ICONS.messageBubble,
-      title: 'MessageBubble',
+      title: 'Message Bubble',
       description:
         'Chat message component with role-based styling and actions.',
       link: 'components/message-bubble',
     },
     {
-      iconPath: ICONS.messageList,
-      title: 'MessageList',
-      description:
-        'Scrollable message container with auto-scroll and loading states.',
-      link: 'components/message-list',
-    },
-    {
-      iconPath: ICONS.chatContainer,
-      title: 'ChatContainer',
-      description:
-        'Full chat layout with header, messages, and footer sections.',
-      link: 'components/chat-container',
-    },
-    {
       iconPath: ICONS.chatInput,
-      title: 'ChatInput',
+      title: 'Chat Input',
       description:
         'Message input with auto-resize, toolbar, and keyboard shortcuts.',
       link: 'components/chat-input',
     },
     {
       iconPath: ICONS.streamingText,
-      title: 'StreamingText',
+      title: 'Streaming Text',
       description:
         'Typewriter effect for streaming AI responses with cursor animation.',
       link: 'components/streaming-text',
     },
     {
       iconPath: ICONS.typingIndicator,
-      title: 'TypingIndicator',
+      title: 'Typing Indicator',
       description: 'Animated bouncing dots indicating AI is processing.',
       link: 'components/typing-indicator',
     },
@@ -102,39 +88,39 @@ export class DocsOverviewComponent {
   comingSoonComponents: ComponentInfo[] = [
     {
       iconPath: ICONS.codeBlock,
-      title: 'CodeBlock',
+      title: 'Code Block',
       description:
         'Syntax highlighted code display with copy button and line numbers.',
       badge: 'Coming Soon',
     },
     {
       iconPath: ICONS.markdownRenderer,
-      title: 'MarkdownRenderer',
+      title: 'Markdown Renderer',
       description: 'Rich markdown rendering with code blocks and sanitization.',
       badge: 'Coming Soon',
     },
     {
       iconPath: ICONS.tokenCounter,
-      title: 'TokenCounter',
+      title: 'Token Counter',
       description:
         'Token usage display with limit indicator and warning states.',
       badge: 'Coming Soon',
     },
     {
       iconPath: ICONS.modelSelector,
-      title: 'ModelSelector',
+      title: 'Model Selector',
       description: 'Dropdown for selecting AI models (GPT-4, Claude, etc.).',
       badge: 'Coming Soon',
     },
     {
       iconPath: ICONS.fileUpload,
-      title: 'FileUpload',
+      title: 'File Upload',
       description: 'Drag and drop file attachment with preview and validation.',
       badge: 'Coming Soon',
     },
     {
       iconPath: ICONS.modelSelector,
-      title: 'ConversationList',
+      title: 'Conversation List',
       description:
         'Sidebar with chat history, search, and conversation management.',
       badge: 'Coming Soon',

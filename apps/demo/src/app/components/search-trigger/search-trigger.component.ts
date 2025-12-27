@@ -88,32 +88,22 @@ export class SearchTriggerComponent {
   private getComponentItems(): CommandItem[] {
     return [
       {
-        label: 'MessageBubble',
+        label: 'Message Bubble',
         icon: 'component',
         action: () => this.router.navigate(['/docs/components/message-bubble']),
       },
       {
-        label: 'MessageList',
-        icon: 'component',
-        action: () => this.router.navigate(['/docs/components/message-list']),
-      },
-      {
-        label: 'ChatContainer',
-        icon: 'component',
-        action: () => this.router.navigate(['/docs/components/chat-container']),
-      },
-      {
-        label: 'ChatInput',
+        label: 'Chat Input',
         icon: 'component',
         action: () => this.router.navigate(['/docs/components/chat-input']),
       },
       {
-        label: 'StreamingText',
+        label: 'Streaming Text',
         icon: 'component',
         action: () => this.router.navigate(['/docs/components/streaming-text']),
       },
       {
-        label: 'TypingIndicator',
+        label: 'Typing Indicator',
         icon: 'component',
         action: () =>
           this.router.navigate(['/docs/components/typing-indicator']),
