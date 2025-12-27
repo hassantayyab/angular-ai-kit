@@ -1,0 +1,32 @@
+@if (isLink()) {
+  <a [routerLink]="link()" [class]="cardClasses()">
+    <ng-container *ngTemplateOutlet="cardContent" />
+  </a>
+} @else {
+  <div [class]="cardClasses()">
+    <ng-container *ngTemplateOutlet="cardContent" />
+  </div>
+}
+
+<ng-template #cardContent>
+  <div class="mb-2 flex items-center gap-2">
+    <svg
+      [class]="iconClasses()"
+      fill="none"
+      stroke="currentColor"
+      viewBox="0 0 24 24"
+    >
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="1.5"
+        [attr.d]="iconPath()"
+      />
+    </svg>
+    <h3 class="font-medium">{{ title() }}</h3>
+    @if (badge()) {
+      <span hlmBadge variant="secondary">{{ badge() }}</span>
+    }
+  </div>
+  <p class="text-muted-foreground text-sm">{{ description() }}</p>
+</ng-template>
