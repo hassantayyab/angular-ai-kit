@@ -1,853 +1,283 @@
-# 🚀 ANGULAR AI KIT - PHASE 0 PLAN
+# Angular AI Kit - Release Plan
+
+## Overview
+
+**Goal:** Production-ready AI chat component library for Angular v21
+
+**Tech Stack:** Angular v21 • Tailwind CSS v4 • Spartan UI • Nx Monorepo • TypeScript
+
+---
 
 ## 📊 Progress Summary
 
-**Current Phase:** Phase 0.3 - Demo App UI/UX & Theme System
-**Status:** 🔄 In Progress (80%)
-**Last Updated:** December 26, 2025
+| Release             | Status         | Progress |
+| ------------------- | -------------- | -------- |
+| **MVP (v1.0)**      | 🔄 In Progress | 90%      |
+| **Post-MVP (v1.x)** | ⏳ Planned     | 0%       |
 
-### Completed ✅
-
-- ✅ Nx monorepo setup with Angular v21
-- ✅ Tailwind CSS v4 configuration
-- ✅ Design tokens library
-- ✅ Utilities library (cn, formatters, validators, token counter)
-- ✅ Base type definitions
-- ✅ DI tokens for extensibility
-- ✅ Reusable directives (4 directives)
-- ✅ Git hooks, ESLint, Prettier
-- ✅ Documentation (README, CONTRIBUTING, LICENSE)
-- ✅ **Phase 0.2: Core Chat Components (MessageBubble, MessageList, ChatContainer)**
-- ✅ **Angular Spartan UI Integration** - Helm components library with 13 components
-
-### In Progress 🔄
-
-- ⏳ Storybook setup (deferred)
-- ⏳ CI/CD configuration (deferred)
-- ⏳ Semantic release setup (deferred)
-
-### Next Up 🎯
-
-- Phase 0.4: Input Components (PromptInput, SubmitButton, FileUpload)
+**Last Updated:** December 27, 2025
 
 ---
 
-## 📋 Overview
+# 🚀 MVP Release (v1.0)
 
-**Goal:** Build and launch a complete AI component library for Angular v21
+> Essential components for initial production release. Devs can install and use these components immediately.
 
-**Timeline:** 6 weeks (Weeks 1-6)
+## Core Components
 
-**Components:** 15 AI-focused components
+### ChatContainer ✅ Done
 
-**Target:** Open source library with shadcn-style CLI installation
+Main layout wrapper for chat interfaces.
 
-**Tech Stack:**
+- [x] Header section with title
+- [x] MessageList integration
+- [x] Input area at bottom
+- [x] Responsive design
+- [x] Dark mode support
+- [x] Content projection slots
 
-- **Angular:** v21 (latest features with signals, control flow, and SSR)
-- **Tailwind CSS:** v4 (latest with @tailwindcss/postcss plugin)
-- **Spartan UI:** Angular-native shadcn/ui port for accessible UI primitives
-- **Nx:** Latest version for monorepo management
-- **TypeScript:** Latest with strict mode enabled
-- **CSS ONLY** (NO SCSS)
+### MessageList ✅ Done
 
-**Monorepo:** Nx workspace for managing library, demo app, CLI tool, and documentation
+Scrollable message display with auto-scroll.
 
-**Important Notes:**
+- [x] Scrollable container
+- [x] Auto-scroll to bottom on new messages
+- [x] Message array input
+- [x] Loading state support
+- [x] Empty state with customizable message
+- [x] SSR-compatible
+- [x] Accessible with `role="log"`
 
-- Using Angular v21 means we have the LATEST features and breaking changes
-- Tailwind CSS v4 uses new @source directive for auto-detection in monorepos
-- All components must be SSR/hydration compatible
-- **Focus on SCALABILITY and MAINTAINABILITY** - this library will grow over time
-- **CSS ONLY** - no SCSS anywhere in the project
+### MessageBubble ✅ Done
 
-**Architecture Principles:**
+User and assistant message display.
 
-- **Scalable:** Designed to grow from 15 to 50+ components without refactoring
-- **Maintainable:** Clear structure, consistent patterns, well-documented
-- **Extensible:** DI tokens and abstract services for easy customization
-- **Performant:** OnPush detection, tree-shakable, optimized bundles
-- **Accessible:** WCAG AA compliance from day one
+- [x] User/assistant/system message variants
+- [x] Avatar display with role-based icons
+- [x] Role-based styling
+- [x] Copy button functionality
+- [x] Regenerate button (emit event)
+- [x] Hover actions
+- [x] Streaming text support
+- [x] ARIA labels and accessibility
+- [x] Dark mode support
 
----
+### StreamingText ✅ Done
 
-## 🎯 Phase 0.1: Project Setup & Foundation (Week 1, Days 1-2) ✅ 100% COMPLETE
+Typewriter effect for AI responses.
 
-### Setup Tasks
+- [x] Character-by-character reveal
+- [x] Configurable speed (ms per character)
+- [x] Blinking cursor animation
+- [x] `aria-live="polite"` for accessibility
+- [x] Respects `prefers-reduced-motion`
 
-- [x] Initialize Nx workspace with Angular preset
-  - [x] Run `npx create-nx-workspace@latest angular-ai-kit --preset=angular-monorepo`
-  - [x] Configure workspace structure
-  - [x] Reference: [Nx Angular Documentation](https://nx.dev/docs/technologies/angular)
-- [x] Create library project: `nx generate @nx/angular:library angular-ai-kit --buildable --publishable --importPath=@angular-ai-kit/core`
-- [x] Create demo app: `nx generate @nx/angular:application demo --routing --style=css`
-- [x] **Configure Tailwind CSS v4 (in library and demo app)**
-  - [x] Install Tailwind v4: `npm install tailwindcss @tailwindcss/postcss postcss --force`
-  - [x] Create `.postcssrc.json` in project root
-  - [x] Import Tailwind in `packages/angular-ai-kit/src/styles.css`
-  - [x] Import Tailwind in `apps/demo/src/styles.css`
-  - [x] Setup CSS layers (@layer base, components, utilities)
-  - [x] Configure theme with CSS custom properties
-  - [x] Use ViewEncapsulation.None with scoped Tailwind classes
-  - [x] Reference: [Tailwind Angular Guide](https://tailwindcss.com/docs/installation/framework-guides/angular)
-  - [x] Reference: [Nx Tailwind Guide](https://nx.dev/docs/technologies/angular/guides/using-tailwind-css-with-angular-projects)
-- [x] Setup Nx project structure:
+### TypingIndicator ✅ Done
 
-  ```text
-  angular-ai-kit/
-  ├── packages/
-  │   ├── angular-ai-kit/           # Main library (core components)
-  │   ├── tokens/                   # Design tokens (CSS custom properties)
-  │   └── utils/                    # Shared utilities library
-  ├── apps/
-  │   ├── demo/                     # Demo application
-  │   └── docs/                     # Documentation site (Storybook)
-  └── tools/
-      ├── generators/               # Custom Nx generators/schematics
-      └── angular-ai-kit-cli/       # CLI tool (future)
-  ```
+Animated "AI is thinking" indicator.
 
-- [x] **Create design tokens library**
-  - [x] `nx generate @nx/angular:library tokens --buildable --publishable`
-  - [x] Define CSS custom properties (colors, spacing, typography, animations)
-  - [x] Create theme.css with CSS variables (not SCSS)
-  - [x] Create token TypeScript interfaces for type safety
-  - [x] Setup theme switching infrastructure (light/dark modes)
-- [x] **Create utilities library**
-  - [x] `nx generate @nx/angular:library utils --buildable --publishable`
-  - [x] `cn()` function (clsx + tailwind-merge wrapper)
-  - [x] Type guards and validators
-  - [x] Common helpers (formatters, parsers)
-  - [x] Token counter utility
-- [x] Configure library build (Nx handles ng-packagr integration)
-- [x] Setup package.json with dependencies:
-  - [x] `marked` (^12.0.0) - Markdown parsing
-  - [x] `highlight.js` (^11.9.0) - Syntax highlighting
-  - [x] `clsx` (^2.1.0) - Class name utilities
-  - [x] `tailwind-merge` (^2.2.0) - Tailwind class merging
-  - [x] `dompurify` (^3.0.0) - HTML sanitization for markdown
-  - [x] `@types/dompurify` (^3.0.0) - TypeScript types
-  - [x] `@types/marked` (^12.0.0) - TypeScript types
-- [x] Configure TypeScript paths in `tsconfig.base.json`
-  - [x] `@angular-ai-kit/core`
-  - [x] `@angular-ai-kit/tokens`
-  - [x] `@angular-ai-kit/utils`
-- [x] Setup ESLint/Prettier with Nx generators
-  - [x] Configure ESLint Angular rules (strict mode)
-  - [x] Add import sorting plugin
-  - [x] Configure Prettier for consistent formatting
-  - [x] Add Tailwind CSS class sorting plugin
-- [ ] Configure Nx build caching (local and CI)
-  - [x] Setup nx.json with appropriate cache settings
-  - [ ] Configure CI cache (GitHub Actions)
-  - [x] Enable parallel execution
-- [ ] **Setup Storybook for component documentation**
-  - [ ] `nx generate @nx/storybook:configuration angular-ai-kit`
-  - [ ] Configure Storybook 8+ with Angular + Tailwind
-  - [ ] Setup interaction testing addon
-  - [ ] Configure accessibility addon (@storybook/addon-a11y)
-  - [ ] Add dark mode toggle
-- [x] **Create base types/interfaces library**
-  - [x] ChatMessage interface with discriminated unions
-  - [x] ChatRole type ('user' | 'assistant' | 'system')
-  - [x] StreamingState interface
-  - [x] ModelInfo interface
-  - [x] Component API contracts (strict input/output types)
-  - [x] Error types and error handling interfaces
-  - [x] Token types
-- [x] **Create DI tokens for extensibility**
-  - [x] CHAT_SERVICE injection token (InjectionToken<ChatService>)
-  - [x] STREAMING_SERVICE injection token
-  - [x] TOKEN_COUNTER injection token
-  - [x] MARKDOWN_OPTIONS injection token
-  - [x] THEME_CONFIG injection token
-- [x] **Setup reusable directives (hostDirectives pattern)**
-  - [x] CopyToClipboard directive
-  - [x] AutoResize directive (for textareas)
-  - [x] ClickOutside directive
-  - [x] FocusTrap directive
-- [x] Initialize Git repository
-  - [x] Create .gitignore (node_modules, dist, .nx, etc.)
-  - [x] Setup git hooks (husky + lint-staged)
-  - [x] Configure conventional commits (commitlint)
-  - [x] Initial commit
-- [x] Create README with project overview and Nx commands
-- [ ] **Setup semantic-release**
-  - [ ] Configure semantic-release for automated versioning
-  - [ ] Setup changelog generation
-  - [ ] Configure npm publishing workflow
-  - [ ] Configure release branches (main, next, beta)
+- [x] Bouncing dots animation
+- [x] Optional avatar display
+- [x] Optional text message
+- [x] `role="status"` for accessibility
+- [x] CSS-only animation (GPU-accelerated)
 
-**Deliverable:** Production-ready Nx monorepo with design system foundation, proper architecture, CSS-based styling, and development tooling
+### ChatInput ✅ Done
 
-**Status:** ✅ 100% Complete - All verification checks passed. Build, lint, format, and git hooks all working. Ready for component development.
+Text input with modern toolbar.
+
+- [x] Auto-resizing textarea
+- [x] Placeholder text
+- [x] Keyboard shortcuts (Enter/Shift+Enter)
+- [x] Disabled state during loading
+- [x] Focus management
+- **Sub-features:**
+  - [x] **Submit Button** - Send with loading spinner
+  - [x] **Quick Suggestions** - Prompt badge pills
+  - [x] **Toolbar** - Attachment, mic, model selector icons
 
 ---
 
-## 🎯 Phase 0.2: Core Chat Components (Week 1, Days 3-7) ✅ 100% COMPLETE
+## Supporting Infrastructure ✅ Done
 
-### Chat Components to Build
+### Directives
 
-- [x] **MessageBubble Component**
-  - [x] User and assistant message variants
-  - [x] Avatar display (user icon 👤 vs AI icon 🤖 vs system icon ⚙️)
-  - [x] Role-based styling
-  - [x] Copy button functionality (with clipboard integration)
-  - [x] Regenerate button (emit event)
-  - [x] Hover actions (copy/regenerate)
-  - [x] Signal-based inputs/outputs
-  - [x] OnPush change detection
-  - [x] ARIA labels and accessibility
-  - [x] Dark mode support
+- [x] CopyToClipboard
+- [x] AutoResize
+- [x] ClickOutside
+- [x] FocusTrap
 
-- [x] **MessageList Component**
-  - [x] Scrollable container
-  - [x] Auto-scroll to bottom on new messages (using effect())
-  - [x] Virtual scrolling (deferred - not needed for Phase 0.2)
-  - [x] Message array input
-  - [x] Loading state support (animated typing indicator)
-  - [x] Empty state with customizable message
-  - [x] SSR-compatible (isPlatformBrowser checks)
-  - [x] Accessible with role="log"
+### Types & Interfaces
 
-- [x] **ChatContainer Component**
-  - [x] Main layout wrapper
-  - [x] Header section (optional with title)
-  - [x] MessageList integration
-  - [x] Input area at bottom (placeholder for Phase 0.3)
-  - [x] Responsive design
-  - [x] Theme support structure (dark mode)
-  - [x] Content projection slots
+- [x] ChatMessage (discriminated unions)
+- [x] ChatRole ('user' | 'assistant' | 'system')
+- [x] StreamingOptions
+- [x] ModelInfo
+- [x] Error types
 
-**Deliverable:** Core chat UI components working together
+### DI Tokens
 
-**Status:** ✅ 100% Complete - All 3 components built, tested, and integrated into demo app. Components are production-ready, accessible, responsive, and SSR-compatible.
+- [x] CHAT_SERVICE
+- [x] STREAMING_SERVICE
+- [x] TOKEN_COUNTER
+- [x] MARKDOWN_OPTIONS
+- [x] THEME_CONFIG
+
+### Utilities Library
+
+- [x] `cn()` function (clsx + tailwind-merge)
+- [x] Token counter utility
+- [x] Formatters & validators
+
+### Design Tokens
+
+- [x] CSS custom properties
+- [x] Light/dark theme variables
+- [x] Typography, spacing, colors
 
 ---
 
-## 🎯 Phase 0.3: Demo App UI/UX & Theme System (Week 1, Days 8-10) 🔄 IN PROGRESS
+## Production Readiness ⏳ Remaining
 
-**Priority:** Build a production-quality demo app with modern UI/UX BEFORE continuing with more components. This establishes the visual foundation and theme system for the entire library.
+> Required to make the library installable by developers.
 
-**Status:** 🔄 In Progress (80% Complete) - Modern UI redesign in progress
+- [ ] **Package Build Setup**
+  - [ ] Configure ng-packagr for library build
+  - [ ] Verify tree-shaking works
+  - [ ] Bundle size optimization
 
-### Demo App Features
+- [ ] **npm Configuration**
+  - [ ] package.json with proper metadata
+  - [ ] Peer dependencies (Angular, Tailwind)
+  - [ ] .npmignore file
 
-#### 1. **Modern Layout Structure**
+- [ ] **Documentation**
+  - [ ] Installation instructions in README
+  - [ ] Basic usage examples
+  - [ ] API reference for each component
 
-Inspired by Claude, ChatGPT, Perplexity, and other modern AI chat applications:
-
-- [x] **Chat Input Redesign** - Modern three-section layout:
-  - Top: "@Add context" pill button
-  - Middle: Clean auto-resizing textarea
-  - Bottom: Toolbar with attachment, research, sources, model name, mic, send buttons
-  - Rounded card design with subtle shadows
-- [x] **Sidebar Redesign** - Modern AI chat sidebar:
-  - Clean header with logo and collapse toggle
-  - New Chat button with outline style
-  - Search input for filtering conversations
-  - Date-grouped chat history (Today, Yesterday, Previous 7 days, etc.)
-  - Footer with Docs, Settings buttons
-  - Theme toggle + User section
-  - Smooth collapse/expand animations
-- [x] Collapsible sidebar with modern styling
-- [x] Mobile-responsive layout
-- [ ] AI response message should have a typing animation
-- [ ] Theme system enhancements
-
-**Deliverable:** Production-quality demo app with modern UI/UX, complete theme system, collapsible sidebar, navigation, and documentation section. Sets the visual foundation for the entire library.
-
-**Why This Phase is Critical:**
-
-- Establishes the visual language and theme system EARLY
-- Provides a beautiful showcase for existing and future components
-- Creates a better development experience with proper documentation
-- Demonstrates the library's capabilities in a real-world context
-- Makes it easier to test new components in a production-like environment
+- [ ] **Demo App Polish**
+  - [ ] Working chat with mock AI responses
+  - [x] Showcase all MVP components (doc pages created)
+  - [x] Interactive component playgrounds with controls
+  - [ ] Mobile responsive
 
 ---
 
-## 🎯 Phase 0.4: Input Components (Week 2, Days 1-3)
+# 🔮 Post-MVP Release (v1.x)
 
-### Input Components to Build
+> Features planned for future releases after MVP is stable.
 
-- [ ] **PromptInput Component**
-  - [ ] Textarea with auto-resize
-  - [ ] Placeholder text
-  - [ ] Character counter (optional)
-  - [ ] Disabled state
-  - [ ] Keyboard shortcuts (Enter to submit, Shift+Enter for new line)
-  - [ ] Focus management
-  - [ ] Form integration support
+## ChatInput Enhancements 🏷️ Coming Soon
 
-- [ ] **SubmitButton Component**
-  - [ ] Send button with icon
-  - [ ] Loading state (spinner)
-  - [ ] Disabled state
-  - [ ] Keyboard accessible
-  - [ ] Click event output
+| Feature           | Description                                     |
+| ----------------- | ----------------------------------------------- |
+| **File Upload**   | Drag & drop zone, file preview, size validation |
+| **Voice Input**   | Microphone button with speech-to-text           |
+| **@Mentions**     | Context pills for adding files/docs             |
+| **Research Mode** | Toggle for web search integration               |
 
-- [ ] **FileUpload Component**
-  - [ ] File input (hidden)
-  - [ ] Drag and drop support
-  - [ ] File preview
-  - [ ] File size validation
-  - [ ] Multiple file support
-  - [ ] File removal
-  - [ ] File list display
+## Display Components 🏷️ Coming Soon
 
-**Deliverable:** Complete input system for chat interface
+| Component            | Description                                                      |
+| -------------------- | ---------------------------------------------------------------- |
+| **CodeBlock**        | Syntax highlighting with highlight.js, copy button, line numbers |
+| **MarkdownRenderer** | Parse & render markdown, code block integration, sanitization    |
+| **TokenCounter**     | Display token usage, limit indicator, warning states             |
 
----
+## Control Components 🏷️ Coming Soon
 
-## 🎯 Phase 0.4: Display & Streaming Components (Week 2, Days 4-7)
+| Component            | Description                                        |
+| -------------------- | -------------------------------------------------- |
+| **ModelSelector**    | Dropdown for model selection (GPT-4, Claude, etc.) |
+| **ConversationList** | Sidebar with chat history, search, delete          |
+| **RegenerateButton** | Retry button with loading state                    |
 
-### Streaming Components to Build
+## Advanced Features 🏷️ Coming Soon
 
-- [ ] **StreamingText Component**
-  - [ ] Typewriter effect
-  - [ ] Configurable speed (ms per character)
-  - [ ] Cursor animation
-  - [ ] Streaming state indicator
-  - [ ] Pause/resume capability (optional)
-  - [ ] Signal-based reactive updates
-
-- [ ] **TypingIndicator Component**
-  - [ ] Animated dots
-  - [ ] "AI is thinking..." text
-  - [ ] Show/hide state
-  - [ ] Smooth animations
-
-**Deliverable:** Streaming and loading state components
+| Feature                 | Description                                               |
+| ----------------------- | --------------------------------------------------------- |
+| **CLI Tool**            | `npx @angular-ai-kit add chat` for component installation |
+| **Storybook**           | Interactive component documentation                       |
+| **CI/CD Pipeline**      | GitHub Actions, automated releases                        |
+| **Semantic Versioning** | Automated changelog, npm publishing                       |
 
 ---
 
-## 🎯 Phase 0.5: Advanced Display Components (Week 3, Days 1-4)
+# 📦 Technical Requirements
 
-### Advanced Display Components to Build
+## Angular v21 Patterns ✅
 
-- [ ] **CodeBlock Component**
-  - [ ] Syntax highlighting with highlight.js
-  - [ ] Language detection
-  - [ ] Copy to clipboard button
-  - [ ] Line numbers (optional)
-  - [ ] Code wrapping toggle
-  - [ ] Dark/light theme support
-  - [ ] Multiple language support
+- Standalone components (no NgModules)
+- Signal-based inputs/outputs
+- OnPush change detection
+- Zoneless compatible
+- Control flow syntax (@if, @for)
+- inject() function for DI
+- SSR/Hydration compatible
 
-- [ ] **MarkdownRenderer Component**
-  - [ ] Markdown parsing with marked
-  - [ ] Render markdown to HTML
-  - [ ] Code block integration (use CodeBlock component)
-  - [ ] Link handling
-  - [ ] Image support
-  - [ ] Table rendering
-  - [ ] Sanitization (security)
+## Styling ✅
 
-- [ ] **TokenCounter Component**
-  - [ ] Display token count
-  - [ ] Token limit indicator
-  - [ ] Progress bar (optional)
-  - [ ] Warning states (near limit)
-  - [ ] Format numbers (1.2K, etc.)
+- Tailwind CSS v4
+- CSS only (no SCSS)
+- ViewEncapsulation.None
+- Spartan UI components preferred
+- Dark mode support
+- Mobile-first responsive
 
-**Deliverable:** Rich content display components
+## Accessibility ✅
 
----
-
-## 🎯 Phase 0.6: Control Components (Week 3, Days 5-7)
-
-### Control Components to Build
-
-- [ ] **ModelSelector Component**
-  - [ ] Dropdown/select for model selection
-  - [ ] Model list input
-  - [ ] Current model display
-  - [ ] Change event output
-  - [ ] Disabled state
-  - [ ] Custom styling
-
-- [ ] **RegenerateButton Component**
-  - [ ] Retry button
-  - [ ] Icon + text
-  - [ ] Loading state
-  - [ ] Click event output
-  - [ ] Disabled state management
-
-- [ ] **ConversationList Component**
-  - [ ] Sidebar with chat history
-  - [ ] Conversation items
-  - [ ] Active conversation highlight
-  - [ ] New conversation button
-  - [ ] Delete conversation
-  - [ ] Search/filter (optional)
-  - [ ] Scrollable list
-
-**Deliverable:** Complete control system for chat management
+- WCAG AA compliance
+- Keyboard navigation
+- Screen reader support
+- ARIA attributes
+- Focus management
+- Reduced motion support
 
 ---
 
-## 🎯 Phase 0.7: Integration & Utilities (Week 4, Days 1-3)
+# 🗂️ Project Structure
 
-### Tasks
-
-- [ ] Create utility functions in shared library:
-  - [ ] Token counting utility (tiktoken-like)
-  - [ ] Class name merging utility (cn function)
-  - [ ] Message formatting helpers
-  - [ ] Date/time formatting (relative time, timestamps)
-  - [ ] Sanitization helpers (HTML/markdown)
-  - [ ] Debounce/throttle utilities
-- [ ] Create service interfaces (abstract classes):
-  - [ ] ChatService interface (abstract) with DI token
-  - [ ] StreamingService interface with RxJS interop
-  - [ ] TokenCounterService interface
-  - [ ] MarkdownService interface
-- [ ] Create demo integrations:
-  - [ ] OpenAI integration example (streaming + non-streaming)
-  - [ ] Anthropic integration example (optional)
-  - [ ] Mock/example service for testing
-  - [ ] Error handling patterns
-- [ ] Create comprehensive type definitions:
-  - [ ] ChatMessage interface (discriminated unions by role)
-  - [ ] ChatConfig interface
-  - [ ] Model interface (id, name, contextWindow, maxTokens)
-  - [ ] Streaming options interface
-  - [ ] API response types
-  - [ ] Error types
-- [ ] **Setup RxJS interop patterns**
-  - [ ] toSignal() usage patterns
-  - [ ] toObservable() usage patterns
-  - [ ] rxResource() for async loading
-- [ ] Configure Nx dependency graph for shared utilities
-  - [ ] Enforce module boundaries
-  - [ ] Prevent circular dependencies
-
-**Deliverable:** Supporting utilities, service abstractions, and integration examples
+```
+angular-ai-kit/
+├── packages/
+│   ├── angular-ai-kit/     # Core library (MVP components)
+│   ├── spartan-ui/         # Spartan UI components
+│   ├── tokens/             # Design tokens
+│   └── utils/              # Shared utilities
+├── apps/
+│   └── demo/               # Demo application
+└── .claude/
+    └── rules/              # AI coding guidelines
+```
 
 ---
 
-## 🎯 Phase 0.8: Demo Application (Week 4, Days 4-7)
+# 🎯 MVP Checklist
 
-### Demo App Features
-
-- [ ] Use existing demo app (created in Phase 0.1)
-- [ ] Integrate all components
-- [ ] OpenAI API integration (or mock)
-- [ ] Full chat interface
-- [ ] Conversation history
-- [ ] Model selection
-- [ ] Token counting display
-- [ ] Responsive design
-- [ ] Error handling
-- [ ] Loading states
-
-### Optional: State Management Enhancement
-
-- [ ] Consider NgRx Signal Store for demo app state management (optional)
-  - [ ] Manage conversation history with Signal Store
-  - [ ] Handle model selection state
-  - [ ] Manage application settings
-  - [ ] Showcase modern state management pattern
-  - [ ] Note: Component library remains state-management agnostic
-
-**Deliverable:** Working demo application showcasing all components
-
----
-
-## 🎯 Phase 0.9: Documentation Site (Week 5, Days 1-4)
-
-### Documentation Tasks
-
-- [ ] Create documentation app: `nx generate @nx/angular:application docs`
-- [ ] Setup documentation site (Angular or static)
-- [ ] Component API documentation:
-  - [ ] Inputs/outputs for each component
-  - [ ] Usage examples
-  - [ ] Code snippets
-  - [ ] Props table
-- [ ] Getting started guide
-- [ ] Installation instructions
-- [ ] Integration examples
-- [ ] Theme customization guide
-- [ ] Accessibility notes
-- [ ] Browser support
-- [ ] Migration guide (if applicable)
-- [ ] Configure Nx build for docs deployment
-
-**Deliverable:** Complete documentation site
-
----
-
-## 🎯 Phase 0.10: Package & Build Setup (Week 5, Days 5-7)
-
-### Build & Package Tasks
-
-- [ ] Configure Nx library build (uses ng-packagr under the hood)
-- [ ] Setup library build process with `nx build angular-ai-kit`
-- [ ] Configure publishable library settings in `project.json`
-- [ ] Generate distributable package
-- [ ] Create package.json for npm (in library package)
-- [ ] Setup versioning strategy
-- [ ] Create .npmignore
-- [ ] Build and test package locally using Nx
-- [ ] Verify peer dependencies
-- [ ] Create bundle size optimization
-- [ ] Setup CI/CD (GitHub Actions) with Nx:
-  - [ ] Use `nx affected:build` for incremental builds
-  - [ ] Use `nx affected:lint` for linting
-  - [ ] Configure Nx Cloud for distributed caching (optional)
-  - [ ] Publish to npm (on tag) using Nx release
-  - [ ] Setup affected project detection
-
-**Deliverable:** Ready-to-publish npm package with optimized Nx build pipeline
-
----
-
-## 🎯 Phase 0.11: CLI Tool (Week 6, Days 1-3)
-
-### CLI Development
-
-- [ ] Create CLI package: `nx generate @nx/node:library angular-ai-kit-cli`
-- [ ] Setup CLI framework (commander.js or similar)
-- [ ] Implement `add` command:
-  - [ ] `npx @yourscope/angular-ai add chat` - Add chat components
-  - [ ] `npx @yourscope/angular-ai add streaming` - Add streaming components
-  - [ ] `npx @yourscope/angular-ai add all` - Add all components
-- [ ] File copying logic
-- [ ] Component file generation
-- [ ] Dependency installation check
-- [ ] Tailwind config updates
-- [ ] Error handling
-- [ ] Success messages
-- [ ] Configure Nx build for CLI package
-
-**Deliverable:** Working CLI tool for component installation
-
----
-
-## 🎯 Phase 0.12: Polish & Optimization (Week 6, Days 4-5)
-
-### Polish Tasks
-
-- [ ] Code review and refactoring
-  - [ ] Review all components for consistency
-  - [ ] Ensure proper error handling
-  - [ ] Remove debug code
-  - [ ] Optimize imports
-- [ ] Performance optimization:
-  - [ ] OnPush change detection everywhere
-  - [ ] Signal optimization (minimize computed/effect usage)
-  - [ ] Bundle size optimization (analyze with webpack-bundle-analyzer)
-  - [ ] Tree-shaking verification
-  - [ ] Lazy loading verification
-  - [ ] Image optimization (if any)
-  - [ ] CSS purging (Tailwind)
-- [ ] **SSR/Hydration compatibility**
-  - [ ] Test all components with SSR
-  - [ ] Ensure no direct DOM access (use Renderer2/inject(DOCUMENT))
-  - [ ] Verify hydration works correctly
-  - [ ] Check for isPlatformBrowser guards where needed
-- [ ] Accessibility audit (AXE + manual testing):
-  - [ ] ARIA labels and roles
-  - [ ] Keyboard navigation (Tab, Enter, Escape, Arrow keys)
-  - [ ] Screen reader support (test with VoiceOver/NVDA)
-  - [ ] Focus management and focus trapping
-  - [ ] Color contrast (WCAG AA minimum)
-  - [ ] Skip links and landmarks
-  - [ ] Reduced motion support
-- [ ] Browser testing:
-  - [ ] Chrome (latest)
-  - [ ] Firefox (latest)
-  - [ ] Safari (latest)
-  - [ ] Edge (latest)
-  - [ ] Mobile Safari (iOS)
-  - [ ] Mobile Chrome (Android)
-- [ ] Mobile responsiveness
-  - [ ] Touch targets (minimum 44x44px)
-  - [ ] Responsive breakpoints
-  - [ ] Mobile-specific interactions
-- [ ] Dark mode support
-  - [ ] CSS variables for theming
-  - [ ] Automatic dark mode detection (prefers-color-scheme)
-  - [ ] Manual theme toggle
-- [ ] Animation polish
-  - [ ] Smooth transitions
-  - [ ] Respect prefers-reduced-motion
-  - [ ] Performance optimization (use transform/opacity)
-- [ ] **Error boundary handling**
-  - [ ] Global error handler
-  - [ ] Component-level error states
-  - [ ] User-friendly error messages
-  - [ ] Retry mechanisms
-
-**Deliverable:** Production-ready, polished, accessible, and performant components
-
----
-
-## 🎯 Phase 0.13: Launch Preparation (Week 6, Days 6-7)
-
-### Launch Tasks
-
-- [ ] Final package build
-- [ ] Publish to npm (private first, then public)
-- [ ] Create GitHub repository
-- [ ] Setup GitHub Pages (for docs)
-- [ ] Create LICENSE file (MIT recommended)
-- [ ] Create CONTRIBUTING.md
-- [ ] Create CHANGELOG.md
-- [ ] Write launch blog post (optional)
-- [ ] Prepare social media content:
-  - [ ] Twitter/X thread
-  - [ ] LinkedIn post
-  - [ ] Reddit post (r/angular)
-- [ ] Create demo video script
-- [ ] Product Hunt preparation (if applicable)
-
-**Deliverable:** Ready to launch publicly
-
----
-
-## 📊 Component Checklist
-
-**Overall Progress: 3/15 components (20%)**
-
-### Core Components (5) - 3/5 🔄
+**Components (6/6)** ✅
 
 - [x] ChatContainer
 - [x] MessageList
 - [x] MessageBubble
-- [ ] StreamingText
-- [ ] TypingIndicator
+- [x] StreamingText
+- [x] TypingIndicator
+- [x] ChatInput
 
-### Input Components (3) - 0/3 ⏳
+**Infrastructure (4/4)** ✅
 
-- [ ] PromptInput
-- [ ] SubmitButton
-- [ ] FileUpload
+- [x] Directives
+- [x] Types & Interfaces
+- [x] DI Tokens
+- [x] Utilities
 
-### Display Components (3) - 0/3 ⏳
+**Production Ready (1/4)** ⏳
 
-- [ ] CodeBlock
-- [ ] MarkdownRenderer
-- [ ] TokenCounter
-
-### Control Components (3) - 0/3 ⏳
-
-- [ ] ModelSelector
-- [ ] RegenerateButton
-- [ ] ConversationList
-
-### Utilities & Services (1) - 1/1 ✅
-
-- [x] Utility functions and interfaces (cn, formatters, validators, token counter)
-
-### Total: 4/16 items complete (25% of components ready)
+- [ ] Package build
+- [ ] npm config
+- [ ] Documentation
+- [x] Demo polish (component docs & playgrounds)
 
 ---
 
-## 🎨 Technical Requirements
-
-### Monorepo & Build
-
-- ✅ Nx workspace for monorepo management
-- ✅ Build caching with Nx (local + CI)
-- ✅ Affected project detection
-- ✅ Parallel task execution
-- ✅ Shared code boundaries
-- ✅ Module boundary enforcement
-- ✅ Dependency graph visualization
-
-### Angular v21 Features
-
-- ✅ Standalone components only (no NgModules)
-- ✅ Signal-based inputs/outputs (input(), output(), computed())
-- ✅ OnPush change detection
-- ✅ Zoneless compatible
-- ✅ Control flow syntax (@if, @for, @switch)
-- ✅ inject() function for DI (no constructor injection)
-- ✅ Host bindings via host object (no @HostBinding/@HostListener)
-- ✅ ViewEncapsulation.None with scoped Tailwind
-- ✅ Resource API (rxResource) for async data
-- ✅ Input transforms for type coercion
-- ✅ hostDirectives for composition
-- ✅ SSR/Hydration compatible
-
-### Styling
-
-- ✅ Tailwind CSS v4 (latest with @tailwindcss/postcss)
-- ✅ Utility-first approach
-- ✅ CSS only (no SCSS)
-- ✅ CSS custom properties for theming
-- ✅ @layer directives (base, components, utilities)
-- ✅ @source directive for automatic class detection across monorepo
-- ✅ ViewEncapsulation.None with scoped class names
-- ✅ Customizable design tokens
-- ✅ Responsive design (mobile-first)
-- ✅ Dark mode support (prefers-color-scheme + manual toggle)
-- ✅ Accessibility (WCAG AA)
-
-### Dependencies
-
-- ✅ `marked` - Markdown parsing
-- ✅ `highlight.js` - Syntax highlighting
-- ✅ `clsx` - Class utilities
-- ✅ `tailwind-merge` - Class merging
-- ✅ `dompurify` - HTML sanitization
-- ✅ Minimal peer dependencies
-
-### Code Quality
-
-- ✅ TypeScript strict mode
-- ✅ ESLint + Prettier
-- ✅ Import sorting
-- ✅ Tailwind class sorting
-- ✅ No tests (as per requirements)
-- ✅ Clean, readable code
-- ✅ Comprehensive JSDoc comments
-- ✅ Good documentation (Storybook)
-
-### Performance
-
-- ✅ OnPush change detection
-- ✅ Signal optimization
-- ✅ Tree-shaking enabled
-- ✅ Bundle size optimization
-- ✅ Lazy loading support
-- ✅ CSS purging
-
-### Accessibility
-
-- ✅ WCAG AA compliance
-- ✅ Keyboard navigation
-- ✅ Screen reader support
-- ✅ ARIA attributes
-- ✅ Focus management
-- ✅ Color contrast
-- ✅ Reduced motion support
-
----
-
-## 📦 Nx Workspace Structure
-
-```text
-angular-ai-kit/
-├── packages/
-│   ├── angular-ai-kit/           # Main library (core components)
-│   │   ├── src/
-│   │   │   ├── lib/
-│   │   │   │   ├── components/   # All UI components
-│   │   │   │   ├── directives/   # Reusable directives
-│   │   │   │   ├── types/        # Type definitions
-│   │   │   │   └── tokens/       # DI tokens
-│   │   │   ├── index.ts          # Public API
-│   │   │   └── styles.css        # Global styles (Tailwind)
-│   │   └── project.json          # Nx project config
-│   ├── tokens/                   # Design tokens library
-│   │   ├── src/
-│   │   │   ├── lib/
-│   │   │   │   ├── theme.css     # CSS custom properties
-│   │   │   │   └── tokens.ts     # TypeScript token interfaces
-│   │   │   └── index.ts
-│   │   └── project.json
-│   └── utils/                    # Shared utilities library
-│       ├── src/
-│       │   ├── lib/
-│       │   │   ├── cn.ts         # Class name utility
-│       │   │   ├── token-counter.ts
-│       │   │   ├── formatters.ts
-│       │   │   └── validators.ts
-│       │   └── index.ts
-│       └── project.json
-├── apps/
-│   ├── demo/                     # Demo application
-│   │   ├── src/
-│   │   │   ├── app/
-│   │   │   ├── assets/
-│   │   │   ├── styles.css        # Tailwind imports
-│   │   │   └── main.ts
-│   │   └── project.json
-│   └── docs/                     # Storybook documentation
-│       ├── .storybook/
-│       └── stories/
-├── tools/
-│   ├── generators/               # Custom Nx generators
-│   │   └── component/            # Component generator
-│   └── angular-ai-kit-cli/       # CLI tool (Phase 0.11)
-├── nx.json                       # Nx configuration
-├── tsconfig.base.json            # Base TypeScript config
-├── tailwind.config.js            # Tailwind configuration
-├── .eslintrc.json                # ESLint configuration
-├── .prettierrc                   # Prettier configuration
-└── package.json                  # Root package.json
-```
-
-## 🛠️ Key Nx Commands
-
-### Build & Serve
-
-- `nx build angular-ai-kit` - Build the core library
-- `nx build tokens` - Build tokens library
-- `nx build utils` - Build utils library
-- `nx serve demo` - Run demo app (http://localhost:4200)
-- `nx storybook angular-ai-kit` - Run Storybook (http://localhost:6006)
-
-### Development
-
-- `nx affected:build` - Build only affected projects
-- `nx affected:lint` - Lint only affected projects
-- `nx affected:test` - Test only affected projects (if tests added later)
-- `nx graph` - Visualize dependency graph
-- `nx run-many --target=build --all` - Build all projects in parallel
-
-### Linting & Formatting
-
-- `nx lint angular-ai-kit` - Lint core library
-- `nx format:write` - Format all files with Prettier
-- `nx format:check` - Check formatting
-
-### Library Management
-
-- `nx generate @nx/angular:component <name> --project=angular-ai-kit` - Generate component
-- `nx generate @nx/angular:directive <name> --project=angular-ai-kit` - Generate directive
-
-**Nx Documentation:** [Nx Angular Documentation](https://nx.dev/docs/technologies/angular)
-
----
-
-## 📈 Success Metrics
-
-| Metric                 | Target |
-| ---------------------- | ------ |
-| Components Built       | 15     |
-| npm Package Published  | ✅     |
-| CLI Tool Working       | ✅     |
-| Documentation Complete | ✅     |
-| Demo App Functional    | ✅     |
-| GitHub Stars           | 300+   |
-| npm Downloads/Week     | 200+   |
-
----
-
-## 🚀 Next Steps After Phase 0
-
-Once Phase 0 is complete:
-
-1. Launch publicly
-2. Gather feedback
-3. Iterate based on community needs
-4. Move to Phase 1 (SaaS Starter)
-
----
-
-## 📚 Resources & References
-
-- [Nx Angular Documentation](https://nx.dev/docs/technologies/angular) - Official Nx documentation for Angular projects
-- [NgRx Signal Store](https://ngrx.io/docs/signal-store) - Modern signal-based state management (optional for demo app)
-- Angular v21 Documentation
-- Tailwind CSS Documentation
-
----
-
-_Last updated: December 24, 2025_
-_Phase 0.1: 80% Complete - Foundation established, ready for component development_
+_Last Updated: December 27, 2025_

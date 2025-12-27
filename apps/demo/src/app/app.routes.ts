@@ -48,6 +48,27 @@ export const appRoutes: Route[] = [
                 './pages/docs/components/chat-container/chat-container-doc.component'
               ).then((m) => m.ChatContainerDocComponent),
           },
+          {
+            path: 'components/chat-input',
+            loadComponent: () =>
+              import(
+                './pages/docs/components/chat-input/chat-input-doc.component'
+              ).then((m) => m.ChatInputDocComponent),
+          },
+          {
+            path: 'components/streaming-text',
+            loadComponent: () =>
+              import(
+                './pages/docs/components/streaming-text/streaming-text-doc.component'
+              ).then((m) => m.StreamingTextDocComponent),
+          },
+          {
+            path: 'components/typing-indicator',
+            loadComponent: () =>
+              import(
+                './pages/docs/components/typing-indicator/typing-indicator-doc.component'
+              ).then((m) => m.TypingIndicatorDocComponent),
+          },
         ],
       },
     ],

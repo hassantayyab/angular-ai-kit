@@ -1,6 +1,7 @@
+import { HlmBadge } from '@angular-ai-kit/spartan-ui/badge';
 import { HlmButton } from '@angular-ai-kit/spartan-ui/button';
 import { cn } from '@angular-ai-kit/utils';
-import { isPlatformBrowser } from '@angular/common';
+import { NgTemplateOutlet, isPlatformBrowser } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -15,6 +16,23 @@ import {
   signal,
   viewChild,
 } from '@angular/core';
+
+/**
+ * Suggestion item for quick prompts
+ */
+export interface ChatSuggestion {
+  /** Short display text for badge */
+  label: string;
+  /** Full prompt text to fill input */
+  prompt: string;
+  /** Optional emoji/icon */
+  icon?: string;
+}
+
+/**
+ * Position of suggestion badges relative to the input
+ */
+export type SuggestionsPosition = 'top' | 'bottom';
 
 /**
  * ChatInputComponent
@@ -36,7 +54,7 @@ import {
   templateUrl: './chat-input.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
-  imports: [HlmButton],
+  imports: [HlmBadge, HlmButton, NgTemplateOutlet],
   host: {
     class: 'app-chat-input-host block',
   },
@@ -51,9 +69,23 @@ export class ChatInputComponent {
   disabled = input<boolean>(false);
   maxHeight = input<number>(200);
 
+  // Visibility toggles - all default to true
+  showContextButton = input<boolean>(true);
+  showAttachmentButton = input<boolean>(true);
+  showResearchButton = input<boolean>(true);
+  showSourcesButton = input<boolean>(true);
+  showModelName = input<boolean>(true);
+  showMicButton = input<boolean>(true);
+
+  // Suggestions feature
+  suggestions = input<ChatSuggestion[]>([]);
+  showSuggestions = input<boolean>(true);
+  suggestionsPosition = input<SuggestionsPosition>('bottom');
+
   // Outputs
   messageSend = output<string>();
   inputCleared = output<void>();
+  suggestionSelect = output<ChatSuggestion>();
 
   // State
   inputValue = signal('');
@@ -61,6 +93,25 @@ export class ChatInputComponent {
   // Computed
   canSend = computed(() => {
     return this.inputValue().trim().length > 0 && !this.disabled();
+  });
+
+  /** Check if any left toolbar items are visible */
+  hasLeftToolbarItems = computed(() => {
+    return (
+      this.showAttachmentButton() ||
+      this.showResearchButton() ||
+      this.showSourcesButton() ||
+      this.showModelName()
+    );
+  });
+
+  /** Show suggestions only when input is empty and feature is enabled */
+  suggestionsVisible = computed(() => {
+    return (
+      this.showSuggestions() &&
+      this.suggestions().length > 0 &&
+      this.inputValue().trim().length === 0
+    );
   });
 
   constructor() {
@@ -147,6 +198,14 @@ export class ChatInputComponent {
     this.messageSend.emit(message);
     this.inputValue.set('');
     this.resetTextarea();
+  }
+
+  /** Handle suggestion badge click */
+  handleSuggestionClick(suggestion: ChatSuggestion): void {
+    this.inputValue.set(suggestion.prompt);
+    this.suggestionSelect.emit(suggestion);
+    this.focus();
+    this.resizeTextarea();
   }
 
   /**

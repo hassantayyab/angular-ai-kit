@@ -103,11 +103,14 @@ export class MessageBubbleComponent {
       'transition-all duration-200',
       'hover:shadow-md',
       {
-        'bg-gray-800 text-white dark:bg-gray-700 dark:text-gray-100':
+        // User messages: slightly darker neutral
+        'bg-zinc-100 text-zinc-900 dark:bg-zinc-800 dark:text-zinc-100':
           role === 'user',
-        'bg-gray-100 text-gray-900 dark:bg-gray-800 dark:text-gray-100':
+        // Assistant messages: lighter with border
+        'bg-white text-zinc-900 border border-zinc-200 dark:bg-zinc-900 dark:text-zinc-100 dark:border-zinc-800':
           role === 'assistant',
-        'bg-gray-200 text-gray-800 dark:bg-gray-700/50 dark:text-gray-200':
+        // System messages: muted styling
+        'bg-zinc-50 text-zinc-600 border border-zinc-200 dark:bg-zinc-800/50 dark:text-zinc-400 dark:border-zinc-700':
           role === 'system',
       },
       this.customClasses()
@@ -126,11 +129,12 @@ export class MessageBubbleComponent {
       'w-9 h-9 rounded-full',
       'flex-shrink-0',
       {
-        'bg-white/20 text-white': role === 'user',
-        'bg-gray-200 text-gray-700 dark:bg-gray-700 dark:text-gray-200':
-          role === 'assistant',
-        'bg-yellow-100 text-yellow-700 dark:bg-yellow-900/30 dark:text-yellow-400':
-          role === 'system',
+        // User: darker neutral avatar
+        'bg-zinc-700 text-white dark:bg-zinc-600': role === 'user',
+        // Assistant: dark avatar
+        'bg-zinc-800 text-white dark:bg-zinc-700': role === 'assistant',
+        // System: muted avatar
+        'bg-zinc-400 text-white dark:bg-zinc-500': role === 'system',
       }
     );
   });
@@ -171,11 +175,10 @@ export class MessageBubbleComponent {
       'hover:scale-110 active:scale-95',
       'focus:outline-none focus:ring-2 focus:ring-offset-2',
       {
-        'hover:bg-white/20 focus:ring-white/50': role === 'user',
-        'hover:bg-gray-200 dark:hover:bg-gray-700 focus:ring-gray-400':
+        'hover:bg-zinc-200 dark:hover:bg-zinc-700 focus:ring-zinc-400':
+          role === 'user' || role === 'system',
+        'hover:bg-zinc-100 dark:hover:bg-zinc-800 focus:ring-zinc-400':
           role === 'assistant',
-        'hover:bg-yellow-100 dark:hover:bg-yellow-800 focus:ring-yellow-400':
-          role === 'system',
       }
     );
   });

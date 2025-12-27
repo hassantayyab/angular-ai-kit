@@ -68,6 +68,12 @@
       ],
       "@angular-ai-kit/spartan-ui/command": [
         "libs/spartan-ui/command/src/index.ts"
+      ],
+      "@angular-ai-kit/spartan-ui/switch": [
+        "libs/spartan-ui/switch/switch/src/index.ts"
+      ],
+      "@angular-ai-kit/spartan-ui/slider": [
+        "libs/spartan-ui/slider/slider/src/index.ts"
       ]
     }
   },

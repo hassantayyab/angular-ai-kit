@@ -10,9 +10,13 @@ import {
   ViewEncapsulation,
   computed,
   inject,
+  signal,
 } from '@angular/core';
 import { ChatService } from '../../services/chat.service';
-import { ChatInputComponent } from '../chat-input/chat-input.component';
+import {
+  ChatInputComponent,
+  ChatSuggestion,
+} from '../chat-input/chat-input.component';
 import { EmptyStateComponent } from '../empty-state/empty-state.component';
 import { MessageListComponent } from '../message-list';
 
@@ -50,6 +54,30 @@ export class ChatViewComponent {
   messages = this.chatService.messages;
   isLoading = this.chatService.isLoading;
   isEmpty = this.chatService.isEmptyConversation;
+
+  // Quick suggestions (shown only when conversation is empty)
+  chatSuggestions = signal<ChatSuggestion[]>([
+    {
+      icon: '💡',
+      label: 'Explain components',
+      prompt: 'Can you explain how the chat components work?',
+    },
+    {
+      icon: '🎨',
+      label: 'Customize styling',
+      prompt: 'How can I customize the styling and themes?',
+    },
+    {
+      icon: '⚡',
+      label: 'Performance tips',
+      prompt: 'What are some performance best practices?',
+    },
+  ]);
+
+  /** Get suggestions to show (only when empty) */
+  activeSuggestions = computed(() => {
+    return this.isEmpty() ? this.chatSuggestions() : [];
+  });
 
   conversationTitle = computed(() => {
     const conversation = this.chatService.activeConversation();

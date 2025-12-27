@@ -1,5 +1,4 @@
 import { ChatMessage } from '@angular-ai-kit/core';
-import { HlmSkeleton } from '@angular-ai-kit/spartan-ui/skeleton';
 import { cn } from '@angular-ai-kit/utils';
 import { isPlatformBrowser } from '@angular/common';
 import {
@@ -17,12 +16,13 @@ import {
   viewChild,
 } from '@angular/core';
 import { MessageBubbleComponent } from '../message-bubble';
+import { TypingIndicatorComponent } from '../typing-indicator';
 
 /**
  * Demo MessageListComponent
  *
  * Scrollable message list with Spartan UI components.
- * Uses native scrolling and HlmSkeleton for loading.
+ * Uses native scrolling and TypingIndicator for loading states.
  *
  * @example
  * ```html
@@ -40,7 +40,7 @@ import { MessageBubbleComponent } from '../message-bubble';
   templateUrl: './message-list.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
-  imports: [MessageBubbleComponent, HlmSkeleton],
+  imports: [MessageBubbleComponent, TypingIndicatorComponent],
   host: {
     class: 'app-message-list-host block h-full',
   },
@@ -111,16 +111,6 @@ export class MessageListComponent implements AfterViewInit {
       'flex items-center justify-center',
       'min-h-[200px] h-full',
       'text-center'
-    );
-  });
-
-  /** Typing indicator classes */
-  typingIndicatorClasses = computed(() => {
-    return cn(
-      'app-typing-indicator',
-      'flex items-center gap-3 p-4',
-      'rounded-xl',
-      'bg-[var(--card)] border border-[var(--border)]'
     );
   });
 

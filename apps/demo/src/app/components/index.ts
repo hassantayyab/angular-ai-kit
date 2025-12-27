@@ -4,4 +4,6 @@ export { EmptyStateComponent } from './empty-state';
 export { MessageBubbleComponent } from './message-bubble';
 export { MessageListComponent } from './message-list';
 export { SidebarComponent } from './sidebar';
+export { StreamingTextComponent } from './streaming-text';
 export { ThemeToggleComponent } from './theme-toggle';
+export { TypingIndicatorComponent } from './typing-indicator';

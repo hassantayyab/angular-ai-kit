@@ -21,18 +21,7 @@
 
       <!-- Loading indicator -->
       @if (loading()) {
-        <div [class]="typingIndicatorClasses()" role="status">
-          <!-- Skeleton avatar -->
-          <div hlmSkeleton class="h-8 w-8 rounded-full"></div>
-
-          <!-- Skeleton lines -->
-          <div class="flex flex-1 flex-col gap-2">
-            <div hlmSkeleton class="h-4 w-3/4 rounded"></div>
-            <div hlmSkeleton class="h-4 w-1/2 rounded"></div>
-          </div>
-
-          <span class="sr-only">AI is thinking...</span>
-        </div>
+        <app-typing-indicator [showAvatar]="showAvatars()" />
       }
     </div>
   } @else {

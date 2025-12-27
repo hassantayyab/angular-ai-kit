@@ -4,6 +4,102 @@ paths: '**/*.component.ts'
 
 # Component Structure & Patterns
 
+## Spartan UI Components (PREFERRED)
+
+**ALWAYS prefer Spartan UI components over custom implementations.**
+
+This project uses [Spartan UI](https://www.spartan.ng/) - a collection of accessible, unstyled Angular components. When building UI, check if a Spartan component exists first.
+
+### Available Spartan UI Components
+
+Import from `@angular-ai-kit/spartan-ui/`:
+
+| Category        | Components                                                    |
+| --------------- | ------------------------------------------------------------- |
+| **Buttons**     | `HlmButton`, `HlmButtonDirective`                             |
+| **Avatar**      | `HlmAvatar`, `HlmAvatarFallback`, `HlmAvatarImage`            |
+| **Icons**       | `HlmIcon` (with `@ng-icons/core` + `@ng-icons/lucide`)        |
+| **Tooltip**     | `HlmTooltipTrigger`, `HlmTooltipContent`                      |
+| **Dialog**      | `HlmDialog`, `HlmDialogTrigger`, `HlmDialogContent`           |
+| **Input**       | `HlmInput`, `HlmInputDirective`                               |
+| **Label**       | `HlmLabel`                                                    |
+| **Card**        | `HlmCard`, `HlmCardHeader`, `HlmCardContent`, `HlmCardFooter` |
+| **Badge**       | `HlmBadge`                                                    |
+| **Skeleton**    | `HlmSkeleton`                                                 |
+| **Scroll Area** | `HlmScrollArea`                                               |
+| **Separator**   | `HlmSeparator`                                                |
+| **Command**     | `HlmCommand`, `HlmCommandInput`, `HlmCommandItem`             |
+| **Sidebar**     | `HlmSidebar`, `HlmSidebarTrigger`, `HlmSidebarContent`        |
+| **Switch**      | `HlmSwitch`                                                   |
+| **Slider**      | `HlmSlider`                                                   |
+
+### Usage Pattern
+
+```typescript
+import { NgIcon, provideIcons } from '@ng-icons/core';
+import { lucideBot, lucideCopy } from '@ng-icons/lucide';
+import {
+  HlmAvatar,
+  HlmAvatarFallback,
+} from '@angular-ai-kit/spartan-ui/avatar';
+import { HlmButton } from '@angular-ai-kit/spartan-ui/button';
+import { HlmIcon } from '@angular-ai-kit/spartan-ui/icon';
+
+@Component({
+  selector: 'app-message-bubble',
+  imports: [HlmButton, HlmAvatar, HlmAvatarFallback, HlmIcon, NgIcon],
+  viewProviders: [provideIcons({ lucideCopy, lucideBot })],
+  template: `
+    <hlm-avatar size="sm">
+      <span hlmAvatarFallback>
+        <ng-icon hlm name="lucideBot" size="sm" />
+      </span>
+    </hlm-avatar>
+
+    <button hlmBtn variant="ghost" size="icon">
+      <ng-icon hlm name="lucideCopy" size="sm" />
+    </button>
+  `,
+})
+export class MessageBubbleComponent {}
+```
+
+### When to Use Spartan vs Custom
+
+| Use Spartan UI            | Use Custom Component                        |
+| ------------------------- | ------------------------------------------- |
+| Buttons, icons, avatars   | AI-specific: StreamingText, TypingIndicator |
+| Tooltips, dialogs, modals | Domain logic components                     |
+| Form inputs, labels       | Complex composite components                |
+| Cards, badges, skeletons  | Highly specialized UI                       |
+| Scroll areas, separators  | Animation-heavy components                  |
+
+### ❌ Don't Reinvent
+
+```typescript
+// ❌ Bad: Custom button implementation
+<button class="custom-btn" (click)="handleClick()">Click</button>
+
+// ✅ Good: Use Spartan button
+<button hlmBtn variant="ghost" size="sm" (click)="handleClick()">Click</button>
+
+// ❌ Bad: Custom avatar with initials
+<div class="avatar-circle">{{ initials }}</div>
+
+// ✅ Good: Use Spartan avatar
+<hlm-avatar size="sm">
+  <span hlmAvatarFallback>{{ initials }}</span>
+</hlm-avatar>
+
+// ❌ Bad: Custom loading skeleton
+<div class="animate-pulse bg-gray-200 h-4 w-full"></div>
+
+// ✅ Good: Use Spartan skeleton
+<div hlmSkeleton class="h-4 w-full"></div>
+```
+
+---
+
 ## Template Files (CRITICAL)
 
 **ALWAYS use separate HTML template files for components. DO NOT use inline templates.**

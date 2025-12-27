@@ -441,4 +441,46 @@
   .scrollbar-hide::-webkit-scrollbar {
     display: none;
   }
+
+  /* Typing Indicator Animation */
+  .typing-dot {
+    animation: typing-bounce 1.4s infinite ease-in-out;
+  }
+
+  @keyframes typing-bounce {
+    0%,
+    60%,
+    100% {
+      transform: translateY(0);
+      opacity: 0.6;
+    }
+    30% {
+      transform: translateY(-6px);
+      opacity: 1;
+    }
+  }
+
+  /* Cursor Blink Animation */
+  .animate-cursor-blink {
+    animation: cursor-blink 1s step-end infinite;
+  }
+
+  @keyframes cursor-blink {
+    0%,
+    100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0;
+    }
+  }
+
+  /* Reduced motion support */
+  @media (prefers-reduced-motion: reduce) {
+    .typing-dot,
+    .animate-cursor-blink {
+      animation: none;
+      opacity: 1;
+    }
+  }
 }

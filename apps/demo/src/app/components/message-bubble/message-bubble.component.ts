@@ -27,6 +27,7 @@ import {
   output,
   signal,
 } from '@angular/core';
+import { StreamingTextComponent } from '../streaming-text';
 
 /**
  * Demo MessageBubbleComponent
@@ -57,6 +58,7 @@ import {
     HlmIcon,
     HlmTooltipTrigger,
     NgIcon,
+    StreamingTextComponent,
   ],
   viewProviders: [
     provideIcons({
@@ -129,6 +131,9 @@ export class MessageBubbleComponent {
   /** Whether this is an assistant message */
   isAssistantMessage = computed(() => this.message().role === 'assistant');
 
+  /** Whether this message is currently streaming */
+  isStreaming = computed(() => this.message().status === 'streaming');
+
   /** Container classes based on message role */
   containerClasses = computed(() => {
     const role = this.message().role;
@@ -138,14 +143,14 @@ export class MessageBubbleComponent {
       'group flex gap-3 p-4 rounded-xl',
       'transition-all duration-200',
       {
-        // User messages - right aligned with accent background
-        'flex-row-reverse bg-[var(--primary)] text-[var(--primary-foreground)]':
+        // User messages - right aligned, slightly darker
+        'flex-row-reverse bg-zinc-100 text-zinc-900 dark:bg-zinc-800 dark:text-zinc-100':
           role === 'user',
-        // Assistant messages - left aligned with subtle background
-        'bg-[var(--card)] text-[var(--card-foreground)] border border-[var(--border)]':
+        // Assistant messages - left aligned, lighter with border
+        'bg-white text-zinc-900 border border-zinc-200 dark:bg-zinc-900 dark:text-zinc-100 dark:border-zinc-800':
           role === 'assistant',
-        // System messages
-        'bg-[var(--muted)] text-[var(--muted-foreground)] border border-[var(--border)]':
+        // System messages - muted
+        'bg-zinc-50 text-zinc-600 border border-zinc-200 dark:bg-zinc-800/50 dark:text-zinc-400 dark:border-zinc-700':
           role === 'system',
       },
       this.customClasses()
@@ -187,10 +192,12 @@ export class MessageBubbleComponent {
     const role = this.message().role;
 
     return cn({
-      'bg-[var(--primary-foreground)] text-[var(--primary)]': role === 'user',
-      'bg-[var(--primary)] text-[var(--primary-foreground)]':
-        role === 'assistant',
-      'bg-[var(--muted-foreground)] text-[var(--muted)]': role === 'system',
+      // User: darker neutral avatar
+      'bg-zinc-700 text-white dark:bg-zinc-600': role === 'user',
+      // Assistant: dark avatar
+      'bg-zinc-800 text-white dark:bg-zinc-700': role === 'assistant',
+      // System: muted avatar
+      'bg-zinc-400 text-white dark:bg-zinc-500': role === 'system',
     });
   });
 
