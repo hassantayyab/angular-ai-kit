@@ -1,4 +1,3 @@
-import { HlmBadge } from '@angular-ai-kit/spartan-ui/badge';
 import { HlmButton } from '@angular-ai-kit/spartan-ui/button';
 import { cn } from '@angular-ai-kit/utils';
 import { NgTemplateOutlet, isPlatformBrowser } from '@angular/common';
@@ -54,7 +53,7 @@ export type SuggestionsPosition = 'top' | 'bottom';
   templateUrl: './chat-input.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
-  imports: [HlmBadge, HlmButton, NgTemplateOutlet],
+  imports: [HlmButton, NgTemplateOutlet],
   host: {
     class: 'app-chat-input-host block',
   },
