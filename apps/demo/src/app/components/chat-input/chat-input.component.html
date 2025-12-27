@@ -41,249 +41,301 @@
     </div>
   }
 
-  <div [class]="cardClasses()">
-    <!-- Top: Context Button -->
+  <!-- Main Input Group -->
+  <div hlmInputGroup class="[--radius:1.5rem]">
+    <!-- Block-start: Context button with popover -->
     @if (showContextButton()) {
-      <div class="px-4 pt-4">
-        <button
-          type="button"
-          hlmBtn
-          variant="outline"
-          size="sm"
-          class="h-8 rounded-full px-3 text-xs font-normal"
-          aria-label="Add context"
-          (click)="contextClick.emit()"
-        >
-          <span class="mr-1 text-sm">&#64;</span>
-          Add context
-        </button>
+      <div hlmInputGroupAddon align="block-start">
+        <hlm-popover sideOffset="5">
+          <button
+            hlmInputGroupButton
+            hlmPopoverTrigger
+            variant="outline"
+            class="rounded-full"
+            [size]="contextButtonSize()"
+            aria-label="Add context"
+          >
+            <ng-icon hlm name="lucideAtSign" size="sm" />
+            @if (!hasContext()) {
+              <span>Add context</span>
+            }
+          </button>
+
+          <div
+            hlmPopoverContent
+            class="rounded-2xl p-0 [&_[data-slot=command-item]]:rounded-lg"
+            *brnPopoverContent="let ctx"
+          >
+            <hlm-command class="rounded-2xl">
+              <hlm-command-search class="border-border">
+                <ng-icon
+                  hlm
+                  name="lucideSearch"
+                  size="sm"
+                  class="shrink-0 opacity-50"
+                />
+                <input
+                  type="text"
+                  hlm-command-search-input
+                  placeholder="Search pages, files..."
+                />
+              </hlm-command-search>
+
+              <hlm-command-list>
+                <!-- Pages -->
+                <hlm-command-group id="pages">
+                  <hlm-command-group-label>Pages</hlm-command-group-label>
+                  @for (item of availableContextItems(); track item.title) {
+                    @if (item.type === 'page') {
+                      <button
+                        hlm-command-item
+                        [value]="item.title"
+                        (click)="addContext(item); ctx.close()"
+                      >
+                        <span class="mr-2">{{ item.icon }}</span>
+                        {{ item.title }}
+                      </button>
+                    }
+                  }
+                </hlm-command-group>
+
+                <!-- Files -->
+                <hlm-command-group id="files">
+                  <hlm-command-group-label>Files</hlm-command-group-label>
+                  @for (item of availableContextItems(); track item.title) {
+                    @if (item.type === 'file') {
+                      <button
+                        hlm-command-item
+                        [value]="item.title"
+                        (click)="addContext(item); ctx.close()"
+                      >
+                        <span class="mr-2">{{ item.icon }}</span>
+                        {{ item.title }}
+                      </button>
+                    }
+                  }
+                </hlm-command-group>
+              </hlm-command-list>
+
+              <!-- Empty state -->
+              <div *brnCommandEmpty hlmCommandEmpty>No results found.</div>
+            </hlm-command>
+          </div>
+        </hlm-popover>
+
+        <!-- Selected context badges -->
+        <div class="no-scrollbar -m-1.5 flex gap-1 overflow-y-auto p-1.5">
+          @for (context of selectedContexts(); track context.title) {
+            <button
+              hlmInputGroupButton
+              variant="secondary"
+              class="rounded-full"
+              size="sm"
+              (click)="removeContext(context)"
+            >
+              <span class="mr-1">{{ context.icon }}</span>
+              {{ context.title }}
+              <ng-icon hlm name="lucideX" size="sm" class="ml-1" />
+            </button>
+          }
+        </div>
       </div>
     }
 
-    <!-- Middle: Textarea -->
-    <div [class]="showContextButton() ? 'px-4 py-3' : 'px-4 pt-4 pb-3'">
-      <textarea
-        #textareaRef
-        [class]="textareaClasses()"
-        [placeholder]="placeholder()"
-        [disabled]="disabled()"
-        [value]="inputValue()"
-        (input)="handleInput($event)"
-        (keydown)="handleKeydown($event)"
-        rows="1"
-        aria-label="Message input"
-        aria-describedby="keyboard-hint"
-      ></textarea>
-      <span id="keyboard-hint" class="sr-only">
-        Press Enter to send, Shift+Enter for new line, Escape to clear
-      </span>
-    </div>
+    <!-- Textarea -->
+    <textarea
+      hlmInputGroupTextarea
+      #textareaRef
+      [placeholder]="placeholder()"
+      [disabled]="disabled()"
+      [value]="inputValue()"
+      (input)="handleInput($event)"
+      (keydown)="handleKeydown($event)"
+      aria-label="Message input"
+      aria-describedby="keyboard-hint"
+    ></textarea>
+    <span id="keyboard-hint" class="sr-only">
+      Press Enter to send, Shift+Enter for new line, Escape to clear
+    </span>
 
-    <!-- Bottom: Toolbar -->
-    <div [class]="toolbarClasses()">
-      <!-- Left side: Action buttons -->
-      @if (hasLeftToolbarItems()) {
-        <div class="flex items-center gap-1">
-          <!-- Attachment -->
-          @if (showAttachmentButton()) {
-            <button
-              type="button"
-              hlmBtn
-              variant="ghost"
-              size="icon"
-              class="h-8 w-8 text-[var(--foreground-muted)] hover:text-[var(--foreground)]"
-              aria-label="Attach file"
-              (click)="triggerFileInput()"
-            >
-              <svg
-                class="h-5 w-5"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="1.5"
-                  d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.414-6.586a4 4 0 00-5.656-5.656l-6.415 6.585a6 6 0 108.486 8.486L20.5 13"
-                />
-              </svg>
-            </button>
-          }
-
-          <!-- Research -->
-          @if (showResearchButton()) {
-            <button
-              type="button"
-              hlmBtn
-              variant="ghost"
-              size="sm"
-              [class]="
-                researchMode()
-                  ? 'h-8 gap-1.5 bg-[var(--accent)] px-2 text-[var(--accent-foreground)]'
-                  : 'h-8 gap-1.5 px-2 text-[var(--foreground-muted)] hover:text-[var(--foreground)]'
-              "
-              [attr.aria-pressed]="researchMode()"
-              aria-label="Toggle research mode"
-              (click)="toggleResearch()"
-            >
-              <svg
-                class="h-4 w-4"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="1.5"
-                  d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"
-                />
-              </svg>
-              <span class="text-xs font-medium">Research</span>
-            </button>
-          }
-
-          <!-- All sources -->
-          @if (showSourcesButton()) {
-            <brn-popover>
-              <button
-                type="button"
-                brnPopoverTrigger
-                hlmBtn
-                variant="ghost"
-                size="sm"
-                class="h-8 gap-1.5 px-2 text-[var(--foreground-muted)] hover:text-[var(--foreground)]"
-                aria-label="Select sources"
-              >
-                <svg
-                  class="h-4 w-4"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="1.5"
-                    d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"
-                  />
-                </svg>
-                <span class="text-xs font-medium">{{
-                  selectedSourceLabel()
-                }}</span>
-                <svg
-                  class="h-3 w-3"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M19 9l-7 7-7-7"
-                  />
-                </svg>
-              </button>
-              <div
-                *brnPopoverContent
-                class="w-40 rounded-md border border-[var(--border)] bg-[var(--popover)] p-1 shadow-md"
-              >
-                @for (option of sourceOptions; track option.value) {
-                  <button
-                    type="button"
-                    class="flex w-full items-center rounded px-2 py-1.5 text-xs hover:bg-[var(--accent)]"
-                    [class.bg-[var(--accent)]]="
-                      selectedSource() === option.value
-                    "
-                    (click)="selectSource(option.value)"
-                  >
-                    {{ option.label }}
-                  </button>
-                }
-              </div>
-            </brn-popover>
-          }
-
-          <!-- Model name -->
-          @if (showModelName()) {
-            <span
-              class="ml-1 text-xs font-medium text-[var(--foreground-muted)]"
-            >
-              Angular AI
-            </span>
-          }
-        </div>
+    <!-- Block-end: Toolbar -->
+    <div
+      hlmInputGroupAddon
+      align="block-end"
+      class="no-scrollbar gap-1 overflow-y-auto"
+    >
+      <!-- Attachment -->
+      @if (showAttachmentButton()) {
+        <button
+          hlmInputGroupButton
+          class="rounded-full"
+          size="icon-sm"
+          aria-label="Attach file"
+          (click)="triggerFileInput()"
+        >
+          <ng-icon hlm name="lucidePaperclip" size="sm" />
+        </button>
       }
 
-      <!-- Right side: Mic + Send -->
-      <div
-        [class]="
-          hasLeftToolbarItems()
-            ? 'flex items-center gap-2'
-            : 'flex w-full items-center justify-end gap-2'
-        "
-      >
-        <!-- Mic button -->
-        @if (showMicButton()) {
-          <button
-            type="button"
-            hlmBtn
-            variant="ghost"
-            size="icon"
-            [class]="
-              isRecording()
-                ? 'h-8 w-8 animate-pulse text-red-500'
-                : 'h-8 w-8 text-[var(--foreground-muted)] hover:text-[var(--foreground)]'
-            "
-            [attr.aria-pressed]="isRecording()"
-            aria-label="Voice input"
-            (click)="toggleMic()"
-          >
-            <svg
-              class="h-5 w-5"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="1.5"
-                d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"
-              />
-            </svg>
-          </button>
-        }
-
-        <!-- Send button -->
+      <!-- Research toggle - subtle active state -->
+      @if (showResearchButton()) {
         <button
-          type="button"
-          hlmBtn
-          [variant]="canSend() ? 'default' : 'secondary'"
-          size="icon"
-          [class]="sendButtonClasses()"
-          [disabled]="!canSend()"
-          [attr.aria-disabled]="!canSend()"
-          (click)="handleSend()"
-          aria-label="Send message"
+          hlmInputGroupButton
+          class="data-[active=true]:bg-accent data-[active=true]:text-accent-foreground rounded-full"
+          size="sm"
+          [attr.data-active]="researchMode()"
+          [attr.aria-pressed]="researchMode()"
+          aria-label="Toggle research mode"
+          (click)="toggleResearch()"
         >
-          <svg
-            class="h-5 w-5"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M5 10l7-7m0 0l7 7m-7-7v18"
-            />
-          </svg>
+          <ng-icon hlm name="lucideLightbulb" size="sm" />
+          <span class="text-xs">Research</span>
         </button>
-      </div>
+      }
+
+      <!-- Model selector dropdown -->
+      @if (showModelName()) {
+        <button
+          hlmInputGroupButton
+          class="rounded-full"
+          size="sm"
+          [hlmDropdownMenuTrigger]="modelMenu"
+        >
+          {{ selectedModel().name }}
+        </button>
+        <ng-template #modelMenu>
+          <hlm-dropdown-menu
+            class="border-border w-50 rounded-2xl [&_[data-slot=dropdown-menu-checkbox-item]]:rounded-lg"
+          >
+            <hlm-dropdown-menu-group>
+              <hlm-dropdown-menu-label class="text-muted-foreground text-xs">
+                Select Mode
+              </hlm-dropdown-menu-label>
+              @for (model of modelOptions; track model.name) {
+                <button
+                  hlmDropdownMenuCheckbox
+                  [checked]="selectedModel().name === model.name"
+                  (click)="selectModel(model)"
+                >
+                  <span>{{ model.name }}</span>
+                  @if (model.badge) {
+                    <span
+                      hlmBadge
+                      variant="secondary"
+                      class="ml-2 h-5 rounded-sm bg-blue-100 px-1 text-xs text-blue-800 dark:bg-blue-900 dark:text-blue-100"
+                    >
+                      {{ model.badge }}
+                    </span>
+                  }
+                  <hlm-dropdown-menu-checkbox-indicator />
+                </button>
+              }
+            </hlm-dropdown-menu-group>
+          </hlm-dropdown-menu>
+        </ng-template>
+      }
+
+      <!-- Sources dropdown -->
+      @if (showSourcesButton()) {
+        <button
+          hlmInputGroupButton
+          class="rounded-full"
+          size="sm"
+          [hlmDropdownMenuTrigger]="sourcesMenu"
+        >
+          <ng-icon hlm name="lucideGlobe" size="sm" />
+          All Sources
+        </button>
+        <ng-template #sourcesMenu>
+          <hlm-dropdown-menu
+            class="border-border w-75 rounded-2xl [&_[data-slot=dropdown-menu-item]]:rounded-lg"
+          >
+            <hlm-dropdown-menu-group>
+              <!-- Web Search toggle -->
+              <button hlmDropdownMenuItem (click)="$event.stopPropagation()">
+                <label
+                  for="web-search"
+                  (click)="$event.stopPropagation()"
+                  class="flex flex-1 items-center"
+                >
+                  <ng-icon hlm name="lucideGlobe" class="mr-2" size="sm" />
+                  Web Search
+                  <hlm-switch
+                    id="web-search"
+                    class="ml-auto"
+                    [checked]="webSearchEnabled()"
+                    (click)="$event.stopPropagation(); toggleWebSearch()"
+                  />
+                </label>
+              </button>
+            </hlm-dropdown-menu-group>
+            <hlm-dropdown-menu-separator />
+            <hlm-dropdown-menu-group>
+              <!-- Apps & Integrations toggle -->
+              <button hlmDropdownMenuItem (click)="$event.stopPropagation()">
+                <label
+                  for="app-integrations"
+                  class="flex flex-1 items-center"
+                  (click)="$event.stopPropagation()"
+                >
+                  <ng-icon hlm name="lucideBlocks" class="mr-2" size="sm" />
+                  Apps and Integrations
+                  <hlm-switch
+                    id="app-integrations"
+                    class="ml-auto"
+                    [checked]="appsIntegrationsEnabled()"
+                    (click)="$event.stopPropagation(); toggleAppsIntegrations()"
+                  />
+                </label>
+              </button>
+              <button hlmDropdownMenuItem>
+                <ng-icon hlm name="lucideBookOpen" size="sm" />
+                Help Center
+              </button>
+            </hlm-dropdown-menu-group>
+            <hlm-dropdown-menu-separator />
+            <hlm-dropdown-menu-group>
+              <button hlmDropdownMenuItem>
+                <ng-icon hlm name="lucidePlus" size="sm" />
+                Connect Apps
+              </button>
+              <hlm-dropdown-menu-label class="text-muted-foreground text-xs">
+                We'll only search in the sources selected here.
+              </hlm-dropdown-menu-label>
+            </hlm-dropdown-menu-group>
+          </hlm-dropdown-menu>
+        </ng-template>
+      }
+
+      <!-- Mic button -->
+      @if (showMicButton()) {
+        <button
+          hlmInputGroupButton
+          class="ml-auto rounded-full"
+          size="icon-sm"
+          [class.animate-pulse]="isRecording()"
+          [class.text-red-500]="isRecording()"
+          [attr.aria-pressed]="isRecording()"
+          aria-label="Voice input"
+          (click)="toggleMic()"
+        >
+          <ng-icon hlm name="lucideMic" size="sm" />
+        </button>
+      }
+
+      <!-- Send button -->
+      <button
+        hlmInputGroupButton
+        [variant]="canSend() ? 'default' : 'secondary'"
+        class="rounded-full"
+        size="icon-sm"
+        [disabled]="!canSend()"
+        [attr.aria-disabled]="!canSend()"
+        aria-label="Send message"
+        (click)="handleSend()"
+      >
+        <ng-icon hlm name="lucideArrowUp" size="sm" />
+      </button>
     </div>
   </div>
 

@@ -16,7 +16,7 @@ export default [
           enforceBuildableLibDependency: true,
           allow: ['^.*/eslint(\\.base)?\\.config\\.[cm]?[jt]s$'],
           depConstraints: [
-            // Apps can depend on anything
+            // Apps can depend on public libs, internal libs, and UI components
             {
               sourceTag: 'scope:app',
               onlyDependOnLibsWithTags: [
@@ -31,20 +31,25 @@ export default [
               sourceTag: 'scope:e2e',
               onlyDependOnLibsWithTags: ['scope:app'],
             },
-            // Public packages can depend on other public packages
+            // Public packages can depend on other public packages and utils
             {
               sourceTag: 'scope:public',
-              onlyDependOnLibsWithTags: ['scope:public'],
+              onlyDependOnLibsWithTags: ['scope:public', 'type:util'],
             },
-            // Internal UI libs can depend on internal utils
+            // Internal libs can depend on internal and public
             {
               sourceTag: 'scope:internal',
-              onlyDependOnLibsWithTags: ['scope:internal'],
+              onlyDependOnLibsWithTags: ['scope:internal', 'scope:public', 'type:util'],
             },
-            // UI components can depend on utils
+            // UI components can depend on utils and other UI
             {
               sourceTag: 'type:ui',
-              onlyDependOnLibsWithTags: ['type:util', 'type:ui'],
+              onlyDependOnLibsWithTags: ['type:util', 'type:ui', 'scope:internal'],
+            },
+            // Utils can depend on other utils
+            {
+              sourceTag: 'type:util',
+              onlyDependOnLibsWithTags: ['type:util'],
             },
           ],
         },

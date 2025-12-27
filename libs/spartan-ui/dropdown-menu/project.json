@@ -1,0 +1,13 @@
+{
+  "name": "dropdown-menu",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/spartan-ui/dropdown-menu/src",
+  "prefix": "hlm",
+  "projectType": "library",
+  "tags": ["scope:internal", "type:ui"],
+  "targets": {
+    "lint": {
+      "executor": "@nx/eslint:lint"
+    }
+  }
+}

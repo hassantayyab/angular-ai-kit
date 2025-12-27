@@ -77,7 +77,38 @@
       ],
       "@angular-ai-kit/spartan-ui/dialog": [
         "libs/spartan-ui/dialog/src/index.ts"
-      ]
+      ],
+      "@angular-ai-kit/spartan-ui/spinner": [
+        "libs/spartan-ui/spinner/src/index.ts"
+      ],
+      "@angular-ai-kit/spartan-ui/empty": [
+        "libs/spartan-ui/empty/src/index.ts"
+      ],
+      "@angular-ai-kit/spartan-ui/button-group": [
+        "libs/spartan-ui/button-group/src/index.ts"
+      ],
+      "@angular-ai-kit/spartan-ui/checkbox": [
+        "libs/spartan-ui/checkbox/src/index.ts"
+      ],
+      "@angular-ai-kit/spartan-ui/dropdown-menu": [
+        "libs/spartan-ui/dropdown-menu/src/index.ts"
+      ],
+      "@angular-ai-kit/spartan-ui/field": [
+        "libs/spartan-ui/field/src/index.ts"
+      ],
+      "@angular-ai-kit/spartan-ui/input-group": [
+        "libs/spartan-ui/input-group/src/index.ts"
+      ],
+      "@angular-ai-kit/spartan-ui/popover": [
+        "libs/spartan-ui/popover/src/index.ts"
+      ],
+      "@angular-ai-kit/spartan-ui/radio-group": [
+        "libs/spartan-ui/radio-group/src/index.ts"
+      ],
+      "@angular-ai-kit/spartan-ui/select": [
+        "libs/spartan-ui/select/src/index.ts"
+      ],
+      "@angular-ai-kit/spartan-ui/item": ["libs/spartan-ui/item/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

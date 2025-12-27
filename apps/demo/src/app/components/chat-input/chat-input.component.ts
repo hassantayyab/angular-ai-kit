@@ -1,4 +1,26 @@
+import { NgIcon, provideIcons } from '@ng-icons/core';
+import {
+  lucideArrowUp,
+  lucideAtSign,
+  lucideBlocks,
+  lucideBookOpen,
+  lucideGlobe,
+  lucideLightbulb,
+  lucideMic,
+  lucidePaperclip,
+  lucidePlus,
+  lucideSearch,
+  lucideX,
+} from '@ng-icons/lucide';
+import { HlmAvatarImports } from '@angular-ai-kit/spartan-ui/avatar';
+import { HlmBadge } from '@angular-ai-kit/spartan-ui/badge';
 import { HlmButton } from '@angular-ai-kit/spartan-ui/button';
+import { HlmCommandImports } from '@angular-ai-kit/spartan-ui/command';
+import { HlmDropdownMenuImports } from '@angular-ai-kit/spartan-ui/dropdown-menu';
+import { HlmIcon } from '@angular-ai-kit/spartan-ui/icon';
+import { HlmInputGroupImports } from '@angular-ai-kit/spartan-ui/input-group';
+import { HlmPopoverImports } from '@angular-ai-kit/spartan-ui/popover';
+import { HlmSwitch } from '@angular-ai-kit/spartan-ui/switch';
 import { cn } from '@angular-ai-kit/utils';
 import { NgTemplateOutlet, isPlatformBrowser } from '@angular/common';
 import {
@@ -15,11 +37,8 @@ import {
   signal,
   viewChild,
 } from '@angular/core';
-import {
-  BrnPopover,
-  BrnPopoverContent,
-  BrnPopoverTrigger,
-} from '@spartan-ng/brain/popover';
+import { BrnCommandEmpty } from '@spartan-ng/brain/command';
+import { BrnPopoverImports } from '@spartan-ng/brain/popover';
 
 /**
  * Source option for the sources dropdown
@@ -48,6 +67,23 @@ export interface ChatSuggestion {
 export type SuggestionsPosition = 'top' | 'bottom';
 
 /**
+ * Model option for the model selector dropdown
+ */
+export interface ModelOption {
+  name: string;
+  badge?: string;
+}
+
+/**
+ * Context item for the context/mention dropdown
+ */
+export interface ContextItem {
+  type: 'page' | 'file' | 'user';
+  title: string;
+  icon: string;
+}
+
+/**
  * ChatInputComponent
  *
  * Auto-resizing textarea with send button for chat input.
@@ -69,10 +105,33 @@ export type SuggestionsPosition = 'top' | 'bottom';
   encapsulation: ViewEncapsulation.None,
   imports: [
     HlmButton,
+    HlmInputGroupImports,
+    HlmDropdownMenuImports,
+    HlmCommandImports,
+    HlmPopoverImports,
+    HlmAvatarImports,
+    HlmIcon,
+    HlmBadge,
+    HlmSwitch,
+    NgIcon,
     NgTemplateOutlet,
-    BrnPopover,
-    BrnPopoverContent,
-    BrnPopoverTrigger,
+    BrnPopoverImports,
+    BrnCommandEmpty,
+  ],
+  providers: [
+    provideIcons({
+      lucidePaperclip,
+      lucideArrowUp,
+      lucideGlobe,
+      lucideMic,
+      lucideLightbulb,
+      lucideBlocks,
+      lucideBookOpen,
+      lucidePlus,
+      lucideAtSign,
+      lucideSearch,
+      lucideX,
+    }),
   ],
   host: {
     class: 'app-chat-input-host block',
@@ -121,12 +180,50 @@ export class ChatInputComponent {
   isRecording = signal(false);
   selectedSource = signal('all');
 
-  // Source options
+  // Source options (legacy - kept for backward compatibility)
   readonly sourceOptions: SourceOption[] = [
     { value: 'all', label: 'All sources' },
     { value: 'web', label: 'Web only' },
     { value: 'docs', label: 'Documents' },
   ];
+
+  // Model options
+  readonly modelOptions: ModelOption[] = [
+    { name: 'Auto' },
+    { name: 'Agent Mode', badge: 'Beta' },
+    { name: 'Plan Mode' },
+  ];
+
+  // Model selection state
+  selectedModel = signal<ModelOption>(this.modelOptions[0]);
+
+  // Sources toggle states
+  webSearchEnabled = signal(true);
+  appsIntegrationsEnabled = signal(true);
+
+  // Context items for the context/mention dropdown
+  readonly contextItems: ContextItem[] = [
+    { type: 'page', title: 'Meeting Notes', icon: '📝' },
+    { type: 'page', title: 'Project Dashboard', icon: '📊' },
+    { type: 'page', title: 'Documentation', icon: '📚' },
+    { type: 'file', title: 'Report.pdf', icon: '📄' },
+    { type: 'file', title: 'Data.csv', icon: '📈' },
+  ];
+
+  // Selected contexts
+  selectedContexts = signal<ContextItem[]>([]);
+
+  // Computed: check if has contexts
+  hasContext = computed(() => this.selectedContexts().length > 0);
+
+  // Computed: context button size
+  contextButtonSize = computed(() => (this.hasContext() ? 'icon-sm' : 'sm'));
+
+  // Computed: available context items (not already selected)
+  availableContextItems = computed(() => {
+    const selected = this.selectedContexts().map((c) => c.title);
+    return this.contextItems.filter((item) => !selected.includes(item.title));
+  });
 
   // File input ref
   private fileInputRef = viewChild<ElementRef<HTMLInputElement>>('fileInput');
@@ -136,16 +233,6 @@ export class ChatInputComponent {
     return this.inputValue().trim().length > 0 && !this.disabled();
   });
 
-  /** Check if any left toolbar items are visible */
-  hasLeftToolbarItems = computed(() => {
-    return (
-      this.showAttachmentButton() ||
-      this.showResearchButton() ||
-      this.showSourcesButton() ||
-      this.showModelName()
-    );
-  });
-
   /** Show suggestions only when input is empty and feature is enabled */
   suggestionsVisible = computed(() => {
     return (
@@ -153,14 +240,6 @@ export class ChatInputComponent {
       this.suggestions().length > 0 &&
       this.inputValue().trim().length === 0
     );
-  });
-
-  /** Get label for selected source */
-  selectedSourceLabel = computed(() => {
-    const source = this.sourceOptions.find(
-      (opt) => opt.value === this.selectedSource()
-    );
-    return source?.label ?? 'All sources';
   });
 
   constructor() {
@@ -173,43 +252,6 @@ export class ChatInputComponent {
   // Computed classes
   containerClasses = computed(() => {
     return cn('app-chat-input', 'w-full', 'px-4 pb-4 pt-2');
-  });
-
-  cardClasses = computed(() => {
-    return cn(
-      'rounded-3xl',
-      'border border-[var(--border)]',
-      'bg-[var(--card)]',
-      'shadow-sm',
-      'transition-all duration-200',
-      'focus-within:border-[var(--border-hover)]',
-      'focus-within:shadow-md'
-    );
-  });
-
-  textareaClasses = computed(() => {
-    return cn(
-      'w-full',
-      'resize-none',
-      'bg-transparent',
-      'text-[var(--foreground)]',
-      'placeholder:text-[var(--foreground-muted)]',
-      'focus:outline-none',
-      'text-base leading-relaxed',
-      'max-h-[200px]',
-      'scrollbar-thin',
-      {
-        'opacity-50 cursor-not-allowed': this.disabled(),
-      }
-    );
-  });
-
-  toolbarClasses = computed(() => {
-    return cn('flex items-center justify-between', 'px-3 pb-3 pt-1');
-  });
-
-  sendButtonClasses = computed(() => {
-    return cn('rounded-full');
   });
 
   // Methods
@@ -319,6 +361,33 @@ export class ChatInputComponent {
   selectSource(value: string): void {
     this.selectedSource.set(value);
     this.sourceChange.emit(value);
+  }
+
+  /** Select a model option */
+  selectModel(model: ModelOption): void {
+    this.selectedModel.set(model);
+  }
+
+  /** Toggle web search */
+  toggleWebSearch(): void {
+    this.webSearchEnabled.update((v) => !v);
+  }
+
+  /** Toggle apps & integrations */
+  toggleAppsIntegrations(): void {
+    this.appsIntegrationsEnabled.update((v) => !v);
+  }
+
+  /** Add a context item */
+  addContext(item: ContextItem): void {
+    this.selectedContexts.update((contexts) => [...contexts, item]);
+  }
+
+  /** Remove a context item */
+  removeContext(item: ContextItem): void {
+    this.selectedContexts.update((contexts) =>
+      contexts.filter((c) => c.title !== item.title)
+    );
   }
 
   /** Toggle microphone recording */

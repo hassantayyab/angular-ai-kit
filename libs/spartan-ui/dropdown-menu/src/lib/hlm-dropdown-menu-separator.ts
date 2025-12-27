@@ -1,0 +1,14 @@
+import { classes } from '@angular-ai-kit/spartan-ui/utils';
+import { Directive } from '@angular/core';
+
+@Directive({
+  selector: '[hlmDropdownMenuSeparator],hlm-dropdown-menu-separator',
+  host: {
+    'data-slot': 'dropdown-menu-separator',
+  },
+})
+export class HlmDropdownMenuSeparator {
+  constructor() {
+    classes(() => 'bg-border -mx-1 my-1 block h-px');
+  }
+}

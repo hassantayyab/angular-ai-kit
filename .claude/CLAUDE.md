@@ -27,6 +27,7 @@ This is an **Angular v21** component library focused on AI chat interfaces. We'r
 
 - **Angular:** v21 (latest features)
 - **Tailwind CSS:** v4 (with @tailwindcss/postcss)
+- **Spartan UI:** Accessible component primitives (`@angular-ai-kit/spartan-ui/*`)
 - **Nx:** Latest monorepo tooling
 - **TypeScript:** Latest with strict mode
 - **CSS ONLY** (NO SCSS)
@@ -66,7 +67,7 @@ packages/angular-ai-kit/src/lib/
 | `tailwind-v4.md`          | Tailwind v4 setup, cn() utility, responsive design           |
 | `todo-management.md`      | Phase tracking, TODO.md management                           |
 | `typescript.md`           | Type safety, interfaces, error handling                      |
-| `ai-components.md`        | AI chat-specific component rules                             |
+| `ai-components.md`        | AI chat rules, Spartan UI components guide                   |
 
 ### When to Update Which File
 
@@ -76,7 +77,7 @@ packages/angular-ai-kit/src/lib/
 - **Angular patterns?** → `angular-v21.md`
 - **File organization/naming?** → `architecture.md`
 - **Accessibility?** → `accessibility.md`
-- **AI chat features?** → `ai-components.md`
+- **AI chat features / Spartan UI?** → `ai-components.md`
 - **TypeScript types?** → `typescript.md`
 - **Task tracking?** → `todo-management.md`
 - **Dialogs/Overlays/Focus?** → `angular-cdk.md`
