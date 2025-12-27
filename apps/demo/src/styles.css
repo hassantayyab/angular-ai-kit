@@ -74,7 +74,7 @@
     --radius: 0.5rem;
 
     /* Sidebar (Spartan UI) */
-    --sidebar-background: theme('colors.zinc.100');
+    --sidebar-background: theme('colors.zinc.50');
     --sidebar-foreground: theme('colors.zinc.950');
     --sidebar-primary: theme('colors.zinc.900');
     --sidebar-primary-foreground: theme('colors.zinc.50');
