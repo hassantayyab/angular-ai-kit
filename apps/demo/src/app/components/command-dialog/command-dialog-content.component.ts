@@ -4,6 +4,7 @@ import {
   Component,
   ViewEncapsulation,
   computed,
+  effect,
   inject,
   signal,
 } from '@angular/core';
@@ -32,6 +33,7 @@ export interface CommandDialogData {
  *
  * The content component for the command palette dialog.
  * Opened via CDK Dialog with proper focus trapping and accessibility.
+ * Supports keyboard navigation with arrow keys.
  */
 @Component({
   selector: 'app-command-dialog-content',
@@ -41,6 +43,7 @@ export interface CommandDialogData {
   imports: [KbdComponent],
   host: {
     class: 'app-command-dialog-content',
+    '(keydown)': 'handleKeydown($event)',
   },
 })
 export class CommandDialogContentComponent {
@@ -53,6 +56,9 @@ export class CommandDialogContentComponent {
 
   // Search state
   searchQuery = signal('');
+
+  // Keyboard navigation state
+  selectedIndex = signal(0);
 
   // Filtered items based on search query
   filteredNavigationItems = computed(() => {
@@ -79,6 +85,21 @@ export class CommandDialogContentComponent {
     );
   });
 
+  // All filtered items flattened for keyboard navigation
+  allFilteredItems = computed(() => [
+    ...this.filteredNavigationItems(),
+    ...this.filteredActionItems(),
+    ...this.filteredComponentItems(),
+  ]);
+
+  constructor() {
+    // Reset selection when search query changes
+    effect(() => {
+      this.searchQuery();
+      this.selectedIndex.set(0);
+    });
+  }
+
   onSearchInput(event: Event): void {
     const input = event.target as HTMLInputElement;
     this.searchQuery.set(input.value);
@@ -91,5 +112,45 @@ export class CommandDialogContentComponent {
   executeItem(item: CommandItem): void {
     item.action();
     this.close();
+  }
+
+  /**
+   * Check if an item is currently selected via keyboard navigation
+   */
+  isSelected(item: CommandItem): boolean {
+    const allItems = this.allFilteredItems();
+    const index = allItems.indexOf(item);
+    return index === this.selectedIndex();
+  }
+
+  /**
+   * Handle keyboard navigation
+   */
+  handleKeydown(event: KeyboardEvent): void {
+    const items = this.allFilteredItems();
+    const currentIndex = this.selectedIndex();
+
+    switch (event.key) {
+      case 'ArrowDown':
+        event.preventDefault();
+        this.selectedIndex.set((currentIndex + 1) % items.length);
+        break;
+
+      case 'ArrowUp':
+        event.preventDefault();
+        this.selectedIndex.set(
+          currentIndex <= 0 ? items.length - 1 : currentIndex - 1
+        );
+        break;
+
+      case 'Enter': {
+        event.preventDefault();
+        const selectedItem = items[currentIndex];
+        if (selectedItem) {
+          this.executeItem(selectedItem);
+        }
+        break;
+      }
+    }
   }
 }

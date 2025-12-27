@@ -74,6 +74,9 @@
       ],
       "@angular-ai-kit/spartan-ui/slider": [
         "libs/spartan-ui/slider/slider/src/index.ts"
+      ],
+      "@angular-ai-kit/spartan-ui/dialog": [
+        "libs/spartan-ui/dialog/src/index.ts"
       ]
     }
   },

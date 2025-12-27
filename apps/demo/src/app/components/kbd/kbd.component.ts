@@ -22,7 +22,7 @@ import {
   encapsulation: ViewEncapsulation.None,
   host: {
     class:
-      'bg-muted text-muted-foreground border-input pointer-events-none inline-flex h-5 items-center justify-center rounded border px-1.5 font-mono text-[10px] font-medium select-none',
+      'bg-muted/50 text-muted-foreground pointer-events-none inline-flex h-5 items-center justify-center rounded border border-foreground/10 px-1.5 font-mono text-[10px] font-medium select-none',
   },
 })
 export class KbdComponent {}
