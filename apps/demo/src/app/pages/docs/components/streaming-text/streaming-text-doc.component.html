@@ -9,132 +9,58 @@
   </div>
 
   <!-- Live Demo -->
-  <section class="bg-card border-border rounded-lg border p-6">
-    <h2 class="mb-4 text-lg font-semibold">Live Demo</h2>
-
-    <div
-      class="bg-muted mb-4 min-h-[100px] rounded-lg p-4 text-sm leading-relaxed"
-    >
-      <app-streaming-text
-        [content]="demoContent()"
-        [isStreaming]="isStreaming()"
-        [speed]="speed()"
-        [showCursor]="showCursor()"
-      />
-    </div>
-
-    <div class="flex gap-2">
-      <button hlmBtn (click)="restartDemo()">Restart Demo</button>
-      <button hlmBtn variant="secondary" (click)="toggleStreaming()">
-        {{ isStreaming() ? 'Stop' : 'Start' }} Streaming
-      </button>
-    </div>
-  </section>
+  <app-doc-section title="Live Demo" size="lg">
+    <app-doc-demo-card>
+      <div
+        class="bg-muted mb-4 min-h-[100px] rounded-lg p-4 text-sm leading-relaxed"
+      >
+        <app-streaming-text
+          [content]="demoContent()"
+          [isStreaming]="isStreaming()"
+          [speed]="speed()"
+          [showCursor]="showCursor()"
+        />
+      </div>
+      <div class="flex gap-2">
+        <button hlmBtn (click)="restartDemo()">Restart Demo</button>
+        <button hlmBtn variant="secondary" (click)="toggleStreaming()">
+          {{ isStreaming() ? 'Stop' : 'Start' }} Streaming
+        </button>
+      </div>
+    </app-doc-demo-card>
+  </app-doc-section>
 
   <!-- Configuration -->
-  <section class="bg-card border-border rounded-lg border p-6">
-    <h2 class="mb-4 text-lg font-semibold">Configuration</h2>
-
-    <div class="grid gap-4 md:grid-cols-2">
-      <!-- Show Cursor -->
-      <div class="flex items-center justify-between">
-        <span class="text-sm font-medium">Show Cursor</span>
-        <hlm-switch
-          id="show-cursor-switch"
-          aria-label="Show cursor"
+  <app-doc-section title="Configuration" size="lg">
+    <app-doc-demo-card>
+      <div class="grid gap-4 md:grid-cols-2">
+        <app-doc-control-toggle
+          label="Show Cursor"
           [checked]="showCursor()"
           (checkedChange)="showCursor.set($event)"
         />
-      </div>
-
-      <!-- Speed -->
-      <div class="flex flex-col gap-2">
-        <span class="text-sm font-medium"
-          >Speed: {{ speed() }}ms per character</span
-        >
-        <hlm-slider
-          aria-label="Streaming speed"
+        <app-doc-slider-control
+          label="Speed"
+          [value]="speed()"
           [min]="5"
           [max]="100"
           [step]="5"
-          [value]="speed()"
+          suffix="ms per character"
           (valueChange)="speed.set($event)"
         />
       </div>
-    </div>
-  </section>
+    </app-doc-demo-card>
+  </app-doc-section>
 
   <!-- API Reference -->
-  <section class="bg-card border-border rounded-lg border p-6">
-    <h2 class="mb-4 text-lg font-semibold">API Reference</h2>
-
-    <div class="overflow-x-auto">
-      <table class="w-full text-left text-sm">
-        <thead class="border-border border-b">
-          <tr>
-            <th class="px-4 py-2 font-medium">Input</th>
-            <th class="px-4 py-2 font-medium">Type</th>
-            <th class="px-4 py-2 font-medium">Default</th>
-            <th class="px-4 py-2 font-medium">Description</th>
-          </tr>
-        </thead>
-        <tbody class="divide-border divide-y">
-          <tr>
-            <td class="px-4 py-2 font-mono text-xs">content</td>
-            <td class="px-4 py-2 font-mono text-xs">string</td>
-            <td class="px-4 py-2 font-mono text-xs">required</td>
-            <td class="text-muted-foreground px-4 py-2">
-              Full text content to display
-            </td>
-          </tr>
-          <tr>
-            <td class="px-4 py-2 font-mono text-xs">isStreaming</td>
-            <td class="px-4 py-2 font-mono text-xs">boolean</td>
-            <td class="px-4 py-2 font-mono text-xs">false</td>
-            <td class="text-muted-foreground px-4 py-2">
-              Whether text is currently streaming
-            </td>
-          </tr>
-          <tr>
-            <td class="px-4 py-2 font-mono text-xs">speed</td>
-            <td class="px-4 py-2 font-mono text-xs">number</td>
-            <td class="px-4 py-2 font-mono text-xs">30</td>
-            <td class="text-muted-foreground px-4 py-2">
-              Milliseconds per character
-            </td>
-          </tr>
-          <tr>
-            <td class="px-4 py-2 font-mono text-xs">showCursor</td>
-            <td class="px-4 py-2 font-mono text-xs">boolean</td>
-            <td class="px-4 py-2 font-mono text-xs">true</td>
-            <td class="text-muted-foreground px-4 py-2">
-              Show blinking cursor during streaming
-            </td>
-          </tr>
-          <tr>
-            <td class="px-4 py-2 font-mono text-xs">cursorChar</td>
-            <td class="px-4 py-2 font-mono text-xs">string</td>
-            <td class="px-4 py-2 font-mono text-xs">'&#9610;'</td>
-            <td class="text-muted-foreground px-4 py-2">
-              Character used for cursor
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </section>
+  <app-doc-section title="API Reference" size="lg">
+    <app-doc-demo-card>
+      <app-doc-api-table title="Inputs" [properties]="inputs" />
+    </app-doc-demo-card>
+  </app-doc-section>
 
   <!-- Usage Example -->
-  <section class="bg-card border-border rounded-lg border p-6">
-    <h2 class="mb-4 text-lg font-semibold">Usage Example</h2>
-
-    <div class="bg-muted overflow-x-auto rounded-lg p-4">
-      <pre class="text-sm"><code>&lt;app-streaming-text
-  [content]="message.content"
-  [isStreaming]="message.status === 'streaming'"
-  [speed]="30"
-  [showCursor]="true"
-/&gt;</code></pre>
-    </div>
-  </section>
+  <app-doc-section title="Usage Example" size="lg">
+    <app-doc-code-block [code]="usageCode" [multiline]="true" />
+  </app-doc-section>
 </div>

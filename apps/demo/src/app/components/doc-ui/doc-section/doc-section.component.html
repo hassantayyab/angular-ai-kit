@@ -1,0 +1,13 @@
+<section>
+  <h2
+    class="mb-4 font-semibold"
+    [class.text-xl]="size() === 'xl'"
+    [class.text-lg]="size() === 'lg'"
+  >
+    {{ title() }}
+  </h2>
+  @if (description()) {
+    <p class="text-muted-foreground mb-4">{{ description() }}</p>
+  }
+  <ng-content />
+</section>

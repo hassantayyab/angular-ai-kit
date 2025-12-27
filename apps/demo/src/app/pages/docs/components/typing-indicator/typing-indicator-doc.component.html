@@ -8,157 +8,73 @@
   </div>
 
   <!-- Live Demo -->
-  <section class="bg-card border-border rounded-lg border p-6">
-    <h2 class="mb-4 text-lg font-semibold">Live Demo</h2>
-
-    <div class="bg-muted mb-4 flex items-center justify-center rounded-lg p-8">
-      <app-typing-indicator
-        [showAvatar]="showAvatar()"
-        [text]="showText() ? text() : ''"
-        [dotCount]="dotCount()"
-      />
-    </div>
-  </section>
+  <app-doc-section title="Live Demo" size="lg">
+    <app-doc-demo-card>
+      <div
+        class="bg-muted mb-4 flex items-center justify-center rounded-lg p-8"
+      >
+        <app-typing-indicator
+          [showAvatar]="showAvatar()"
+          [text]="showText() ? text() : ''"
+          [dotCount]="dotCount()"
+        />
+      </div>
+    </app-doc-demo-card>
+  </app-doc-section>
 
   <!-- Configuration -->
-  <section class="bg-card border-border rounded-lg border p-6">
-    <h2 class="mb-4 text-lg font-semibold">Configuration</h2>
-
-    <div class="grid gap-4 md:grid-cols-2">
-      <!-- Show Avatar -->
-      <div class="flex items-center justify-between">
-        <span class="text-sm font-medium">Show Avatar</span>
-        <hlm-switch
-          id="show-avatar-switch"
-          aria-label="Show avatar"
+  <app-doc-section title="Configuration" size="lg">
+    <app-doc-demo-card>
+      <div class="grid gap-4 md:grid-cols-2">
+        <app-doc-control-toggle
+          label="Show Avatar"
           [checked]="showAvatar()"
           (checkedChange)="showAvatar.set($event)"
         />
-      </div>
-
-      <!-- Show Text -->
-      <div class="flex items-center justify-between">
-        <span class="text-sm font-medium">Show Text</span>
-        <hlm-switch
-          id="show-text-switch"
-          aria-label="Show text"
+        <app-doc-control-toggle
+          label="Show Text"
           [checked]="showText()"
           (checkedChange)="showText.set($event)"
         />
-      </div>
-
-      <!-- Dot Count -->
-      <div class="flex flex-col gap-2">
-        <span class="text-sm font-medium">Dot Count: {{ dotCount() }}</span>
-        <hlm-slider
-          aria-label="Dot count"
+        <app-doc-slider-control
+          label="Dot Count"
+          [value]="dotCount()"
           [min]="2"
           [max]="5"
           [step]="1"
-          [value]="dotCount()"
           (valueChange)="dotCount.set($event)"
         />
+        @if (showText()) {
+          <div class="flex flex-col gap-2 px-3 py-2.5">
+            <label for="text-message-input" class="text-sm font-medium">
+              Text Message
+            </label>
+            <input
+              id="text-message-input"
+              type="text"
+              [value]="text()"
+              (input)="text.set($any($event.target).value)"
+              class="bg-muted border-border rounded-md border px-3 py-2 text-sm"
+              placeholder="Thinking..."
+            />
+          </div>
+        }
       </div>
-
-      <!-- Text Input -->
-      @if (showText()) {
-        <div class="flex flex-col gap-2">
-          <label for="text-message-input" class="text-sm font-medium"
-            >Text Message</label
-          >
-          <input
-            id="text-message-input"
-            type="text"
-            [value]="text()"
-            (input)="text.set($any($event.target).value)"
-            class="bg-muted border-border rounded-md border px-3 py-2 text-sm"
-            placeholder="Thinking..."
-          />
-        </div>
-      }
-    </div>
-  </section>
+    </app-doc-demo-card>
+  </app-doc-section>
 
   <!-- API Reference -->
-  <section class="bg-card border-border rounded-lg border p-6">
-    <h2 class="mb-4 text-lg font-semibold">API Reference</h2>
-
-    <div class="overflow-x-auto">
-      <table class="w-full text-left text-sm">
-        <thead class="border-border border-b">
-          <tr>
-            <th class="px-4 py-2 font-medium">Input</th>
-            <th class="px-4 py-2 font-medium">Type</th>
-            <th class="px-4 py-2 font-medium">Default</th>
-            <th class="px-4 py-2 font-medium">Description</th>
-          </tr>
-        </thead>
-        <tbody class="divide-border divide-y">
-          <tr>
-            <td class="px-4 py-2 font-mono text-xs">showAvatar</td>
-            <td class="px-4 py-2 font-mono text-xs">boolean</td>
-            <td class="px-4 py-2 font-mono text-xs">true</td>
-            <td class="text-muted-foreground px-4 py-2">
-              Show AI avatar next to dots
-            </td>
-          </tr>
-          <tr>
-            <td class="px-4 py-2 font-mono text-xs">text</td>
-            <td class="px-4 py-2 font-mono text-xs">string</td>
-            <td class="px-4 py-2 font-mono text-xs">''</td>
-            <td class="text-muted-foreground px-4 py-2">
-              Optional text message (e.g., "Thinking...")
-            </td>
-          </tr>
-          <tr>
-            <td class="px-4 py-2 font-mono text-xs">dotCount</td>
-            <td class="px-4 py-2 font-mono text-xs">number</td>
-            <td class="px-4 py-2 font-mono text-xs">3</td>
-            <td class="text-muted-foreground px-4 py-2">
-              Number of animated dots (2-5)
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </section>
+  <app-doc-section title="API Reference" size="lg">
+    <app-doc-demo-card>
+      <app-doc-api-table title="Inputs" [properties]="inputs" />
+    </app-doc-demo-card>
+  </app-doc-section>
 
   <!-- Accessibility -->
-  <section class="bg-card border-border rounded-lg border p-6">
-    <h2 class="mb-4 text-lg font-semibold">Accessibility</h2>
-
-    <ul class="text-muted-foreground list-inside list-disc space-y-2 text-sm">
-      <li>
-        Uses <code class="bg-muted rounded px-1">role="status"</code> for screen
-        reader announcements
-      </li>
-      <li>
-        Includes <code class="bg-muted rounded px-1">aria-label</code> for "AI
-        is typing"
-      </li>
-      <li>
-        Hidden text "AI is thinking..." for screen readers via
-        <code class="bg-muted rounded px-1">sr-only</code> class
-      </li>
-      <li>
-        Respects
-        <code class="bg-muted rounded px-1">prefers-reduced-motion</code> media
-        query
-      </li>
-    </ul>
-  </section>
+  <app-doc-features-list title="Accessibility" [items]="accessibility" />
 
   <!-- Usage Example -->
-  <section class="bg-card border-border rounded-lg border p-6">
-    <h2 class="mb-4 text-lg font-semibold">Usage Example</h2>
-
-    <div class="bg-muted overflow-x-auto rounded-lg p-4">
-      <pre class="text-sm"><code>&#64;if (loading()) {{'{'}}
-  &lt;app-typing-indicator
-    [showAvatar]="true"
-    [text]="'Thinking...'"
-  /&gt;
-{{'}'}}</code></pre>
-    </div>
-  </section>
+  <app-doc-section title="Usage Example" size="lg">
+    <app-doc-code-block [code]="usageCode" [multiline]="true" />
+  </app-doc-section>
 </div>

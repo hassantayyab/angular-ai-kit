@@ -1,6 +1,4 @@
 import { HlmButton } from '@angular-ai-kit/spartan-ui/button';
-import { HlmSlider } from '@angular-ai-kit/spartan-ui/slider';
-import { HlmSwitch } from '@angular-ai-kit/spartan-ui/switch';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -8,25 +6,86 @@ import {
   signal,
   viewChild,
 } from '@angular/core';
+import {
+  ApiProperty,
+  DocApiTableComponent,
+  DocCodeBlockComponent,
+  DocControlToggleComponent,
+  DocDemoCardComponent,
+  DocSectionComponent,
+  DocSliderControlComponent,
+} from '../../../../components/doc-ui';
 import { StreamingTextComponent } from '../../../../components/streaming-text';
+
+/** API Input properties */
+const INPUTS: ApiProperty[] = [
+  {
+    name: 'content',
+    type: 'string',
+    default: 'required',
+    description: 'Full text content to display',
+  },
+  {
+    name: 'isStreaming',
+    type: 'boolean',
+    default: 'false',
+    description: 'Whether text is currently streaming',
+  },
+  {
+    name: 'speed',
+    type: 'number',
+    default: '30',
+    description: 'Milliseconds per character',
+  },
+  {
+    name: 'showCursor',
+    type: 'boolean',
+    default: 'true',
+    description: 'Show blinking cursor during streaming',
+  },
+  {
+    name: 'cursorChar',
+    type: 'string',
+    default: "'▊'",
+    description: 'Character used for cursor',
+  },
+];
+
+/** Code examples */
+const USAGE_CODE = `<app-streaming-text
+  [content]="message.content"
+  [isStreaming]="message.status === 'streaming'"
+  [speed]="30"
+  [showCursor]="true"
+/>`;
 
 /**
  * StreamingText Documentation Component
- *
- * Interactive playground for the StreamingText component
- * with configurable options for speed, cursor, and streaming state.
  */
 @Component({
   selector: 'app-streaming-text-doc',
   templateUrl: './streaming-text-doc.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
-  imports: [StreamingTextComponent, HlmSwitch, HlmSlider, HlmButton],
+  imports: [
+    StreamingTextComponent,
+    HlmButton,
+    DocSectionComponent,
+    DocDemoCardComponent,
+    DocCodeBlockComponent,
+    DocApiTableComponent,
+    DocControlToggleComponent,
+    DocSliderControlComponent,
+  ],
   host: {
     class: 'app-streaming-text-doc block',
   },
 })
 export class StreamingTextDocComponent {
+  // API data
+  readonly inputs = INPUTS;
+  readonly usageCode = USAGE_CODE;
+
   // Reference to streaming text component
   private streamingText = viewChild(StreamingTextComponent);
 

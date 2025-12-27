@@ -9,9 +9,9 @@
       @for (suggestion of suggestions(); track suggestion.label) {
         <button
           type="button"
-          hlmBadge
-          variant="secondary"
-          class="cursor-pointer rounded-full border border-zinc-200 px-3 py-1 dark:border-zinc-700"
+          hlmBtn
+          variant="outline"
+          class="rounded-full px-3 py-1 text-xs"
           (click)="handleSuggestionClick(suggestion)"
           [attr.aria-label]="'Use suggestion: ' + suggestion.label"
         >

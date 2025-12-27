@@ -1,0 +1,6 @@
+<div class="bg-card border-border rounded-lg border" [class.p-6]="padding()">
+  @if (title()) {
+    <h3 class="mb-4 text-lg font-semibold">{{ title() }}</h3>
+  }
+  <ng-content />
+</div>

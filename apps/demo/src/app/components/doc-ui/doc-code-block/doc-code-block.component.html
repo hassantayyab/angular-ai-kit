@@ -1,0 +1,7 @@
+<div class="bg-muted overflow-x-auto rounded-lg p-4">
+  @if (multiline()) {
+    <pre class="text-sm"><code>{{ code() }}</code></pre>
+  } @else {
+    <code class="text-sm">{{ code() }}</code>
+  }
+</div>

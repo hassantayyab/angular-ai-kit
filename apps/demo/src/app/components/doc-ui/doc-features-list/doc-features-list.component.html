@@ -1,0 +1,8 @@
+<section>
+  <h2 class="mb-4 text-xl font-semibold">{{ title() }}</h2>
+  <ul class="text-muted-foreground list-inside list-disc space-y-2">
+    @for (item of items(); track item) {
+      <li>{{ item }}</li>
+    }
+  </ul>
+</section>
