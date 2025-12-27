@@ -4,7 +4,7 @@
   "sourceRoot": "libs/spartan-ui/button/src",
   "prefix": "hlm",
   "projectType": "library",
-  "tags": [],
+  "tags": ["scope:internal", "type:ui"],
   "targets": {
     "lint": {
       "executor": "@nx/eslint:lint"
