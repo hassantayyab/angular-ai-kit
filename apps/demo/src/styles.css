@@ -1,4 +1,7 @@
-/* Angular AI Kit Demo - Design System */
+/* Angular AI Kit Demo - Design System
+ * Architecture: Tailwind CSS v4 + Minimal CSS Variables for Spartan UI
+ * Color Scale: Zinc (Tailwind built-in)
+ */
 
 @layer theme, base, components, utilities;
 @import 'tailwindcss/theme.css' layer(theme);
@@ -6,9 +9,9 @@
 @import 'tailwindcss/utilities.css';
 @import '@spartan-ng/brain/hlm-tailwind-preset.css';
 
-@source '../../packages'; /* Watch packages for classes */
+@source '../../packages';
 
-/* Sidebar Theme Colors (Tailwind v4) */
+/* Tailwind v4 theme extension for sidebar colors */
 @theme {
   --color-sidebar: var(--sidebar-background);
   --color-sidebar-foreground: var(--sidebar-foreground);
@@ -21,173 +24,112 @@
 }
 
 /* ============================================
-   Design Tokens - CSS Custom Properties
+   Semantic Design Tokens
+   Using Tailwind theme() for all color values
    ============================================ */
 
 @layer base {
   /* Light Theme (Default) */
   :root {
-    /* Background Colors */
-    --background: #fafafa; /* zinc-50 */
-    --background-secondary: #f4f4f5; /* zinc-100 */
+    /* Core Colors */
+    --background: theme('colors.zinc.50');
+    --foreground: theme('colors.zinc.950');
 
-    /* Card Colors */
-    --card: #ffffff;
-    --card-hover: #fafafa; /* zinc-50 */
-    --card-foreground: #09090b; /* zinc-950 */
+    /* Card */
+    --card: theme('colors.white');
+    --card-foreground: theme('colors.zinc.950');
 
-    /* Popover Colors (for tooltips, dropdowns) */
-    --popover: #ffffff;
-    --popover-foreground: #09090b; /* zinc-950 */
+    /* Popover */
+    --popover: theme('colors.white');
+    --popover-foreground: theme('colors.zinc.950');
 
-    /* Foreground Colors */
-    --foreground: #09090b; /* zinc-950 */
-    --foreground-secondary: #3f3f46; /* zinc-700 */
-    --foreground-muted: #71717a; /* zinc-500 */
+    /* Muted */
+    --muted: theme('colors.zinc.100');
+    --muted-foreground: theme('colors.zinc.500');
 
-    /* Muted/Subtle Colors */
-    --muted: #f4f4f5; /* zinc-100 */
-    --muted-foreground: #71717a; /* zinc-500 */
+    /* Accent */
+    --accent: theme('colors.zinc.100');
+    --accent-foreground: theme('colors.zinc.900');
 
-    /* Border Colors */
-    --border: #e4e4e7; /* zinc-200 */
-    --border-hover: #d4d4d8; /* zinc-300 */
-    --input: #e4e4e7; /* zinc-200 - for input borders */
+    /* Border & Input */
+    --border: theme('colors.zinc.200');
+    --input: theme('colors.zinc.200');
 
-    /* Primary Colors */
-    --primary: #18181b; /* zinc-900 */
-    --primary-hover: #27272a; /* zinc-800 */
-    --primary-foreground: #fafafa; /* zinc-50 */
+    /* Ring */
+    --ring: theme('colors.zinc.400');
 
-    /* Secondary Colors */
-    --secondary: #f4f4f5; /* zinc-100 */
-    --secondary-foreground: #18181b; /* zinc-900 */
+    /* Primary */
+    --primary: theme('colors.zinc.900');
+    --primary-foreground: theme('colors.zinc.50');
 
-    /* Accent Colors */
-    --accent: #f4f4f5; /* zinc-100 */
-    --accent-hover: #e4e4e7; /* zinc-200 */
-    --accent-foreground: #18181b; /* zinc-900 */
+    /* Secondary */
+    --secondary: theme('colors.zinc.100');
+    --secondary-foreground: theme('colors.zinc.900');
 
-    /* Semantic Colors */
-    --destructive: #ef4444;
-    --destructive-foreground: #fafafa;
-    --success: #22c55e;
-    --success-foreground: #fafafa;
-
-    /* Ring/Focus Colors */
-    --ring: #a1a1aa; /* zinc-400 */
-    --ring-offset: #ffffff;
-    --ring-offset-background: #ffffff;
-
-    /* Shadows */
-    --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-    --shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
-    --shadow-md:
-      0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-    --shadow-lg:
-      0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
-    --shadow-xl:
-      0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+    /* Destructive */
+    --destructive: theme('colors.red.500');
+    --destructive-foreground: theme('colors.zinc.50');
 
     /* Border Radius */
-    --radius-sm: 0.25rem;
     --radius: 0.5rem;
-    --radius-md: 0.625rem;
-    --radius-lg: 0.75rem;
-    --radius-xl: 1rem;
-    --radius-full: 9999px;
 
-    /* Typography */
-    --font-sans:
-      'Geist', 'Inter', ui-sans-serif, system-ui, -apple-system,
-      BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    --font-mono:
-      'Geist Mono', 'JetBrains Mono', ui-monospace, SFMono-Regular, 'SF Mono',
-      Menlo, Monaco, Consolas, monospace;
-
-    /* Transitions */
-    --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
-    --transition-base: 200ms cubic-bezier(0.4, 0, 0.2, 1);
-    --transition-slow: 300ms cubic-bezier(0.4, 0, 0.2, 1);
-
-    /* Sidebar Colors (Spartan UI) */
-    --sidebar-background: #f4f4f5; /* zinc-100 - slightly darker than white */
-    --sidebar-foreground: #09090b;
-    --sidebar-primary: #18181b;
-    --sidebar-primary-foreground: #fafafa;
-    --sidebar-accent: #e4e4e7; /* zinc-200 */
-    --sidebar-accent-foreground: #18181b;
-    --sidebar-border: #e4e4e7;
-    --sidebar-ring: #a1a1aa;
+    /* Sidebar (Spartan UI) */
+    --sidebar-background: theme('colors.zinc.100');
+    --sidebar-foreground: theme('colors.zinc.950');
+    --sidebar-primary: theme('colors.zinc.900');
+    --sidebar-primary-foreground: theme('colors.zinc.50');
+    --sidebar-accent: theme('colors.zinc.200');
+    --sidebar-accent-foreground: theme('colors.zinc.900');
+    --sidebar-border: theme('colors.zinc.200');
+    --sidebar-ring: theme('colors.zinc.400');
   }
 
   /* Dark Theme */
   .dark {
-    /* Background Colors */
-    --background: #09090b; /* zinc-950 */
-    --background-secondary: #18181b; /* zinc-900 */
+    /* Core Colors */
+    --background: theme('colors.zinc.950');
+    --foreground: theme('colors.zinc.50');
 
-    /* Card Colors */
-    --card: #18181b; /* zinc-900 */
-    --card-hover: #27272a; /* zinc-800 */
-    --card-foreground: #fafafa; /* zinc-50 */
+    /* Card */
+    --card: theme('colors.zinc.900');
+    --card-foreground: theme('colors.zinc.50');
 
-    /* Popover Colors (for tooltips, dropdowns) */
-    --popover: #18181b; /* zinc-900 */
-    --popover-foreground: #fafafa; /* zinc-50 */
+    /* Popover */
+    --popover: theme('colors.zinc.900');
+    --popover-foreground: theme('colors.zinc.50');
 
-    /* Foreground Colors */
-    --foreground: #fafafa; /* zinc-50 */
-    --foreground-secondary: #a1a1aa; /* zinc-400 */
-    --foreground-muted: #71717a; /* zinc-500 */
+    /* Muted */
+    --muted: theme('colors.zinc.800');
+    --muted-foreground: theme('colors.zinc.400');
 
-    /* Muted/Subtle Colors */
-    --muted: #27272a; /* zinc-800 */
-    --muted-foreground: #a1a1aa; /* zinc-400 */
+    /* Accent */
+    --accent: theme('colors.zinc.800');
+    --accent-foreground: theme('colors.zinc.50');
 
-    /* Border Colors */
-    --border: #27272a; /* zinc-800 */
-    --border-hover: #3f3f46; /* zinc-700 */
-    --input: #27272a; /* zinc-800 - for input borders */
+    /* Border & Input */
+    --border: theme('colors.zinc.800');
+    --input: theme('colors.zinc.800');
 
-    /* Primary Colors */
-    --primary: #fafafa; /* zinc-50 */
-    --primary-hover: #e4e4e7; /* zinc-200 */
-    --primary-foreground: #18181b; /* zinc-900 */
+    /* Ring */
+    --ring: theme('colors.zinc.600');
 
-    /* Secondary Colors */
-    --secondary: #27272a; /* zinc-800 */
-    --secondary-foreground: #fafafa; /* zinc-50 */
+    /* Primary */
+    --primary: theme('colors.zinc.50');
+    --primary-foreground: theme('colors.zinc.900');
 
-    /* Accent Colors */
-    --accent: #27272a; /* zinc-800 */
-    --accent-hover: #3f3f46; /* zinc-700 */
-    --accent-foreground: #fafafa; /* zinc-50 */
+    /* Secondary */
+    --secondary: theme('colors.zinc.800');
+    --secondary-foreground: theme('colors.zinc.50');
 
-    /* Ring/Focus Colors */
-    --ring: #52525b; /* zinc-600 */
-    --ring-offset: #09090b; /* zinc-950 */
-    --ring-offset-background: #09090b; /* zinc-950 */
-
-    /* Shadows (darker for dark mode) */
-    --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.3);
-    --shadow: 0 1px 3px 0 rgb(0 0 0 / 0.4), 0 1px 2px -1px rgb(0 0 0 / 0.4);
-    --shadow-md:
-      0 4px 6px -1px rgb(0 0 0 / 0.4), 0 2px 4px -2px rgb(0 0 0 / 0.4);
-    --shadow-lg:
-      0 10px 15px -3px rgb(0 0 0 / 0.4), 0 4px 6px -4px rgb(0 0 0 / 0.4);
-    --shadow-xl:
-      0 20px 25px -5px rgb(0 0 0 / 0.5), 0 8px 10px -6px rgb(0 0 0 / 0.5);
-
-    /* Sidebar Colors (Spartan UI) */
-    --sidebar-background: #0a0a0a; /* darker than zinc-950 */
-    --sidebar-foreground: #fafafa;
-    --sidebar-primary: #fafafa;
-    --sidebar-primary-foreground: #18181b;
-    --sidebar-accent: #18181b; /* zinc-900 */
-    --sidebar-accent-foreground: #fafafa;
-    --sidebar-border: #1f1f23; /* subtle border */
-    --sidebar-ring: #52525b;
+    /* Sidebar (Spartan UI) */
+    --sidebar-background: theme('colors.zinc.950');
+    --sidebar-foreground: theme('colors.zinc.50');
+    --sidebar-primary: theme('colors.zinc.50');
+    --sidebar-primary-foreground: theme('colors.zinc.900');
+    --sidebar-accent: theme('colors.zinc.800');
+    --sidebar-accent-foreground: theme('colors.zinc.50');
+    --sidebar-border: theme('colors.zinc.800');
+    --sidebar-ring: theme('colors.zinc.600');
   }
 
   /* Base HTML Styles */
@@ -196,29 +138,26 @@
   }
 
   body {
-    font-family: var(--font-sans);
+    font-family: theme('fontFamily.sans');
     background-color: var(--background);
     color: var(--foreground);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    transition:
-      background-color var(--transition-base),
-      color var(--transition-base);
   }
 
-  /* Selection Colors */
+  /* Selection */
   ::selection {
     background-color: var(--primary);
     color: var(--primary-foreground);
   }
 
-  /* Focus Ring Defaults */
+  /* Focus Ring */
   :focus-visible {
     outline: 2px solid var(--ring);
     outline-offset: 2px;
   }
 
-  /* Scrollbar Styling */
+  /* Scrollbar */
   ::-webkit-scrollbar {
     width: 8px;
     height: 8px;
@@ -230,11 +169,11 @@
 
   ::-webkit-scrollbar-thumb {
     background: var(--border);
-    border-radius: var(--radius-full);
+    border-radius: 9999px;
   }
 
   ::-webkit-scrollbar-thumb:hover {
-    background: var(--border-hover);
+    background: var(--muted-foreground);
   }
 
   /* Firefox scrollbar */
@@ -245,28 +184,29 @@
 }
 
 /* ============================================
-   Component Layer - Reusable Patterns
+   Component Styles
    ============================================ */
 
 @layer components {
-  /* CDK Dialog Styles */
+  /* CDK Dialog Overlay */
   .cdk-overlay-dark-backdrop {
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgb(0 0 0 / 0.5);
     backdrop-filter: blur(4px);
     animation: overlay-fade-in 150ms ease-out;
   }
 
+  /* Command Dialog Panel */
   .command-dialog-panel {
     background-color: var(--background);
     border: 1px solid var(--border);
-    border-radius: var(--radius-xl);
-    box-shadow: var(--shadow-lg);
+    border-radius: var(--radius);
+    box-shadow: theme('boxShadow.lg');
     overflow: hidden;
     outline: none;
     animation: dialog-slide-in 150ms ease-out;
   }
 
-  /* Center the CDK overlay pane */
+  /* CDK Overlay Centering */
   .cdk-global-overlay-wrapper {
     display: flex;
     justify-content: center;
@@ -295,218 +235,36 @@
     }
   }
 
-  /* Card Component */
-  .demo-card {
-    background-color: var(--card);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-lg);
-    box-shadow: var(--shadow-sm);
-    transition:
-      box-shadow var(--transition-base),
-      border-color var(--transition-base);
-  }
-
-  .demo-card:hover {
-    box-shadow: var(--shadow-md);
-    border-color: var(--border-hover);
-  }
-
-  /* Button Base */
-  .demo-btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-    font-weight: 500;
-    border-radius: var(--radius-md);
-    transition: all var(--transition-base);
-    cursor: pointer;
-  }
-
-  .demo-btn:focus-visible {
-    outline: 2px solid var(--ring);
-    outline-offset: 2px;
-  }
-
-  /* Primary Button */
-  .demo-btn-primary {
-    background-color: var(--primary);
-    color: var(--primary-foreground);
-    padding: 0.625rem 1.25rem;
-    font-size: 0.875rem;
-  }
-
-  .demo-btn-primary:hover {
-    background-color: var(--primary-hover);
-  }
-
-  /* Secondary/Ghost Button */
-  .demo-btn-secondary {
-    background-color: transparent;
-    color: var(--foreground);
-    border: 1px solid var(--border);
-    padding: 0.625rem 1.25rem;
-    font-size: 0.875rem;
-  }
-
-  .demo-btn-secondary:hover {
-    background-color: var(--accent);
-    border-color: var(--border-hover);
-  }
-
-  /* Section Container */
-  .demo-section {
-    width: 100%;
-    padding-left: 1rem;
-    padding-right: 1rem;
-    margin-left: auto;
-    margin-right: auto;
-  }
-
-  @media (min-width: 640px) {
-    .demo-section {
-      padding-left: 1.5rem;
-      padding-right: 1.5rem;
-    }
-  }
-
-  @media (min-width: 1024px) {
-    .demo-section {
-      padding-left: 2rem;
-      padding-right: 2rem;
-      max-width: 80rem;
-    }
-  }
-
-  /* Gradient Text */
-  .demo-gradient-text {
-    background: linear-gradient(
-      135deg,
-      var(--foreground) 0%,
-      var(--foreground-muted) 100%
-    );
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-
-  /* Badge */
-  .demo-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.25rem;
-    padding: 0.25rem 0.75rem;
-    font-size: 0.75rem;
-    font-weight: 500;
-    border-radius: var(--radius-full);
-    background-color: var(--muted);
-    color: var(--foreground-secondary);
-  }
-
-  /* Ensure no horizontal overflow */
+  /* Sidebar Host */
   .app-sidebar-host {
     overflow-x: hidden !important;
   }
 }
 
 /* ============================================
-   Utilities Layer
+   Utility Animations
    ============================================ */
 
 @layer utilities {
-  /* Animation Utilities */
-  .animate-fade-in {
-    animation: fade-in 0.5s ease-out forwards;
-  }
-
-  .animate-slide-up {
-    animation: slide-up 0.5s ease-out forwards;
-  }
-
-  .animate-scale-in {
-    animation: scale-in 0.3s ease-out forwards;
-  }
-
-  @keyframes fade-in {
-    from {
-      opacity: 0;
-    }
-    to {
-      opacity: 1;
-    }
-  }
-
-  @keyframes slide-up {
-    from {
-      opacity: 0;
-      transform: translateY(20px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
-  @keyframes scale-in {
-    from {
-      opacity: 0;
-      transform: scale(0.95);
-    }
-    to {
-      opacity: 1;
-      transform: scale(1);
-    }
-  }
-
-  /* Stagger Animation Delays */
-  .stagger-1 {
-    animation-delay: 0.1s;
-  }
-  .stagger-2 {
-    animation-delay: 0.2s;
-  }
-  .stagger-3 {
-    animation-delay: 0.3s;
-  }
-  .stagger-4 {
-    animation-delay: 0.4s;
-  }
-  .stagger-5 {
-    animation-delay: 0.5s;
-  }
-  .stagger-6 {
-    animation-delay: 0.6s;
-  }
-
-  /* Hide scrollbar but keep functionality */
-  .scrollbar-hide {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-  }
-
-  .scrollbar-hide::-webkit-scrollbar {
-    display: none;
-  }
-
-  /* Typing Indicator Animation */
+  /* Typing Indicator */
   .typing-dot {
-    animation: typing-bounce 1.4s infinite ease-in-out;
+    animation: typing-bounce 1.4s infinite ease-in-out both;
   }
 
   @keyframes typing-bounce {
     0%,
-    60%,
+    80%,
     100% {
-      transform: translateY(0);
-      opacity: 0.6;
+      transform: scale(0.6);
+      opacity: 0.4;
     }
-    30% {
-      transform: translateY(-6px);
+    40% {
+      transform: scale(1);
       opacity: 1;
     }
   }
 
-  /* Cursor Blink Animation */
+  /* Cursor Blink */
   .animate-cursor-blink {
     animation: cursor-blink 1s step-end infinite;
   }
@@ -521,7 +279,17 @@
     }
   }
 
-  /* Reduced motion support */
+  /* Hide Scrollbar */
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Reduced Motion */
   @media (prefers-reduced-motion: reduce) {
     .typing-dot,
     .animate-cursor-blink {
