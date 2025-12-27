@@ -1,4 +1,5 @@
 import { ChatMessage } from '@angular-ai-kit/core';
+import { HlmButton } from '@angular-ai-kit/spartan-ui/button';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -15,7 +16,7 @@ import { MessageListComponent } from '../../../../components/message-list';
   templateUrl: './message-list-doc.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
-  imports: [MessageListComponent],
+  imports: [HlmButton, MessageListComponent],
   host: {
     class: 'app-message-list-doc block',
   },

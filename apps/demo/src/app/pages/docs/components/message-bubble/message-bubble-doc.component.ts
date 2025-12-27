@@ -1,4 +1,5 @@
 import { ChatMessage } from '@angular-ai-kit/core';
+import { HlmBadge } from '@angular-ai-kit/spartan-ui/badge';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -15,7 +16,7 @@ import { MessageBubbleComponent } from '../../../../components/message-bubble';
   templateUrl: './message-bubble-doc.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
-  imports: [MessageBubbleComponent],
+  imports: [HlmBadge, MessageBubbleComponent],
   host: {
     class: 'app-message-bubble-doc block',
   },

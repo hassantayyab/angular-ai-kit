@@ -1,3 +1,4 @@
+import { HlmButton } from '@angular-ai-kit/spartan-ui/button';
 import { HlmSwitch } from '@angular-ai-kit/spartan-ui/switch';
 import {
   ChangeDetectionStrategy,
@@ -23,7 +24,7 @@ import {
   templateUrl: './chat-input-doc.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
-  imports: [ChatInputComponent, FormsModule, HlmSwitch],
+  imports: [ChatInputComponent, FormsModule, HlmButton, HlmSwitch],
   host: {
     class: 'app-chat-input-doc block',
   },

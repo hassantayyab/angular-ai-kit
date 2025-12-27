@@ -1,4 +1,5 @@
 import { ChatContainerComponent, ChatMessage } from '@angular-ai-kit/core';
+import { HlmButton } from '@angular-ai-kit/spartan-ui/button';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -14,7 +15,7 @@ import {
   templateUrl: './chat-container-doc.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
-  imports: [ChatContainerComponent],
+  imports: [ChatContainerComponent, HlmButton],
   host: {
     class: 'app-chat-container-doc block',
   },

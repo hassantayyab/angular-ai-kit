@@ -1,3 +1,4 @@
+import { HlmBadge } from '@angular-ai-kit/spartan-ui/badge';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -15,7 +16,7 @@ import { RouterLink } from '@angular/router';
   templateUrl: './docs-overview.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
-  imports: [RouterLink],
+  imports: [RouterLink, HlmBadge],
   host: {
     class: 'app-docs-overview block',
   },

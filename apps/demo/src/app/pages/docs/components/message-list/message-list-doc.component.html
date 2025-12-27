@@ -55,11 +55,7 @@
     </p>
 
     <div class="mb-4">
-      <button
-        type="button"
-        class="bg-primary text-primary-foreground hover:bg-primary/90 rounded-md px-4 py-2 text-sm font-medium"
-        (click)="toggleLoading()"
-      >
+      <button type="button" hlmBtn (click)="toggleLoading()">
         {{ isLoading() ? 'Hide Loading' : 'Show Loading' }}
       </button>
     </div>
