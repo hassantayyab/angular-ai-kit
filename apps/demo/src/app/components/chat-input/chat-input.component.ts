@@ -15,6 +15,20 @@ import {
   signal,
   viewChild,
 } from '@angular/core';
+import {
+  BrnPopover,
+  BrnPopoverContent,
+  BrnPopoverTrigger,
+} from '@spartan-ng/brain/popover';
+
+/**
+ * Source option for the sources dropdown
+ */
+export interface SourceOption {
+  value: string;
+  label: string;
+  icon?: string;
+}
 
 /**
  * Suggestion item for quick prompts
@@ -53,7 +67,13 @@ export type SuggestionsPosition = 'top' | 'bottom';
   templateUrl: './chat-input.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
-  imports: [HlmButton, NgTemplateOutlet],
+  imports: [
+    HlmButton,
+    NgTemplateOutlet,
+    BrnPopover,
+    BrnPopoverContent,
+    BrnPopoverTrigger,
+  ],
   host: {
     class: 'app-chat-input-host block',
   },
@@ -86,8 +106,30 @@ export class ChatInputComponent {
   inputCleared = output<void>();
   suggestionSelect = output<ChatSuggestion>();
 
+  // Button action outputs
+  contextClick = output<void>();
+  fileSelect = output<File[]>();
+  researchModeChange = output<boolean>();
+  sourceChange = output<string>();
+  recordingChange = output<boolean>();
+
   // State
   inputValue = signal('');
+
+  // Button states
+  researchMode = signal(false);
+  isRecording = signal(false);
+  selectedSource = signal('all');
+
+  // Source options
+  readonly sourceOptions: SourceOption[] = [
+    { value: 'all', label: 'All sources' },
+    { value: 'web', label: 'Web only' },
+    { value: 'docs', label: 'Documents' },
+  ];
+
+  // File input ref
+  private fileInputRef = viewChild<ElementRef<HTMLInputElement>>('fileInput');
 
   // Computed
   canSend = computed(() => {
@@ -111,6 +153,14 @@ export class ChatInputComponent {
       this.suggestions().length > 0 &&
       this.inputValue().trim().length === 0
     );
+  });
+
+  /** Get label for selected source */
+  selectedSourceLabel = computed(() => {
+    const source = this.sourceOptions.find(
+      (opt) => opt.value === this.selectedSource()
+    );
+    return source?.label ?? 'All sources';
   });
 
   constructor() {
@@ -239,5 +289,41 @@ export class ChatInputComponent {
 
     textarea.style.height = 'auto';
     textarea.value = '';
+  }
+
+  // Button action methods
+
+  /** Trigger file input click */
+  triggerFileInput(): void {
+    this.fileInputRef()?.nativeElement.click();
+  }
+
+  /** Handle file selection */
+  handleFileSelect(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    if (input.files && input.files.length > 0) {
+      const files = Array.from(input.files);
+      this.fileSelect.emit(files);
+      // Reset input so same file can be selected again
+      input.value = '';
+    }
+  }
+
+  /** Toggle research mode */
+  toggleResearch(): void {
+    this.researchMode.update((v) => !v);
+    this.researchModeChange.emit(this.researchMode());
+  }
+
+  /** Select a source option */
+  selectSource(value: string): void {
+    this.selectedSource.set(value);
+    this.sourceChange.emit(value);
+  }
+
+  /** Toggle microphone recording */
+  toggleMic(): void {
+    this.isRecording.update((v) => !v);
+    this.recordingChange.emit(this.isRecording());
   }
 }

@@ -1,4 +1,14 @@
 <div [class]="containerClasses()">
+  <!-- Hidden file input for attachments -->
+  <input
+    #fileInput
+    type="file"
+    multiple
+    hidden
+    (change)="handleFileSelect($event)"
+    aria-hidden="true"
+  />
+
   <!-- Suggestions Template -->
   <ng-template #suggestionsTemplate>
     <div
@@ -42,6 +52,7 @@
           size="sm"
           class="h-8 rounded-full px-3 text-xs font-normal"
           aria-label="Add context"
+          (click)="contextClick.emit()"
         >
           <span class="mr-1 text-sm">&#64;</span>
           Add context
@@ -82,6 +93,7 @@
               size="icon"
               class="h-8 w-8 text-[var(--foreground-muted)] hover:text-[var(--foreground)]"
               aria-label="Attach file"
+              (click)="triggerFileInput()"
             >
               <svg
                 class="h-5 w-5"
@@ -106,8 +118,14 @@
               hlmBtn
               variant="ghost"
               size="sm"
-              class="h-8 gap-1.5 px-2 text-[var(--foreground-muted)] hover:text-[var(--foreground)]"
-              aria-label="Research"
+              [class]="
+                researchMode()
+                  ? 'h-8 gap-1.5 bg-[var(--accent)] px-2 text-[var(--accent-foreground)]'
+                  : 'h-8 gap-1.5 px-2 text-[var(--foreground-muted)] hover:text-[var(--foreground)]'
+              "
+              [attr.aria-pressed]="researchMode()"
+              aria-label="Toggle research mode"
+              (click)="toggleResearch()"
             >
               <svg
                 class="h-4 w-4"
@@ -128,42 +146,64 @@
 
           <!-- All sources -->
           @if (showSourcesButton()) {
-            <button
-              type="button"
-              hlmBtn
-              variant="ghost"
-              size="sm"
-              class="h-8 gap-1.5 px-2 text-[var(--foreground-muted)] hover:text-[var(--foreground)]"
-              aria-label="Select sources"
-            >
-              <svg
-                class="h-4 w-4"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
+            <brn-popover>
+              <button
+                type="button"
+                brnPopoverTrigger
+                hlmBtn
+                variant="ghost"
+                size="sm"
+                class="h-8 gap-1.5 px-2 text-[var(--foreground-muted)] hover:text-[var(--foreground)]"
+                aria-label="Select sources"
               >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="1.5"
-                  d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"
-                />
-              </svg>
-              <span class="text-xs font-medium">All sources</span>
-              <svg
-                class="h-3 w-3"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
+                <svg
+                  class="h-4 w-4"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="1.5"
+                    d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"
+                  />
+                </svg>
+                <span class="text-xs font-medium">{{
+                  selectedSourceLabel()
+                }}</span>
+                <svg
+                  class="h-3 w-3"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M19 9l-7 7-7-7"
+                  />
+                </svg>
+              </button>
+              <div
+                *brnPopoverContent
+                class="w-40 rounded-md border border-[var(--border)] bg-[var(--popover)] p-1 shadow-md"
               >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M19 9l-7 7-7-7"
-                />
-              </svg>
-            </button>
+                @for (option of sourceOptions; track option.value) {
+                  <button
+                    type="button"
+                    class="flex w-full items-center rounded px-2 py-1.5 text-xs hover:bg-[var(--accent)]"
+                    [class.bg-[var(--accent)]]="
+                      selectedSource() === option.value
+                    "
+                    (click)="selectSource(option.value)"
+                  >
+                    {{ option.label }}
+                  </button>
+                }
+              </div>
+            </brn-popover>
           }
 
           <!-- Model name -->
@@ -192,8 +232,14 @@
             hlmBtn
             variant="ghost"
             size="icon"
-            class="h-8 w-8 text-[var(--foreground-muted)] hover:text-[var(--foreground)]"
+            [class]="
+              isRecording()
+                ? 'h-8 w-8 animate-pulse text-red-500'
+                : 'h-8 w-8 text-[var(--foreground-muted)] hover:text-[var(--foreground)]'
+            "
+            [attr.aria-pressed]="isRecording()"
             aria-label="Voice input"
+            (click)="toggleMic()"
           >
             <svg
               class="h-5 w-5"
