@@ -55,22 +55,24 @@ packages/angular-ai-kit/src/lib/
 
 **Detailed rules are organized in `.claude/rules/`. When adding new rules, put them in the appropriate file - NOT in this CLAUDE.md.**
 
-| File                    | Purpose                                                      |
-| ----------------------- | ------------------------------------------------------------ |
-| `accessibility.md`      | WCAG, ARIA, keyboard navigation, screen readers              |
-| `angular-cdk.md`        | Angular CDK primitives for dialogs, overlays, a11y           |
-| `angular-v21.md`        | Angular-specific patterns, signals, standalone components    |
-| `architecture.md`       | Scalability, barrel exports, naming conventions, file limits |
-| `component-patterns.md` | Component structure, templates, inputs/outputs               |
-| `tailwind-v4.md`        | Styling, cn() utility, CSS variables, dark mode              |
-| `todo-management.md`    | Phase tracking, TODO.md management                           |
-| `typescript.md`         | Type safety, interfaces, error handling                      |
-| `ai-components.md`      | AI chat-specific component rules                             |
+| File                      | Purpose                                                      |
+| ------------------------- | ------------------------------------------------------------ |
+| `accessibility.md`        | WCAG, ARIA, keyboard navigation, screen readers              |
+| `angular-cdk.md`          | Angular CDK primitives for dialogs, overlays, a11y           |
+| `angular-v21.md`          | Angular-specific patterns, signals, standalone components    |
+| `architecture.md`         | Scalability, barrel exports, naming conventions, file limits |
+| `component-patterns.md`   | Component structure, templates, inputs/outputs               |
+| `styling-architecture.md` | CSS variables, color system, theme() usage, dark mode        |
+| `tailwind-v4.md`          | Tailwind v4 setup, cn() utility, responsive design           |
+| `todo-management.md`      | Phase tracking, TODO.md management                           |
+| `typescript.md`           | Type safety, interfaces, error handling                      |
+| `ai-components.md`        | AI chat-specific component rules                             |
 
 ### When to Update Which File
 
 - **Component structure questions?** → `component-patterns.md`
-- **Styling/Tailwind issues?** → `tailwind-v4.md`
+- **CSS variables/colors/theming?** → `styling-architecture.md`
+- **Tailwind v4 setup/utilities?** → `tailwind-v4.md`
 - **Angular patterns?** → `angular-v21.md`
 - **File organization/naming?** → `architecture.md`
 - **Accessibility?** → `accessibility.md`

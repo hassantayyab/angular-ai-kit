@@ -53,7 +53,11 @@
 
     /* Border & Input */
     --border: theme('colors.zinc.200');
+    --border-hover: theme('colors.zinc.300');
     --input: theme('colors.zinc.200');
+
+    /* Foreground variants */
+    --foreground-muted: theme('colors.zinc.500');
 
     /* Ring */
     --ring: theme('colors.zinc.400');
@@ -107,8 +111,12 @@
     --accent-foreground: theme('colors.zinc.50');
 
     /* Border & Input */
-    --border: theme('colors.zinc.800');
-    --input: theme('colors.zinc.800');
+    --border: theme('colors.zinc.700');
+    --border-hover: theme('colors.zinc.600');
+    --input: theme('colors.zinc.700');
+
+    /* Foreground variants */
+    --foreground-muted: theme('colors.zinc.500');
 
     /* Ring */
     --ring: theme('colors.zinc.600');
