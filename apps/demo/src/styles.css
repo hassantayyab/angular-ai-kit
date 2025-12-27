@@ -272,6 +272,21 @@
     }
   }
 
+  /* Typing Indicator - Wave Variant */
+  .typing-dot-wave {
+    animation: typing-wave 1s infinite ease-in-out;
+  }
+
+  @keyframes typing-wave {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-4px);
+    }
+  }
+
   /* Cursor Blink */
   .animate-cursor-blink {
     animation: cursor-blink 1s step-end infinite;
@@ -300,6 +315,7 @@
   /* Reduced Motion */
   @media (prefers-reduced-motion: reduce) {
     .typing-dot,
+    .typing-dot-wave,
     .animate-cursor-blink {
       animation: none;
       opacity: 1;

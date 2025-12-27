@@ -19,6 +19,18 @@ import { TypingIndicatorComponent } from '../../../../components/typing-indicato
 /** API Input properties */
 const INPUTS: ApiProperty[] = [
   {
+    name: 'showBackground',
+    type: 'boolean',
+    default: 'true',
+    description: 'Show card background with border',
+  },
+  {
+    name: 'animation',
+    type: "'shimmer' | 'wave'",
+    default: "'shimmer'",
+    description: 'Animation style: shimmer (bounce) or wave (up/down)',
+  },
+  {
     name: 'showAvatar',
     type: 'boolean',
     default: 'true',
@@ -47,12 +59,13 @@ const ACCESSIBILITY = [
 ];
 
 /** Code examples */
-const USAGE_CODE = `@if (loading()) {
-  <app-typing-indicator
-    [showAvatar]="true"
-    [text]="'Thinking...'"
-  />
-}`;
+const USAGE_CODE = `<app-typing-indicator
+  [showBackground]="true"
+  animation="wave"
+  [showAvatar]="true"
+  [text]="'Thinking...'"
+  [dotCount]="3"
+/>`;
 
 /**
  * TypingIndicator Documentation Component
@@ -83,6 +96,8 @@ export class TypingIndicatorDocComponent {
   readonly usageCode = USAGE_CODE;
 
   // Configuration
+  showBackground = signal(true);
+  animation = signal<'shimmer' | 'wave'>('shimmer');
   showAvatar = signal(true);
   showText = signal(false);
   text = signal('Thinking...');
