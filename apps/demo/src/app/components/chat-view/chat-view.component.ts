@@ -128,12 +128,10 @@ export class ChatViewComponent {
     this.chatService.sendMessage(prompt);
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   handleMessageCopy(_event: { content: string; message: ChatMessage }): void {
     // Copy handled by the component, could add toast notification here
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   handleMessageRegenerate(_message: ChatMessage): void {
     this.chatService.regenerateLastMessage();
   }

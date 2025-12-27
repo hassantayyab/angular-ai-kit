@@ -86,6 +86,18 @@ packages/angular-ai-kit/src/lib/
 
 ---
 
+## Code Quality Principles
+
+**NEVER do quick fixes or workarounds. ALWAYS implement proper solutions following best practices.**
+
+- Research the correct approach before implementing
+- If unsure, ask for clarification rather than guessing
+- Temporary fixes become permanent problems
+- Quick hacks bypass important safeguards (like module boundaries, type safety, etc.)
+- Every fix should be production-ready
+
+---
+
 ## Quick Reference: What NOT to Do
 
 - ❌ Don't use NgModules (use standalone components)
