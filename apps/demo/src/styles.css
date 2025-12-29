@@ -32,7 +32,7 @@
 
     /* Popover */
     --popover: theme('colors.white');
-    --popover-foreground: theme('colors.zinc.900');
+    --popover-foreground: theme('colors.zinc.950');
 
     /* Muted */
     --muted: theme('colors.zinc.100');
