@@ -23,16 +23,16 @@
   /* Light Theme (Default) */
   :root {
     /* Core Colors */
-    --background: theme('colors.zinc.50');
+    --background: theme('colors.white');
     --foreground: theme('colors.zinc.950');
 
     /* Card */
-    --card: theme('colors.white');
+    --card: theme('colors.zinc.50');
     --card-foreground: theme('colors.zinc.950');
 
     /* Popover */
     --popover: theme('colors.white');
-    --popover-foreground: theme('colors.zinc.950');
+    --popover-foreground: theme('colors.zinc.900');
 
     /* Muted */
     --muted: theme('colors.zinc.100');
@@ -46,6 +46,14 @@
     --border: theme('colors.zinc.200');
     --border-hover: theme('colors.zinc.300');
     --input: theme('colors.zinc.50');
+
+    /* Inline/Markdown code blocks (subtle) */
+    --code: theme('colors.zinc.100');
+    --code-foreground: theme('colors.zinc.900');
+
+    /* Doc code blocks (prominent/terminal-like) */
+    --doc-code: theme('colors.zinc.100');
+    --doc-code-foreground: theme('colors.zinc.900');
 
     /* Foreground variants */
     --foreground-muted: theme('colors.zinc.500');
@@ -95,6 +103,14 @@
     --border: theme('colors.zinc.800');
     --border-hover: theme('colors.zinc.600');
     --input: theme('colors.zinc.900');
+
+    /* Inline/Markdown code blocks (subtle) */
+    --code: theme('colors.zinc.950');
+    --code-foreground: theme('colors.zinc.100');
+
+    /* Doc code blocks (prominent/terminal-like) */
+    --doc-code: theme('colors.zinc.900');
+    --doc-code-foreground: theme('colors.zinc.100');
 
     /* Foreground variants */
     --foreground-muted: theme('colors.zinc.500');
@@ -220,10 +236,10 @@
   }
 
   /* ============================================
-     Highlight.js Code Syntax Theme (GitHub Dark)
+     Highlight.js Code Syntax Theme (Light - GitHub Light)
      ============================================ */
   .hljs {
-    color: #c9d1d9;
+    color: #24292f;
     background: transparent;
   }
 
@@ -234,14 +250,14 @@
   .hljs-template-variable,
   .hljs-type,
   .hljs-variable.language_ {
-    color: #ff7b72;
+    color: #cf222e;
   }
 
   .hljs-title,
   .hljs-title.class_,
   .hljs-title.class_.inherited__,
   .hljs-title.function_ {
-    color: #d2a8ff;
+    color: #8250df;
   }
 
   .hljs-attr,
@@ -254,62 +270,154 @@
   .hljs-selector-attr,
   .hljs-selector-class,
   .hljs-selector-id {
-    color: #79c0ff;
+    color: #0550ae;
   }
 
   .hljs-regexp,
   .hljs-string,
   .hljs-meta .hljs-string {
-    color: #a5d6ff;
+    color: #0a3069;
   }
 
   .hljs-built_in,
   .hljs-symbol {
-    color: #ffa657;
+    color: #953800;
   }
 
   .hljs-comment,
   .hljs-code,
   .hljs-formula {
-    color: #8b949e;
+    color: #6e7781;
   }
 
   .hljs-name,
   .hljs-quote,
   .hljs-selector-tag,
   .hljs-selector-pseudo {
-    color: #7ee787;
+    color: #116329;
   }
 
   .hljs-subst {
-    color: #c9d1d9;
+    color: #24292f;
   }
 
   .hljs-section {
-    color: #1f6feb;
+    color: #0550ae;
     font-weight: bold;
   }
 
   .hljs-bullet {
-    color: #f2cc60;
+    color: #953800;
   }
 
   .hljs-emphasis {
-    color: #c9d1d9;
+    color: #24292f;
     font-style: italic;
   }
 
   .hljs-strong {
-    color: #c9d1d9;
+    color: #24292f;
     font-weight: bold;
   }
 
   .hljs-addition {
+    color: #116329;
+    background-color: #dafbe1;
+  }
+
+  .hljs-deletion {
+    color: #cf222e;
+    background-color: #ffebe9;
+  }
+
+  /* Dark theme syntax highlighting */
+  .dark .hljs {
+    color: #c9d1d9;
+  }
+
+  .dark .hljs-doctag,
+  .dark .hljs-keyword,
+  .dark .hljs-meta .hljs-keyword,
+  .dark .hljs-template-tag,
+  .dark .hljs-template-variable,
+  .dark .hljs-type,
+  .dark .hljs-variable.language_ {
+    color: #ff7b72;
+  }
+
+  .dark .hljs-title,
+  .dark .hljs-title.class_,
+  .dark .hljs-title.class_.inherited__,
+  .dark .hljs-title.function_ {
+    color: #d2a8ff;
+  }
+
+  .dark .hljs-attr,
+  .dark .hljs-attribute,
+  .dark .hljs-literal,
+  .dark .hljs-meta,
+  .dark .hljs-number,
+  .dark .hljs-operator,
+  .dark .hljs-variable,
+  .dark .hljs-selector-attr,
+  .dark .hljs-selector-class,
+  .dark .hljs-selector-id {
+    color: #79c0ff;
+  }
+
+  .dark .hljs-regexp,
+  .dark .hljs-string,
+  .dark .hljs-meta .hljs-string {
+    color: #a5d6ff;
+  }
+
+  .dark .hljs-built_in,
+  .dark .hljs-symbol {
+    color: #ffa657;
+  }
+
+  .dark .hljs-comment,
+  .dark .hljs-code,
+  .dark .hljs-formula {
+    color: #8b949e;
+  }
+
+  .dark .hljs-name,
+  .dark .hljs-quote,
+  .dark .hljs-selector-tag,
+  .dark .hljs-selector-pseudo {
+    color: #7ee787;
+  }
+
+  .dark .hljs-subst {
+    color: #c9d1d9;
+  }
+
+  .dark .hljs-section {
+    color: #1f6feb;
+    font-weight: bold;
+  }
+
+  .dark .hljs-bullet {
+    color: #f2cc60;
+  }
+
+  .dark .hljs-emphasis {
+    color: #c9d1d9;
+    font-style: italic;
+  }
+
+  .dark .hljs-strong {
+    color: #c9d1d9;
+    font-weight: bold;
+  }
+
+  .dark .hljs-addition {
     color: #aff5b4;
     background-color: #033a16;
   }
 
-  .hljs-deletion {
+  .dark .hljs-deletion {
     color: #ffdcd7;
     background-color: #67060c;
   }
@@ -323,7 +431,7 @@
     border-radius: 0.5rem;
     overflow: hidden;
     margin: 1rem 0;
-    background: theme('colors.zinc.950');
+    background: var(--code);
   }
 
   /* Header bar with language label and copy button */
@@ -332,13 +440,13 @@
     justify-content: space-between;
     align-items: center;
     padding: 0.75rem 1rem;
-    background: theme('colors.zinc.950');
+    background: var(--code);
   }
 
   .code-block-language {
     font-size: 0.75rem;
     font-weight: 500;
-    color: theme('colors.zinc.400');
+    color: var(--muted-foreground);
     text-transform: lowercase;
     font-family: ui-sans-serif, system-ui, sans-serif;
   }
@@ -349,7 +457,7 @@
     justify-content: center;
     width: 1.75rem;
     height: 1.75rem;
-    color: theme('colors.zinc.400');
+    color: var(--muted-foreground);
     background: transparent;
     border: none;
     cursor: pointer;
@@ -358,8 +466,8 @@
   }
 
   .code-block-copy:hover {
-    color: theme('colors.zinc.50');
-    background: theme('colors.zinc.800');
+    color: var(--foreground);
+    background: var(--accent);
   }
 
   .code-block-copy svg {
@@ -372,7 +480,7 @@
   }
 
   .code-block-copy.copied {
-    color: theme('colors.emerald.400');
+    color: var(--primary);
   }
 
   /* Code content inside wrapper */
@@ -551,7 +659,7 @@
     width: 2.5rem;
     padding-right: 1rem;
     text-align: right;
-    color: theme('colors.zinc.600');
+    color: var(--muted-foreground);
     user-select: none;
   }
 

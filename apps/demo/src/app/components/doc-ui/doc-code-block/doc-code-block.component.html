@@ -1,14 +1,16 @@
-<div class="group relative overflow-hidden rounded-lg bg-zinc-900">
+<div
+  class="group relative overflow-hidden rounded-lg bg-[var(--doc-code)] text-[var(--doc-code-foreground)]"
+>
   <!-- Copy Button -->
   <button
     type="button"
-    class="absolute top-3 right-3 z-10 flex h-7 w-7 items-center justify-center rounded-md text-zinc-400 transition-colors hover:bg-zinc-800 hover:text-zinc-200"
+    class="text-muted-foreground hover:bg-accent hover:text-foreground absolute top-3 right-3 z-10 flex h-7 w-7 items-center justify-center rounded-md transition-colors"
     (click)="copyCode()"
     [attr.aria-label]="copied() ? 'Copied!' : 'Copy code'"
   >
     @if (copied()) {
       <svg
-        class="h-4 w-4 text-emerald-400"
+        class="text-primary h-4 w-4"
         fill="none"
         stroke="currentColor"
         viewBox="0 0 24 24"
