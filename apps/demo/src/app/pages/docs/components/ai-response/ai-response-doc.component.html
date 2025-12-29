@@ -1,0 +1,77 @@
+<div class="space-y-8">
+  <!-- Header -->
+  <div>
+    <h1 class="mb-2 text-2xl font-bold">AI Response</h1>
+    <p class="text-muted-foreground">
+      Rich markdown rendering for AI responses with syntax highlighting,
+      streaming text effect, and action buttons.
+    </p>
+  </div>
+
+  <!-- Live Demo -->
+  <app-doc-section title="Live Demo" size="lg">
+    <app-doc-demo-card>
+      <div class="mb-4">
+        <app-ai-response
+          [content]="demoContent()"
+          [isStreaming]="isStreaming()"
+          [speed]="speed()"
+          [showActions]="showActions()"
+          [showCursor]="showCursor()"
+          (copy)="handleCopy($event)"
+          (regenerate)="handleRegenerate()"
+          (thumbsUp)="handleThumbsUp()"
+          (thumbsDown)="handleThumbsDown()"
+        />
+      </div>
+      <div class="flex gap-2">
+        <button hlmBtn (click)="restartDemo()">Start Streaming</button>
+        <button hlmBtn variant="secondary" (click)="toggleStreaming()">
+          {{ isStreaming() ? 'Stop' : 'Show' }} Immediately
+        </button>
+      </div>
+    </app-doc-demo-card>
+  </app-doc-section>
+
+  <!-- Configuration -->
+  <app-doc-section title="Configuration" size="lg">
+    <app-doc-demo-card>
+      <div class="grid gap-4 md:grid-cols-2">
+        <app-doc-control-toggle
+          label="Show Actions"
+          [checked]="showActions()"
+          (checkedChange)="showActions.set($event)"
+        />
+        <app-doc-control-toggle
+          label="Show Cursor"
+          [checked]="showCursor()"
+          (checkedChange)="showCursor.set($event)"
+        />
+        <app-doc-slider-control
+          label="Streaming Speed"
+          [value]="speed()"
+          [min]="5"
+          [max]="100"
+          [step]="5"
+          suffix="ms per character"
+          (valueChange)="speed.set($event)"
+        />
+      </div>
+    </app-doc-demo-card>
+  </app-doc-section>
+
+  <!-- API Reference -->
+  <app-doc-section title="API Reference" size="lg">
+    <app-doc-api-table title="Inputs" [properties]="inputs" />
+    <app-doc-api-table
+      title="Outputs"
+      [properties]="outputs"
+      [showDefault]="false"
+    />
+  </app-doc-section>
+
+  <!-- Usage Example -->
+  <app-doc-section title="Usage Example" size="lg">
+    <app-doc-code-block [code]="usageCode" [multiline]="true" language="html" />
+  </app-doc-section>
+</div>

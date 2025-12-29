@@ -136,6 +136,11 @@ export class SidebarComponent {
   // AI Components list for docs sidebar
   readonly components: ComponentItem[] = [
     {
+      name: 'AiResponse',
+      label: 'AI Response',
+      route: '/docs/components/ai-response',
+    },
+    {
       name: 'MessageBubble',
       label: 'Message Bubble',
       route: '/docs/components/message-bubble',

@@ -1,7 +1,50 @@
-<div class="bg-muted overflow-x-auto rounded-lg p-4">
-  @if (multiline()) {
-    <pre class="text-sm"><code>{{ code() }}</code></pre>
-  } @else {
-    <code class="text-sm">{{ code() }}</code>
-  }
+<div class="group relative overflow-hidden rounded-lg bg-zinc-900">
+  <!-- Copy Button -->
+  <button
+    type="button"
+    class="absolute top-3 right-3 z-10 flex h-7 w-7 items-center justify-center rounded-md text-zinc-400 transition-colors hover:bg-zinc-800 hover:text-zinc-200"
+    (click)="copyCode()"
+    [attr.aria-label]="copied() ? 'Copied!' : 'Copy code'"
+  >
+    @if (copied()) {
+      <svg
+        class="h-4 w-4 text-emerald-400"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M5 13l4 4L19 7"
+        />
+      </svg>
+    } @else {
+      <svg
+        class="h-4 w-4"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+      >
+        <path
+          d="M7 7m0 2.667a2.667 2.667 0 0 1 2.667 -2.667h8.666a2.667 2.667 0 0 1 2.667 2.667v8.666a2.667 2.667 0 0 1 -2.667 2.667h-8.666a2.667 2.667 0 0 1 -2.667 -2.667z"
+          stroke-width="2"
+        />
+        <path
+          d="M4.012 16.737a2.005 2.005 0 0 1 -1.012 -1.737v-10c0 -1.1 .9 -2 2 -2h10c.75 0 1.158 .385 1.5 1"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+        />
+      </svg>
+    }
+  </button>
+
+  <!-- Code Content with Line Numbers -->
+  <div class="overflow-x-auto py-4 pr-12">
+    <pre
+      class="text-sm leading-relaxed"
+    ><code class="hljs grid" [innerHTML]="highlightedCodeWithLines()"></code></pre>
+  </div>
 </div>

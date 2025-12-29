@@ -1,4 +1,12 @@
-<div class="bg-card border-border rounded-lg border" [class.p-6]="padding()">
+<div
+  class="border-border rounded-lg border"
+  [class.p-6]="padding()"
+  [class.p-8]="centered()"
+  [class.min-h-[200px]]="centered()"
+  [class.flex]="centered()"
+  [class.items-center]="centered()"
+  [class.justify-center]="centered()"
+>
   @if (title()) {
     <h3 class="mb-4 text-lg font-semibold">{{ title() }}</h3>
   }

@@ -117,11 +117,14 @@
       </div>
     </div>
 
-    <div hlmSidebarSeparator class="mx-auto"></div>
+    <div
+      hlmSidebarSeparator
+      class="mx-auto group-data-[collapsible=icon]:hidden"
+    ></div>
 
     @if (isDocsPage()) {
-      <!-- Components Section (for Docs page) -->
-      <div hlmSidebarGroup class="flex-1">
+      <!-- Components Section (for Docs page) - Hidden when collapsed -->
+      <div hlmSidebarGroup class="flex-1 group-data-[collapsible=icon]:hidden">
         <div hlmSidebarGroupLabel>Components</div>
         <div hlmSidebarGroupContent>
           <ul hlmSidebarMenu>

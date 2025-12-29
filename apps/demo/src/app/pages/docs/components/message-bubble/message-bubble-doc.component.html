@@ -10,7 +10,7 @@
 
   <!-- Installation -->
   <app-doc-section title="Installation">
-    <app-doc-code-block [code]="installCode" />
+    <app-doc-code-block [code]="installCode" language="bash" />
   </app-doc-section>
 
   <!-- Basic Usage -->
@@ -32,7 +32,12 @@
         />
       </div>
     </app-doc-demo-card>
-    <app-doc-code-block [code]="usageCode" [multiline]="true" class="mt-4" />
+    <app-doc-code-block
+      [code]="usageCode"
+      [multiline]="true"
+      language="html"
+      class="mt-4"
+    />
   </app-doc-section>
 
   <!-- With Actions -->
@@ -115,7 +120,11 @@
 
   <!-- ChatMessage Interface -->
   <app-doc-section title="ChatMessage Interface">
-    <app-doc-code-block [code]="interfaceCode" [multiline]="true" />
+    <app-doc-code-block
+      [code]="interfaceCode"
+      [multiline]="true"
+      language="typescript"
+    />
   </app-doc-section>
 
   <!-- Accessibility -->

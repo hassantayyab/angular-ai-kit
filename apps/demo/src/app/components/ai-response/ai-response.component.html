@@ -1,0 +1,89 @@
+<div [class]="containerClasses()">
+  <!-- Content Area -->
+  <div #contentArea>
+    <!-- Always render markdown (progressively during streaming) -->
+    <div [class]="contentClasses()">
+      <span [innerHTML]="renderedHtml()"></span>
+      @if (isStreaming() && showCursor()) {
+        <span [class]="cursorClasses()">▊</span>
+      }
+    </div>
+  </div>
+
+  <!-- Action Bar -->
+  @if (showActions()) {
+    <div [class]="actionsClasses()">
+      <!-- Copy Button -->
+      <button
+        hlmBtn
+        variant="ghost"
+        size="icon"
+        [class]="actionButtonClasses()"
+        (click)="handleCopy()"
+        [attr.aria-label]="justCopied() ? 'Copied!' : 'Copy response'"
+      >
+        <ng-icon
+          hlm
+          [name]="justCopied() ? 'lucideCheck' : 'lucideCopy'"
+          size="sm"
+          [class]="justCopied() ? 'text-emerald-500' : ''"
+        />
+      </button>
+
+      <!-- Regenerate Button -->
+      <button
+        hlmBtn
+        variant="ghost"
+        size="icon"
+        [class]="actionButtonClasses()"
+        (click)="handleRegenerate()"
+        aria-label="Regenerate response"
+      >
+        <ng-icon hlm name="lucideRefreshCw" size="sm" />
+      </button>
+
+      <!-- Spacer -->
+      <div class="flex-1"></div>
+
+      <!-- Thumbs Up Button -->
+      <button
+        hlmBtn
+        variant="ghost"
+        size="icon"
+        [class]="actionButtonClasses()"
+        (click)="handleThumbsUp()"
+        [attr.aria-label]="
+          thumbsUpSelected() ? 'Remove positive feedback' : 'Good response'
+        "
+        [attr.aria-pressed]="thumbsUpSelected()"
+      >
+        <ng-icon
+          hlm
+          name="lucideThumbsUp"
+          size="sm"
+          [class]="thumbsUpSelected() ? 'text-emerald-500' : ''"
+        />
+      </button>
+
+      <!-- Thumbs Down Button -->
+      <button
+        hlmBtn
+        variant="ghost"
+        size="icon"
+        [class]="actionButtonClasses()"
+        (click)="handleThumbsDown()"
+        [attr.aria-label]="
+          thumbsDownSelected() ? 'Remove negative feedback' : 'Bad response'
+        "
+        [attr.aria-pressed]="thumbsDownSelected()"
+      >
+        <ng-icon
+          hlm
+          name="lucideThumbsDown"
+          size="sm"
+          [class]="thumbsDownSelected() ? 'text-red-500' : ''"
+        />
+      </button>
+    </div>
+  }
+</div>

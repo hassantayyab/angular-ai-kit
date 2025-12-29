@@ -88,6 +88,11 @@ export class SearchTriggerComponent {
   private getComponentItems(): CommandItem[] {
     return [
       {
+        label: 'AI Response',
+        icon: 'component',
+        action: () => this.router.navigate(['/docs/components/ai-response']),
+      },
+      {
         label: 'Message Bubble',
         icon: 'component',
         action: () => this.router.navigate(['/docs/components/message-bubble']),

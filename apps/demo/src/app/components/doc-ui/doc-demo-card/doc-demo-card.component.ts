@@ -26,4 +26,7 @@ export class DocDemoCardComponent {
 
   /** Whether to include padding (set false for full-bleed content) */
   padding = input(true);
+
+  /** Whether to center content (for single component demos) */
+  centered = input(false);
 }

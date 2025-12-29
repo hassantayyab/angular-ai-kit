@@ -55,6 +55,13 @@ export const appRoutes: Route[] = [
                 './pages/docs/components/typing-indicator/typing-indicator-doc.component'
               ).then((m) => m.TypingIndicatorDocComponent),
           },
+          {
+            path: 'components/ai-response',
+            loadComponent: () =>
+              import(
+                './pages/docs/components/ai-response/ai-response-doc.component'
+              ).then((m) => m.AiResponseDocComponent),
+          },
         ],
       },
     ],

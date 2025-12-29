@@ -21,7 +21,7 @@
           type="button"
           hlmBtn
           variant="outline"
-          class="rounded-full px-3 py-1 text-xs"
+          class="rounded-full px-3 text-xs"
           (click)="handleSuggestionClick(suggestion)"
           [attr.aria-label]="'Use suggestion: ' + suggestion.label"
         >
@@ -42,7 +42,7 @@
   }
 
   <!-- Main Input Group -->
-  <div hlmInputGroup class="[--radius:1.5rem]">
+  <div hlmInputGroup class="rounded-2xl">
     <!-- Block-start: Context button with popover -->
     @if (showContextButton()) {
       <div hlmInputGroupAddon align="block-start">
@@ -63,7 +63,7 @@
 
           <div
             hlmPopoverContent
-            class="rounded-2xl p-0 [&_[data-slot=command-item]]:rounded-lg"
+            class="rounded-xl p-0"
             *brnPopoverContent="let ctx"
           >
             <hlm-command class="rounded-2xl">
