@@ -15,7 +15,7 @@
   </app-doc-section>
 
   <!-- Interactive Playground -->
-  <app-doc-section title="Interactive Playground" size="lg">
+  <app-doc-section title="Interactive Playground">
     <p class="text-muted-foreground mb-4">
       Toggle the switches below to customize which elements are visible in the
       ChatInput component.
@@ -165,7 +165,7 @@
   </app-doc-section>
 
   <!-- Basic Usage -->
-  <app-doc-section title="Basic Usage" size="lg">
+  <app-doc-section title="Basic Usage">
     <app-doc-code-block [code]="basicCode" [multiline]="true" />
   </app-doc-section>
 
@@ -173,13 +173,12 @@
   <app-doc-section
     title="Minimal Configuration"
     description="Hide all optional elements to get a minimal input with just the textarea and send button."
-    size="lg"
   >
     <app-doc-code-block [code]="minimalCode" [multiline]="true" />
   </app-doc-section>
 
   <!-- Keyboard Shortcuts -->
-  <app-doc-section title="Keyboard Shortcuts" size="lg">
+  <app-doc-section title="Keyboard Shortcuts">
     <app-doc-demo-card>
       <div class="grid gap-3 sm:grid-cols-3">
         @for (shortcut of keyboardShortcuts; track shortcut.key) {
@@ -199,7 +198,7 @@
   </app-doc-section>
 
   <!-- API Reference -->
-  <app-doc-section title="API Reference" size="lg">
+  <app-doc-section title="API Reference">
     <app-doc-api-table title="Inputs" [properties]="inputs" />
     <app-doc-api-table
       title="Outputs"

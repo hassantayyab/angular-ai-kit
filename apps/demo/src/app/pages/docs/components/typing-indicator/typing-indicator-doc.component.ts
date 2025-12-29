@@ -52,6 +52,10 @@ const INPUTS: ApiProperty[] = [
   },
 ];
 
+/** Install command */
+const INSTALL_CODE =
+  "import { TypingIndicatorComponent } from '@angular-ai-kit/core';";
+
 /** Accessibility features */
 const ACCESSIBILITY = [
   'Uses role="status" for screen reader announcements',
@@ -97,6 +101,7 @@ export class TypingIndicatorDocComponent {
   readonly inputs = INPUTS;
   readonly accessibility = ACCESSIBILITY;
   readonly usageCode = USAGE_CODE;
+  readonly installCode = INSTALL_CODE;
 
   // Animation options
   readonly animationOptions: SelectOption[] = [

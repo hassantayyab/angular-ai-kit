@@ -13,6 +13,7 @@ import {
   DocCodeBlockComponent,
   DocControlToggleComponent,
   DocDemoCardComponent,
+  DocFeaturesListComponent,
   DocSectionComponent,
   DocSliderControlComponent,
 } from '../../../../components/doc-ui';
@@ -91,6 +92,19 @@ const OUTPUTS: ApiProperty[] = [
   },
 ];
 
+/** Install command */
+const INSTALL_CODE =
+  "import { AiResponseComponent } from '@angular-ai-kit/core';";
+
+/** Accessibility features */
+const ACCESSIBILITY = [
+  'Uses semantic HTML for content structure',
+  'Code blocks have accessible copy buttons',
+  'Action buttons have aria-labels',
+  'Supports keyboard navigation',
+  'Respects prefers-reduced-motion for animations',
+];
+
 /** Code example */
 const USAGE_CODE = `<app-ai-response
   [content]="response"
@@ -149,6 +163,7 @@ Inline code like \`const x = 1\` is also supported.`;
     DocApiTableComponent,
     DocControlToggleComponent,
     DocSliderControlComponent,
+    DocFeaturesListComponent,
   ],
   host: {
     class: 'app-ai-response-doc block',
@@ -159,6 +174,8 @@ export class AiResponseDocComponent {
   readonly inputs = INPUTS;
   readonly outputs = OUTPUTS;
   readonly usageCode = USAGE_CODE;
+  readonly installCode = INSTALL_CODE;
+  readonly accessibility = ACCESSIBILITY;
 
   // Reference to component
   private aiResponse = viewChild(AiResponseComponent);

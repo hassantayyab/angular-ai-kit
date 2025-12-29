@@ -2,14 +2,19 @@
   <!-- Header -->
   <div>
     <h1 class="text-3xl font-bold">Streaming Text</h1>
-    <p class="text-muted-foreground">
+    <p class="text-muted-foreground mt-2">
       Typewriter effect component for streaming AI responses with configurable
       speed and cursor animation.
     </p>
   </div>
 
+  <!-- Installation -->
+  <app-doc-section title="Installation">
+    <app-doc-code-block [code]="installCode" language="bash" />
+  </app-doc-section>
+
   <!-- Live Demo -->
-  <app-doc-section title="Live Demo" size="lg">
+  <app-doc-section title="Live Demo">
     <app-doc-demo-card>
       <div
         class="bg-muted mb-4 min-h-[100px] rounded-lg p-4 text-sm leading-relaxed"
@@ -31,7 +36,7 @@
   </app-doc-section>
 
   <!-- Configuration -->
-  <app-doc-section title="Configuration" size="lg">
+  <app-doc-section title="Configuration">
     <app-doc-demo-card>
       <div class="grid gap-4 md:grid-cols-2">
         <app-doc-control-toggle
@@ -53,12 +58,15 @@
   </app-doc-section>
 
   <!-- API Reference -->
-  <app-doc-section title="API Reference" size="lg">
+  <app-doc-section title="API Reference">
     <app-doc-api-table title="Inputs" [properties]="inputs" />
   </app-doc-section>
 
   <!-- Usage Example -->
-  <app-doc-section title="Usage Example" size="lg">
+  <app-doc-section title="Usage Example">
     <app-doc-code-block [code]="usageCode" [multiline]="true" />
   </app-doc-section>
+
+  <!-- Accessibility -->
+  <app-doc-features-list title="Accessibility" [items]="accessibility" />
 </div>

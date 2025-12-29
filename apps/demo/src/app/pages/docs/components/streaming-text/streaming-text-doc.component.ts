@@ -12,6 +12,7 @@ import {
   DocCodeBlockComponent,
   DocControlToggleComponent,
   DocDemoCardComponent,
+  DocFeaturesListComponent,
   DocSectionComponent,
   DocSliderControlComponent,
 } from '../../../../components/doc-ui';
@@ -51,6 +52,18 @@ const INPUTS: ApiProperty[] = [
   },
 ];
 
+/** Install command */
+const INSTALL_CODE =
+  "import { StreamingTextComponent } from '@angular-ai-kit/core';";
+
+/** Accessibility features */
+const ACCESSIBILITY = [
+  'Uses aria-live for screen reader announcements',
+  'Cursor animation respects prefers-reduced-motion',
+  'Content remains accessible during streaming',
+  'Supports keyboard focus management',
+];
+
 /** Code examples */
 const USAGE_CODE = `<app-streaming-text
   [content]="message.content"
@@ -76,6 +89,7 @@ const USAGE_CODE = `<app-streaming-text
     DocApiTableComponent,
     DocControlToggleComponent,
     DocSliderControlComponent,
+    DocFeaturesListComponent,
   ],
   host: {
     class: 'app-streaming-text-doc block',
@@ -85,6 +99,8 @@ export class StreamingTextDocComponent {
   // API data
   readonly inputs = INPUTS;
   readonly usageCode = USAGE_CODE;
+  readonly installCode = INSTALL_CODE;
+  readonly accessibility = ACCESSIBILITY;
 
   // Reference to streaming text component
   private streamingText = viewChild(StreamingTextComponent);
