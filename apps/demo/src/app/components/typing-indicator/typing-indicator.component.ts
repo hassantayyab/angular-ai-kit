@@ -86,8 +86,8 @@ export class TypingIndicatorComponent {
       // Add bubble styling when background is enabled
       hasBackground && [
         'rounded-2xl rounded-tl-sm',
-        'bg-[var(--card)]',
-        'border border-[var(--border)]',
+        'bg-card',
+        'border border-border',
         'px-4 py-3',
         'shadow-sm',
       ],
@@ -102,7 +102,7 @@ export class TypingIndicatorComponent {
     return cn(
       'h-2 w-2',
       'rounded-full',
-      'bg-[var(--foreground-muted)]',
+      'bg-foreground-muted',
       // Animation class based on animation type
       isWave ? 'typing-dot-wave' : 'typing-dot'
     );
@@ -112,7 +112,7 @@ export class TypingIndicatorComponent {
     return cn(
       'app-typing-indicator-text',
       'ml-2',
-      'text-sm text-[var(--foreground-muted)]'
+      'text-sm text-foreground-muted'
     );
   });
 

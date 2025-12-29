@@ -9,6 +9,27 @@
 @import 'tailwindcss/utilities.css';
 @import '@spartan-ng/brain/hlm-tailwind-preset.css';
 
+/* Custom theme extensions (variables not in Spartan preset) */
+@theme inline {
+  /* Code blocks */
+  --color-code: var(--code);
+  --color-code-foreground: var(--code-foreground);
+  --color-doc-code: var(--doc-code);
+  --color-doc-code-foreground: var(--doc-code-foreground);
+
+  /* Extended tokens */
+  --color-border-hover: var(--border-hover);
+  --color-foreground-muted: var(--foreground-muted);
+
+  /* Message bubble role colors */
+  --color-message-user-bg: var(--message-user-bg);
+  --color-message-assistant-bg: var(--message-assistant-bg);
+  --color-message-system-bg: var(--message-system-bg);
+  --color-avatar-user: var(--avatar-user);
+  --color-avatar-assistant: var(--avatar-assistant);
+  --color-avatar-system: var(--avatar-system);
+}
+
 /* Typography plugin for prose styling */
 @plugin '@tailwindcss/typography';
 
@@ -55,6 +76,14 @@
     --doc-code: theme('colors.zinc.100');
     --doc-code-foreground: theme('colors.zinc.900');
 
+    /* Message bubble role colors */
+    --message-user-bg: theme('colors.zinc.100');
+    --message-assistant-bg: theme('colors.white');
+    --message-system-bg: theme('colors.zinc.50');
+    --avatar-user: theme('colors.zinc.700');
+    --avatar-assistant: theme('colors.zinc.800');
+    --avatar-system: theme('colors.zinc.400');
+
     /* Foreground variants */
     --foreground-muted: theme('colors.zinc.500');
 
@@ -92,7 +121,7 @@
     --popover-foreground: theme('colors.zinc.50');
 
     /* Muted */
-    --muted: theme('colors.zinc.800');
+    --muted: theme('colors.zinc.900');
     --muted-foreground: theme('colors.zinc.400');
 
     /* Accent */
@@ -111,6 +140,14 @@
     /* Doc code blocks (prominent/terminal-like) */
     --doc-code: theme('colors.zinc.900');
     --doc-code-foreground: theme('colors.zinc.100');
+
+    /* Message bubble role colors */
+    --message-user-bg: theme('colors.zinc.800');
+    --message-assistant-bg: theme('colors.zinc.900');
+    --message-system-bg: theme('colors.zinc.800/50');
+    --avatar-user: theme('colors.zinc.600');
+    --avatar-assistant: theme('colors.zinc.700');
+    --avatar-system: theme('colors.zinc.500');
 
     /* Foreground variants */
     --foreground-muted: theme('colors.zinc.500');

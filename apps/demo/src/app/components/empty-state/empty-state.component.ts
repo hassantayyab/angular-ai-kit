@@ -87,8 +87,8 @@ export class EmptyStateComponent {
     return cn(
       'flex items-center justify-center',
       'h-16 w-16 rounded-2xl',
-      'bg-[var(--muted)]',
-      'text-[var(--foreground)]',
+      'bg-muted',
+      'text-foreground',
       'mb-6'
     );
   });
@@ -97,13 +97,13 @@ export class EmptyStateComponent {
     return cn(
       'text-2xl sm:text-3xl',
       'font-semibold',
-      'text-[var(--foreground)]',
+      'text-foreground',
       'mb-2'
     );
   });
 
   subtitleClasses = computed(() => {
-    return cn('text-base', 'text-[var(--foreground-muted)]', 'mb-8');
+    return cn('text-base', 'text-foreground-muted', 'mb-8');
   });
 
   promptsGridClasses = computed(() => {
@@ -115,15 +115,15 @@ export class EmptyStateComponent {
       'flex flex-col items-start gap-1',
       'p-4',
       'rounded-xl',
-      'border border-[var(--border)]',
-      'bg-[var(--card)]',
+      'border border-border',
+      'bg-card',
       'text-left',
       'transition-all duration-200',
-      'hover:border-[var(--border-hover)]',
-      'hover:bg-[var(--card-hover)]',
+      'hover:border-border-hover',
+      'hover:bg-accent',
       'hover:shadow-md',
       'cursor-pointer',
-      'focus:outline-none focus:ring-2 focus:ring-[var(--ring)]'
+      'focus:outline-none focus:ring-2 focus:ring-ring'
     );
   });
 
@@ -132,7 +132,7 @@ export class EmptyStateComponent {
   });
 
   disclaimerClasses = computed(() => {
-    return cn('text-xs', 'text-[var(--foreground-muted)]', 'opacity-60');
+    return cn('text-xs', 'text-foreground-muted', 'opacity-60');
   });
 
   // Methods

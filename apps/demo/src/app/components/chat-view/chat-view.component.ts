@@ -89,20 +89,15 @@ export class ChatViewComponent {
 
   // Computed classes
   containerClasses = computed(() => {
-    return cn(
-      'app-chat-view',
-      'flex flex-col',
-      'h-full',
-      'bg-[var(--background)]'
-    );
+    return cn('app-chat-view', 'flex flex-col', 'h-full', 'bg-background');
   });
 
   headerClasses = computed(() => {
     return cn(
       'flex items-center gap-2',
       'px-4 py-3',
-      'border-b border-[var(--border)]',
-      'bg-[var(--background)]',
+      'border-b border-border',
+      'bg-background',
       'md:hidden' // Only show on mobile
     );
   });
@@ -112,11 +107,7 @@ export class ChatViewComponent {
   });
 
   inputAreaClasses = computed(() => {
-    return cn(
-      'shrink-0',
-      'border-t border-[var(--border)]',
-      'bg-[var(--background)]'
-    );
+    return cn('shrink-0', 'border-t border-border', 'bg-background');
   });
 
   // Methods

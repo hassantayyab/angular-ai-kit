@@ -103,14 +103,13 @@ export class MessageBubbleComponent {
       'transition-all duration-200',
       'hover:shadow-md',
       {
-        // User messages: slightly darker neutral
-        'bg-zinc-100 text-zinc-900 dark:bg-zinc-800 dark:text-zinc-100':
-          role === 'user',
+        // User messages
+        'bg-message-user-bg text-foreground': role === 'user',
         // Assistant messages: lighter with border
-        'bg-white text-zinc-900 border border-zinc-200 dark:bg-zinc-900 dark:text-zinc-100 dark:border-zinc-800':
+        'bg-message-assistant-bg text-foreground border border-border':
           role === 'assistant',
         // System messages: muted styling
-        'bg-zinc-50 text-zinc-600 border border-zinc-200 dark:bg-zinc-800/50 dark:text-zinc-400 dark:border-zinc-700':
+        'bg-message-system-bg text-muted-foreground border border-border':
           role === 'system',
       },
       this.customClasses()
@@ -129,12 +128,9 @@ export class MessageBubbleComponent {
       'w-9 h-9 rounded-full',
       'flex-shrink-0',
       {
-        // User: darker neutral avatar
-        'bg-zinc-700 text-white dark:bg-zinc-600': role === 'user',
-        // Assistant: dark avatar
-        'bg-zinc-800 text-white dark:bg-zinc-700': role === 'assistant',
-        // System: muted avatar
-        'bg-zinc-400 text-white dark:bg-zinc-500': role === 'system',
+        'bg-avatar-user text-white': role === 'user',
+        'bg-avatar-assistant text-white': role === 'assistant',
+        'bg-avatar-system text-white': role === 'system',
       }
     );
   });
@@ -166,20 +162,13 @@ export class MessageBubbleComponent {
    * Button classes for action buttons
    */
   buttonClasses = computed(() => {
-    const role = this.message().role;
-
     return cn(
       'inline-flex items-center justify-center',
       'w-8 h-8 rounded',
       'transition-colors duration-150',
       'hover:scale-110 active:scale-95',
-      'focus:outline-none focus:ring-2 focus:ring-offset-2',
-      {
-        'hover:bg-zinc-200 dark:hover:bg-zinc-700 focus:ring-zinc-400':
-          role === 'user' || role === 'system',
-        'hover:bg-zinc-100 dark:hover:bg-zinc-800 focus:ring-zinc-400':
-          role === 'assistant',
-      }
+      'focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2',
+      'hover:bg-accent'
     );
   });
 

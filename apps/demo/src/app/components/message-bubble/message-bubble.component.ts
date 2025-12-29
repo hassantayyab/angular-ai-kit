@@ -143,14 +143,13 @@ export class MessageBubbleComponent {
       'group flex gap-3 p-4 rounded-xl',
       'transition-all duration-200',
       {
-        // User messages - right aligned, slightly darker
-        'flex-row-reverse bg-zinc-100 text-zinc-900 dark:bg-zinc-800 dark:text-zinc-100':
-          role === 'user',
+        // User messages - right aligned
+        'flex-row-reverse bg-message-user-bg text-foreground': role === 'user',
         // Assistant messages - left aligned, lighter with border
-        'bg-white text-zinc-900 border border-zinc-200 dark:bg-zinc-900 dark:text-zinc-100 dark:border-zinc-800':
+        'bg-message-assistant-bg text-foreground border border-border':
           role === 'assistant',
         // System messages - muted
-        'bg-zinc-50 text-zinc-600 border border-zinc-200 dark:bg-zinc-800/50 dark:text-zinc-400 dark:border-zinc-700':
+        'bg-message-system-bg text-muted-foreground border border-border':
           role === 'system',
       },
       this.customClasses()
@@ -192,12 +191,9 @@ export class MessageBubbleComponent {
     const role = this.message().role;
 
     return cn({
-      // User: darker neutral avatar
-      'bg-zinc-700 text-white dark:bg-zinc-600': role === 'user',
-      // Assistant: dark avatar
-      'bg-zinc-800 text-white dark:bg-zinc-700': role === 'assistant',
-      // System: muted avatar
-      'bg-zinc-400 text-white dark:bg-zinc-500': role === 'system',
+      'bg-avatar-user text-white': role === 'user',
+      'bg-avatar-assistant text-white': role === 'assistant',
+      'bg-avatar-system text-white': role === 'system',
     });
   });
 

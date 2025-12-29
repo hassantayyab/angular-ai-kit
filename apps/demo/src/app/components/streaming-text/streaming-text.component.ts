@@ -70,7 +70,7 @@ export class StreamingTextComponent implements OnInit {
     return cn(
       'app-streaming-text-cursor',
       'inline-block',
-      'text-[var(--primary)]',
+      'text-primary',
       'animate-cursor-blink'
     );
   });

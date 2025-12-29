@@ -181,8 +181,8 @@ export class AiResponseComponent implements AfterViewInit {
     return cn(
       'app-ai-response',
       'relative rounded-xl p-4',
-      'bg-white dark:bg-zinc-900',
-      'border border-zinc-200 dark:border-zinc-800',
+      'bg-card',
+      'border border-border',
       'transition-all duration-200',
       this.customClasses()
     );
@@ -193,7 +193,7 @@ export class AiResponseComponent implements AfterViewInit {
     return cn(
       'app-ai-response-content',
       'text-sm leading-relaxed',
-      'text-zinc-800 dark:text-zinc-200'
+      'text-foreground'
     );
   });
 
@@ -202,7 +202,7 @@ export class AiResponseComponent implements AfterViewInit {
     return cn(
       'app-ai-response-cursor',
       'inline-block ml-0.5',
-      'text-zinc-800 dark:text-zinc-200',
+      'text-foreground',
       'animate-cursor-blink'
     );
   });
@@ -214,7 +214,7 @@ export class AiResponseComponent implements AfterViewInit {
     return cn(
       'app-ai-response-actions',
       'flex items-center gap-1 mt-3 pt-3',
-      'border-t border-zinc-100 dark:border-zinc-800',
+      'border-t border-border',
       'transition-opacity duration-200',
       {
         'opacity-100 visible': shouldShow,
