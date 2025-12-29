@@ -45,7 +45,7 @@
     /* Border & Input */
     --border: theme('colors.zinc.200');
     --border-hover: theme('colors.zinc.300');
-    --input: theme('colors.zinc.200');
+    --input: theme('colors.zinc.50');
 
     /* Foreground variants */
     --foreground-muted: theme('colors.zinc.500');
@@ -94,7 +94,7 @@
     /* Border & Input */
     --border: theme('colors.zinc.800');
     --border-hover: theme('colors.zinc.600');
-    --input: theme('colors.zinc.700');
+    --input: theme('colors.zinc.900');
 
     /* Foreground variants */
     --foreground-muted: theme('colors.zinc.500');
