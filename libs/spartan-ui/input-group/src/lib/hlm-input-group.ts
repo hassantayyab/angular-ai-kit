@@ -11,7 +11,7 @@ import { Directive } from '@angular/core';
 export class HlmInputGroup {
   constructor() {
     classes(() => [
-      'group/input-group border-input dark:bg-input/30 relative flex w-full items-center rounded-md border shadow-xs transition-[color,box-shadow] outline-none',
+      'group/input-group border-border bg-input relative flex w-full items-center rounded-md border shadow-xs transition-[color,box-shadow] outline-none',
       'h-9 min-w-0 has-[>textarea]:h-auto',
       // Variants based on alignment.
       'has-[>[data-align=inline-start]]:[&>input]:pl-2',

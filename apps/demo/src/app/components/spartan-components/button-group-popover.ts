@@ -43,7 +43,7 @@ import { BrnPopoverImports } from '@spartan-ng/brain/popover';
           class="rounded-xl p-0 text-sm"
           *brnPopoverContent="let ctx"
         >
-          <div class="border-input border-b px-4 py-3">
+          <div class="border-border border-b px-4 py-3">
             <div class="text-sm font-medium">Agent Tasks</div>
           </div>
           <div class="p-4 text-sm">
