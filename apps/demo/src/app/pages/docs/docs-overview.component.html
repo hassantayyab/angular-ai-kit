@@ -1,25 +1,23 @@
 <div class="space-y-8">
-  <!-- Getting Started Section -->
-  <section>
-    <h2 class="mb-4 text-xl font-semibold">Getting Started</h2>
-    <div class="bg-card border-border rounded-lg border p-6">
-      <p class="text-foreground mb-4">
-        Angular AI Kit provides a set of beautiful, accessible components for
-        building AI chat interfaces in Angular applications.
-      </p>
-      <div class="bg-muted rounded-md p-4">
-        <code class="text-sm">npm install &#64;angular-ai-kit/core</code>
-      </div>
-    </div>
-  </section>
-
-  <!-- MVP Components Section -->
-  <section>
-    <h2 class="mb-4 text-xl font-semibold">Core Components</h2>
-    <p class="text-muted-foreground mb-6">
-      Production-ready components for building AI chat interfaces.
+  <!-- Header -->
+  <div>
+    <h1 class="text-3xl font-bold">Getting Started</h1>
+    <p class="text-muted-foreground mt-2">
+      Angular AI Kit provides a set of beautiful, accessible components for
+      building AI chat interfaces in Angular applications.
     </p>
+  </div>
 
+  <!-- Installation -->
+  <app-doc-section title="Installation">
+    <app-doc-code-block [code]="installCode" language="bash" />
+  </app-doc-section>
+
+  <!-- Core Components Section -->
+  <app-doc-section
+    title="Core Components"
+    description="Production-ready components for building AI chat interfaces."
+  >
     <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
       @for (component of coreComponents; track component.title) {
         <app-component-card
@@ -30,15 +28,13 @@
         />
       }
     </div>
-  </section>
+  </app-doc-section>
 
   <!-- Coming Soon Section -->
-  <section>
-    <h2 class="mb-4 text-xl font-semibold">Coming Soon</h2>
-    <p class="text-muted-foreground mb-6">
-      Additional components planned for future releases.
-    </p>
-
+  <app-doc-section
+    title="Coming Soon"
+    description="Additional components planned for future releases."
+  >
     <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
       @for (component of comingSoonComponents; track component.title) {
         <app-component-card
@@ -50,5 +46,5 @@
         />
       }
     </div>
-  </section>
+  </app-doc-section>
 </div>

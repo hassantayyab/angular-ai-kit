@@ -4,6 +4,10 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { ComponentCardComponent } from '../../components/component-card';
+import {
+  DocCodeBlockComponent,
+  DocSectionComponent,
+} from '../../components/doc-ui';
 
 /** Icon paths for component cards */
 const ICONS = {
@@ -49,12 +53,15 @@ interface ComponentInfo {
   templateUrl: './docs-overview.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
-  imports: [ComponentCardComponent],
+  imports: [ComponentCardComponent, DocSectionComponent, DocCodeBlockComponent],
   host: {
     class: 'app-docs-overview block',
   },
 })
 export class DocsOverviewComponent {
+  /** Install command */
+  installCode = 'npm install @angular-ai-kit/core';
+
   /** Core components (active) */
   coreComponents: ComponentInfo[] = [
     {

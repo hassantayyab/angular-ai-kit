@@ -14,7 +14,7 @@ export class HlmSidebarInput extends HlmInput {
     super();
     classes(() => [
       inputVariants({ error: this._state().error }),
-      'bg-background focus-visible:ring-sidebar-ring w-full shadow-none focus-visible:ring-2',
+      'bg-background focus-visible:ring-ring w-full shadow-none focus-visible:ring-2',
     ]);
   }
 }

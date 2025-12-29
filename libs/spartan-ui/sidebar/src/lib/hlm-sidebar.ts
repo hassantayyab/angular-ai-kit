@@ -43,7 +43,7 @@ import { injectHlmSidebarConfig } from './hlm-sidebar.token';
           data-slot="sidebar"
           data-sidebar="sidebar"
           data-mobile="true"
-          class="bg-sidebar text-sidebar-foreground h-screen w-[var(--sidebar-width)] p-0 [&>button]:hidden"
+          class="bg-background text-foreground h-screen w-[var(--sidebar-width)] p-0 [&>button]:hidden"
           [style.--sidebar-width]="sidebarWidthMobile()"
         >
           <div class="flex h-full w-full flex-col">
@@ -61,7 +61,7 @@ import { injectHlmSidebarConfig } from './hlm-sidebar.token';
         <div
           data-sidebar="sidebar"
           data-slot="sidebar-inner"
-          class="bg-sidebar group-data-[variant=floating]:border-sidebar-border flex h-full w-full flex-col group-data-[variant=floating]:rounded-lg group-data-[variant=floating]:border group-data-[variant=floating]:shadow"
+          class="bg-background group-data-[variant=floating]:border-border flex h-full w-full flex-col group-data-[variant=floating]:rounded-lg group-data-[variant=floating]:border group-data-[variant=floating]:shadow"
         >
           <ng-container *ngTemplateOutlet="contentContainer" />
         </div>
@@ -104,7 +104,7 @@ export class HlmSidebar {
         : 'right-0 group-data-[collapsible=offcanvas]:right-[calc(var(--sidebar-width)*-1)]',
       this.variant() === 'floating' || this.variant() === 'inset'
         ? 'p-2 group-data-[collapsible=icon]:w-[calc(var(--sidebar-width-icon)_+_theme(spacing.4)_+2px)]'
-        : 'group-data-[collapsible=icon]:w-[var(--sidebar-width-icon)] group-data-[side=left]:border-r group-data-[side=right]:border-l border-sidebar-border',
+        : 'group-data-[collapsible=icon]:w-[var(--sidebar-width-icon)] group-data-[side=left]:border-r group-data-[side=right]:border-l border-border',
       this.sidebarContainerClass()
     )
   );
@@ -149,12 +149,12 @@ export class HlmSidebar {
     classes(() => {
       if (this.collapsible() === 'none') {
         return hlm(
-          'bg-sidebar text-sidebar-foreground flex h-svh w-[var(--sidebar-width)] flex-col'
+          'bg-background text-foreground flex h-svh w-[var(--sidebar-width)] flex-col'
         );
       } else if (this._sidebarService.isMobile()) {
         return '';
       } else {
-        return hlm('text-sidebar-foreground group peer hidden md:block');
+        return hlm('text-foreground group peer hidden md:block');
       }
     });
   }

@@ -12,7 +12,9 @@ import {
   DocDemoCardComponent,
   DocFeaturesListComponent,
   DocSectionComponent,
+  DocSelectControlComponent,
   DocSliderControlComponent,
+  SelectOption,
 } from '../../../../components/doc-ui';
 import { TypingIndicatorComponent } from '../../../../components/typing-indicator';
 
@@ -83,6 +85,7 @@ const USAGE_CODE = `<app-typing-indicator
     DocApiTableComponent,
     DocControlToggleComponent,
     DocSliderControlComponent,
+    DocSelectControlComponent,
     DocFeaturesListComponent,
   ],
   host: {
@@ -94,6 +97,12 @@ export class TypingIndicatorDocComponent {
   readonly inputs = INPUTS;
   readonly accessibility = ACCESSIBILITY;
   readonly usageCode = USAGE_CODE;
+
+  // Animation options
+  readonly animationOptions: SelectOption[] = [
+    { value: 'shimmer', label: 'Shimmer' },
+    { value: 'wave', label: 'Wave' },
+  ];
 
   // Configuration
   showBackground = signal(true);

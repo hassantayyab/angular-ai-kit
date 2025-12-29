@@ -12,6 +12,6 @@ import { Directive } from '@angular/core';
 })
 export class HlmSidebarSeparator {
   constructor() {
-    classes(() => 'bg-sidebar-border mx-2 w-auto');
+    classes(() => 'bg-border mx-2 w-auto');
   }
 }

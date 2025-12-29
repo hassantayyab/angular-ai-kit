@@ -1,7 +1,7 @@
 <div class="space-y-8">
   <!-- Header -->
   <div>
-    <h1 class="text-3xl font-bold">ChatInput</h1>
+    <h1 class="text-3xl font-bold">Chat Input</h1>
     <p class="text-muted-foreground mt-2">
       A flexible, auto-resizing chat input component with configurable toolbar
       elements. Supports keyboard shortcuts and visibility toggles for a fully
@@ -200,14 +200,12 @@
 
   <!-- API Reference -->
   <app-doc-section title="API Reference" size="lg">
-    <app-doc-demo-card>
-      <app-doc-api-table title="Inputs" [properties]="inputs" />
-      <app-doc-api-table
-        title="Outputs"
-        [properties]="outputs"
-        [showDefault]="false"
-      />
-    </app-doc-demo-card>
+    <app-doc-api-table title="Inputs" [properties]="inputs" />
+    <app-doc-api-table
+      title="Outputs"
+      [properties]="outputs"
+      [showDefault]="false"
+    />
   </app-doc-section>
 
   <!-- Accessibility -->

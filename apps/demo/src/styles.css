@@ -14,18 +14,6 @@
 
 @source '../../packages';
 
-/* Tailwind v4 theme extension for sidebar colors */
-@theme {
-  --color-sidebar: var(--sidebar-background);
-  --color-sidebar-foreground: var(--sidebar-foreground);
-  --color-sidebar-primary: var(--sidebar-primary);
-  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
-  --color-sidebar-accent: var(--sidebar-accent);
-  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
-  --color-sidebar-border: var(--sidebar-border);
-  --color-sidebar-ring: var(--sidebar-ring);
-}
-
 /* ============================================
    Semantic Design Tokens
    Using Tailwind theme() for all color values
@@ -79,16 +67,6 @@
 
     /* Border Radius */
     --radius: 0.5rem;
-
-    /* Sidebar (Spartan UI) */
-    --sidebar-background: theme('colors.zinc.50');
-    --sidebar-foreground: theme('colors.zinc.950');
-    --sidebar-primary: theme('colors.zinc.900');
-    --sidebar-primary-foreground: theme('colors.zinc.50');
-    --sidebar-accent: theme('colors.zinc.200');
-    --sidebar-accent-foreground: theme('colors.zinc.900');
-    --sidebar-border: theme('colors.zinc.200');
-    --sidebar-ring: theme('colors.zinc.400');
   }
 
   /* Dark Theme */
@@ -114,7 +92,7 @@
     --accent-foreground: theme('colors.zinc.50');
 
     /* Border & Input */
-    --border: theme('colors.zinc.700');
+    --border: theme('colors.zinc.800');
     --border-hover: theme('colors.zinc.600');
     --input: theme('colors.zinc.700');
 
@@ -122,7 +100,7 @@
     --foreground-muted: theme('colors.zinc.500');
 
     /* Ring */
-    --ring: theme('colors.zinc.600');
+    --ring: theme('colors.zinc.500');
 
     /* Primary */
     --primary: theme('colors.zinc.50');
@@ -131,16 +109,6 @@
     /* Secondary */
     --secondary: theme('colors.zinc.800');
     --secondary-foreground: theme('colors.zinc.50');
-
-    /* Sidebar (Spartan UI) */
-    --sidebar-background: theme('colors.zinc.950');
-    --sidebar-foreground: theme('colors.zinc.50');
-    --sidebar-primary: theme('colors.zinc.50');
-    --sidebar-primary-foreground: theme('colors.zinc.900');
-    --sidebar-accent: theme('colors.zinc.800');
-    --sidebar-accent-foreground: theme('colors.zinc.50');
-    --sidebar-border: theme('colors.zinc.800');
-    --sidebar-ring: theme('colors.zinc.600');
   }
 
   /* Base HTML Styles */
