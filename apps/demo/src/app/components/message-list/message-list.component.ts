@@ -1,4 +1,4 @@
-import { ChatMessage } from '@angular-ai-kit/core';
+import { AiResponseComponent, ChatMessage } from '@angular-ai-kit/core';
 import { cn } from '@angular-ai-kit/utils';
 import { isPlatformBrowser } from '@angular/common';
 import {
@@ -15,7 +15,6 @@ import {
   output,
   viewChild,
 } from '@angular/core';
-import { AiResponseComponent } from '../ai-response';
 import { MessageBubbleComponent } from '../message-bubble';
 import { TypingIndicatorComponent } from '../typing-indicator';
 

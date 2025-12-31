@@ -18,7 +18,6 @@ import {
   DestroyRef,
   Directive,
   ElementRef,
-  HostListener,
   PLATFORM_ID,
   afterNextRender,
   effect,
@@ -32,6 +31,10 @@ import {
  */
 @Directive({
   selector: '[aiFocusTrap]',
+  host: {
+    '(keydown.tab)': 'handleTab($event)',
+    '(keydown.escape)': 'handleEscape($event)',
+  },
 })
 export class FocusTrapDirective {
   private elementRef = inject(ElementRef);
@@ -132,7 +135,6 @@ export class FocusTrapDirective {
   /**
    * Handle Tab key navigation
    */
-  @HostListener('keydown.tab', ['$event'])
   handleTab(event: Event): void {
     const keyboardEvent = event as KeyboardEvent;
 
@@ -169,7 +171,6 @@ export class FocusTrapDirective {
   /**
    * Handle Escape key
    */
-  @HostListener('keydown.escape', ['$event'])
   handleEscape(event: Event): void {
     const keyboardEvent = event as KeyboardEvent;
 

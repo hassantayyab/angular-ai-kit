@@ -1,3 +1,4 @@
+import { AiResponseComponent } from '@angular-ai-kit/core';
 import { HlmButton } from '@angular-ai-kit/spartan-ui/button';
 import {
   ChangeDetectionStrategy,
@@ -6,7 +7,6 @@ import {
   signal,
   viewChild,
 } from '@angular/core';
-import { AiResponseComponent } from '../../../../components/ai-response';
 import {
   ApiProperty,
   DocApiTableComponent,

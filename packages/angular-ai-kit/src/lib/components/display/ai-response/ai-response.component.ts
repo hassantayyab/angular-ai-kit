@@ -137,37 +137,47 @@ export class AiResponseComponent implements AfterViewInit {
    *
    * Renders content() directly - the streaming is handled by the service
    * that provides the content, not by this component.
+   *
+   * @security This uses `bypassSecurityTrustHtml` to allow interactive elements
+   * (copy buttons) in rendered code blocks. This is safe ONLY when:
+   * - Content comes from trusted sources (your own AI backend, not user input)
+   * - The MarkdownService properly sanitizes HTML before rendering
+   * - You control the markdown parsing pipeline
+   *
+   * NEVER use this component with untrusted/unsanitized user-generated content.
+   * If displaying user content, use a sanitized markdown renderer instead.
    */
   renderedHtml = computed((): SafeHtml => {
     const html = this.markdownService.parse(this.content());
     // Bypass Angular sanitization to allow copy buttons in code blocks
+    // See @security note above for usage requirements
     return this.sanitizer.bypassSecurityTrustHtml(html);
   });
 
   /** Container classes */
   containerClasses = computed(() => {
     const base = 'ai-response relative rounded-xl p-4';
-    const bg = 'bg-white dark:bg-gray-900';
-    const border = 'border border-gray-200 dark:border-gray-800';
+    const bg = 'bg-card';
+    const border = 'border border-border';
     const transition = 'transition-all duration-200';
     return `${base} ${bg} ${border} ${transition} ${this.customClasses()}`.trim();
   });
 
   /** Content area classes */
   contentClasses = computed(() => {
-    return 'ai-response-content text-sm leading-relaxed text-gray-900 dark:text-gray-100';
+    return 'ai-response-content text-sm leading-relaxed text-foreground';
   });
 
   /** Cursor classes */
   cursorClasses = computed(() => {
-    return 'ai-response-cursor inline-block ml-0.5 text-gray-900 dark:text-gray-100 animate-pulse';
+    return 'ai-response-cursor inline-block ml-0.5 text-foreground animate-pulse';
   });
 
   /** Actions container classes */
   actionsClasses = computed(() => {
     const shouldShow = this.actionsVisible();
     const base = 'ai-response-actions flex items-center gap-1 mt-3 pt-3';
-    const border = 'border-t border-gray-200 dark:border-gray-800';
+    const border = 'border-t border-border';
     const transition = 'transition-opacity duration-200';
     const visibility = shouldShow
       ? 'opacity-100 visible'
@@ -177,7 +187,7 @@ export class AiResponseComponent implements AfterViewInit {
 
   /** Action button base classes */
   actionButtonClasses = computed(() => {
-    return 'ai-action-btn inline-flex items-center justify-center h-7 w-7 rounded text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-gray-900 dark:hover:text-gray-100 transition-colors duration-150 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2 dark:focus:ring-offset-gray-900';
+    return 'ai-action-btn inline-flex items-center justify-center h-7 w-7 rounded text-muted-foreground hover:bg-accent hover:text-foreground transition-colors duration-150 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 focus:ring-offset-background';
   });
 
   constructor() {

@@ -64,7 +64,7 @@
         "libs/spartan-ui/sheet/src/index.ts"
       ],
       "@angular-ai-kit/spartan-ui/collapsible": [
-        "packages/spartan-ui/collapsible/src/index.ts"
+        "libs/spartan-ui/collapsible/src/index.ts"
       ],
       "@angular-ai-kit/spartan-ui/command": [
         "libs/spartan-ui/command/src/index.ts"

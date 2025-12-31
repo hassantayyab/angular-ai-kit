@@ -111,6 +111,8 @@ packages/angular-ai-kit/src/lib/
 - ❌ Don't use ViewEncapsulation.Emulated (use None for Tailwind)
 - ❌ Don't access DOM directly (use Renderer2 or inject(DOCUMENT))
 - ❌ Don't ignore accessibility (ARIA, keyboard nav)
+- ❌ **NEVER use `dark:` prefix** (use Tailwind semantic classes: bg-card, text-foreground)
+- ❌ **NEVER use `var()` in Tailwind** (use bg-card NOT bg-[var(--card)])
 
 ## Code Review Checklist
 

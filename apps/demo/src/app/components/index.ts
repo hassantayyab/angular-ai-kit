@@ -1,4 +1,3 @@
-export { AiResponseComponent } from './ai-response';
 export { ChatInputComponent } from './chat-input';
 export { ChatViewComponent } from './chat-view';
 export { EmptyStateComponent } from './empty-state';

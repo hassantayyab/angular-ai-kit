@@ -1,7 +1,7 @@
 {
   "name": "collapsible",
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "packages/spartan-ui/collapsible/src",
+  "sourceRoot": "libs/spartan-ui/collapsible/src",
   "prefix": "hlm",
   "projectType": "library",
   "tags": ["scope:internal", "type:ui"],

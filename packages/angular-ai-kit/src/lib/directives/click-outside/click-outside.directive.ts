@@ -37,7 +37,7 @@ export class ClickOutsideDirective {
   private destroyRef = inject(DestroyRef);
 
   private isEnabled = signal(true);
-  private clickListener?: () => void;
+  private clickHandler?: (event: Event) => void;
 
   /**
    * Whether the directive is enabled
@@ -73,50 +73,46 @@ export class ClickOutsideDirective {
    * Setup the click listener
    */
   private setupListener(): void {
-    this.clickListener = this.document.addEventListener(
-      'click',
-      (event: Event) => {
-        const mouseEvent = event as MouseEvent;
-        const enabled = this.enabled();
+    // Store handler reference for proper cleanup
+    this.clickHandler = (event: Event) => {
+      const mouseEvent = event as MouseEvent;
+      const enabled = this.enabled();
 
-        if (!enabled) {
-          return;
-        }
+      if (!enabled) {
+        return;
+      }
 
-        const clickedInside = this.elementRef.nativeElement.contains(
-          mouseEvent.target
-        );
+      const clickedInside = this.elementRef.nativeElement.contains(
+        mouseEvent.target
+      );
 
-        if (clickedInside) {
-          return;
-        }
+      if (clickedInside) {
+        return;
+      }
 
-        // Check excluded elements
-        const excludedElements = this.exclude();
-        const clickedOnExcluded = excludedElements.some((element) =>
-          element?.contains(mouseEvent.target as Node)
-        );
+      // Check excluded elements
+      const excludedElements = this.exclude();
+      const clickedOnExcluded = excludedElements.some((element) =>
+        element?.contains(mouseEvent.target as Node)
+      );
 
-        if (clickedOnExcluded) {
-          return;
-        }
+      if (clickedOnExcluded) {
+        return;
+      }
 
-        this.clickOutside.emit(mouseEvent);
-      },
-      true // Use capture phase
-    ) as unknown as () => void;
+      this.clickOutside.emit(mouseEvent);
+    };
+
+    this.document.addEventListener('click', this.clickHandler, true);
   }
 
   /**
    * Remove the click listener
    */
   private removeListener(): void {
-    if (this.clickListener && isPlatformBrowser(this.platformId)) {
-      this.document.removeEventListener(
-        'click',
-        this.clickListener as never,
-        true
-      );
+    if (this.clickHandler && isPlatformBrowser(this.platformId)) {
+      this.document.removeEventListener('click', this.clickHandler, true);
+      this.clickHandler = undefined;
     }
   }
 }

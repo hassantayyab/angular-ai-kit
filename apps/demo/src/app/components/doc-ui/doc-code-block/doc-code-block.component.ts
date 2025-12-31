@@ -1,4 +1,4 @@
-import hljs from 'highlight.js';
+import { CodeHighlightService } from '@angular-ai-kit/core';
 import { isPlatformBrowser } from '@angular/common';
 import {
   ChangeDetectionStrategy,
@@ -15,7 +15,8 @@ import {
  * DocCodeBlock Component
  *
  * Displays code snippets with syntax highlighting and copy button.
- * Uses highlight.js for proper code syntax highlighting.
+ * Uses CodeHighlightService for consistent syntax highlighting with
+ * enhanced Angular template support.
  */
 @Component({
   selector: 'app-doc-code-block',
@@ -28,6 +29,7 @@ import {
 })
 export class DocCodeBlockComponent {
   private platformId = inject(PLATFORM_ID);
+  private highlightService = inject(CodeHighlightService);
 
   /** Code content to display */
   code = input.required<string>();
@@ -46,19 +48,10 @@ export class DocCodeBlockComponent {
     const code = this.code();
     const lang = this.language();
 
-    let highlighted: string;
-    try {
-      if (lang && hljs.getLanguage(lang)) {
-        highlighted = hljs.highlight(code, { language: lang }).value;
-      } else {
-        highlighted = hljs.highlightAuto(code).value;
-      }
-    } catch {
-      highlighted = this.escapeHtml(code);
-    }
+    const result = this.highlightService.highlight(code, lang);
 
     // Split into lines and wrap each with line number
-    const lines = highlighted.split('\n');
+    const lines = result.value.split('\n');
     return lines
       .map((line, i) => {
         const lineNum = i + 1;
@@ -66,14 +59,6 @@ export class DocCodeBlockComponent {
       })
       .join('');
   });
-
-  /** Escape HTML special characters */
-  private escapeHtml(text: string): string {
-    return text
-      .replace(/&/g, '&amp;')
-      .replace(/</g, '&lt;')
-      .replace(/>/g, '&gt;');
-  }
 
   /** Copy code to clipboard */
   copyCode(): void {

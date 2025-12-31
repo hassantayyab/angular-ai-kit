@@ -104,17 +104,22 @@ Use `var()` for CSS variable references:
 
 ### In Tailwind Classes (Templates)
 
-Use bracket notation with var():
+Use Tailwind semantic color classes directly:
 
 ```html
-<!-- ✅ Correct: CSS variable in bracket notation -->
-<div class="border-[var(--border)] bg-[var(--card)] text-[var(--foreground)]">
-  <!-- ✅ Also correct: Direct Tailwind classes when semantic token not needed -->
-  <div class="border-zinc-700 bg-zinc-900 text-zinc-50">
-    <!-- ❌ Wrong: Hardcoded colors when semantic token exists -->
-    <div class="border-[#3f3f46] bg-[#18181b]"></div>
-  </div>
+<!-- ✅ Correct: Tailwind semantic color classes -->
+<div class="border-border bg-card text-foreground">
+  <div class="bg-muted text-muted-foreground">Muted content</div>
 </div>
+
+<!-- ❌ Wrong: var() syntax in Tailwind classes -->
+<div class="border-[var(--border)] bg-[var(--card)]"></div>
+
+<!-- ❌ Wrong: dark: prefix -->
+<div class="bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-100"></div>
+
+<!-- ❌ Wrong: Hardcoded hex colors -->
+<div class="border-[#3f3f46] bg-[#18181b]"></div>
 ```
 
 ### In TypeScript (cn utility)
@@ -123,10 +128,10 @@ Use bracket notation with var():
 cardClasses = computed(() => {
   return cn(
     'rounded-lg',
-    'border border-[var(--border)]',
-    'bg-[var(--card)]',
-    'text-[var(--foreground)]',
-    'hover:border-[var(--border-hover)]'
+    'border border-border',
+    'bg-card',
+    'text-foreground',
+    'hover:border-border-hover'
   );
 });
 ```
@@ -137,46 +142,49 @@ cardClasses = computed(() => {
 
 ### How It Works
 
-Dark mode is controlled by the `.dark` class on `<html>`:
+Dark mode is controlled by the `.dark` class on `<html>`. CSS variables automatically switch values:
 
 ```css
 :root {
   --background: theme('colors.zinc.50'); /* Light */
+  --foreground: theme('colors.zinc.950');
 }
 
 .dark {
   --background: theme('colors.zinc.950'); /* Dark */
+  --foreground: theme('colors.zinc.50');
 }
 ```
 
 ### Component Pattern
 
-Components automatically adapt via CSS variables:
+Components automatically adapt via Tailwind semantic classes. **NEVER use the `dark:` prefix.**
 
 ```typescript
-// No dark: prefix needed when using CSS variables
+// ✅ Correct: Tailwind semantic classes auto-switch light/dark
 containerClasses = computed(() =>
   cn(
-    'bg-[var(--background)]', // Auto-switches light/dark
-    'text-[var(--foreground)]' // Auto-switches light/dark
+    'bg-background', // Auto-switches light/dark
+    'text-foreground', // Auto-switches light/dark
+    'border-border'
+  )
+);
+
+// ❌ NEVER use dark: prefix
+containerClasses = computed(() =>
+  cn(
+    'bg-white dark:bg-gray-900', // WRONG!
+    'text-gray-900 dark:text-gray-100' // WRONG!
   )
 );
 ```
 
-### When to Use dark: Prefix
+### Why No dark: Prefix?
 
-Only use `dark:` prefix when:
-
-1. Using direct Tailwind colors (not CSS variables)
-2. Need different behavior beyond color swap
-
-```html
-<!-- Needed: Direct Tailwind colors -->
-<div class="bg-zinc-100 dark:bg-zinc-800">
-  <!-- Not needed: CSS variables auto-switch -->
-  <div class="bg-[var(--muted)]"></div>
-</div>
-```
+1. CSS variables handle theme switching automatically
+2. `dark:` prefix creates maintenance burden
+3. Components become theme-aware without extra code
+4. Single source of truth for colors in `styles.css`
 
 ---
 
@@ -217,6 +225,34 @@ Only use `dark:` prefix when:
 ---
 
 ## ❌ What NOT to Do
+
+### NEVER Use dark: Prefix
+
+```typescript
+// ❌ WRONG: dark: prefix
+'bg-white dark:bg-gray-900';
+'text-gray-900 dark:text-gray-100';
+'border-gray-200 dark:border-gray-800';
+
+// ✅ CORRECT: Tailwind semantic classes
+'bg-card';
+'text-foreground';
+'border-border';
+```
+
+### NEVER Use var() in Tailwind Classes
+
+```typescript
+// ❌ WRONG: var() syntax
+'bg-[var(--card)]';
+'text-[var(--foreground)]';
+'border-[var(--border)]';
+
+// ✅ CORRECT: Tailwind semantic classes
+'bg-card';
+'text-foreground';
+'border-border';
+```
 
 ### Never Use Hex Codes
 
@@ -283,10 +319,10 @@ packages/tokens/src/lib/
 cardClasses = computed(() =>
   cn(
     'rounded-lg',
-    'border border-[var(--border)]',
-    'bg-[var(--card)]',
+    'border border-border',
+    'bg-card',
     'shadow-sm',
-    'hover:border-[var(--border-hover)]',
+    'hover:border-border-hover',
     'hover:shadow-md'
   )
 );
@@ -298,12 +334,12 @@ cardClasses = computed(() =>
 inputClasses = computed(() =>
   cn(
     'w-full rounded-md',
-    'border border-[var(--input)]',
+    'border border-input',
     'bg-transparent',
-    'text-[var(--foreground)]',
-    'placeholder:text-[var(--foreground-muted)]',
-    'focus:border-[var(--ring)]',
-    'focus:ring-1 focus:ring-[var(--ring)]'
+    'text-foreground',
+    'placeholder:text-muted-foreground',
+    'focus:border-ring',
+    'focus:ring-1 focus:ring-ring'
   )
 );
 ```
@@ -311,20 +347,20 @@ inputClasses = computed(() =>
 ### Muted Text
 
 ```html
-<span class="text-[var(--foreground-muted)]">Secondary info</span>
+<span class="text-muted-foreground">Secondary info</span>
 ```
 
 ### Button Variants
 
 ```typescript
 // Primary
-'bg-[var(--primary)] text-[var(--primary-foreground)]';
+'bg-primary text-primary-foreground';
 
 // Secondary
-'bg-[var(--secondary)] text-[var(--secondary-foreground)]';
+'bg-secondary text-secondary-foreground';
 
 // Ghost
-'bg-transparent hover:bg-[var(--accent)] text-[var(--foreground)]';
+'bg-transparent hover:bg-accent text-foreground';
 ```
 
 ---
@@ -335,5 +371,7 @@ inputClasses = computed(() =>
 - [ ] New variables added to both `:root` and `.dark`
 - [ ] Variables follow existing naming conventions
 - [ ] No duplicate variable definitions
-- [ ] Components use CSS variables, not direct colors
+- [ ] Components use Tailwind semantic classes (bg-card, text-foreground, etc.)
+- [ ] NO `dark:` prefix used anywhere
+- [ ] NO `var()` syntax in Tailwind classes
 - [ ] Light and dark mode tested

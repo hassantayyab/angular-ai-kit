@@ -166,7 +166,7 @@
 
   <!-- Basic Usage -->
   <app-doc-section title="Basic Usage">
-    <app-doc-code-block [code]="basicCode" [multiline]="true" />
+    <app-doc-code-block [code]="basicCode" [multiline]="true" language="html" />
   </app-doc-section>
 
   <!-- Minimal Configuration -->
@@ -174,7 +174,11 @@
     title="Minimal Configuration"
     description="Hide all optional elements to get a minimal input with just the textarea and send button."
   >
-    <app-doc-code-block [code]="minimalCode" [multiline]="true" />
+    <app-doc-code-block
+      [code]="minimalCode"
+      [multiline]="true"
+      language="html"
+    />
   </app-doc-section>
 
   <!-- Keyboard Shortcuts -->

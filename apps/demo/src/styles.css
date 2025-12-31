@@ -460,11 +460,83 @@
   }
 
   /* ============================================
+     Angular Template Syntax Highlighting
+     Enhanced highlighting for Angular-specific syntax
+     ============================================ */
+
+  /* Property binding brackets: [ ] */
+  .hljs-ng-binding {
+    color: #cf222e;
+  }
+
+  .dark .hljs-ng-binding {
+    color: #ff7b72;
+  }
+
+  /* Property names inside [property] */
+  .hljs-ng-property {
+    color: #8250df;
+  }
+
+  .dark .hljs-ng-property {
+    color: #d2a8ff;
+  }
+
+  /* Event names inside (event) */
+  .hljs-ng-event {
+    color: #0550ae;
+  }
+
+  .dark .hljs-ng-event {
+    color: #79c0ff;
+  }
+
+  /* Two-way binding names [(ngModel)] */
+  .hljs-ng-twoway {
+    color: #953800;
+  }
+
+  .dark .hljs-ng-twoway {
+    color: #ffa657;
+  }
+
+  /* Control flow: @if, @for, @switch, @defer, etc. */
+  .hljs-ng-control {
+    color: #cf222e;
+    font-weight: 600;
+  }
+
+  .dark .hljs-ng-control {
+    color: #ff7b72;
+    font-weight: 600;
+  }
+
+  /* Template reference variables: #ref */
+  .hljs-ng-ref {
+    color: #116329;
+  }
+
+  .dark .hljs-ng-ref {
+    color: #7ee787;
+  }
+
+  /* Structural directives: *ngIf, *ngFor */
+  .hljs-ng-structural {
+    color: #cf222e;
+  }
+
+  .dark .hljs-ng-structural {
+    color: #ff7b72;
+  }
+
+  /* ============================================
      Professional Code Block Styling (ChatGPT/Claude-like)
      ============================================ */
 
   /* Code block wrapper - container with header */
-  .code-block-wrapper {
+  /* Support both demo (code-block-*) and library (ai-code-block-*) class names */
+  .code-block-wrapper,
+  .ai-code-block-wrapper {
     border-radius: 0.5rem;
     overflow: hidden;
     margin: 1rem 0;
@@ -472,7 +544,8 @@
   }
 
   /* Header bar with language label and copy button */
-  .code-block-header {
+  .code-block-header,
+  .ai-code-block-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -480,7 +553,8 @@
     background: var(--code);
   }
 
-  .code-block-language {
+  .code-block-language,
+  .ai-code-block-language {
     font-size: 0.75rem;
     font-weight: 500;
     color: var(--muted-foreground);
@@ -488,7 +562,8 @@
     font-family: ui-sans-serif, system-ui, sans-serif;
   }
 
-  .code-block-copy {
+  .code-block-copy,
+  .ai-code-block-copy {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -502,26 +577,31 @@
     transition: all 0.15s ease;
   }
 
-  .code-block-copy:hover {
+  .code-block-copy:hover,
+  .ai-code-block-copy:hover {
     color: var(--foreground);
     background: var(--accent);
   }
 
-  .code-block-copy svg {
+  .code-block-copy svg,
+  .ai-code-block-copy svg {
     width: 1rem;
     height: 1rem;
   }
 
-  .code-block-copy span {
+  .code-block-copy span,
+  .ai-code-block-copy span {
     display: none;
   }
 
-  .code-block-copy.copied {
+  .code-block-copy.copied,
+  .ai-code-block-copy.copied {
     color: var(--primary);
   }
 
   /* Code content inside wrapper */
-  .code-block-wrapper pre {
+  .code-block-wrapper pre,
+  .ai-code-block-wrapper pre {
     margin: 0 !important;
     padding: 1rem !important;
     background: transparent !important;
@@ -530,7 +610,8 @@
     overflow-x: auto;
   }
 
-  .code-block-wrapper pre code {
+  .code-block-wrapper pre code,
+  .ai-code-block-wrapper pre code {
     font-size: 0.875rem;
     line-height: 1.7;
     font-family:
@@ -541,7 +622,9 @@
   }
 
   /* Inline code styling */
-  .app-ai-response-content :not(pre) > code {
+  /* Support both demo (app-ai-response-content) and library (ai-response-content) class names */
+  .app-ai-response-content :not(pre) > code,
+  .ai-response-content :not(pre) > code {
     padding: 0.125rem 0.5rem;
     border-radius: 0.375rem;
     background-color: var(--muted);
@@ -550,12 +633,15 @@
     color: theme('colors.emerald.600');
   }
 
-  .dark .app-ai-response-content :not(pre) > code {
+  .dark .app-ai-response-content :not(pre) > code,
+  .dark .ai-response-content :not(pre) > code {
     color: theme('colors.emerald.400');
   }
 
   /* Prose customizations for AI responses */
-  .app-ai-response-content {
+  /* Support both demo (app-ai-response-content) and library (ai-response-content) class names */
+  .app-ai-response-content,
+  .ai-response-content {
     /* Headers */
     & h1 {
       font-size: 1.5rem;

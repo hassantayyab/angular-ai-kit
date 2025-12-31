@@ -12,7 +12,7 @@
       @for (message of messages(); track message.id) {
         @if (message.role === 'assistant') {
           <!-- AI Response for assistant messages -->
-          <app-ai-response
+          <ai-response
             [content]="message.content"
             [isStreaming]="message.status === 'streaming'"
             [showActions]="true"
