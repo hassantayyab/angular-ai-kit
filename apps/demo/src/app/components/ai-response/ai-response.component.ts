@@ -14,7 +14,6 @@ import {
   AfterViewInit,
   ChangeDetectionStrategy,
   Component,
-  DestroyRef,
   ElementRef,
   PLATFORM_ID,
   ViewEncapsulation,
@@ -30,24 +29,27 @@ import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { MarkdownService } from '../../services/markdown.service';
 
 /**
- * AI Response Component
+ * AI Response Component (Demo App Version)
  *
  * Displays AI response content with markdown rendering, syntax highlighting,
- * streaming text effect, and action buttons.
+ * streaming cursor, and action buttons.
  *
  * Features:
  * - Full markdown support (GFM)
  * - Code blocks with syntax highlighting
  * - Copy button on each code block
- * - Streaming text animation
+ * - Streaming cursor indicator
  * - Action buttons: copy, regenerate, thumbs up/down
+ *
+ * Note: Streaming animation is handled by the service providing the content.
+ * This component simply renders the content it receives with a cursor when
+ * isStreaming is true.
  *
  * @example
  * ```html
  * <app-ai-response
  *   [content]="response"
  *   [isStreaming]="isLoading"
- *   [speed]="20"
  *   (copy)="handleCopy($event)"
  *   (regenerate)="handleRegenerate()"
  *   (thumbsUp)="handleThumbsUp()"
@@ -82,7 +84,6 @@ import { MarkdownService } from '../../services/markdown.service';
 })
 export class AiResponseComponent implements AfterViewInit {
   private platformId = inject(PLATFORM_ID);
-  private destroyRef = inject(DestroyRef);
   private markdownService = inject(MarkdownService);
   private sanitizer = inject(DomSanitizer);
 
@@ -98,9 +99,6 @@ export class AiResponseComponent implements AfterViewInit {
 
   /** Whether the content is currently streaming */
   isStreaming = input<boolean>(false);
-
-  /** Streaming speed in milliseconds per character */
-  speed = input<number>(20);
 
   /** Whether to show action buttons */
   showActions = input<boolean>(true);
@@ -127,9 +125,6 @@ export class AiResponseComponent implements AfterViewInit {
   /** Emitted when thumbs down is clicked */
   thumbsDown = output<void>();
 
-  /** Emitted when streaming completes */
-  streamComplete = output<void>();
-
   // ==========================================
   // State
   // ==========================================
@@ -140,9 +135,6 @@ export class AiResponseComponent implements AfterViewInit {
   private _isFocused = signal(false);
   isFocused = this._isFocused.asReadonly();
 
-  /** Currently displayed text during streaming */
-  displayedText = signal('');
-
   /** Whether copy was just clicked (for feedback) */
   justCopied = signal(false);
 
@@ -151,10 +143,6 @@ export class AiResponseComponent implements AfterViewInit {
 
   /** Thumbs down selected state */
   thumbsDownSelected = signal(false);
-
-  // Animation state
-  private currentIndex = 0;
-  private animationTimeoutId: ReturnType<typeof setTimeout> | null = null;
 
   // ==========================================
   // Computed Properties
@@ -165,13 +153,14 @@ export class AiResponseComponent implements AfterViewInit {
     () => this.showActions() || this.isHovered() || this.isFocused()
   );
 
-  /** Rendered HTML from markdown (works during streaming too) */
+  /**
+   * Rendered HTML from markdown.
+   *
+   * Renders content() directly - the streaming is handled by the service
+   * that provides the content, not by this component.
+   */
   renderedHtml = computed((): SafeHtml => {
-    // Use displayedText during streaming, full content when complete
-    const textToRender = this.isStreaming()
-      ? this.displayedText()
-      : this.content();
-    const html = this.markdownService.parse(textToRender);
+    const html = this.markdownService.parse(this.content());
     // Bypass Angular sanitization to allow copy buttons in code blocks
     return this.sanitizer.bypassSecurityTrustHtml(html);
   });
@@ -229,29 +218,14 @@ export class AiResponseComponent implements AfterViewInit {
   });
 
   constructor() {
-    // Effect to handle content/streaming changes
+    // Add copy buttons when streaming completes
     effect(() => {
-      const fullText = this.content();
       const streaming = this.isStreaming();
-
-      if (!isPlatformBrowser(this.platformId)) {
-        // SSR: show full text
-        this.displayedText.set(fullText);
-        return;
+      if (!streaming && isPlatformBrowser(this.platformId)) {
+        // Content is complete, add copy buttons to code blocks
+        // Use setTimeout to ensure DOM is updated
+        setTimeout(() => this.addCodeBlockCopyButtons(), 0);
       }
-
-      if (streaming) {
-        this.animateText(fullText);
-      } else {
-        this.cancelAnimation();
-        this.displayedText.set(fullText);
-        this.currentIndex = fullText.length;
-      }
-    });
-
-    // Cleanup on destroy
-    this.destroyRef.onDestroy(() => {
-      this.cancelAnimation();
     });
   }
 
@@ -265,44 +239,6 @@ export class AiResponseComponent implements AfterViewInit {
   // ==========================================
   // Private Methods
   // ==========================================
-
-  /** Animate text character by character */
-  private animateText(fullText: string): void {
-    if (this.currentIndex >= fullText.length) {
-      this.displayedText.set(fullText);
-      return;
-    }
-
-    if (fullText.length < this.currentIndex) {
-      this.currentIndex = 0;
-    }
-
-    const revealNextChar = () => {
-      if (this.currentIndex < fullText.length) {
-        this.currentIndex++;
-        this.displayedText.set(fullText.slice(0, this.currentIndex));
-        this.animationTimeoutId = setTimeout(revealNextChar, this.speed());
-      } else {
-        // Streaming complete
-        this.streamComplete.emit();
-        // Wait a tick then add copy buttons
-        setTimeout(() => this.addCodeBlockCopyButtons(), 0);
-      }
-    };
-
-    if (this.currentIndex < fullText.length) {
-      this.cancelAnimation();
-      revealNextChar();
-    }
-  }
-
-  /** Cancel ongoing animation */
-  private cancelAnimation(): void {
-    if (this.animationTimeoutId !== null) {
-      clearTimeout(this.animationTimeoutId);
-      this.animationTimeoutId = null;
-    }
-  }
 
   /** Attach click handlers to code block copy buttons */
   private addCodeBlockCopyButtons(): void {
@@ -403,12 +339,5 @@ export class AiResponseComponent implements AfterViewInit {
   /** Handle focus out */
   handleFocusOut(): void {
     this._isFocused.set(false);
-  }
-
-  /** Reset animation state */
-  reset(): void {
-    this.cancelAnimation();
-    this.currentIndex = 0;
-    this.displayedText.set('');
   }
 }

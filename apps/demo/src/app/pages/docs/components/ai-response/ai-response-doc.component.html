@@ -20,7 +20,6 @@
         <app-ai-response
           [content]="demoContent()"
           [isStreaming]="isStreaming()"
-          [speed]="speed()"
           [showActions]="showActions()"
           [showCursor]="showCursor()"
           (copy)="handleCopy($event)"
@@ -51,15 +50,6 @@
           label="Show Cursor"
           [checked]="showCursor()"
           (checkedChange)="showCursor.set($event)"
-        />
-        <app-doc-slider-control
-          label="Streaming Speed"
-          [value]="speed()"
-          [min]="5"
-          [max]="100"
-          [step]="5"
-          suffix="ms per character"
-          (valueChange)="speed.set($event)"
         />
       </div>
     </app-doc-demo-card>

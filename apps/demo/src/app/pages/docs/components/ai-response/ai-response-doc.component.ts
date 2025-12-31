@@ -15,7 +15,6 @@ import {
   DocDemoCardComponent,
   DocFeaturesListComponent,
   DocSectionComponent,
-  DocSliderControlComponent,
 } from '../../../../components/doc-ui';
 
 /** API Input properties */
@@ -31,12 +30,6 @@ const INPUTS: ApiProperty[] = [
     type: 'boolean',
     default: 'false',
     description: 'Whether content is currently streaming',
-  },
-  {
-    name: 'speed',
-    type: 'number',
-    default: '20',
-    description: 'Streaming speed (ms per character)',
   },
   {
     name: 'showActions',
@@ -84,12 +77,6 @@ const OUTPUTS: ApiProperty[] = [
     default: '-',
     description: 'Emits when thumbs down is clicked',
   },
-  {
-    name: 'streamComplete',
-    type: 'void',
-    default: '-',
-    description: 'Emits when streaming animation completes',
-  },
 ];
 
 /** Install command */
@@ -109,7 +96,6 @@ const ACCESSIBILITY = [
 const USAGE_CODE = `<app-ai-response
   [content]="response"
   [isStreaming]="isLoading"
-  [speed]="20"
   [showActions]="true"
   (copy)="handleCopy($event)"
   (regenerate)="handleRegenerate()"
@@ -315,7 +301,6 @@ This component supports:
     DocCodeBlockComponent,
     DocApiTableComponent,
     DocControlToggleComponent,
-    DocSliderControlComponent,
     DocFeaturesListComponent,
   ],
   host: {
@@ -340,12 +325,12 @@ export class AiResponseDocComponent {
   isStreaming = signal(false);
   showActions = signal(true);
   showCursor = signal(true);
-  speed = signal(20);
 
   // Restart streaming demo
   restartDemo(): void {
-    this.aiResponse()?.reset();
-    this.isStreaming.set(true);
+    // Toggle streaming to reset the demo
+    this.isStreaming.set(false);
+    setTimeout(() => this.isStreaming.set(true), 50);
   }
 
   // Toggle streaming
