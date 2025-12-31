@@ -5,3 +5,4 @@
  */
 
 export * from './chat';
+export * from './display';

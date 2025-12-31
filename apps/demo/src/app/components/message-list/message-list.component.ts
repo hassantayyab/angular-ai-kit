@@ -15,6 +15,7 @@ import {
   output,
   viewChild,
 } from '@angular/core';
+import { AiResponseComponent } from '../ai-response';
 import { MessageBubbleComponent } from '../message-bubble';
 import { TypingIndicatorComponent } from '../typing-indicator';
 
@@ -40,7 +41,11 @@ import { TypingIndicatorComponent } from '../typing-indicator';
   templateUrl: './message-list.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
-  imports: [MessageBubbleComponent, TypingIndicatorComponent],
+  imports: [
+    AiResponseComponent,
+    MessageBubbleComponent,
+    TypingIndicatorComponent,
+  ],
   host: {
     class: 'app-message-list-host block h-full',
   },
@@ -96,7 +101,14 @@ export class MessageListComponent implements AfterViewInit {
 
   /** Container classes */
   containerClasses = computed(() => {
-    return cn('app-message-list', 'h-full', this.customClasses());
+    return cn(
+      'app-message-list',
+      'h-full',
+      'overflow-y-auto overflow-x-hidden',
+      'scrollbar-thin scrollbar-thumb-zinc-300 dark:scrollbar-thumb-zinc-600',
+      'scrollbar-track-transparent',
+      this.customClasses()
+    );
   });
 
   /** Messages wrapper classes */

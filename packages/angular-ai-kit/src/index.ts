@@ -8,6 +8,9 @@ export * from './lib/components';
 // Directives
 export * from './lib/directives';
 
+// Services
+export * from './lib/services';
+
 // DI Tokens
 export * from './lib/tokens';
 

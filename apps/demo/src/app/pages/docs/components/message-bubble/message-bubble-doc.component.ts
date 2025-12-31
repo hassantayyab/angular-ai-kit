@@ -117,19 +117,53 @@ export class MessageBubbleDocComponent {
   readonly usageCode = USAGE_CODE;
   readonly interfaceCode = INTERFACE_CODE;
 
-  // Example messages for demos
+  // Example messages for demos with comprehensive markdown
   userMessage: ChatMessage = {
     id: 'demo-user-1',
     role: 'user',
-    content: 'Hello! Can you help me understand how signals work in Angular?',
+    content: 'Hello! Can you explain signals in Angular with a code example?',
     timestamp: new Date(),
   };
 
   assistantMessage: ChatMessage = {
     id: 'demo-assistant-1',
     role: 'assistant',
-    content:
-      'Of course! Signals are a new reactive primitive in Angular that provide fine-grained reactivity. They automatically track dependencies and update only what needs to change.',
+    content: `## Angular Signals
+
+**Signals** are a reactive primitive that provide fine-grained reactivity in Angular.
+
+### Basic Example
+
+\`\`\`typescript
+import { signal, computed, effect } from '@angular/core';
+
+// Create a signal
+const count = signal(0);
+
+// Read the value
+console.log(count()); // 0
+
+// Update the value
+count.set(1);
+count.update(v => v + 1);
+
+// Computed signal
+const doubled = computed(() => count() * 2);
+
+// Effect (side effects)
+effect(() => {
+  console.log('Count changed:', count());
+});
+\`\`\`
+
+### Key Benefits
+
+1. **Fine-grained updates** - Only affected parts re-render
+2. **Synchronous** - No async complexity
+3. **TypeScript support** - Full type inference
+4. **Zoneless compatible** - Works without Zone.js
+
+> **Note:** Signals are the future of Angular reactivity!`,
     timestamp: new Date(),
   };
 

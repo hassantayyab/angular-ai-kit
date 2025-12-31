@@ -10,13 +10,24 @@
   <!-- Messages -->
   @if (messages().length > 0) {
     @for (message of messages(); track message.id) {
-      <ai-message-bubble
-        [message]="message"
-        [showAvatar]="showAvatars()"
-        [showActions]="true"
-        (copied)="handleMessageCopy($event, message)"
-        (regenerate)="handleMessageRegenerate(message)"
-      />
+      @if (message.role === 'assistant') {
+        <!-- AI Response with markdown rendering for assistant messages -->
+        <ai-response
+          [content]="message.content"
+          [isStreaming]="message.status === 'streaming'"
+          [showActions]="true"
+          (copy)="handleMessageCopy($event, message)"
+          (regenerate)="handleMessageRegenerate(message)"
+        />
+      } @else {
+        <!-- Message bubble for user messages -->
+        <ai-message-bubble
+          [message]="message"
+          [showAvatar]="showAvatars()"
+          [showActions]="false"
+          (copied)="handleMessageCopy($event, message)"
+        />
+      }
     }
   } @else {
     <!-- Empty state -->

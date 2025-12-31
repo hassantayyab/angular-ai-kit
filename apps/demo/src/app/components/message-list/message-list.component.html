@@ -10,13 +10,25 @@
     <!-- Messages -->
     <div [class]="messagesWrapperClasses()">
       @for (message of messages(); track message.id) {
-        <app-message-bubble
-          [message]="message"
-          [showAvatar]="showAvatars()"
-          [showActions]="false"
-          (copied)="handleMessageCopy($event, message)"
-          (regenerate)="handleMessageRegenerate(message)"
-        />
+        @if (message.role === 'assistant') {
+          <!-- AI Response for assistant messages -->
+          <app-ai-response
+            [content]="message.content"
+            [isStreaming]="message.status === 'streaming'"
+            [showActions]="true"
+            (copy)="handleMessageCopy($event, message)"
+            (regenerate)="handleMessageRegenerate(message)"
+          />
+        } @else {
+          <!-- Message Bubble for user messages -->
+          <app-message-bubble
+            [message]="message"
+            [showAvatar]="showAvatars()"
+            [showActions]="false"
+            (copied)="handleMessageCopy($event, message)"
+            (regenerate)="handleMessageRegenerate(message)"
+          />
+        }
       }
 
       <!-- Loading indicator -->

@@ -15,6 +15,7 @@ import {
   viewChild,
 } from '@angular/core';
 import { ChatMessage } from '../../../types';
+import { AiResponseComponent } from '../../display/ai-response';
 import { MessageBubbleComponent } from '../message-bubble';
 
 /**
@@ -44,7 +45,7 @@ import { MessageBubbleComponent } from '../message-bubble';
   templateUrl: './message-list.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
-  imports: [MessageBubbleComponent],
+  imports: [MessageBubbleComponent, AiResponseComponent],
   host: {
     class: 'ai-message-list-host',
   },

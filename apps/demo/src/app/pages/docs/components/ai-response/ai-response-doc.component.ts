@@ -117,34 +117,187 @@ const USAGE_CODE = `<app-ai-response
   (thumbsDown)="handleThumbsDown()"
 />`;
 
-/** Demo markdown content */
-const DEMO_MARKDOWN = `# Hello, World!
+/** Comprehensive demo markdown content showcasing all features */
+const DEMO_MARKDOWN = `# Welcome to Angular AI Kit
 
-This is a **markdown** response with full formatting support.
+This is a **comprehensive demonstration** of all markdown features supported by the AI Response component.
 
-## Code Example
+## Text Formatting
 
-Here's a TypeScript function:
+You can use **bold text**, *italic text*, and ~~strikethrough~~. You can also combine them: ***bold and italic***, or ~~**bold strikethrough**~~.
+
+## Lists
+
+### Unordered Lists
+
+- First item
+- Second item
+  - Nested item 2.1
+  - Nested item 2.2
+    - Deeply nested item
+- Third item
+
+### Ordered Lists
+
+1. First step
+2. Second step
+   1. Sub-step 2.1
+   2. Sub-step 2.2
+3. Third step
+
+### Task Lists
+
+- [x] Completed task
+- [x] Another completed task
+- [ ] Pending task
+- [ ] Future task
+
+## Code Examples
+
+### TypeScript
 
 \`\`\`typescript
-function greet(name: string): string {
-  return \`Hello, \${name}!\`;
+interface ChatMessage {
+  id: string;
+  role: 'user' | 'assistant' | 'system';
+  content: string;
+  timestamp: Date;
 }
 
-const message = greet('Angular');
-console.log(message);
+function formatMessage(message: ChatMessage): string {
+  const { role, content, timestamp } = message;
+  return \`[\${timestamp.toISOString()}] \${role}: \${content}\`;
+}
+
+const message: ChatMessage = {
+  id: crypto.randomUUID(),
+  role: 'assistant',
+  content: 'Hello, how can I help you today?',
+  timestamp: new Date()
+};
+
+console.log(formatMessage(message));
 \`\`\`
 
-## Features
+### Python
 
-- Full **GFM** (GitHub Flavored Markdown) support
-- Syntax highlighting for code blocks
-- Copy button on each code block
-- Action buttons (copy, regenerate, thumbs up/down)
+\`\`\`python
+from dataclasses import dataclass
+from datetime import datetime
+from typing import Literal
 
-> This is a blockquote with some important information.
+@dataclass
+class ChatMessage:
+    id: str
+    role: Literal['user', 'assistant', 'system']
+    content: str
+    timestamp: datetime
 
-Inline code like \`const x = 1\` is also supported.`;
+def format_message(message: ChatMessage) -> str:
+    return f"[{message.timestamp.isoformat()}] {message.role}: {message.content}"
+
+# Example usage
+message = ChatMessage(
+    id="123",
+    role="assistant",
+    content="Hello! How can I assist you?",
+    timestamp=datetime.now()
+)
+print(format_message(message))
+\`\`\`
+
+### JSON Configuration
+
+\`\`\`json
+{
+  "name": "angular-ai-kit",
+  "version": "1.0.0",
+  "features": {
+    "markdown": true,
+    "streaming": true,
+    "codeHighlighting": true
+  },
+  "themes": ["light", "dark"]
+}
+\`\`\`
+
+### CSS Styling
+
+\`\`\`css
+.ai-response {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 0.75rem;
+  padding: 1rem;
+}
+
+.ai-response:hover {
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+}
+\`\`\`
+
+### Bash Commands
+
+\`\`\`bash
+# Install dependencies
+npm install @angular-ai-kit/core
+
+# Generate a new component
+npx nx generate @angular-ai-kit/core:component my-chat
+
+# Run the development server
+npm run dev
+\`\`\`
+
+Inline code is also supported: \`const greeting = "Hello, World!";\`
+
+## Blockquotes
+
+> This is a simple blockquote. It's great for highlighting important information.
+
+> **Note:** You can use formatting inside blockquotes too.
+>
+> Even multiple paragraphs work!
+>
+> > And nested blockquotes as well.
+
+## Tables
+
+| Feature | Status | Notes |
+|:--------|:------:|------:|
+| Markdown Rendering | ✅ | Full GFM support |
+| Code Highlighting | ✅ | Multiple languages |
+| Streaming Text | ✅ | Character-by-character |
+| Dark Mode | ✅ | CSS variables |
+| Copy to Clipboard | ✅ | Per code block |
+
+## Links
+
+- [Angular Documentation](https://angular.dev)
+- [Tailwind CSS](https://tailwindcss.com)
+- [GitHub Repository](https://github.com/angular-ai-kit)
+
+## Horizontal Rules
+
+Content above the rule.
+
+---
+
+Content below the rule.
+
+## Mathematical Expressions
+
+While LaTeX isn't natively supported, you can write equations inline: \`E = mc²\` or \`a² + b² = c²\`.
+
+## Summary
+
+This component supports:
+
+1. **Rich text formatting** - Bold, italic, strikethrough
+2. **Structured content** - Lists, tables, blockquotes
+3. **Code presentation** - Syntax highlighting for 20+ languages
+4. **Interactive features** - Copy buttons, action buttons
+5. **Accessibility** - Full ARIA support, keyboard navigation`;
 
 /**
  * AI Response Documentation Component

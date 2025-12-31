@@ -163,32 +163,50 @@ export class ChatContainerDocComponent {
   readonly usageCode = USAGE_CODE;
   readonly layoutCode = LAYOUT_CODE;
 
-  // Example messages
+  // Example messages with comprehensive markdown
   messages = signal<ChatMessage[]>([
     {
       id: '1',
       role: 'user',
-      content: 'Hello! How can I use ChatContainer?',
+      content: 'Hello! Can you show me the features of ChatContainer?',
       timestamp: new Date(),
     },
     {
       id: '2',
       role: 'assistant',
-      content:
-        'ChatContainer is a full-height layout component that combines a header, message list, and footer. It provides a complete chat interface structure.',
-      timestamp: new Date(),
-    },
-    {
-      id: '3',
-      role: 'user',
-      content: 'Can I customize the header?',
-      timestamp: new Date(),
-    },
-    {
-      id: '4',
-      role: 'assistant',
-      content:
-        'Yes! You can set a custom title, show/hide the header, and even add action buttons. The component is designed to be flexible.',
+      content: `## ChatContainer Features
+
+The **ChatContainer** component provides a complete chat interface layout:
+
+### Structure
+
+- **Header** - Optional, displays title and action buttons
+- **Message List** - Scrollable area for messages
+- **Footer** - Placeholder for input components
+
+### Code Example
+
+\`\`\`typescript
+@Component({
+  template: \`
+    <ai-chat-container
+      [messages]="messages()"
+      [title]="'AI Assistant'"
+      [loading]="isLoading()"
+    />
+  \`
+})
+export class ChatComponent {}
+\`\`\`
+
+### Benefits
+
+1. **Full-height flex layout** - Fills available space
+2. **Auto-scroll** - Scrolls to newest messages
+3. **Dark mode support** - Built-in theme switching
+4. **Responsive design** - Works on all screen sizes
+
+> **Tip:** Use the \`showHeader\` and \`showFooter\` inputs to customize visibility.`,
       timestamp: new Date(),
     },
   ]);
