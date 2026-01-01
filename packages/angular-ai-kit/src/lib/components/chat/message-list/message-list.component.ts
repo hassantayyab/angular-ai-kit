@@ -16,7 +16,8 @@ import {
 } from '@angular/core';
 import { ChatMessage } from '../../../types';
 import { AiResponseComponent } from '../../display/ai-response';
-import { MessageBubbleComponent } from '../message-bubble';
+import { UserMessageComponent } from '../user-message';
+import { EditEvent } from '../user-message/user-message.types';
 
 /**
  * MessageList Component
@@ -45,7 +46,7 @@ import { MessageBubbleComponent } from '../message-bubble';
   templateUrl: './message-list.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
-  imports: [MessageBubbleComponent, AiResponseComponent],
+  imports: [UserMessageComponent, AiResponseComponent],
   host: {
     class: 'ai-message-list-host',
   },
@@ -115,6 +116,11 @@ export class MessageListComponent implements AfterViewInit {
    * Emitted when a message's regenerate button is clicked
    */
   messageRegenerate = output<ChatMessage>();
+
+  /**
+   * Emitted when a user message is edited
+   */
+  messageEdit = output<{ event: EditEvent; message: ChatMessage }>();
 
   // ==========================================
   // Template References
@@ -234,5 +240,13 @@ export class MessageListComponent implements AfterViewInit {
    */
   handleMessageRegenerate(message: ChatMessage): void {
     this.messageRegenerate.emit(message);
+  }
+
+  /**
+   * Handle user message edit event
+   * @internal
+   */
+  handleMessageEdit(event: EditEvent, message: ChatMessage): void {
+    this.messageEdit.emit({ event, message });
   }
 }

@@ -19,13 +19,12 @@
           (copy)="handleMessageCopy($event, message)"
           (regenerate)="handleMessageRegenerate(message)"
         />
-      } @else {
-        <!-- Message bubble for user messages -->
-        <ai-message-bubble
+      } @else if (message.role === 'user') {
+        <!-- User message component -->
+        <ai-user-message
           [message]="message"
-          [showAvatar]="showAvatars()"
-          [showActions]="false"
-          (copied)="handleMessageCopy($event, message)"
+          (copy)="handleMessageCopy($event, message)"
+          (edit)="handleMessageEdit($event, message)"
         />
       }
     }

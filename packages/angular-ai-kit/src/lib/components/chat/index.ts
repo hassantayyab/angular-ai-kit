@@ -4,6 +4,7 @@
  * @module components/chat
  */
 
-export { MessageBubbleComponent } from './message-bubble';
+export { UserMessageComponent } from './user-message';
+export type { EditEvent } from './user-message';
 export { MessageListComponent } from './message-list';
 export { ChatContainerComponent } from './chat-container';

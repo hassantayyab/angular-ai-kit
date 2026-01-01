@@ -1,4 +1,9 @@
-import { AiResponseComponent, ChatMessage } from '@angular-ai-kit/core';
+import {
+  AiResponseComponent,
+  ChatMessage,
+  EditEvent,
+  UserMessageComponent,
+} from '@angular-ai-kit/core';
 import { cn } from '@angular-ai-kit/utils';
 import { isPlatformBrowser } from '@angular/common';
 import {
@@ -15,7 +20,6 @@ import {
   output,
   viewChild,
 } from '@angular/core';
-import { MessageBubbleComponent } from '../message-bubble';
 import { TypingIndicatorComponent } from '../typing-indicator';
 
 /**
@@ -42,7 +46,7 @@ import { TypingIndicatorComponent } from '../typing-indicator';
   encapsulation: ViewEncapsulation.None,
   imports: [
     AiResponseComponent,
-    MessageBubbleComponent,
+    UserMessageComponent,
     TypingIndicatorComponent,
   ],
   host: {
@@ -87,6 +91,9 @@ export class MessageListComponent implements AfterViewInit {
 
   /** Emitted when a message's regenerate button is clicked */
   messageRegenerate = output<ChatMessage>();
+
+  /** Emitted when a user message is edited */
+  messageEdit = output<{ event: EditEvent; message: ChatMessage }>();
 
   // ==========================================
   // Template References
@@ -176,5 +183,10 @@ export class MessageListComponent implements AfterViewInit {
   /** Handle message regenerate event */
   handleMessageRegenerate(message: ChatMessage): void {
     this.messageRegenerate.emit(message);
+  }
+
+  /** Handle user message edit event */
+  handleMessageEdit(event: EditEvent, message: ChatMessage): void {
+    this.messageEdit.emit({ event, message });
   }
 }

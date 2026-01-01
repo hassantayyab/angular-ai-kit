@@ -28,11 +28,11 @@ export const appRoutes: Route[] = [
               ),
           },
           {
-            path: 'components/message-bubble',
+            path: 'components/user-message',
             loadComponent: () =>
               import(
-                './pages/docs/components/message-bubble/message-bubble-doc.component'
-              ).then((m) => m.MessageBubbleDocComponent),
+                './pages/docs/components/user-message/user-message-doc.component'
+              ).then((m) => m.UserMessageDocComponent),
           },
           {
             path: 'components/chat-input',

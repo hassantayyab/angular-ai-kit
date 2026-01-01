@@ -73,10 +73,10 @@ export class DocsOverviewComponent {
     },
     {
       iconPath: ICONS.messageBubble,
-      title: 'Message Bubble',
+      title: 'User Message',
       description:
-        'Chat message component with role-based styling and actions.',
-      link: 'components/message-bubble',
+        'Compact user message card with inline editing and truncation.',
+      link: 'components/user-message',
     },
     {
       iconPath: ICONS.chatInput,

@@ -1,0 +1,87 @@
+<div class="space-y-8">
+  <!-- Header -->
+  <div>
+    <h1 class="text-3xl font-bold">User Message</h1>
+    <p class="text-muted-foreground mt-2">
+      Compact card-style component for displaying user messages with inline
+      editing, text truncation, and hover-activated actions.
+    </p>
+  </div>
+
+  <!-- Installation -->
+  <app-doc-section title="Installation">
+    <app-doc-code-block [code]="installCode" language="bash" />
+  </app-doc-section>
+
+  <!-- Live Demo -->
+  <app-doc-section title="Live Demo">
+    <app-doc-demo-card>
+      <div class="w-full space-y-6">
+        <!-- Short message -->
+        <div>
+          <p class="text-muted-foreground mb-2 text-sm">Short message:</p>
+          <ai-user-message
+            [message]="shortMessage()"
+            (copy)="handleCopy($event)"
+            (edit)="handleEdit($event)"
+          />
+        </div>
+
+        <!-- Medium message -->
+        <div>
+          <p class="text-muted-foreground mb-2 text-sm">Medium message:</p>
+          <ai-user-message
+            [message]="mediumMessage()"
+            (copy)="handleCopy($event)"
+            (edit)="handleEdit($event)"
+          />
+        </div>
+
+        <!-- Long message (truncated) -->
+        <div>
+          <p class="text-muted-foreground mb-2 text-sm">
+            Long message (with truncation):
+          </p>
+          <ai-user-message
+            [message]="longMessage()"
+            (copy)="handleCopy($event)"
+            (edit)="handleEdit($event)"
+          />
+        </div>
+      </div>
+    </app-doc-demo-card>
+    <p class="text-muted-foreground mt-2 text-sm">
+      Hover over any message to see the action buttons (copy and edit).
+    </p>
+  </app-doc-section>
+
+  <!-- Features -->
+  <app-doc-features-list title="Features" [items]="features" />
+
+  <!-- API Reference -->
+  <app-doc-section title="API Reference">
+    <app-doc-api-table title="Inputs" [properties]="inputs" />
+    <app-doc-api-table
+      title="Outputs"
+      [properties]="outputs"
+      [showDefault]="false"
+    />
+  </app-doc-section>
+
+  <!-- Usage Example -->
+  <app-doc-section title="Usage Example">
+    <app-doc-code-block [code]="usageCode" [multiline]="true" language="html" />
+  </app-doc-section>
+
+  <!-- Interface -->
+  <app-doc-section title="Interfaces">
+    <app-doc-code-block
+      [code]="interfaceCode"
+      [multiline]="true"
+      language="typescript"
+    />
+  </app-doc-section>
+
+  <!-- Accessibility -->
+  <app-doc-features-list title="Accessibility" [items]="accessibility" />
+</div>

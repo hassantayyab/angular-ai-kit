@@ -24,6 +24,7 @@ import {
   lucideGithub,
   lucideMenu,
   lucideMessageSquare,
+  lucidePencil,
   lucidePlus,
   lucideRefreshCw,
   lucideSettings,
@@ -45,6 +46,7 @@ export const AI_ICONS = {
   lucideRefreshCw,
   lucideTrash2,
   lucidePlus,
+  lucidePencil,
 
   // Feedback
   lucideThumbsUp,
@@ -88,6 +90,7 @@ export const ROLE_ICONS = {
 export const ACTION_ICONS = {
   copy: 'lucideCopy',
   copied: 'lucideCheck',
+  edit: 'lucidePencil',
   regenerate: 'lucideRefreshCw',
   delete: 'lucideTrash2',
   thumbsUp: 'lucideThumbsUp',
