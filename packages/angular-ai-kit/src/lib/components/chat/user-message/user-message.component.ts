@@ -1,5 +1,3 @@
-import { NgIcon, provideIcons } from '@ng-icons/core';
-import { lucideCheck, lucideCopy, lucidePencil } from '@ng-icons/lucide';
 import { cn } from '@angular-ai-kit/utils';
 import { isPlatformBrowser } from '@angular/common';
 import {
@@ -16,6 +14,7 @@ import {
   viewChild,
 } from '@angular/core';
 import { UserMessage } from '../../../types';
+import { IconButtonComponent } from '../../ui/icon-button';
 import { EditEvent } from './user-message.types';
 
 /**
@@ -45,14 +44,7 @@ import { EditEvent } from './user-message.types';
   templateUrl: './user-message.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
-  imports: [NgIcon],
-  viewProviders: [
-    provideIcons({
-      lucideCopy,
-      lucideCheck,
-      lucidePencil,
-    }),
-  ],
+  imports: [IconButtonComponent],
   host: {
     class: 'ai-user-message-host block',
     '(mouseenter)': 'handleMouseEnter()',
@@ -190,19 +182,6 @@ export class UserMessageComponent {
         'opacity-100': this.actionsVisible(),
         'opacity-0 pointer-events-none': !this.actionsVisible(),
       }
-    )
-  );
-
-  /** Action button classes */
-  actionButtonClasses = computed(() =>
-    cn(
-      'inline-flex items-center justify-center',
-      'h-7 w-7 rounded',
-      'text-muted-foreground',
-      'hover:bg-accent hover:text-foreground',
-      'transition-colors duration-150',
-      'focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 focus:ring-offset-background',
-      'cursor-pointer'
     )
   );
 

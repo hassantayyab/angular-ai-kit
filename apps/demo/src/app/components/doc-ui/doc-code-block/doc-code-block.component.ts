@@ -1,4 +1,7 @@
+import { provideIcons } from '@ng-icons/core';
+import { lucideCheck, lucideCopy } from '@ng-icons/lucide';
 import { CodeHighlightService } from '@angular-ai-kit/core';
+import { HlmIconImports } from '@angular-ai-kit/spartan-ui/icon';
 import { isPlatformBrowser } from '@angular/common';
 import {
   ChangeDetectionStrategy,
@@ -23,6 +26,8 @@ import {
   templateUrl: './doc-code-block.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
+  imports: [HlmIconImports],
+  viewProviders: [provideIcons({ lucideCopy, lucideCheck })],
   host: {
     class: 'app-doc-code-block block',
   },

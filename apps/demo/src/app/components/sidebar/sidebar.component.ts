@@ -9,7 +9,7 @@ import {
   lucideSparkles,
   lucideTrash2,
 } from '@ng-icons/lucide';
-import { HlmButton } from '@angular-ai-kit/spartan-ui/button';
+import { IconButtonComponent } from '@angular-ai-kit/core';
 import {
   HlmCollapsible,
   HlmCollapsibleContent,
@@ -126,8 +126,8 @@ interface ConversationDisplay {
     HlmCollapsible,
     HlmCollapsibleTrigger,
     HlmCollapsibleContent,
-    HlmButton,
     HlmIconImports,
+    IconButtonComponent,
     ThemeToggleComponent,
     SearchTriggerComponent,
     RouterLink,

@@ -21,14 +21,14 @@
       <div class="mt-2 flex justify-end gap-2">
         <button
           type="button"
-          class="text-muted-foreground hover:bg-accent hover:text-foreground rounded px-3 py-1 text-sm transition-colors"
+          class="text-muted-foreground hover:bg-accent hover:text-foreground cursor-pointer rounded px-3 py-1 text-sm transition-colors"
           (click)="cancelEdit()"
         >
           Cancel
         </button>
         <button
           type="button"
-          class="bg-primary text-primary-foreground hover:bg-primary/90 rounded px-3 py-1 text-sm transition-colors"
+          class="bg-primary text-primary-foreground hover:bg-primary/90 cursor-pointer rounded px-3 py-1 text-sm transition-colors"
           (click)="saveEdit()"
         >
           Save
@@ -42,7 +42,7 @@
       @if (isLongMessage()) {
         <button
           type="button"
-          class="text-muted-foreground mt-1 block text-xs hover:underline"
+          class="text-muted-foreground mt-1 block cursor-pointer text-xs hover:underline"
           (click)="toggleExpand()"
         >
           {{ isExpanded() ? 'Show less' : 'Show more' }}
@@ -55,26 +55,20 @@
   @if (!isEditing()) {
     <div [class]="actionsClasses()" [attr.aria-hidden]="!actionsVisible()">
       <!-- Copy Button -->
-      <button
-        type="button"
-        [class]="actionButtonClasses()"
-        [attr.aria-label]="'Copy message'"
-        [attr.tabindex]="actionsVisible() ? 0 : -1"
-        (click)="handleCopy()"
-      >
-        <ng-icon [name]="copyIcon()" class="text-sm" />
-      </button>
+      <ai-icon-button
+        [icon]="copyIcon()"
+        ariaLabel="Copy message"
+        size="sm"
+        (clicked)="handleCopy()"
+      />
 
       <!-- Edit Button -->
-      <button
-        type="button"
-        [class]="actionButtonClasses()"
-        [attr.aria-label]="'Edit message'"
-        [attr.tabindex]="actionsVisible() ? 0 : -1"
-        (click)="startEdit()"
-      >
-        <ng-icon name="lucidePencil" class="text-sm" />
-      </button>
+      <ai-icon-button
+        icon="lucidePencil"
+        ariaLabel="Edit message"
+        size="sm"
+        (clicked)="startEdit()"
+      />
     </div>
   }
 </article>

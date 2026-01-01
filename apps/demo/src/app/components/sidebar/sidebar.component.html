@@ -165,24 +165,16 @@
                           </button>
 
                           <!-- Delete button (on hover) -->
-                          <button
-                            type="button"
-                            hlmBtn
+                          <ai-icon-button
+                            icon="lucideTrash2"
+                            ariaLabel="Delete conversation"
+                            size="sm"
                             variant="ghost"
-                            size="icon"
-                            class="hover:bg-destructive/10 absolute top-1/2 right-1 hidden h-6 w-6 -translate-y-1/2 items-center justify-center group-hover/item:flex group-data-[collapsible=icon]:hidden"
-                            (click)="
+                            customClasses="absolute top-1/2 right-1 hidden -translate-y-1/2 group-hover/item:inline-flex group-data-[collapsible=icon]:hidden hover:bg-destructive/10 hover:text-destructive"
+                            (clicked)="
                               handleDeleteConversation($event, conversation.id)
                             "
-                            aria-label="Delete conversation"
-                          >
-                            <ng-icon
-                              hlm
-                              name="lucideTrash2"
-                              size="xs"
-                              class="text-muted-foreground hover:text-destructive"
-                            />
-                          </button>
+                          />
                         </li>
                       }
                     } @empty {

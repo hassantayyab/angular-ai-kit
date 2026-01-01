@@ -4,42 +4,14 @@
   <!-- Copy Button -->
   <button
     type="button"
-    class="text-muted-foreground hover:bg-accent hover:text-foreground absolute top-3 right-3 z-10 flex h-7 w-7 items-center justify-center rounded-md transition-colors"
+    class="absolute top-3 right-3 z-10 flex h-7 w-7 cursor-pointer items-center justify-center rounded-md text-zinc-400 transition-colors hover:bg-zinc-700 hover:text-zinc-200"
     (click)="copyCode()"
     [attr.aria-label]="copied() ? 'Copied!' : 'Copy code'"
   >
     @if (copied()) {
-      <svg
-        class="text-primary h-4 w-4"
-        fill="none"
-        stroke="currentColor"
-        viewBox="0 0 24 24"
-      >
-        <path
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="2"
-          d="M5 13l4 4L19 7"
-        />
-      </svg>
+      <ng-icon hlm name="lucideCheck" size="sm" class="text-primary" />
     } @else {
-      <svg
-        class="h-4 w-4"
-        fill="none"
-        stroke="currentColor"
-        viewBox="0 0 24 24"
-      >
-        <path
-          d="M7 7m0 2.667a2.667 2.667 0 0 1 2.667 -2.667h8.666a2.667 2.667 0 0 1 2.667 2.667v8.666a2.667 2.667 0 0 1 -2.667 2.667h-8.666a2.667 2.667 0 0 1 -2.667 -2.667z"
-          stroke-width="2"
-        />
-        <path
-          d="M4.012 16.737a2.005 2.005 0 0 1 -1.012 -1.737v-10c0 -1.1 .9 -2 2 -2h10c.75 0 1.158 .385 1.5 1"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="2"
-        />
-      </svg>
+      <ng-icon hlm name="lucideCopy" size="sm" />
     }
   </button>
 

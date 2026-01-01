@@ -14,65 +14,44 @@
   @if (showActions()) {
     <div [class]="actionsClasses()">
       <!-- Copy Button -->
-      <button
-        type="button"
-        [class]="actionButtonClasses()"
-        (click)="handleCopy()"
-        [attr.aria-label]="justCopied() ? 'Copied!' : 'Copy response'"
-      >
-        @if (justCopied()) {
-          <ng-icon name="lucideCheck" class="text-base text-emerald-500" />
-        } @else {
-          <ng-icon name="lucideCopy" class="text-base" />
-        }
-      </button>
+      <ai-icon-button
+        [icon]="copyIcon()"
+        [ariaLabel]="justCopied() ? 'Copied!' : 'Copy response'"
+        [customClasses]="justCopied() ? 'text-emerald-500' : ''"
+        (clicked)="handleCopy()"
+      />
 
       <!-- Regenerate Button -->
-      <button
-        type="button"
-        [class]="actionButtonClasses()"
-        (click)="handleRegenerate()"
-        aria-label="Regenerate response"
-      >
-        <ng-icon name="lucideRefreshCw" class="text-base" />
-      </button>
+      <ai-icon-button
+        icon="lucideRefreshCw"
+        ariaLabel="Regenerate response"
+        (clicked)="handleRegenerate()"
+      />
 
       <!-- Spacer -->
       <div class="flex-1"></div>
 
       <!-- Thumbs Up Button -->
-      <button
-        type="button"
-        [class]="actionButtonClasses()"
-        (click)="handleThumbsUp()"
-        [attr.aria-label]="
+      <ai-icon-button
+        icon="lucideThumbsUp"
+        [ariaLabel]="
           thumbsUpSelected() ? 'Remove positive feedback' : 'Good response'
         "
-        [attr.aria-pressed]="thumbsUpSelected()"
-      >
-        <ng-icon
-          name="lucideThumbsUp"
-          class="text-base"
-          [class.text-emerald-500]="thumbsUpSelected()"
-        />
-      </button>
+        [ariaPressed]="thumbsUpSelected()"
+        [customClasses]="thumbsUpSelected() ? 'text-emerald-500' : ''"
+        (clicked)="handleThumbsUp()"
+      />
 
       <!-- Thumbs Down Button -->
-      <button
-        type="button"
-        [class]="actionButtonClasses()"
-        (click)="handleThumbsDown()"
-        [attr.aria-label]="
+      <ai-icon-button
+        icon="lucideThumbsDown"
+        [ariaLabel]="
           thumbsDownSelected() ? 'Remove negative feedback' : 'Bad response'
         "
-        [attr.aria-pressed]="thumbsDownSelected()"
-      >
-        <ng-icon
-          name="lucideThumbsDown"
-          class="text-base"
-          [class.text-red-500]="thumbsDownSelected()"
-        />
-      </button>
+        [ariaPressed]="thumbsDownSelected()"
+        [customClasses]="thumbsDownSelected() ? 'text-red-500' : ''"
+        (clicked)="handleThumbsDown()"
+      />
     </div>
   }
 </div>

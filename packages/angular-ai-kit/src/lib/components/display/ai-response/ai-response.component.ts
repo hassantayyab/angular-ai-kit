@@ -1,4 +1,4 @@
-import { NgIcon, provideIcons } from '@ng-icons/core';
+import { cn } from '@angular-ai-kit/utils';
 import { isPlatformBrowser } from '@angular/common';
 import {
   AfterViewInit,
@@ -16,8 +16,8 @@ import {
   viewChild,
 } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
-import { AI_ICONS } from '../../../icons';
 import { MarkdownService } from '../../../services/markdown.service';
+import { IconButtonComponent } from '../../ui/icon-button';
 
 /**
  * AI Response Component
@@ -55,8 +55,7 @@ import { MarkdownService } from '../../../services/markdown.service';
   templateUrl: './ai-response.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
-  imports: [NgIcon],
-  viewProviders: [provideIcons(AI_ICONS)],
+  imports: [IconButtonComponent],
   host: {
     class: 'ai-response-host block',
     '[attr.aria-live]': '"polite"',
@@ -129,6 +128,9 @@ export class AiResponseComponent implements AfterViewInit {
   /** Thumbs down selected state */
   thumbsDownSelected = signal(false);
 
+  /** Icon to show for copy button */
+  copyIcon = computed(() => (this.justCopied() ? 'lucideCheck' : 'lucideCopy'));
+
   // ==========================================
   // Computed Properties
   // ==========================================
@@ -161,36 +163,31 @@ export class AiResponseComponent implements AfterViewInit {
   });
 
   /** Container classes - no card/wrapper, just plain text */
-  containerClasses = computed(() => {
-    const base = 'ai-response relative';
-    return `${base} ${this.customClasses()}`.trim();
-  });
+  containerClasses = computed(() =>
+    cn('ai-response relative', this.customClasses())
+  );
 
   /** Content area classes */
-  contentClasses = computed(() => {
-    return 'ai-response-content text-sm leading-relaxed text-foreground';
-  });
+  contentClasses = computed(() =>
+    cn('ai-response-content text-sm leading-relaxed text-foreground')
+  );
 
   /** Cursor classes */
-  cursorClasses = computed(() => {
-    return 'ai-response-cursor inline-block ml-0.5 text-foreground animate-pulse';
-  });
+  cursorClasses = computed(() =>
+    cn('ai-response-cursor inline-block ml-0.5 text-foreground animate-pulse')
+  );
 
   /** Actions container classes */
-  actionsClasses = computed(() => {
-    const shouldShow = this.actionsVisible();
-    const base = 'ai-response-actions flex items-center gap-1 mt-2';
-    const transition = 'transition-opacity duration-200';
-    const visibility = shouldShow
-      ? 'opacity-100 visible'
-      : 'opacity-0 invisible';
-    return `${base} ${transition} ${visibility}`;
-  });
-
-  /** Action button base classes */
-  actionButtonClasses = computed(() => {
-    return 'ai-action-btn inline-flex items-center justify-center h-7 w-7 rounded text-muted-foreground hover:bg-accent hover:text-foreground transition-colors duration-150 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 focus:ring-offset-background cursor-pointer';
-  });
+  actionsClasses = computed(() =>
+    cn(
+      'ai-response-actions flex items-center gap-1 mt-2',
+      'transition-opacity duration-200',
+      {
+        'opacity-100 visible': this.actionsVisible(),
+        'opacity-0 invisible': !this.actionsVisible(),
+      }
+    )
+  );
 
   constructor() {
     // Add copy buttons when streaming completes
