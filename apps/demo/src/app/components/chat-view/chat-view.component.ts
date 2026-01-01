@@ -107,7 +107,7 @@ export class ChatViewComponent {
   });
 
   inputAreaClasses = computed(() => {
-    return cn('shrink-0', 'border-t border-border', 'bg-background');
+    return cn('shrink-0', 'bg-background');
   });
 
   // Methods
