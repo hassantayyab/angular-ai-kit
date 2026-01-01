@@ -201,7 +201,8 @@ export class UserMessageComponent {
       'text-muted-foreground',
       'hover:bg-accent hover:text-foreground',
       'transition-colors duration-150',
-      'focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 focus:ring-offset-background'
+      'focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 focus:ring-offset-background',
+      'cursor-pointer'
     )
   );
 
