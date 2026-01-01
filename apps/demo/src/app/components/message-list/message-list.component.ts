@@ -89,7 +89,7 @@ export class MessageListComponent {
 
   /** Messages wrapper classes */
   messagesWrapperClasses = computed(() => {
-    return cn('flex flex-col gap-4', 'p-4');
+    return cn('flex flex-col gap-4', 'px-4', 'py-12');
   });
 
   /** Empty state classes */

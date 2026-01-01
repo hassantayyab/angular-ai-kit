@@ -14,8 +14,6 @@
   /* Code blocks */
   --color-code: var(--code);
   --color-code-foreground: var(--code-foreground);
-  --color-doc-code: var(--doc-code);
-  --color-doc-code-foreground: var(--doc-code-foreground);
 
   /* Extended tokens */
   --color-border-hover: var(--border-hover);
@@ -71,10 +69,6 @@
     /* Inline/Markdown code blocks (subtle) */
     --code: theme('colors.zinc.100');
     --code-foreground: theme('colors.zinc.900');
-
-    /* Doc code blocks (prominent/terminal-like) */
-    --doc-code: theme('colors.zinc.100');
-    --doc-code-foreground: theme('colors.zinc.900');
 
     /* Message bubble role colors */
     --message-user-bg: theme('colors.zinc.100');
@@ -133,13 +127,9 @@
     --border-hover: theme('colors.zinc.600');
     --input: theme('colors.zinc.900');
 
-    /* Inline/Markdown code blocks (subtle) */
-    --code: theme('colors.zinc.950');
+    /* Code blocks */
+    --code: theme('colors.zinc.900');
     --code-foreground: theme('colors.zinc.100');
-
-    /* Doc code blocks (prominent/terminal-like) */
-    --doc-code: theme('colors.zinc.900');
-    --doc-code-foreground: theme('colors.zinc.100');
 
     /* Message bubble role colors */
     --message-user-bg: theme('colors.zinc.800');

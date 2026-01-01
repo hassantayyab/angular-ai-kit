@@ -189,7 +189,7 @@ export class AiResponseComponent implements AfterViewInit {
 
   /** Action button base classes */
   actionButtonClasses = computed(() => {
-    return 'ai-action-btn inline-flex items-center justify-center h-7 w-7 rounded text-muted-foreground hover:bg-accent hover:text-foreground transition-colors duration-150 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 focus:ring-offset-background';
+    return 'ai-action-btn inline-flex items-center justify-center h-7 w-7 rounded text-muted-foreground hover:bg-accent hover:text-foreground transition-colors duration-150 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 focus:ring-offset-background cursor-pointer';
   });
 
   constructor() {
