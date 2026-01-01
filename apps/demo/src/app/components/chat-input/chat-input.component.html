@@ -52,12 +52,12 @@
             hlmPopoverTrigger
             variant="outline"
             class="rounded-full"
-            [size]="contextButtonSize()"
+            [size]="hasContext() ? 'icon-sm' : 'sm'"
             aria-label="Add context"
           >
             <ng-icon hlm name="lucideAtSign" size="sm" />
             @if (!hasContext()) {
-              <span>Add context</span>
+              <span class="hidden sm:inline">Add context</span>
             }
           </button>
 
@@ -159,11 +159,7 @@
     </span>
 
     <!-- Block-end: Toolbar -->
-    <div
-      hlmInputGroupAddon
-      align="block-end"
-      class="no-scrollbar gap-1 overflow-y-auto"
-    >
+    <div hlmInputGroupAddon align="block-end" class="no-scrollbar gap-1">
       <!-- Attachment -->
       @if (showAttachmentButton()) {
         <button
@@ -189,7 +185,7 @@
           (click)="toggleResearch()"
         >
           <ng-icon hlm name="lucideLightbulb" size="sm" />
-          Research
+          <span class="hidden sm:inline">Research</span>
         </button>
       }
 
@@ -235,7 +231,7 @@
         </ng-template>
       }
 
-      <!-- Sources dropdown -->
+      <!-- Sources dropdown - icon only on mobile -->
       @if (showSourcesButton()) {
         <button
           hlmInputGroupButton
@@ -244,7 +240,7 @@
           [hlmDropdownMenuTrigger]="sourcesMenu"
         >
           <ng-icon hlm name="lucideGlobe" size="sm" />
-          All Sources
+          <span class="hidden sm:inline">All Sources</span>
         </button>
         <ng-template #sourcesMenu>
           <hlm-dropdown-menu
@@ -307,11 +303,14 @@
         </ng-template>
       }
 
+      <!-- Spacer to push mic and send to right on desktop -->
+      <div class="flex-1"></div>
+
       <!-- Mic button -->
       @if (showMicButton()) {
         <button
           hlmInputGroupButton
-          class="ml-auto rounded-full"
+          class="rounded-full"
           size="icon-sm"
           [class.animate-pulse]="isRecording()"
           [class.text-red-500]="isRecording()"

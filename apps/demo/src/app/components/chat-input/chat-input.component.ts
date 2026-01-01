@@ -216,8 +216,7 @@ export class ChatInputComponent {
   // Computed: check if has contexts
   hasContext = computed(() => this.selectedContexts().length > 0);
 
-  // Computed: context button size
-  contextButtonSize = computed(() => (this.hasContext() ? 'icon-sm' : 'sm'));
+  // Context button uses icon-sm when has context, otherwise sm (handled in template)
 
   // Computed: available context items (not already selected)
   availableContextItems = computed(() => {
