@@ -5,35 +5,27 @@ import {
   UserMessageComponent,
 } from '@angular-ai-kit/core';
 import { cn } from '@angular-ai-kit/utils';
-import { isPlatformBrowser } from '@angular/common';
 import {
-  AfterViewInit,
   ChangeDetectionStrategy,
   Component,
-  ElementRef,
-  PLATFORM_ID,
   ViewEncapsulation,
   computed,
-  effect,
-  inject,
   input,
   output,
-  viewChild,
 } from '@angular/core';
 import { TypingIndicatorComponent } from '../typing-indicator';
 
 /**
  * Demo MessageListComponent
  *
- * Scrollable message list with Spartan UI components.
- * Uses native scrolling and TypingIndicator for loading states.
+ * Displays a list of chat messages. Scroll is handled by the parent container.
+ * Uses TypingIndicator for loading states.
  *
  * @example
  * ```html
  * <app-message-list
  *   [messages]="messages"
  *   [loading]="isLoading"
- *   [autoScroll]="true"
  *   (messageCopy)="handleCopy($event)"
  *   (messageRegenerate)="handleRegenerate($event)"
  * />
@@ -50,16 +42,10 @@ import { TypingIndicatorComponent } from '../typing-indicator';
     TypingIndicatorComponent,
   ],
   host: {
-    class: 'app-message-list-host block h-full',
+    class: 'app-message-list-host block',
   },
 })
-export class MessageListComponent implements AfterViewInit {
-  // ==========================================
-  // Dependencies
-  // ==========================================
-
-  private platformId = inject(PLATFORM_ID);
-
+export class MessageListComponent {
   // ==========================================
   // Inputs
   // ==========================================
@@ -72,9 +58,6 @@ export class MessageListComponent implements AfterViewInit {
 
   /** Custom CSS classes to apply to the container */
   customClasses = input<string>('');
-
-  /** Whether to automatically scroll to bottom on new messages */
-  autoScroll = input<boolean>(true);
 
   /** Whether to show avatars for each message */
   showAvatars = input<boolean>(true);
@@ -96,25 +79,12 @@ export class MessageListComponent implements AfterViewInit {
   messageEdit = output<{ event: EditEvent; message: ChatMessage }>();
 
   // ==========================================
-  // Template References
-  // ==========================================
-
-  scrollContainer = viewChild<ElementRef<HTMLDivElement>>('scrollContainer');
-
-  // ==========================================
   // Computed Properties
   // ==========================================
 
-  /** Container classes */
+  /** Container classes - no internal scroll, parent handles scrolling */
   containerClasses = computed(() => {
-    return cn(
-      'app-message-list',
-      'h-full',
-      'overflow-y-auto overflow-x-hidden',
-      'scrollbar-thin scrollbar-thumb-zinc-300 dark:scrollbar-thumb-zinc-600',
-      'scrollbar-track-transparent',
-      this.customClasses()
-    );
+    return cn('app-message-list', this.customClasses());
   });
 
   /** Messages wrapper classes */
@@ -127,53 +97,14 @@ export class MessageListComponent implements AfterViewInit {
     return cn(
       'app-message-list-empty',
       'flex items-center justify-center',
-      'min-h-[200px] h-full',
+      'min-h-[200px]',
       'text-center'
     );
   });
 
   // ==========================================
-  // Lifecycle
-  // ==========================================
-
-  constructor() {
-    // Auto-scroll effect when messages change or loading state changes
-    effect(() => {
-      if (this.autoScroll()) {
-        const messagesCount = this.messages().length;
-        const isLoading = this.loading();
-
-        if (messagesCount > 0 || isLoading) {
-          this.scrollToBottom();
-        }
-      }
-    });
-  }
-
-  ngAfterViewInit(): void {
-    this.scrollToBottom();
-  }
-
-  // ==========================================
   // Methods
   // ==========================================
-
-  /** Scrolls the message list to the bottom */
-  private scrollToBottom(): void {
-    if (!isPlatformBrowser(this.platformId)) {
-      return;
-    }
-
-    requestAnimationFrame(() => {
-      const container = this.scrollContainer()?.nativeElement;
-      if (container) {
-        container.scrollTo({
-          top: container.scrollHeight,
-          behavior: 'smooth',
-        });
-      }
-    });
-  }
 
   /** Handle message copy event */
   handleMessageCopy(content: string, message: ChatMessage): void {

@@ -4,13 +4,19 @@ import {
   HlmSidebarTrigger,
 } from '@angular-ai-kit/spartan-ui/sidebar';
 import { cn } from '@angular-ai-kit/utils';
+import { isPlatformBrowser } from '@angular/common';
 import {
+  AfterViewInit,
   ChangeDetectionStrategy,
   Component,
+  ElementRef,
+  PLATFORM_ID,
   ViewEncapsulation,
   computed,
+  effect,
   inject,
   signal,
+  viewChild,
 } from '@angular/core';
 import { ChatService } from '../../services/chat.service';
 import {
@@ -46,9 +52,14 @@ import { MessageListComponent } from '../message-list';
     class: 'app-chat-view-host flex flex-col h-full',
   },
 })
-export class ChatViewComponent {
+export class ChatViewComponent implements AfterViewInit {
   private chatService = inject(ChatService);
+  private platformId = inject(PLATFORM_ID);
   protected sidebarService = inject(HlmSidebarService);
+
+  // Scroll container reference
+  private scrollContainer =
+    viewChild<ElementRef<HTMLDivElement>>('scrollContainer');
 
   // Computed from service
   messages = this.chatService.messages;
@@ -102,13 +113,33 @@ export class ChatViewComponent {
     );
   });
 
-  chatAreaClasses = computed(() => {
-    return cn('flex-1', 'flex flex-col', 'min-h-0', 'overflow-hidden');
+  scrollAreaClasses = computed(() => {
+    return cn(
+      'flex-1',
+      'overflow-y-auto overflow-x-hidden',
+      'min-h-0' // Critical for flex scroll behavior
+    );
   });
 
   inputAreaClasses = computed(() => {
     return cn('shrink-0', 'bg-background');
   });
+
+  constructor() {
+    // Auto-scroll when messages change or loading state changes
+    effect(() => {
+      const messagesCount = this.messages().length;
+      const isLoading = this.isLoading();
+
+      if (messagesCount > 0 || isLoading) {
+        this.scrollToBottom();
+      }
+    });
+  }
+
+  ngAfterViewInit(): void {
+    this.scrollToBottom();
+  }
 
   // Methods
   handleSendMessage(content: string): void {
@@ -125,5 +156,22 @@ export class ChatViewComponent {
 
   handleMessageRegenerate(_message: ChatMessage): void {
     this.chatService.regenerateLastMessage();
+  }
+
+  /** Scrolls chat to the bottom */
+  private scrollToBottom(): void {
+    if (!isPlatformBrowser(this.platformId)) {
+      return;
+    }
+
+    requestAnimationFrame(() => {
+      const container = this.scrollContainer()?.nativeElement;
+      if (container) {
+        container.scrollTo({
+          top: container.scrollHeight,
+          behavior: 'smooth',
+        });
+      }
+    });
   }
 }

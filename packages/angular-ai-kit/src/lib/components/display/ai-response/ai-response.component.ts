@@ -22,10 +22,12 @@ import { MarkdownService } from '../../../services/markdown.service';
 /**
  * AI Response Component
  *
- * Displays AI response content with markdown rendering, syntax highlighting,
- * streaming cursor, and action buttons.
+ * Displays AI response content as plain text with markdown rendering,
+ * syntax highlighting, streaming cursor, and action buttons.
+ * The component has no card or wrapper styling - just the text content.
  *
  * Features:
+ * - Plain text display (no card/wrapper)
  * - Full markdown support (GFM)
  * - Code blocks with syntax highlighting
  * - Copy button on each code block
@@ -158,13 +160,10 @@ export class AiResponseComponent implements AfterViewInit {
     return this.sanitizer.bypassSecurityTrustHtml(html);
   });
 
-  /** Container classes */
+  /** Container classes - no card/wrapper, just plain text */
   containerClasses = computed(() => {
-    const base = 'ai-response relative rounded-xl p-4';
-    const bg = 'bg-card';
-    const border = 'border border-border';
-    const transition = 'transition-all duration-200';
-    return `${base} ${bg} ${border} ${transition} ${this.customClasses()}`.trim();
+    const base = 'ai-response relative';
+    return `${base} ${this.customClasses()}`.trim();
   });
 
   /** Content area classes */
@@ -180,13 +179,12 @@ export class AiResponseComponent implements AfterViewInit {
   /** Actions container classes */
   actionsClasses = computed(() => {
     const shouldShow = this.actionsVisible();
-    const base = 'ai-response-actions flex items-center gap-1 mt-3 pt-3';
-    const border = 'border-t border-border';
+    const base = 'ai-response-actions flex items-center gap-1 mt-2';
     const transition = 'transition-opacity duration-200';
     const visibility = shouldShow
       ? 'opacity-100 visible'
       : 'opacity-0 invisible';
-    return `${base} ${border} ${transition} ${visibility}`;
+    return `${base} ${transition} ${visibility}`;
   });
 
   /** Action button base classes */

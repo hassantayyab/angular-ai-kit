@@ -31,12 +31,6 @@ const INPUTS: ApiProperty[] = [
     description: 'Show loading/typing indicator',
   },
   {
-    name: 'autoScroll',
-    type: 'boolean',
-    default: 'true',
-    description: 'Auto-scroll to bottom on new messages',
-  },
-  {
     name: 'showAvatars',
     type: 'boolean',
     default: 'true',
@@ -72,11 +66,10 @@ const OUTPUTS: ApiProperty[] = [
 
 /** Features list */
 const FEATURES = [
-  'Auto-scroll to latest message',
+  'Displays messages with user/assistant styling',
   'Skeleton loading indicator while waiting for AI response',
   'Empty state with customizable message',
-  'Smooth scroll behavior',
-  'SSR-safe scroll handling',
+  'Scroll handled by parent container for cleaner UI',
 ];
 
 /** Accessibility features */
@@ -91,14 +84,16 @@ const ACCESSIBILITY = [
 const INSTALL_CODE =
   "import { MessageListComponent } from '@angular-ai-kit/core';";
 
-const USAGE_CODE = `<ai-message-list
-  [messages]="messages()"
-  [loading]="isLoading()"
-  [autoScroll]="true"
-  [showAvatars]="true"
-  (messageCopy)="handleCopy($event)"
-  (messageRegenerate)="handleRegenerate($event)"
-/>`;
+const USAGE_CODE = `<!-- Parent container handles scrolling -->
+<div class="h-full overflow-y-auto">
+  <app-message-list
+    [messages]="messages()"
+    [loading]="isLoading()"
+    [showAvatars]="true"
+    (messageCopy)="handleCopy($event)"
+    (messageRegenerate)="handleRegenerate($event)"
+  />
+</div>`;
 
 /**
  * MessageList Documentation Component

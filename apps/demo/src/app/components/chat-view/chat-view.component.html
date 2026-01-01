@@ -15,26 +15,26 @@
     </header>
   }
 
-  <!-- Main Chat Area -->
-  <div [class]="chatAreaClasses()">
-    @if (isEmpty()) {
-      <!-- Empty State -->
-      <app-empty-state (promptSelect)="handlePromptSelect($event)" />
-    } @else {
-      <!-- Message List with Spartan UI -->
-      <app-message-list
-        [messages]="messages()"
-        [loading]="isLoading()"
-        [autoScroll]="true"
-        [showAvatars]="true"
-        [customClasses]="'flex-1'"
-        (messageCopy)="handleMessageCopy($event)"
-        (messageRegenerate)="handleMessageRegenerate($event)"
-      />
-    }
+  <!-- Scrollable Chat Area -->
+  <div #scrollContainer [class]="scrollAreaClasses()">
+    <div class="mx-auto w-full max-w-3xl">
+      @if (isEmpty()) {
+        <!-- Empty State -->
+        <app-empty-state (promptSelect)="handlePromptSelect($event)" />
+      } @else {
+        <!-- Message List (no internal scroll) -->
+        <app-message-list
+          [messages]="messages()"
+          [loading]="isLoading()"
+          [showAvatars]="true"
+          (messageCopy)="handleMessageCopy($event)"
+          (messageRegenerate)="handleMessageRegenerate($event)"
+        />
+      }
+    </div>
   </div>
 
-  <!-- Input Area -->
+  <!-- Fixed Input Area -->
   <div [class]="inputAreaClasses()">
     <div class="mx-auto w-full max-w-3xl">
       <app-chat-input

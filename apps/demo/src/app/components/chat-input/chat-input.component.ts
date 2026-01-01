@@ -251,7 +251,7 @@ export class ChatInputComponent {
 
   // Computed classes
   containerClasses = computed(() => {
-    return cn('app-chat-input', 'w-full', 'px-4 pb-4 pt-2');
+    return cn('app-chat-input', 'w-full', 'px-4 pb-4');
   });
 
   // Methods

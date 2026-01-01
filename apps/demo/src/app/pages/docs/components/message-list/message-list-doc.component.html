@@ -16,11 +16,10 @@
   <!-- Basic Usage -->
   <app-doc-section title="Basic Usage">
     <app-doc-demo-card [padding]="false">
-      <div class="h-[400px]">
+      <div class="h-[400px] overflow-y-auto">
         <app-message-list
           [messages]="messages()"
           [loading]="false"
-          [autoScroll]="true"
           [showAvatars]="true"
           (messageCopy)="handleCopy($event)"
           (messageRegenerate)="handleRegenerate($event)"
@@ -46,11 +45,10 @@
       </button>
     </div>
     <app-doc-demo-card [padding]="false">
-      <div class="h-[300px]">
+      <div class="h-[300px] overflow-y-auto">
         <app-message-list
           [messages]="messages()"
           [loading]="isLoading()"
-          [autoScroll]="true"
           [showAvatars]="true"
         />
       </div>

@@ -95,14 +95,34 @@ export class ChatInputComponent {}
 
 ## Chat Components
 
-### Message Bubbles
+### Message Styling
 
-- Always support both user and assistant messages
-- Include copy functionality for assistant messages
-- Support streaming text display with typing indicators
-- Handle empty states gracefully
+**User Messages:**
+
+- Display in a card/bubble with background styling
+- Align to the right side
+- Include edit and copy functionality
+
+**AI/Assistant Responses:**
+
+- Display as plain text (no card or wrapper)
+- Align to the left side
+- Support markdown rendering with syntax highlighting
+- Include action buttons: copy, regenerate, thumbs up/down
+
+### Message Bubbles (User)
+
+- Display with card styling (bg-card, border, rounded corners)
+- Include copy and edit functionality
 - Show timestamps (optional, configurable)
-- Support markdown content rendering
+
+### AI Response
+
+- Plain text display - no card, border, or wrapper styling
+- Full markdown support (GFM)
+- Code blocks with syntax highlighting and copy buttons
+- Support streaming text display with typing cursor
+- Action buttons appear on hover
 
 ### Message Lists
 
