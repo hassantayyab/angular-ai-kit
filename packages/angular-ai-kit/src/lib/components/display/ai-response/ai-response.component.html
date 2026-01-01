@@ -21,40 +21,9 @@
         [attr.aria-label]="justCopied() ? 'Copied!' : 'Copy response'"
       >
         @if (justCopied()) {
-          <svg
-            class="h-4 w-4 text-emerald-500"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <polyline
-              points="20 6 9 17 4 12"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            />
-          </svg>
+          <ng-icon name="lucideCheck" class="text-base text-emerald-500" />
         } @else {
-          <svg
-            class="h-4 w-4"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <rect
-              x="9"
-              y="9"
-              width="13"
-              height="13"
-              rx="2"
-              ry="2"
-              stroke-width="2"
-            />
-            <path
-              d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"
-              stroke-width="2"
-            />
-          </svg>
+          <ng-icon name="lucideCopy" class="text-base" />
         }
       </button>
 
@@ -65,19 +34,7 @@
         (click)="handleRegenerate()"
         aria-label="Regenerate response"
       >
-        <svg
-          class="h-4 w-4"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"
-          />
-        </svg>
+        <ng-icon name="lucideRefreshCw" class="text-base" />
       </button>
 
       <!-- Spacer -->
@@ -93,20 +50,11 @@
         "
         [attr.aria-pressed]="thumbsUpSelected()"
       >
-        <svg
-          class="h-4 w-4"
+        <ng-icon
+          name="lucideThumbsUp"
+          class="text-base"
           [class.text-emerald-500]="thumbsUpSelected()"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M14 9V5a3 3 0 00-3-3l-4 9v11h11.28a2 2 0 002-1.7l1.38-9a2 2 0 00-2-2.3zM7 22H4a2 2 0 01-2-2v-7a2 2 0 012-2h3"
-          />
-        </svg>
+        />
       </button>
 
       <!-- Thumbs Down Button -->
@@ -119,20 +67,11 @@
         "
         [attr.aria-pressed]="thumbsDownSelected()"
       >
-        <svg
-          class="h-4 w-4"
+        <ng-icon
+          name="lucideThumbsDown"
+          class="text-base"
           [class.text-red-500]="thumbsDownSelected()"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M10 15v4a3 3 0 003 3l4-9V2H5.72a2 2 0 00-2 1.7l-1.38 9a2 2 0 002 2.3zm7-13h2.67A2.31 2.31 0 0122 4v7a2.31 2.31 0 01-2.33 2H17"
-          />
-        </svg>
+        />
       </button>
     </div>
   }

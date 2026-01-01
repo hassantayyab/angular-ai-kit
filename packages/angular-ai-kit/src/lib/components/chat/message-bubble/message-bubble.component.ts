@@ -1,3 +1,4 @@
+import { NgIcon, provideIcons } from '@ng-icons/core';
 import { cn } from '@angular-ai-kit/utils';
 import {
   ChangeDetectionStrategy,
@@ -8,6 +9,7 @@ import {
   output,
   signal,
 } from '@angular/core';
+import { AI_ICONS, ROLE_ICONS } from '../../../icons';
 import { ChatMessage } from '../../../types';
 
 /**
@@ -39,6 +41,8 @@ import { ChatMessage } from '../../../types';
   templateUrl: './message-bubble.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
+  imports: [NgIcon],
+  viewProviders: [provideIcons(AI_ICONS)],
   host: {
     class: 'ai-message-bubble-host group',
     '(mouseenter)': 'handleMouseEnter()',
@@ -133,6 +137,14 @@ export class MessageBubbleComponent {
         'bg-avatar-system text-white': role === 'system',
       }
     );
+  });
+
+  /**
+   * Get the icon name for the current message role
+   */
+  avatarIcon = computed(() => {
+    const role = this.message().role;
+    return ROLE_ICONS[role] || ROLE_ICONS.assistant;
   });
 
   /**

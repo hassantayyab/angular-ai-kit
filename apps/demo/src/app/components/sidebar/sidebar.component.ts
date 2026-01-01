@@ -1,9 +1,21 @@
+import { provideIcons } from '@ng-icons/core';
+import {
+  lucideBook,
+  lucideChevronRight,
+  lucideClock,
+  lucideGithub,
+  lucideMenu,
+  lucidePlus,
+  lucideSparkles,
+  lucideTrash2,
+} from '@ng-icons/lucide';
 import { HlmButton } from '@angular-ai-kit/spartan-ui/button';
 import {
   HlmCollapsible,
   HlmCollapsibleContent,
   HlmCollapsibleTrigger,
 } from '@angular-ai-kit/spartan-ui/collapsible';
+import { HlmIconImports } from '@angular-ai-kit/spartan-ui/icon';
 import {
   HlmSidebar,
   HlmSidebarContent,
@@ -40,6 +52,18 @@ import { filter, map, startWith } from 'rxjs';
 import { ChatService, Conversation } from '../../services';
 import { SearchTriggerComponent } from '../search-trigger';
 import { ThemeToggleComponent } from '../theme-toggle';
+
+/** Icons used in the sidebar */
+const SIDEBAR_ICONS = {
+  lucideBook,
+  lucideChevronRight,
+  lucideClock,
+  lucideGithub,
+  lucideMenu,
+  lucidePlus,
+  lucideSparkles,
+  lucideTrash2,
+};
 
 /**
  * Component item for docs sidebar
@@ -103,11 +127,13 @@ interface ConversationDisplay {
     HlmCollapsibleTrigger,
     HlmCollapsibleContent,
     HlmButton,
+    HlmIconImports,
     ThemeToggleComponent,
     SearchTriggerComponent,
     RouterLink,
     RouterLinkActive,
   ],
+  viewProviders: [provideIcons(SIDEBAR_ICONS)],
   host: {
     class: 'app-sidebar-host',
   },

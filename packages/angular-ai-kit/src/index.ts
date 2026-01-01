@@ -16,3 +16,6 @@ export * from './lib/tokens';
 
 // Types
 export * from './lib/types';
+
+// Icons
+export * from './lib/icons';

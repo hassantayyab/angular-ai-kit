@@ -30,7 +30,9 @@
     "@angular/common": "^21.0.0",
     "@angular/core": "^21.0.0",
     "@angular-ai-kit/tokens": "0.0.1",
-    "@angular-ai-kit/utils": "0.0.1"
+    "@angular-ai-kit/utils": "0.0.1",
+    "@ng-icons/core": ">=32.0.0",
+    "@ng-icons/lucide": ">=32.0.0"
   },
   "dependencies": {},
   "sideEffects": false,

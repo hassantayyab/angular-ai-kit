@@ -10,19 +10,7 @@
         class="text-primary hidden group-data-[collapsible=icon]:flex"
         aria-label="Expand sidebar"
       >
-        <svg
-          class="h-4 w-4"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M4 6h16M4 12h16M4 18h16"
-          />
-        </svg>
+        <ng-icon hlm name="lucideMenu" size="sm" />
       </button>
 
       <!-- Logo + Title (clickable, hidden when collapsed) -->
@@ -33,19 +21,7 @@
         <div
           class="bg-primary text-primary-foreground flex h-8 w-8 shrink-0 items-center justify-center rounded-lg"
         >
-          <svg
-            class="h-4 w-4"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456z"
-            />
-          </svg>
+          <ng-icon hlm name="lucideSparkles" size="sm" />
         </div>
         <span class="text-sm font-semibold">Angular AI Kit</span>
       </a>
@@ -81,19 +57,7 @@
               routerLink="/docs"
               routerLinkActive="bg-accent"
             >
-              <svg
-                class="h-4 w-4"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="1.5"
-                  d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"
-                />
-              </svg>
+              <ng-icon hlm name="lucideBook" size="sm" />
               <span>Documentation</span>
             </a>
           </li>
@@ -106,13 +70,7 @@
               target="_blank"
               rel="noopener noreferrer"
             >
-              <svg class="h-4 w-4" fill="currentColor" viewBox="0 0 24 24">
-                <path
-                  fill-rule="evenodd"
-                  d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
-                  clip-rule="evenodd"
-                />
-              </svg>
+              <ng-icon hlm name="lucideGithub" size="sm" />
               <span>GitHub</span>
             </a>
           </li>
@@ -156,19 +114,7 @@
             <!-- New Chat Button -->
             <li hlmSidebarMenuItem>
               <button hlmSidebarMenuButton (click)="handleNewConversation()">
-                <svg
-                  class="h-4 w-4"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M12 4v16m8-8H4"
-                  />
-                </svg>
+                <ng-icon hlm name="lucidePlus" size="sm" />
                 <span>New Chat</span>
               </button>
             </li>
@@ -184,33 +130,14 @@
                   hlmSidebarMenuButton
                   class="w-full"
                 >
-                  <svg
-                    class="h-4 w-4"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="1.5"
-                      d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
-                    />
-                  </svg>
+                  <ng-icon hlm name="lucideClock" size="sm" />
                   <span>Chat History</span>
-                  <svg
-                    class="ml-auto h-4 w-4 transition-transform group-data-[state=open]/collapsible:rotate-90"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M9 5l7 7-7 7"
-                    />
-                  </svg>
+                  <ng-icon
+                    hlm
+                    name="lucideChevronRight"
+                    size="sm"
+                    class="ml-auto transition-transform group-data-[state=open]/collapsible:rotate-90"
+                  />
                 </button>
 
                 <hlm-collapsible-content>
@@ -249,19 +176,12 @@
                             "
                             aria-label="Delete conversation"
                           >
-                            <svg
-                              class="text-muted-foreground hover:text-destructive h-3.5 w-3.5"
-                              fill="none"
-                              stroke="currentColor"
-                              viewBox="0 0 24 24"
-                            >
-                              <path
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                stroke-width="2"
-                                d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
-                              />
-                            </svg>
+                            <ng-icon
+                              hlm
+                              name="lucideTrash2"
+                              size="xs"
+                              class="text-muted-foreground hover:text-destructive"
+                            />
                           </button>
                         </li>
                       }

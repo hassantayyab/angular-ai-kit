@@ -1,3 +1,4 @@
+import { NgIcon, provideIcons } from '@ng-icons/core';
 import { isPlatformBrowser } from '@angular/common';
 import {
   AfterViewInit,
@@ -15,6 +16,7 @@ import {
   viewChild,
 } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import { AI_ICONS } from '../../../icons';
 import { MarkdownService } from '../../../services/markdown.service';
 
 /**
@@ -51,6 +53,8 @@ import { MarkdownService } from '../../../services/markdown.service';
   templateUrl: './ai-response.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
+  imports: [NgIcon],
+  viewProviders: [provideIcons(AI_ICONS)],
   host: {
     class: 'ai-response-host block',
     '[attr.aria-live]': '"polite"',
