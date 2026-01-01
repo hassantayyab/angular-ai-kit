@@ -167,10 +167,7 @@ export class UserMessageComponent {
       'text-foreground',
       'shadow-sm',
       'transition-all duration-200',
-      {
-        'rounded-3xl': this.isShortMessage(),
-        'rounded-2xl': !this.isShortMessage(),
-      }
+      'rounded-xl'
     )
   );
 
