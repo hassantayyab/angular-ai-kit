@@ -133,13 +133,15 @@
           <ul hlmSidebarMenu>
             @for (component of components; track component.name) {
               <li hlmSidebarMenuItem>
-                <button
+                <a
                   hlmSidebarMenuButton
+                  [routerLink]="component.route"
+                  routerLinkActive="bg-accent"
                   [title]="component.label"
                   (click)="handleComponentSelect(component.route)"
                 >
                   {{ component.label }}
-                </button>
+                </a>
               </li>
             }
           </ul>

@@ -228,9 +228,9 @@ export class SidebarComponent {
     }
   }
 
-  handleComponentSelect(route: string): void {
-    this.router.navigate([route]);
+  handleComponentSelect(_route: string): void {
     // Close sidebar on mobile after selecting
+    // Navigation is handled by routerLink directive
     if (this.sidebarService.isMobile()) {
       this.sidebarService.setOpenMobile(false);
     }
