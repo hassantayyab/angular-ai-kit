@@ -86,6 +86,18 @@ packages/angular-ai-kit/src/lib/
 
 ---
 
+## ⛔ Git Rules (CRITICAL)
+
+**NEVER commit or push without explicit user permission.**
+
+- ❌ **NEVER run `git commit`** unless user explicitly asks
+- ❌ **NEVER run `git push`** unless user explicitly asks
+- ❌ **NEVER run `git commit && git push`** or any chained git commands
+- ✅ You MAY stage files with `git add` only
+- ✅ After making changes, inform user: "Changes are ready. Run `git add . && git commit -m 'message' && git push` when ready."
+
+---
+
 ## Code Quality Principles
 
 **NEVER do quick fixes or workarounds. ALWAYS implement proper solutions following best practices.**
