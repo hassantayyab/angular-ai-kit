@@ -1,0 +1,250 @@
+{
+  "$schema": "./schema.json",
+  "baseUrl": "https://raw.githubusercontent.com/hassantayyab/angular-ai-kit/main/packages/angular-ai-kit/src/lib",
+  "components": {
+    "ai-response": {
+      "name": "AiResponseComponent",
+      "description": "Display AI assistant responses with markdown rendering and actions",
+      "category": "display",
+      "path": "components/display/ai-response",
+      "files": ["ai-response.component.ts", "ai-response.component.html"],
+      "dependencies": ["markdown-renderer", "response-actions"],
+      "services": ["MarkdownService"],
+      "npmDependencies": {
+        "@angular-ai-kit/utils": "^0.1.0",
+        "@angular-ai-kit/tokens": "^0.1.0"
+      },
+      "peerDependencies": {
+        "highlight.js": "^11.0.0",
+        "marked": "^17.0.0",
+        "dompurify": "^3.0.0"
+      }
+    },
+    "user-message": {
+      "name": "UserMessageComponent",
+      "description": "Display user messages with edit and copy actions",
+      "category": "chat",
+      "path": "components/chat/user-message",
+      "files": [
+        "user-message.component.ts",
+        "user-message.component.html",
+        "user-message.types.ts",
+        "index.ts"
+      ],
+      "dependencies": ["message-actions"],
+      "services": [],
+      "npmDependencies": {
+        "@angular-ai-kit/utils": "^0.1.0",
+        "@angular-ai-kit/tokens": "^0.1.0"
+      }
+    },
+    "message-list": {
+      "name": "MessageListComponent",
+      "description": "Scrollable list of chat messages with auto-scroll",
+      "category": "chat",
+      "path": "components/chat/message-list",
+      "files": [
+        "message-list.component.ts",
+        "message-list.component.html",
+        "index.ts"
+      ],
+      "dependencies": ["user-message", "ai-response"],
+      "services": [],
+      "npmDependencies": {
+        "@angular-ai-kit/utils": "^0.1.0",
+        "@angular-ai-kit/tokens": "^0.1.0"
+      }
+    },
+    "chat-container": {
+      "name": "ChatContainerComponent",
+      "description": "Full chat layout with message list and input area",
+      "category": "chat",
+      "path": "components/chat/chat-container",
+      "files": [
+        "chat-container.component.ts",
+        "chat-container.component.html",
+        "index.ts"
+      ],
+      "dependencies": ["message-list", "prompt-suggestions"],
+      "services": [],
+      "npmDependencies": {
+        "@angular-ai-kit/utils": "^0.1.0",
+        "@angular-ai-kit/tokens": "^0.1.0"
+      }
+    },
+    "message-actions": {
+      "name": "MessageActionsComponent",
+      "description": "Copy and edit action buttons for messages",
+      "category": "chat",
+      "path": "components/chat/message-actions",
+      "files": [
+        "message-actions.component.ts",
+        "message-actions.component.html",
+        "index.ts"
+      ],
+      "dependencies": ["icon-button"],
+      "services": [],
+      "npmDependencies": {
+        "@angular-ai-kit/utils": "^0.1.0"
+      }
+    },
+    "prompt-suggestions": {
+      "name": "PromptSuggestionsComponent",
+      "description": "Display clickable prompt suggestions",
+      "category": "chat",
+      "path": "components/chat/prompt-suggestions",
+      "files": [
+        "prompt-suggestions.component.ts",
+        "prompt-suggestions.component.html",
+        "index.ts"
+      ],
+      "dependencies": [],
+      "services": [],
+      "npmDependencies": {
+        "@angular-ai-kit/utils": "^0.1.0"
+      }
+    },
+    "conversation-list": {
+      "name": "ConversationListComponent",
+      "description": "Sidebar list of conversations",
+      "category": "chat",
+      "path": "components/chat/conversation-list",
+      "files": [
+        "conversation-list.component.ts",
+        "conversation-list.component.html",
+        "index.ts"
+      ],
+      "dependencies": [],
+      "services": [],
+      "npmDependencies": {
+        "@angular-ai-kit/utils": "^0.1.0",
+        "@angular-ai-kit/tokens": "^0.1.0"
+      }
+    },
+    "markdown-renderer": {
+      "name": "MarkdownRendererComponent",
+      "description": "Render markdown content with syntax highlighting",
+      "category": "display",
+      "path": "components/display/markdown-renderer",
+      "files": [
+        "markdown-renderer.component.ts",
+        "markdown-renderer.component.html",
+        "index.ts"
+      ],
+      "dependencies": [],
+      "services": ["MarkdownService"],
+      "npmDependencies": {
+        "@angular-ai-kit/utils": "^0.1.0"
+      },
+      "peerDependencies": {
+        "highlight.js": "^11.0.0",
+        "marked": "^17.0.0",
+        "dompurify": "^3.0.0"
+      }
+    },
+    "code-block": {
+      "name": "CodeBlockComponent",
+      "description": "Display code with syntax highlighting and copy button",
+      "category": "display",
+      "path": "components/display/code-block",
+      "files": [
+        "code-block.component.ts",
+        "code-block.component.html",
+        "index.ts"
+      ],
+      "dependencies": [],
+      "services": ["CodeHighlightService"],
+      "npmDependencies": {
+        "@angular-ai-kit/utils": "^0.1.0"
+      },
+      "peerDependencies": {
+        "highlight.js": "^11.0.0"
+      }
+    },
+    "feedback-buttons": {
+      "name": "FeedbackButtonsComponent",
+      "description": "Thumbs up/down feedback buttons",
+      "category": "display",
+      "path": "components/display/feedback-buttons",
+      "files": [
+        "feedback-buttons.component.ts",
+        "feedback-buttons.component.html",
+        "index.ts"
+      ],
+      "dependencies": ["icon-button"],
+      "services": [],
+      "npmDependencies": {
+        "@angular-ai-kit/utils": "^0.1.0"
+      }
+    },
+    "response-actions": {
+      "name": "ResponseActionsComponent",
+      "description": "Action buttons for AI responses (copy, regenerate, feedback)",
+      "category": "display",
+      "path": "components/display/response-actions",
+      "files": [
+        "response-actions.component.ts",
+        "response-actions.component.html",
+        "index.ts"
+      ],
+      "dependencies": ["icon-button", "feedback-buttons"],
+      "services": [],
+      "npmDependencies": {
+        "@angular-ai-kit/utils": "^0.1.0"
+      }
+    },
+    "icon-button": {
+      "name": "IconButtonComponent",
+      "description": "Reusable icon button primitive",
+      "category": "ui",
+      "path": "components/ui/icon-button",
+      "files": [
+        "icon-button.component.ts",
+        "icon-button.component.html",
+        "index.ts"
+      ],
+      "dependencies": [],
+      "services": [],
+      "npmDependencies": {
+        "@angular-ai-kit/utils": "^0.1.0"
+      },
+      "spartanDependencies": ["button", "icon"]
+    }
+  },
+  "services": {
+    "MarkdownService": {
+      "name": "MarkdownService",
+      "description": "Parse and render markdown with syntax highlighting",
+      "path": "services",
+      "files": ["markdown.service.ts"],
+      "npmDependencies": {
+        "highlight.js": "^11.0.0",
+        "marked": "^17.0.0",
+        "dompurify": "^3.0.0"
+      }
+    },
+    "CodeHighlightService": {
+      "name": "CodeHighlightService",
+      "description": "Syntax highlighting for code blocks",
+      "path": "services",
+      "files": ["code-highlight.service.ts"],
+      "npmDependencies": {
+        "highlight.js": "^11.0.0"
+      }
+    }
+  },
+  "categories": {
+    "chat": {
+      "name": "Chat",
+      "description": "Components for building chat interfaces"
+    },
+    "display": {
+      "name": "Display",
+      "description": "Components for displaying AI responses and content"
+    },
+    "ui": {
+      "name": "UI",
+      "description": "Base UI primitives"
+    }
+  }
+}
