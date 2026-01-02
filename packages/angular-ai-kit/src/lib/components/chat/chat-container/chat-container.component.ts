@@ -152,8 +152,8 @@ export class ChatContainerComponent {
     return cn(
       'ai-chat-container',
       'flex flex-col h-full',
-      'bg-white dark:bg-gray-900',
-      'text-gray-900 dark:text-gray-100',
+      'bg-background',
+      'text-foreground',
       'transition-colors duration-200',
       this.customClasses()
     );
@@ -165,9 +165,9 @@ export class ChatContainerComponent {
   headerClasses = computed(() => {
     return cn(
       'ai-chat-header',
-      'border-b border-gray-200 dark:border-gray-700',
+      'border-b border-border',
       'p-4 flex-shrink-0',
-      'bg-white dark:bg-gray-900'
+      'bg-background'
     );
   });
 
@@ -184,9 +184,9 @@ export class ChatContainerComponent {
   footerClasses = computed(() => {
     return cn(
       'ai-chat-footer',
-      'border-t border-gray-200 dark:border-gray-700',
+      'border-t border-border',
       'p-4 flex-shrink-0',
-      'bg-white dark:bg-gray-900'
+      'bg-background'
     );
   });
 

@@ -1,5 +1,12 @@
 import { isPlatformBrowser } from '@angular/common';
-import { Injectable, PLATFORM_ID, effect, inject, signal } from '@angular/core';
+import {
+  Injectable,
+  PLATFORM_ID,
+  computed,
+  effect,
+  inject,
+  signal,
+} from '@angular/core';
 
 /**
  * Theme modes supported by the application
@@ -38,7 +45,7 @@ export class ThemeService {
   /**
    * Computed: Is dark mode active?
    */
-  isDark = signal(false);
+  isDark = computed(() => this.theme() === 'dark');
 
   constructor() {
     // Only run in browser
@@ -48,7 +55,6 @@ export class ThemeService {
       // Sync theme changes with DOM and localStorage
       effect(() => {
         const currentTheme = this.theme();
-        this.isDark.set(currentTheme === 'dark');
         this.applyTheme(currentTheme);
         this.saveTheme(currentTheme);
       });

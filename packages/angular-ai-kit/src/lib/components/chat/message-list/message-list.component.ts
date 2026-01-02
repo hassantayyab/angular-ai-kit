@@ -145,8 +145,6 @@ export class MessageListComponent implements AfterViewInit {
       'flex flex-col gap-4 p-4',
       'overflow-y-auto overflow-x-hidden',
       'h-full', // Fill parent container height
-      'scrollbar-thin scrollbar-thumb-gray-300 dark:scrollbar-thumb-gray-600',
-      'scrollbar-track-transparent',
       this.customClasses()
     );
   });
@@ -170,7 +168,7 @@ export class MessageListComponent implements AfterViewInit {
     return cn(
       'ai-typing-indicator',
       'p-4 rounded-lg',
-      'bg-gray-100 dark:bg-gray-800',
+      'bg-muted',
       'transition-all duration-200'
     );
   });

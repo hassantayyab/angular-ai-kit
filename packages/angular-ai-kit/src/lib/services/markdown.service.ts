@@ -104,9 +104,21 @@ export class MarkdownService {
       .replace(/'/g, '&#039;');
   }
 
-  /** Sanitize HTML content (SSR-safe). */
+  /**
+   * Sanitize HTML content using DOMPurify (SSR-safe).
+   * Falls back to returning HTML as-is during SSR or before DOMPurify loads.
+   */
   private sanitize(html: string): string {
-    // Return as-is - markdown content is trusted
+    // Use DOMPurify if available (browser only)
+    if (this.purify) {
+      return this.purify.sanitize(html, {
+        USE_PROFILES: { html: true },
+        ADD_ATTR: ['class', 'data-code', 'title'], // Allow code block attributes
+        ADD_TAGS: ['hlm-icon', 'ng-icon'], // Allow Angular components
+      });
+    }
+    // SSR or before DOMPurify loads - return as-is
+    // Note: Consumer should sanitize if using SSR
     return html;
   }
 
@@ -122,8 +134,8 @@ export class MarkdownService {
     try {
       const html = this.marked.parse(markdown) as string;
       return this.sanitize(html);
-    } catch (error) {
-      console.error('Markdown parsing error:', error);
+    } catch {
+      // Fallback to sanitized raw input on parse error
       return this.sanitize(markdown);
     }
   }
@@ -140,8 +152,8 @@ export class MarkdownService {
     try {
       const html = await this.marked.parse(markdown);
       return this.sanitize(html as string);
-    } catch (error) {
-      console.error('Markdown parsing error:', error);
+    } catch {
+      // Fallback to sanitized raw input on parse error
       return this.sanitize(markdown);
     }
   }
