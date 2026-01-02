@@ -1,26 +1,32 @@
 {
   "name": "@angular-ai-kit/utils",
-  "version": "0.0.1",
-  "description": "Utility functions for Angular AI Kit - Class names, formatters, validators, and token counting",
+  "version": "0.1.0",
+  "description": "Utility functions for Angular AI Kit - Class names (cn), formatters, validators, and token counting",
   "keywords": [
     "angular",
     "utilities",
     "helpers",
+    "cn",
+    "clsx",
+    "tailwind-merge",
     "formatters",
     "validators",
     "token-counter",
     "tailwind",
     "typescript"
   ],
-  "author": "Your Name <your.email@example.com>",
+  "author": "Hassan Tayyab",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/yourusername/angular-ai-kit"
+    "url": "https://github.com/hassantayyab/angular-ai-kit.git"
   },
-  "homepage": "https://github.com/yourusername/angular-ai-kit#readme",
+  "homepage": "https://github.com/hassantayyab/angular-ai-kit#readme",
   "bugs": {
-    "url": "https://github.com/yourusername/angular-ai-kit/issues"
+    "url": "https://github.com/hassantayyab/angular-ai-kit/issues"
+  },
+  "engines": {
+    "node": ">=20.0.0"
   },
   "peerDependencies": {
     "@angular/core": "^21.0.0",

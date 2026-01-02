@@ -1,24 +1,29 @@
 {
   "name": "@angular-ai-kit/tokens",
-  "version": "0.0.1",
-  "description": "Design tokens and theming for Angular AI Kit - CSS custom properties and TypeScript interfaces",
+  "version": "0.1.0",
+  "description": "Design tokens and theming for Angular AI Kit - CSS custom properties, dark mode, and TypeScript interfaces",
   "keywords": [
     "angular",
     "design-tokens",
     "theming",
     "css-variables",
+    "dark-mode",
     "tailwind",
+    "spartan-ui",
     "typescript"
   ],
-  "author": "Your Name <your.email@example.com>",
+  "author": "Hassan Tayyab",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/yourusername/angular-ai-kit"
+    "url": "https://github.com/hassantayyab/angular-ai-kit.git"
   },
-  "homepage": "https://github.com/yourusername/angular-ai-kit#readme",
+  "homepage": "https://github.com/hassantayyab/angular-ai-kit#readme",
   "bugs": {
-    "url": "https://github.com/yourusername/angular-ai-kit/issues"
+    "url": "https://github.com/hassantayyab/angular-ai-kit/issues"
+  },
+  "engines": {
+    "node": ">=20.0.0"
   },
   "peerDependencies": {
     "@angular/core": "^21.0.0"

@@ -5,7 +5,17 @@
   "scripts": {
     "prepare": "husky",
     "format": "prettier --write \"**/*.{ts,js,json,md,html,css}\"",
-    "format:check": "prettier --check \"**/*.{ts,js,json,md,html,css}\""
+    "format:check": "prettier --check \"**/*.{ts,js,json,md,html,css}\"",
+    "build": "nx run-many -t build",
+    "build:libs": "nx run-many -t build --projects=@angular-ai-kit/core,@angular-ai-kit/utils,@angular-ai-kit/tokens",
+    "build:core": "nx build @angular-ai-kit/core",
+    "build:utils": "nx build @angular-ai-kit/utils",
+    "build:tokens": "nx build @angular-ai-kit/tokens",
+    "build:demo": "nx build demo",
+    "dev": "nx serve demo",
+    "lint": "nx run-many -t lint",
+    "release": "nx release",
+    "release:dry-run": "nx release --dry-run"
   },
   "private": true,
   "dependencies": {

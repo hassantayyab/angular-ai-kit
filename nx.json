@@ -73,8 +73,21 @@
     }
   },
   "release": {
+    "projects": [
+      "@angular-ai-kit/core",
+      "@angular-ai-kit/utils",
+      "@angular-ai-kit/tokens"
+    ],
     "version": {
-      "preVersionCommand": "npx nx run-many -t build"
+      "preVersionCommand": "npx nx run-many -t build --projects=@angular-ai-kit/core,@angular-ai-kit/utils,@angular-ai-kit/tokens",
+      "conventionalCommits": true
+    },
+    "changelog": {
+      "automaticFromRef": true,
+      "workspaceChangelog": {
+        "createRelease": "github"
+      },
+      "projectChangelogs": true
     }
   }
 }
