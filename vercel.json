@@ -1,0 +1,7 @@
+{
+  "installCommand": "npm install --legacy-peer-deps",
+  "buildCommand": "npx nx build demo --configuration=production",
+  "outputDirectory": "dist/apps/demo/browser",
+  "framework": null,
+  "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }]
+}
