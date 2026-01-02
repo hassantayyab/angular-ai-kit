@@ -1,0 +1,207 @@
+<div class="api-integration-container space-y-12">
+  <!-- Header -->
+  <div>
+    <h1 class="text-foreground mb-4 text-4xl font-bold">API Integration</h1>
+    <p class="text-muted-foreground text-lg">
+      Connect Angular AI Kit to OpenAI, Anthropic, and other AI providers.
+    </p>
+  </div>
+
+  <!-- Overview -->
+  <app-doc-section
+    title="Overview"
+    description="Architecture for AI API integration"
+  >
+    <div class="text-foreground space-y-4">
+      <p>
+        <strong>Important:</strong> Never expose API keys in your Angular
+        frontend. Always use a backend proxy to make API calls securely.
+      </p>
+      <div class="border-border bg-muted/50 rounded-lg border p-4">
+        <p class="mb-2 text-sm font-semibold">Recommended Architecture</p>
+        <pre class="text-muted-foreground text-sm">
+Angular App  →  Your Backend  →  AI Provider API
+  (fetch)        (proxy)          (OpenAI, etc.)
+        </pre>
+      </div>
+      <ul class="text-muted-foreground list-disc space-y-2 pl-6">
+        <li>Frontend makes requests to your backend</li>
+        <li>Backend adds API key and forwards to AI provider</li>
+        <li>Backend streams response back to frontend</li>
+        <li>This keeps your API keys secure</li>
+      </ul>
+    </div>
+  </app-doc-section>
+
+  <!-- OpenAI -->
+  <app-doc-section
+    title="OpenAI Integration"
+    description="Stream responses from GPT-4 and other OpenAI models"
+  >
+    <div class="space-y-6">
+      <div>
+        <h3 class="text-foreground mb-3 text-lg font-semibold">
+          Frontend Service
+        </h3>
+        <app-doc-code-block [code]="openaiCode" language="typescript" />
+      </div>
+
+      <div>
+        <h3 class="text-foreground mb-3 text-lg font-semibold">
+          Backend Proxy (Node.js)
+        </h3>
+        <app-doc-code-block [code]="backendProxyCode" language="typescript" />
+      </div>
+    </div>
+  </app-doc-section>
+
+  <!-- Anthropic -->
+  <app-doc-section
+    title="Anthropic (Claude) Integration"
+    description="Stream responses from Claude models"
+  >
+    <div class="space-y-4">
+      <p class="text-foreground">
+        Anthropic's API uses a slightly different streaming format:
+      </p>
+      <app-doc-code-block [code]="anthropicCode" language="typescript" />
+      <div class="border-border bg-muted/50 rounded-lg border p-4">
+        <p class="text-foreground mb-2 text-sm font-semibold">
+          Key Differences
+        </p>
+        <ul class="text-muted-foreground list-disc space-y-1 pl-5 text-sm">
+          <li>
+            Uses <code class="text-xs">content_block_delta</code> event type
+          </li>
+          <li>Content in <code class="text-xs">data.delta.text</code></li>
+          <li>Requires <code class="text-xs">max_tokens</code> parameter</li>
+        </ul>
+      </div>
+    </div>
+  </app-doc-section>
+
+  <!-- Error Handling -->
+  <app-doc-section
+    title="Error Handling"
+    description="Gracefully handle API errors"
+  >
+    <div class="space-y-4">
+      <p class="text-foreground">
+        Robust error handling with typed errors and user-friendly messages:
+      </p>
+      <app-doc-code-block [code]="errorHandlingCode" language="typescript" />
+    </div>
+  </app-doc-section>
+
+  <!-- Rate Limiting -->
+  <app-doc-section
+    title="Rate Limiting"
+    description="Client-side rate limiting to prevent API abuse"
+  >
+    <div class="space-y-4">
+      <p class="text-foreground">
+        Implement client-side rate limiting to protect your API budget:
+      </p>
+      <app-doc-code-block [code]="rateLimitCode" language="typescript" />
+    </div>
+  </app-doc-section>
+
+  <!-- Retry Logic -->
+  <app-doc-section
+    title="Retry Logic"
+    description="Automatic retries with exponential backoff"
+  >
+    <div class="space-y-4">
+      <p class="text-foreground">
+        Retry failed requests automatically with exponential backoff:
+      </p>
+      <app-doc-code-block [code]="retryCode" language="typescript" />
+    </div>
+  </app-doc-section>
+
+  <!-- Token Counting -->
+  <app-doc-section
+    title="Token Counting"
+    description="Estimate and manage token usage"
+  >
+    <div class="space-y-4">
+      <p class="text-foreground">
+        Track token usage to stay within context limits and manage costs:
+      </p>
+      <app-doc-code-block [code]="tokenCountCode" language="typescript" />
+    </div>
+  </app-doc-section>
+
+  <!-- Best Practices -->
+  <app-doc-section
+    title="Best Practices"
+    description="Production-ready API integration tips"
+  >
+    <div class="grid gap-4 sm:grid-cols-2">
+      <div class="border-border bg-card rounded-lg border p-4">
+        <p class="text-foreground mb-2 text-sm font-semibold">Security</p>
+        <ul class="text-muted-foreground list-disc space-y-1 pl-5 text-sm">
+          <li>Never expose API keys in frontend</li>
+          <li>Use backend proxy for all API calls</li>
+          <li>Implement authentication</li>
+          <li>Rate limit by user/IP</li>
+        </ul>
+      </div>
+      <div class="border-border bg-card rounded-lg border p-4">
+        <p class="text-foreground mb-2 text-sm font-semibold">Performance</p>
+        <ul class="text-muted-foreground list-disc space-y-1 pl-5 text-sm">
+          <li>Use streaming for better UX</li>
+          <li>Cancel in-flight requests</li>
+          <li>Cache common responses</li>
+          <li>Implement request debouncing</li>
+        </ul>
+      </div>
+      <div class="border-border bg-card rounded-lg border p-4">
+        <p class="text-foreground mb-2 text-sm font-semibold">Reliability</p>
+        <ul class="text-muted-foreground list-disc space-y-1 pl-5 text-sm">
+          <li>Implement retry with backoff</li>
+          <li>Handle partial responses</li>
+          <li>Fallback to non-streaming</li>
+          <li>Monitor error rates</li>
+        </ul>
+      </div>
+      <div class="border-border bg-card rounded-lg border p-4">
+        <p class="text-foreground mb-2 text-sm font-semibold">Cost Control</p>
+        <ul class="text-muted-foreground list-disc space-y-1 pl-5 text-sm">
+          <li>Track token usage</li>
+          <li>Set usage limits</li>
+          <li>Truncate long conversations</li>
+          <li>Use cheaper models when appropriate</li>
+        </ul>
+      </div>
+    </div>
+  </app-doc-section>
+
+  <!-- Next Steps -->
+  <div class="border-border bg-muted/50 rounded-lg border p-6">
+    <h3 class="text-foreground mb-2 text-lg font-semibold">Next Steps</h3>
+    <p class="text-muted-foreground mb-4 text-sm">
+      Continue building your chat application:
+    </p>
+    <div class="flex flex-wrap gap-3">
+      <a
+        routerLink="/docs/guides/building-chat-app"
+        class="border-border bg-card text-foreground hover:border-border-hover inline-flex items-center gap-2 rounded-lg border px-4 py-2 text-sm font-semibold transition-all hover:shadow-sm"
+      >
+        Building a Chat App
+      </a>
+      <a
+        routerLink="/docs/guides/customization"
+        class="border-border bg-card text-foreground hover:border-border-hover inline-flex items-center gap-2 rounded-lg border px-4 py-2 text-sm font-semibold transition-all hover:shadow-sm"
+      >
+        Customization
+      </a>
+      <a
+        routerLink="/docs/examples/full-chat"
+        class="border-border bg-card text-foreground hover:border-border-hover inline-flex items-center gap-2 rounded-lg border px-4 py-2 text-sm font-semibold transition-all hover:shadow-sm"
+      >
+        Full Chat Example
+      </a>
+    </div>
+  </div>
+</div>

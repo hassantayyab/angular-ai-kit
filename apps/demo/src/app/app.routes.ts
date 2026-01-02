@@ -23,6 +23,11 @@ export const appRoutes: Route[] = [
           {
             path: '',
             loadComponent: () =>
+              import('./pages/docs/home').then((m) => m.DocsHomeComponent),
+          },
+          {
+            path: 'components',
+            loadComponent: () =>
               import('./pages/docs/docs-overview.component').then(
                 (m) => m.DocsOverviewComponent
               ),
@@ -110,6 +115,88 @@ export const appRoutes: Route[] = [
               import(
                 './pages/docs/components/conversation-list/conversation-list-doc.component'
               ).then((m) => m.ConversationListDocComponent),
+          },
+          {
+            path: 'guides/getting-started',
+            loadComponent: () =>
+              import('./pages/docs/guides/getting-started').then(
+                (m) => m.GettingStartedComponent
+              ),
+          },
+          {
+            path: 'guides/theming',
+            loadComponent: () =>
+              import('./pages/docs/guides/theming').then(
+                (m) => m.ThemingComponent
+              ),
+          },
+          {
+            path: 'guides/building-chat-app',
+            loadComponent: () =>
+              import('./pages/docs/guides/building-chat-app').then(
+                (m) => m.BuildingChatAppComponent
+              ),
+          },
+          {
+            path: 'guides/api-integration',
+            loadComponent: () =>
+              import('./pages/docs/guides/api-integration').then(
+                (m) => m.ApiIntegrationComponent
+              ),
+          },
+          {
+            path: 'guides/customization',
+            loadComponent: () =>
+              import('./pages/docs/guides/customization').then(
+                (m) => m.CustomizationComponent
+              ),
+          },
+          {
+            path: 'api/types',
+            loadComponent: () =>
+              import('./pages/docs/api/types').then(
+                (m) => m.TypesReferenceComponent
+              ),
+          },
+          {
+            path: 'api/tokens',
+            loadComponent: () =>
+              import('./pages/docs/api/tokens').then(
+                (m) => m.TokensReferenceComponent
+              ),
+          },
+          {
+            path: 'api/utilities',
+            loadComponent: () =>
+              import('./pages/docs/api/utilities').then(
+                (m) => m.UtilitiesReferenceComponent
+              ),
+          },
+          {
+            path: 'api/services',
+            loadComponent: () =>
+              import('./pages/docs/api/services').then(
+                (m) => m.ServicesReferenceComponent
+              ),
+          },
+          {
+            path: 'guides/faq',
+            loadComponent: () =>
+              import('./pages/docs/guides/faq').then((m) => m.FaqComponent),
+          },
+          {
+            path: 'guides/troubleshooting',
+            loadComponent: () =>
+              import('./pages/docs/guides/troubleshooting').then(
+                (m) => m.TroubleshootingComponent
+              ),
+          },
+          {
+            path: 'examples/full-chat',
+            loadComponent: () =>
+              import('./pages/docs/examples/full-chat').then(
+                (m) => m.FullChatExampleComponent
+              ),
           },
         ],
       },

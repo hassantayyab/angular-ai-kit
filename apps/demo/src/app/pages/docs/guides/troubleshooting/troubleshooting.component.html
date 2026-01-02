@@ -1,0 +1,299 @@
+<div class="troubleshooting-container space-y-12">
+  <!-- Header -->
+  <div>
+    <h1 class="text-foreground mb-4 text-4xl font-bold">Troubleshooting</h1>
+    <p class="text-muted-foreground text-lg">
+      Common issues and solutions when using Angular AI Kit.
+    </p>
+  </div>
+
+  <!-- Quick Checklist -->
+  <app-doc-section
+    title="Quick Checklist"
+    description="First things to check when something isn't working"
+  >
+    <div class="space-y-4">
+      <div class="border-border bg-card rounded-lg border p-4">
+        <ul class="text-foreground space-y-3">
+          <li class="flex items-start gap-3">
+            <span
+              class="bg-primary text-primary-foreground mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full text-xs"
+              >1</span
+            >
+            <span>Check console for errors (F12 → Console)</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <span
+              class="bg-primary text-primary-foreground mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full text-xs"
+              >2</span
+            >
+            <span
+              >Verify all dependencies are installed (<code class="text-xs"
+                >npm ls &#64;angular-ai-kit/core</code
+              >)</span
+            >
+          </li>
+          <li class="flex items-start gap-3">
+            <span
+              class="bg-primary text-primary-foreground mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full text-xs"
+              >3</span
+            >
+            <span
+              >Clear cache and rebuild (<code class="text-xs"
+                >npm cache clean --force && npm install</code
+              >)</span
+            >
+          </li>
+          <li class="flex items-start gap-3">
+            <span
+              class="bg-primary text-primary-foreground mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full text-xs"
+              >4</span
+            >
+            <span>Check Angular version compatibility (17+ required)</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <span
+              class="bg-primary text-primary-foreground mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full text-xs"
+              >5</span
+            >
+            <span>Restart development server after configuration changes</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </app-doc-section>
+
+  <!-- Installation Issues -->
+  <app-doc-section
+    title="Installation Issues"
+    description="Problems during package installation"
+  >
+    <div class="space-y-6">
+      <div
+        class="border-destructive/50 bg-destructive/10 rounded-lg border p-4"
+      >
+        <p class="text-destructive mb-2 font-semibold">
+          Error: Module not found
+        </p>
+        <p class="text-muted-foreground mb-4 text-sm">
+          Cannot find module '&#64;angular-ai-kit/core' or its corresponding
+          type declarations.
+        </p>
+        <app-doc-code-block [code]="moduleNotFoundCode" language="typescript" />
+      </div>
+    </div>
+  </app-doc-section>
+
+  <!-- Styling Issues -->
+  <app-doc-section
+    title="Styling Issues"
+    description="Components not styled correctly"
+  >
+    <div class="space-y-6">
+      <div
+        class="border-destructive/50 bg-destructive/10 rounded-lg border p-4"
+      >
+        <p class="text-destructive mb-2 font-semibold">
+          Tailwind styles not applying
+        </p>
+        <p class="text-muted-foreground mb-4 text-sm">
+          Components appear unstyled or with default browser styles.
+        </p>
+        <app-doc-code-block [code]="tailwindFixCode" language="typescript" />
+      </div>
+
+      <div
+        class="border-destructive/50 bg-destructive/10 rounded-lg border p-4"
+      >
+        <p class="text-destructive mb-2 font-semibold">
+          CSS variables not defined
+        </p>
+        <p class="text-muted-foreground mb-4 text-sm">
+          Colors showing as default or undefined.
+        </p>
+        <app-doc-code-block [code]="cssVariablesCode" language="css" />
+      </div>
+
+      <div
+        class="border-destructive/50 bg-destructive/10 rounded-lg border p-4"
+      >
+        <p class="text-destructive mb-2 font-semibold">
+          ViewEncapsulation blocking styles
+        </p>
+        <p class="text-muted-foreground mb-4 text-sm">
+          Tailwind classes not working in components.
+        </p>
+        <app-doc-code-block
+          [code]="viewEncapsulationCode"
+          language="typescript"
+        />
+      </div>
+    </div>
+  </app-doc-section>
+
+  <!-- Runtime Issues -->
+  <app-doc-section
+    title="Runtime Issues"
+    description="Errors during application execution"
+  >
+    <div class="space-y-6">
+      <div
+        class="border-destructive/50 bg-destructive/10 rounded-lg border p-4"
+      >
+        <p class="text-destructive mb-2 font-semibold">
+          Signal.mutate() is deprecated
+        </p>
+        <p class="text-muted-foreground mb-4 text-sm">
+          TypeScript error or runtime warning about mutate.
+        </p>
+        <app-doc-code-block [code]="signalUpdateCode" language="typescript" />
+      </div>
+
+      <div
+        class="border-destructive/50 bg-destructive/10 rounded-lg border p-4"
+      >
+        <p class="text-destructive mb-2 font-semibold">
+          Memory leaks from subscriptions
+        </p>
+        <p class="text-muted-foreground mb-4 text-sm">
+          Application slowing down over time or duplicate subscriptions.
+        </p>
+        <app-doc-code-block [code]="memoryLeakCode" language="typescript" />
+      </div>
+
+      <div
+        class="border-destructive/50 bg-destructive/10 rounded-lg border p-4"
+      >
+        <p class="text-destructive mb-2 font-semibold">
+          Changes not reflecting in UI
+        </p>
+        <p class="text-muted-foreground mb-4 text-sm">
+          Data updates but UI doesn't refresh (OnPush components).
+        </p>
+        <app-doc-code-block
+          [code]="changeDetectionCode"
+          language="typescript"
+        />
+      </div>
+    </div>
+  </app-doc-section>
+
+  <!-- API Issues -->
+  <app-doc-section
+    title="API Integration Issues"
+    description="Problems connecting to AI APIs"
+  >
+    <div class="space-y-6">
+      <div
+        class="border-destructive/50 bg-destructive/10 rounded-lg border p-4"
+      >
+        <p class="text-destructive mb-2 font-semibold">Streaming not working</p>
+        <p class="text-muted-foreground mb-4 text-sm">
+          Response comes all at once instead of streaming.
+        </p>
+        <app-doc-code-block [code]="streamingFixCode" language="typescript" />
+      </div>
+
+      <div
+        class="border-destructive/50 bg-destructive/10 rounded-lg border p-4"
+      >
+        <p class="text-destructive mb-2 font-semibold">CORS errors</p>
+        <p class="text-muted-foreground mb-4 text-sm">
+          "Access-Control-Allow-Origin" errors in console.
+        </p>
+        <app-doc-code-block [code]="corsFixCode" language="typescript" />
+      </div>
+    </div>
+  </app-doc-section>
+
+  <!-- SSR Issues -->
+  <app-doc-section
+    title="SSR / Hydration Issues"
+    description="Server-side rendering problems"
+  >
+    <div class="space-y-6">
+      <div
+        class="border-destructive/50 bg-destructive/10 rounded-lg border p-4"
+      >
+        <p class="text-destructive mb-2 font-semibold">
+          window/document is not defined
+        </p>
+        <p class="text-muted-foreground mb-4 text-sm">
+          Errors during server-side rendering.
+        </p>
+        <app-doc-code-block [code]="ssrFixCode" language="typescript" />
+      </div>
+    </div>
+  </app-doc-section>
+
+  <!-- Debugging Tips -->
+  <app-doc-section title="Debugging Tips" description="How to diagnose issues">
+    <div class="grid gap-4 sm:grid-cols-2">
+      <div class="border-border bg-card rounded-lg border p-4">
+        <p class="text-foreground mb-2 text-sm font-semibold">
+          Check Network Tab
+        </p>
+        <p class="text-muted-foreground text-sm">
+          F12 → Network → Look for failed requests, check response format
+        </p>
+      </div>
+      <div class="border-border bg-card rounded-lg border p-4">
+        <p class="text-foreground mb-2 text-sm font-semibold">
+          Use Angular DevTools
+        </p>
+        <p class="text-muted-foreground text-sm">
+          Install the Chrome extension to inspect components and signals
+        </p>
+      </div>
+      <div class="border-border bg-card rounded-lg border p-4">
+        <p class="text-foreground mb-2 text-sm font-semibold">
+          Add console.log
+        </p>
+        <p class="text-muted-foreground text-sm">
+          Log signal values with
+          <code class="text-xs">console.log(signal())</code>
+        </p>
+      </div>
+      <div class="border-border bg-card rounded-lg border p-4">
+        <p class="text-foreground mb-2 text-sm font-semibold">
+          Inspect Elements
+        </p>
+        <p class="text-muted-foreground text-sm">
+          F12 → Elements → Check applied CSS classes and computed styles
+        </p>
+      </div>
+    </div>
+  </app-doc-section>
+
+  <!-- Need More Help -->
+  <div class="border-border bg-muted/50 rounded-lg border p-6">
+    <h3 class="text-foreground mb-2 text-lg font-semibold">Need More Help?</h3>
+    <p class="text-muted-foreground mb-4 text-sm">
+      If you're still stuck, reach out through these channels:
+    </p>
+    <div class="flex flex-wrap gap-3">
+      <a
+        routerLink="/docs/guides/faq"
+        class="border-border bg-card text-foreground hover:border-border-hover inline-flex items-center gap-2 rounded-lg border px-4 py-2 text-sm font-semibold transition-all hover:shadow-sm"
+      >
+        FAQ
+      </a>
+      <a
+        href="https://github.com/angular-ai-kit/angular-ai-kit/issues/new"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="border-border bg-card text-foreground hover:border-border-hover inline-flex items-center gap-2 rounded-lg border px-4 py-2 text-sm font-semibold transition-all hover:shadow-sm"
+      >
+        Report Bug
+      </a>
+      <a
+        href="https://github.com/angular-ai-kit/angular-ai-kit/discussions"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="border-border bg-card text-foreground hover:border-border-hover inline-flex items-center gap-2 rounded-lg border px-4 py-2 text-sm font-semibold transition-all hover:shadow-sm"
+      >
+        Ask Community
+      </a>
+    </div>
+  </div>
+</div>

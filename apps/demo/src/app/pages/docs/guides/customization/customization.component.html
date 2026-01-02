@@ -1,0 +1,241 @@
+<div class="customization-container space-y-12">
+  <!-- Header -->
+  <div>
+    <h1 class="text-foreground mb-4 text-4xl font-bold">Customization</h1>
+    <p class="text-muted-foreground text-lg">
+      Customize Angular AI Kit components to match your design system.
+    </p>
+  </div>
+
+  <!-- Overview -->
+  <app-doc-section
+    title="Customization Options"
+    description="Multiple ways to customize components"
+  >
+    <div class="text-foreground space-y-4">
+      <p>Angular AI Kit provides several customization approaches:</p>
+      <div class="grid gap-4 sm:grid-cols-2">
+        <div class="border-border bg-card rounded-lg border p-4">
+          <p class="mb-2 text-sm font-semibold">1. Custom Classes</p>
+          <p class="text-muted-foreground text-sm">
+            Use the <code class="text-xs">customClasses</code> input to add
+            Tailwind classes
+          </p>
+        </div>
+        <div class="border-border bg-card rounded-lg border p-4">
+          <p class="mb-2 text-sm font-semibold">2. CSS Variables</p>
+          <p class="text-muted-foreground text-sm">
+            Override CSS custom properties for global theming
+          </p>
+        </div>
+        <div class="border-border bg-card rounded-lg border p-4">
+          <p class="mb-2 text-sm font-semibold">3. Wrapper Components</p>
+          <p class="text-muted-foreground text-sm">
+            Create wrapper components with custom behavior
+          </p>
+        </div>
+        <div class="border-border bg-card rounded-lg border p-4">
+          <p class="mb-2 text-sm font-semibold">4. DI Tokens</p>
+          <p class="text-muted-foreground text-sm">
+            Provide configuration via dependency injection
+          </p>
+        </div>
+      </div>
+    </div>
+  </app-doc-section>
+
+  <!-- Custom Classes -->
+  <app-doc-section
+    title="Using Custom Classes"
+    description="The simplest way to customize appearance"
+  >
+    <div class="space-y-4">
+      <p class="text-foreground">
+        Most components accept a
+        <code class="bg-muted rounded px-1.5 py-0.5 text-xs"
+          >customClasses</code
+        >
+        input for additional Tailwind classes:
+      </p>
+      <app-doc-code-block [code]="customClassesCode" language="html" />
+      <div class="border-border bg-muted/50 rounded-lg border p-4">
+        <p class="text-foreground mb-2 text-sm font-semibold">Tips</p>
+        <ul class="text-muted-foreground list-disc space-y-1 pl-5 text-sm">
+          <li>Custom classes are merged with default classes</li>
+          <li>
+            Use Tailwind's <code class="text-xs">!</code> prefix for specificity
+            if needed
+          </li>
+          <li>Combine with CSS variables for full control</li>
+        </ul>
+      </div>
+    </div>
+  </app-doc-section>
+
+  <!-- Wrapper Components -->
+  <app-doc-section
+    title="Creating Wrapper Components"
+    description="Extend functionality with custom wrappers"
+  >
+    <div class="space-y-4">
+      <p class="text-foreground">
+        Wrap existing components to add custom headers, footers, or behavior:
+      </p>
+      <app-doc-code-block [code]="wrappingCode" language="typescript" />
+    </div>
+  </app-doc-section>
+
+  <!-- Custom Actions -->
+  <app-doc-section
+    title="Custom Action Buttons"
+    description="Add your own actions to messages"
+  >
+    <div class="space-y-4">
+      <p class="text-foreground">
+        Create custom action components and inject them via slots:
+      </p>
+      <app-doc-code-block [code]="customActionsCode" language="typescript" />
+    </div>
+  </app-doc-section>
+
+  <!-- Custom Markdown -->
+  <app-doc-section
+    title="Custom Markdown Rendering"
+    description="Override default markdown styles"
+  >
+    <div class="space-y-4">
+      <p class="text-foreground">Customize how markdown content is rendered:</p>
+      <app-doc-code-block [code]="customMarkdownCode" language="typescript" />
+    </div>
+  </app-doc-section>
+
+  <!-- Custom Code Block -->
+  <app-doc-section
+    title="Custom Code Block"
+    description="Add features like run button and copy feedback"
+  >
+    <div class="space-y-4">
+      <p class="text-foreground">
+        Create an enhanced code block with additional features:
+      </p>
+      <app-doc-code-block [code]="customCodeBlockCode" language="typescript" />
+    </div>
+  </app-doc-section>
+
+  <!-- Custom Input -->
+  <app-doc-section
+    title="Custom Input Component"
+    description="Add model selection and character count"
+  >
+    <div class="space-y-4">
+      <p class="text-foreground">
+        Extend the chat input with model selection and other features:
+      </p>
+      <app-doc-code-block [code]="customInputCode" language="typescript" />
+    </div>
+  </app-doc-section>
+
+  <!-- DI Tokens -->
+  <app-doc-section
+    title="Configuration via DI Tokens"
+    description="Global configuration using dependency injection"
+  >
+    <div class="space-y-4">
+      <p class="text-foreground">
+        Provide global configuration using Angular's dependency injection:
+      </p>
+      <app-doc-code-block [code]="tokensCode" language="typescript" />
+      <div class="border-border bg-muted/50 rounded-lg border p-4">
+        <p class="text-foreground mb-2 text-sm font-semibold">
+          Available Tokens
+        </p>
+        <ul class="text-muted-foreground list-disc space-y-1 pl-5 text-sm">
+          <li>
+            <code class="text-xs">AI_AVATAR_CONFIG</code> - Avatar settings
+          </li>
+          <li>
+            <code class="text-xs">AI_CODE_HIGHLIGHT_CONFIG</code> - Code
+            highlighting
+          </li>
+          <li>
+            <code class="text-xs">AI_MARKDOWN_CONFIG</code> - Markdown rendering
+          </li>
+          <li><code class="text-xs">AI_THEME_CONFIG</code> - Theme settings</li>
+        </ul>
+      </div>
+    </div>
+  </app-doc-section>
+
+  <!-- Best Practices -->
+  <app-doc-section
+    title="Best Practices"
+    description="Tips for effective customization"
+  >
+    <div class="grid gap-4 sm:grid-cols-2">
+      <div class="border-border bg-card rounded-lg border p-4">
+        <p class="text-foreground mb-2 text-sm font-semibold">Start Simple</p>
+        <ul class="text-muted-foreground list-disc space-y-1 pl-5 text-sm">
+          <li>Use <code class="text-xs">customClasses</code> first</li>
+          <li>Then CSS variables for theming</li>
+          <li>Create wrappers for complex needs</li>
+        </ul>
+      </div>
+      <div class="border-border bg-card rounded-lg border p-4">
+        <p class="text-foreground mb-2 text-sm font-semibold">
+          Stay Consistent
+        </p>
+        <ul class="text-muted-foreground list-disc space-y-1 pl-5 text-sm">
+          <li>Use your design system tokens</li>
+          <li>Create reusable wrapper components</li>
+          <li>Document your customizations</li>
+        </ul>
+      </div>
+      <div class="border-border bg-card rounded-lg border p-4">
+        <p class="text-foreground mb-2 text-sm font-semibold">
+          Test Thoroughly
+        </p>
+        <ul class="text-muted-foreground list-disc space-y-1 pl-5 text-sm">
+          <li>Test in light and dark mode</li>
+          <li>Test responsive behavior</li>
+          <li>Test accessibility (keyboard, screen readers)</li>
+        </ul>
+      </div>
+      <div class="border-border bg-card rounded-lg border p-4">
+        <p class="text-foreground mb-2 text-sm font-semibold">Keep Updated</p>
+        <ul class="text-muted-foreground list-disc space-y-1 pl-5 text-sm">
+          <li>Avoid relying on internal classes</li>
+          <li>Use public APIs only</li>
+          <li>Check changelog on updates</li>
+        </ul>
+      </div>
+    </div>
+  </app-doc-section>
+
+  <!-- Next Steps -->
+  <div class="border-border bg-muted/50 rounded-lg border p-6">
+    <h3 class="text-foreground mb-2 text-lg font-semibold">Next Steps</h3>
+    <p class="text-muted-foreground mb-4 text-sm">
+      Explore more customization options:
+    </p>
+    <div class="flex flex-wrap gap-3">
+      <a
+        routerLink="/docs/guides/theming"
+        class="border-border bg-card text-foreground hover:border-border-hover inline-flex items-center gap-2 rounded-lg border px-4 py-2 text-sm font-semibold transition-all hover:shadow-sm"
+      >
+        Theming Guide
+      </a>
+      <a
+        routerLink="/docs/api/tokens"
+        class="border-border bg-card text-foreground hover:border-border-hover inline-flex items-center gap-2 rounded-lg border px-4 py-2 text-sm font-semibold transition-all hover:shadow-sm"
+      >
+        DI Tokens Reference
+      </a>
+      <a
+        routerLink="/docs/components"
+        class="border-border bg-card text-foreground hover:border-border-hover inline-flex items-center gap-2 rounded-lg border px-4 py-2 text-sm font-semibold transition-all hover:shadow-sm"
+      >
+        Components
+      </a>
+    </div>
+  </div>
+</div>

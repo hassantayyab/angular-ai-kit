@@ -1,0 +1,396 @@
+<div class="theming-container space-y-12">
+  <!-- Header -->
+  <div>
+    <h1 class="text-foreground mb-4 text-4xl font-bold">Theming</h1>
+    <p class="text-muted-foreground text-lg">
+      Customize Angular AI Kit components with CSS variables and Tailwind
+      classes.
+    </p>
+  </div>
+
+  <!-- Overview -->
+  <app-doc-section
+    title="Overview"
+    description="How theming works in Angular AI Kit"
+  >
+    <div class="text-foreground space-y-4">
+      <p>
+        Angular AI Kit uses
+        <strong>CSS custom properties (variables)</strong> for theming. This
+        approach provides:
+      </p>
+      <ul class="list-disc space-y-2 pl-6">
+        <li>Automatic light/dark mode switching</li>
+        <li>Easy customization without rebuilding</li>
+        <li>Consistent styling across all components</li>
+        <li>Full Tailwind CSS v4 compatibility</li>
+      </ul>
+    </div>
+  </app-doc-section>
+
+  <!-- CSS Variables Reference -->
+  <app-doc-section
+    title="CSS Variables Reference"
+    description="All available CSS custom properties"
+  >
+    <div class="space-y-8">
+      <!-- Core Colors -->
+      <div>
+        <h3 class="text-foreground mb-4 text-lg font-semibold">Core Colors</h3>
+        <div class="overflow-x-auto">
+          <table class="w-full border-collapse text-sm">
+            <thead>
+              <tr class="border-border border-b">
+                <th class="text-foreground py-3 pr-4 text-left font-semibold">
+                  Variable
+                </th>
+                <th class="text-foreground py-3 pr-4 text-left font-semibold">
+                  Description
+                </th>
+                <th class="text-foreground py-3 pr-4 text-left font-semibold">
+                  Light
+                </th>
+                <th class="text-foreground py-3 text-left font-semibold">
+                  Dark
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              @for (v of coreVariables; track v.name) {
+                <tr class="border-border border-b">
+                  <td class="py-3 pr-4">
+                    <code class="bg-muted rounded px-1.5 py-0.5 text-xs">{{
+                      v.name
+                    }}</code>
+                  </td>
+                  <td class="text-muted-foreground py-3 pr-4">
+                    {{ v.description }}
+                  </td>
+                  <td class="py-3 pr-4">
+                    <span class="bg-muted rounded px-2 py-1 text-xs">{{
+                      v.lightValue
+                    }}</span>
+                  </td>
+                  <td class="py-3">
+                    <span class="bg-muted rounded px-2 py-1 text-xs">{{
+                      v.darkValue
+                    }}</span>
+                  </td>
+                </tr>
+              }
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Border & Input -->
+      <div>
+        <h3 class="text-foreground mb-4 text-lg font-semibold">
+          Border & Input
+        </h3>
+        <div class="overflow-x-auto">
+          <table class="w-full border-collapse text-sm">
+            <thead>
+              <tr class="border-border border-b">
+                <th class="text-foreground py-3 pr-4 text-left font-semibold">
+                  Variable
+                </th>
+                <th class="text-foreground py-3 pr-4 text-left font-semibold">
+                  Description
+                </th>
+                <th class="text-foreground py-3 pr-4 text-left font-semibold">
+                  Light
+                </th>
+                <th class="text-foreground py-3 text-left font-semibold">
+                  Dark
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              @for (v of borderVariables; track v.name) {
+                <tr class="border-border border-b">
+                  <td class="py-3 pr-4">
+                    <code class="bg-muted rounded px-1.5 py-0.5 text-xs">{{
+                      v.name
+                    }}</code>
+                  </td>
+                  <td class="text-muted-foreground py-3 pr-4">
+                    {{ v.description }}
+                  </td>
+                  <td class="py-3 pr-4">
+                    <span class="bg-muted rounded px-2 py-1 text-xs">{{
+                      v.lightValue
+                    }}</span>
+                  </td>
+                  <td class="py-3">
+                    <span class="bg-muted rounded px-2 py-1 text-xs">{{
+                      v.darkValue
+                    }}</span>
+                  </td>
+                </tr>
+              }
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Actions -->
+      <div>
+        <h3 class="text-foreground mb-4 text-lg font-semibold">
+          Actions & Buttons
+        </h3>
+        <div class="overflow-x-auto">
+          <table class="w-full border-collapse text-sm">
+            <thead>
+              <tr class="border-border border-b">
+                <th class="text-foreground py-3 pr-4 text-left font-semibold">
+                  Variable
+                </th>
+                <th class="text-foreground py-3 pr-4 text-left font-semibold">
+                  Description
+                </th>
+                <th class="text-foreground py-3 pr-4 text-left font-semibold">
+                  Light
+                </th>
+                <th class="text-foreground py-3 text-left font-semibold">
+                  Dark
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              @for (v of actionVariables; track v.name) {
+                <tr class="border-border border-b">
+                  <td class="py-3 pr-4">
+                    <code class="bg-muted rounded px-1.5 py-0.5 text-xs">{{
+                      v.name
+                    }}</code>
+                  </td>
+                  <td class="text-muted-foreground py-3 pr-4">
+                    {{ v.description }}
+                  </td>
+                  <td class="py-3 pr-4">
+                    <span class="bg-muted rounded px-2 py-1 text-xs">{{
+                      v.lightValue
+                    }}</span>
+                  </td>
+                  <td class="py-3">
+                    <span class="bg-muted rounded px-2 py-1 text-xs">{{
+                      v.darkValue
+                    }}</span>
+                  </td>
+                </tr>
+              }
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Message-specific -->
+      <div>
+        <h3 class="text-foreground mb-4 text-lg font-semibold">
+          Message Components
+        </h3>
+        <div class="overflow-x-auto">
+          <table class="w-full border-collapse text-sm">
+            <thead>
+              <tr class="border-border border-b">
+                <th class="text-foreground py-3 pr-4 text-left font-semibold">
+                  Variable
+                </th>
+                <th class="text-foreground py-3 pr-4 text-left font-semibold">
+                  Description
+                </th>
+                <th class="text-foreground py-3 pr-4 text-left font-semibold">
+                  Light
+                </th>
+                <th class="text-foreground py-3 text-left font-semibold">
+                  Dark
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              @for (v of messageVariables; track v.name) {
+                <tr class="border-border border-b">
+                  <td class="py-3 pr-4">
+                    <code class="bg-muted rounded px-1.5 py-0.5 text-xs">{{
+                      v.name
+                    }}</code>
+                  </td>
+                  <td class="text-muted-foreground py-3 pr-4">
+                    {{ v.description }}
+                  </td>
+                  <td class="py-3 pr-4">
+                    <span class="bg-muted rounded px-2 py-1 text-xs">{{
+                      v.lightValue
+                    }}</span>
+                  </td>
+                  <td class="py-3">
+                    <span class="bg-muted rounded px-2 py-1 text-xs">{{
+                      v.darkValue
+                    }}</span>
+                  </td>
+                </tr>
+              }
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </app-doc-section>
+
+  <!-- Basic Setup -->
+  <app-doc-section
+    title="Basic Setup"
+    description="Add CSS variables to your styles.css"
+  >
+    <div class="space-y-6">
+      <div>
+        <h3 class="text-foreground mb-3 text-lg font-semibold">
+          Light Theme (Default)
+        </h3>
+        <app-doc-code-block [code]="basicVariablesCode" language="css" />
+      </div>
+
+      <div>
+        <h3 class="text-foreground mb-3 text-lg font-semibold">Dark Theme</h3>
+        <app-doc-code-block [code]="darkVariablesCode" language="css" />
+      </div>
+    </div>
+  </app-doc-section>
+
+  <!-- Using Tailwind Classes -->
+  <app-doc-section
+    title="Using Tailwind Classes"
+    description="How to use semantic color classes"
+  >
+    <div class="space-y-4">
+      <p class="text-foreground">
+        Use Tailwind's semantic color classes which automatically reference CSS
+        variables:
+      </p>
+      <app-doc-code-block [code]="tailwindClassesCode" language="html" />
+      <div class="border-border bg-card rounded-lg border p-4">
+        <p class="text-foreground mb-2 text-sm font-semibold">Key Classes</p>
+        <div class="grid gap-2 text-sm sm:grid-cols-2">
+          <div>
+            <code class="text-xs">bg-background</code> - Page background
+          </div>
+          <div><code class="text-xs">bg-card</code> - Card backgrounds</div>
+          <div><code class="text-xs">bg-muted</code> - Muted backgrounds</div>
+          <div><code class="text-xs">bg-primary</code> - Primary buttons</div>
+          <div><code class="text-xs">text-foreground</code> - Main text</div>
+          <div>
+            <code class="text-xs">text-muted-foreground</code> - Subtle text
+          </div>
+          <div><code class="text-xs">border-border</code> - Borders</div>
+          <div><code class="text-xs">ring-ring</code> - Focus rings</div>
+        </div>
+      </div>
+    </div>
+  </app-doc-section>
+
+  <!-- Dark Mode -->
+  <app-doc-section
+    title="Dark Mode Implementation"
+    description="How to implement theme switching"
+  >
+    <div class="space-y-6">
+      <p class="text-foreground">
+        Dark mode is activated by adding the
+        <code class="bg-muted rounded px-1.5 py-0.5 text-xs">.dark</code> class
+        to the
+        <code class="bg-muted rounded px-1.5 py-0.5 text-xs">&lt;html&gt;</code>
+        element.
+      </p>
+
+      <div>
+        <h3 class="text-foreground mb-3 text-lg font-semibold">
+          Theme Toggle Component
+        </h3>
+        <app-doc-code-block [code]="themeToggleCode" language="typescript" />
+      </div>
+
+      <div class="border-border bg-muted/50 rounded-lg border p-4">
+        <p class="text-foreground mb-2 text-sm font-semibold">Key Points</p>
+        <ul class="text-muted-foreground list-disc space-y-1 pl-5 text-sm">
+          <li>
+            Check <code class="text-xs">prefers-color-scheme</code> for system
+            preference
+          </li>
+          <li>
+            Store user preference in <code class="text-xs">localStorage</code>
+          </li>
+          <li>
+            Toggle <code class="text-xs">.dark</code> class on
+            <code class="text-xs">&lt;html&gt;</code>
+          </li>
+          <li>All components automatically adapt!</li>
+        </ul>
+      </div>
+    </div>
+  </app-doc-section>
+
+  <!-- Custom Color Schemes -->
+  <app-doc-section
+    title="Custom Color Schemes"
+    description="Create your own color theme"
+  >
+    <div class="space-y-6">
+      <p class="text-foreground">
+        Override the default zinc color scheme with your own colors:
+      </p>
+      <app-doc-code-block [code]="customColorSchemeCode" language="css" />
+      <div class="border-border bg-card rounded-lg border p-4">
+        <p class="text-foreground mb-2 text-sm font-semibold">Tips</p>
+        <ul class="text-muted-foreground list-disc space-y-1 pl-5 text-sm">
+          <li>
+            Use <code class="text-xs">theme('colors.xxx')</code> to reference
+            Tailwind colors
+          </li>
+          <li>Keep neutral backgrounds for readability</li>
+          <li>Ensure sufficient contrast for accessibility</li>
+          <li>Test both light and dark modes</li>
+        </ul>
+      </div>
+    </div>
+  </app-doc-section>
+
+  <!-- Custom Classes Input -->
+  <app-doc-section
+    title="Component Customization"
+    description="Override styles on individual components"
+  >
+    <div class="space-y-4">
+      <p class="text-foreground">
+        Most components accept a
+        <code class="bg-muted rounded px-1.5 py-0.5 text-xs"
+          >customClasses</code
+        >
+        input for additional styling:
+      </p>
+      <app-doc-code-block [code]="customClassesCode" language="typescript" />
+    </div>
+  </app-doc-section>
+
+  <!-- Next Steps -->
+  <div class="border-border bg-muted/50 rounded-lg border p-6">
+    <h3 class="text-foreground mb-2 text-lg font-semibold">Next Steps</h3>
+    <p class="text-muted-foreground mb-4 text-sm">
+      Now that you understand theming, explore more:
+    </p>
+    <div class="flex flex-wrap gap-3">
+      <a
+        routerLink="/docs/components"
+        class="border-border bg-card text-foreground hover:border-border-hover inline-flex items-center gap-2 rounded-lg border px-4 py-2 text-sm font-semibold transition-all hover:shadow-sm"
+      >
+        Browse Components
+      </a>
+      <a
+        routerLink="/docs/guides/getting-started"
+        class="border-border bg-card text-foreground hover:border-border-hover inline-flex items-center gap-2 rounded-lg border px-4 py-2 text-sm font-semibold transition-all hover:shadow-sm"
+      >
+        Getting Started
+      </a>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,174 @@
+<div class="utilities-reference-container space-y-12">
+  <!-- Header -->
+  <div>
+    <h1 class="text-foreground mb-4 text-4xl font-bold">Utilities Reference</h1>
+    <p class="text-muted-foreground text-lg">
+      Helper functions exported by Angular AI Kit for common operations.
+    </p>
+  </div>
+
+  <!-- Overview -->
+  <app-doc-section title="Overview" description="Available utility functions">
+    <div class="text-foreground grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      <div class="border-border bg-card rounded-lg border p-4">
+        <p class="mb-1 font-mono text-sm font-semibold">cn()</p>
+        <p class="text-muted-foreground text-sm">Class name merging utility</p>
+      </div>
+      <div class="border-border bg-card rounded-lg border p-4">
+        <p class="mb-1 font-mono text-sm font-semibold">formatDate()</p>
+        <p class="text-muted-foreground text-sm">Date formatting helper</p>
+      </div>
+      <div class="border-border bg-card rounded-lg border p-4">
+        <p class="mb-1 font-mono text-sm font-semibold">truncateText()</p>
+        <p class="text-muted-foreground text-sm">Text truncation helper</p>
+      </div>
+      <div class="border-border bg-card rounded-lg border p-4">
+        <p class="mb-1 font-mono text-sm font-semibold">generateId()</p>
+        <p class="text-muted-foreground text-sm">ID generation helper</p>
+      </div>
+      <div class="border-border bg-card rounded-lg border p-4">
+        <p class="mb-1 font-mono text-sm font-semibold">debounce()</p>
+        <p class="text-muted-foreground text-sm">Function debouncing</p>
+      </div>
+      <div class="border-border bg-card rounded-lg border p-4">
+        <p class="mb-1 font-mono text-sm font-semibold">copyToClipboard()</p>
+        <p class="text-muted-foreground text-sm">Clipboard helper</p>
+      </div>
+    </div>
+  </app-doc-section>
+
+  <!-- cn() -->
+  <app-doc-section
+    title="cn() - Class Name Utility"
+    description="Combines clsx and tailwind-merge for dynamic class names"
+  >
+    <app-doc-code-block [code]="cnCode" language="typescript" />
+    <div class="border-border bg-muted/50 mt-4 rounded-lg border p-4">
+      <p class="text-foreground mb-2 text-sm font-semibold">Why use cn()?</p>
+      <ul class="text-muted-foreground list-disc space-y-1 pl-5 text-sm">
+        <li>Handles conditional classes cleanly</li>
+        <li>Merges conflicting Tailwind classes correctly</li>
+        <li>Supports arrays, objects, and string arguments</li>
+        <li>Type-safe with excellent DX</li>
+      </ul>
+    </div>
+  </app-doc-section>
+
+  <!-- formatDate() -->
+  <app-doc-section
+    title="formatDate() - Date Formatting"
+    description="Format dates with locale support and relative time"
+  >
+    <app-doc-code-block [code]="formatDateCode" language="typescript" />
+  </app-doc-section>
+
+  <!-- formatTokenCount() -->
+  <app-doc-section
+    title="formatTokenCount() - Token Count Formatting"
+    description="Format token numbers for display"
+  >
+    <app-doc-code-block [code]="formatTokensCode" language="typescript" />
+  </app-doc-section>
+
+  <!-- truncateText() -->
+  <app-doc-section
+    title="truncateText() - Text Truncation"
+    description="Truncate text with various options"
+  >
+    <app-doc-code-block [code]="truncateTextCode" language="typescript" />
+  </app-doc-section>
+
+  <!-- generateId() -->
+  <app-doc-section
+    title="generateId() - ID Generation"
+    description="Generate unique identifiers"
+  >
+    <app-doc-code-block [code]="generateIdCode" language="typescript" />
+  </app-doc-section>
+
+  <!-- debounce() -->
+  <app-doc-section
+    title="debounce() - Function Debouncing"
+    description="Delay function execution until after wait time"
+  >
+    <app-doc-code-block [code]="debounceCode" language="typescript" />
+  </app-doc-section>
+
+  <!-- throttle() -->
+  <app-doc-section
+    title="throttle() - Function Throttling"
+    description="Limit function execution rate"
+  >
+    <app-doc-code-block [code]="throttleCode" language="typescript" />
+  </app-doc-section>
+
+  <!-- copyToClipboard() -->
+  <app-doc-section
+    title="copyToClipboard() - Clipboard"
+    description="Copy text to clipboard"
+  >
+    <app-doc-code-block [code]="copyToClipboardCode" language="typescript" />
+  </app-doc-section>
+
+  <!-- parseMarkdownCodeBlocks() -->
+  <app-doc-section
+    title="parseMarkdownCodeBlocks() - Parse Code Blocks"
+    description="Extract code blocks from markdown"
+  >
+    <app-doc-code-block [code]="parseMarkdownCode" language="typescript" />
+  </app-doc-section>
+
+  <!-- escapeHtml() -->
+  <app-doc-section
+    title="escapeHtml() - HTML Escaping"
+    description="Safely escape HTML entities"
+  >
+    <app-doc-code-block [code]="escapeHtmlCode" language="typescript" />
+  </app-doc-section>
+
+  <!-- isValidUrl() -->
+  <app-doc-section
+    title="isValidUrl() - URL Validation"
+    description="Validate and parse URLs"
+  >
+    <app-doc-code-block [code]="isValidUrlCode" language="typescript" />
+  </app-doc-section>
+
+  <!-- Import Guide -->
+  <app-doc-section
+    title="Importing Utilities"
+    description="How to import utilities in your project"
+  >
+    <div class="border-border bg-card rounded-lg border p-4">
+      <pre class="text-foreground text-sm">
+import {{ '{' }}
+  cn,
+  formatDate,
+  truncateText,
+  generateId,
+  debounce,
+  copyToClipboard,
+{{ '}' }} from '&#64;angular-ai-kit/utils';</pre
+      >
+    </div>
+  </app-doc-section>
+
+  <!-- Next Steps -->
+  <div class="border-border bg-muted/50 rounded-lg border p-6">
+    <h3 class="text-foreground mb-2 text-lg font-semibold">Related</h3>
+    <div class="flex flex-wrap gap-3">
+      <a
+        routerLink="/docs/api/types"
+        class="border-border bg-card text-foreground hover:border-border-hover inline-flex items-center gap-2 rounded-lg border px-4 py-2 text-sm font-semibold transition-all hover:shadow-sm"
+      >
+        Types Reference
+      </a>
+      <a
+        routerLink="/docs/api/services"
+        class="border-border bg-card text-foreground hover:border-border-hover inline-flex items-center gap-2 rounded-lg border px-4 py-2 text-sm font-semibold transition-all hover:shadow-sm"
+      >
+        Services Reference
+      </a>
+    </div>
+  </div>
+</div>

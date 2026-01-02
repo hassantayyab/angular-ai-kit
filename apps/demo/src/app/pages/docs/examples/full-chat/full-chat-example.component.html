@@ -1,0 +1,233 @@
+<div class="full-chat-example-container space-y-12">
+  <!-- Header -->
+  <div>
+    <h1 class="text-foreground mb-4 text-4xl font-bold">Full Chat Example</h1>
+    <p class="text-muted-foreground text-lg">
+      A complete chat implementation with all Angular AI Kit features.
+    </p>
+  </div>
+
+  <!-- Live Demo -->
+  <app-doc-section
+    title="Live Demo"
+    description="Try the interactive chat demo"
+  >
+    <div
+      class="border-border bg-background overflow-hidden rounded-lg border shadow-sm"
+    >
+      <!-- Demo Header -->
+      <div
+        class="border-border bg-muted/50 flex items-center justify-between border-b px-4 py-2"
+      >
+        <span class="text-foreground text-sm font-medium">Chat Demo</span>
+        <button
+          class="text-muted-foreground hover:bg-accent hover:text-foreground rounded px-2 py-1 text-xs"
+          (click)="clearChat()"
+        >
+          Clear
+        </button>
+      </div>
+
+      <!-- Chat Container (matching real app layout) -->
+      <div class="bg-background flex h-[600px] flex-col">
+        <!-- Scrollable Messages Area -->
+        <div class="flex-1 overflow-x-hidden overflow-y-auto">
+          @if (isEmpty()) {
+            <!-- Empty State - Centered (matching real app) -->
+            <div class="flex min-h-full items-center justify-center p-4">
+              <div class="mx-auto w-full max-w-2xl">
+                <div class="flex flex-col items-center gap-6 text-center">
+                  <!-- Logo Icon -->
+                  <div
+                    class="bg-primary/10 flex h-16 w-16 items-center justify-center rounded-full"
+                  >
+                    <svg
+                      class="text-primary h-8 w-8"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="1.5"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456z"
+                      />
+                    </svg>
+                  </div>
+
+                  <!-- Welcome Text -->
+                  <div class="space-y-2">
+                    <h2 class="text-foreground text-2xl font-semibold">
+                      How can I help you today?
+                    </h2>
+                    <p class="text-muted-foreground">
+                      Start a conversation or choose a suggestion below
+                    </p>
+                  </div>
+
+                  <!-- Prompt Suggestions -->
+                  <ai-prompt-suggestions
+                    [suggestions]="suggestions"
+                    (select)="handleSuggestion($event.prompt)"
+                  />
+
+                  <!-- Disclaimer -->
+                  <p class="text-muted-foreground text-xs">
+                    This is a demo with simulated AI responses. No real AI is
+                    connected.
+                  </p>
+                </div>
+              </div>
+            </div>
+          } @else {
+            <!-- Messages (with max-width matching real app) -->
+            <div class="mx-auto w-full max-w-3xl p-4">
+              <div class="space-y-4">
+                @for (message of messages(); track message.id) {
+                  @if (message.role === 'user') {
+                    <ai-user-message
+                      [message]="message"
+                      (copy)="handleCopy($event)"
+                    />
+                  } @else {
+                    <div class="group">
+                      <ai-response
+                        [content]="message.content"
+                        (copy)="handleCopy($event)"
+                        (regenerate)="handleRegenerate()"
+                      />
+                      <div
+                        class="mt-2 flex items-center gap-2 opacity-0 transition-opacity group-hover:opacity-100"
+                      >
+                        <ai-feedback-buttons
+                          (thumbsUp)="handleFeedback('up')"
+                          (thumbsDown)="handleFeedback('down')"
+                        />
+                      </div>
+                    </div>
+                  }
+                }
+
+                <!-- Streaming Response -->
+                @if (streamingContent()) {
+                  <ai-response
+                    [content]="streamingContent()"
+                    [isStreaming]="true"
+                  />
+                }
+
+                <!-- Loading Indicator -->
+                @if (isLoading() && !streamingContent()) {
+                  <app-typing-indicator />
+                }
+              </div>
+            </div>
+          }
+        </div>
+
+        <!-- Fixed Input Area (matching real app) -->
+        <div class="border-border bg-background shrink-0 border-t">
+          <div class="mx-auto w-full max-w-3xl">
+            <app-chat-input
+              placeholder="Message Angular AI Kit..."
+              [disabled]="isLoading() || !!streamingContent()"
+              (messageSend)="handleSubmit($event)"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </app-doc-section>
+
+  <!-- Features -->
+  <app-doc-section
+    title="Features Demonstrated"
+    description="What this example includes"
+  >
+    <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      <div class="border-border bg-card rounded-lg border p-4">
+        <p class="text-foreground mb-2 text-sm font-semibold">
+          Prompt Suggestions
+        </p>
+        <p class="text-muted-foreground text-sm">
+          Empty state with clickable starter prompts
+        </p>
+      </div>
+      <div class="border-border bg-card rounded-lg border p-4">
+        <p class="text-foreground mb-2 text-sm font-semibold">
+          Streaming Responses
+        </p>
+        <p class="text-muted-foreground text-sm">
+          Character-by-character text streaming
+        </p>
+      </div>
+      <div class="border-border bg-card rounded-lg border p-4">
+        <p class="text-foreground mb-2 text-sm font-semibold">
+          Markdown Rendering
+        </p>
+        <p class="text-muted-foreground text-sm">
+          Full markdown with code highlighting
+        </p>
+      </div>
+      <div class="border-border bg-card rounded-lg border p-4">
+        <p class="text-foreground mb-2 text-sm font-semibold">
+          Message Actions
+        </p>
+        <p class="text-muted-foreground text-sm">
+          Copy, regenerate, and feedback buttons
+        </p>
+      </div>
+      <div class="border-border bg-card rounded-lg border p-4">
+        <p class="text-foreground mb-2 text-sm font-semibold">
+          Typing Indicator
+        </p>
+        <p class="text-muted-foreground text-sm">
+          Visual feedback while AI is thinking
+        </p>
+      </div>
+      <div class="border-border bg-card rounded-lg border p-4">
+        <p class="text-foreground mb-2 text-sm font-semibold">Input Handling</p>
+        <p class="text-muted-foreground text-sm">
+          Disabled state during response generation
+        </p>
+      </div>
+    </div>
+  </app-doc-section>
+
+  <!-- Code -->
+  <app-doc-section
+    title="Implementation"
+    description="How to build this chat interface"
+  >
+    <app-doc-code-block [code]="codeExample" language="typescript" />
+  </app-doc-section>
+
+  <!-- Try Live Demo -->
+  <div class="border-border bg-muted/50 rounded-lg border p-6">
+    <h3 class="text-foreground mb-2 text-lg font-semibold">Try It Live</h3>
+    <p class="text-muted-foreground mb-4 text-sm">
+      Experience the full chat interface with all features working together.
+    </p>
+    <div class="flex flex-wrap gap-3">
+      <a
+        routerLink="/"
+        class="bg-primary text-primary-foreground hover:bg-primary/90 inline-flex items-center gap-2 rounded-lg px-6 py-3 text-sm font-semibold transition-all hover:shadow-md"
+      >
+        Launch Full Chat App
+      </a>
+      <a
+        routerLink="/docs/guides/building-chat-app"
+        class="border-border bg-card text-foreground hover:border-border-hover inline-flex items-center gap-2 rounded-lg border px-4 py-2 text-sm font-semibold transition-all hover:shadow-sm"
+      >
+        Building a Chat App Guide
+      </a>
+      <a
+        routerLink="/docs/guides/api-integration"
+        class="border-border bg-card text-foreground hover:border-border-hover inline-flex items-center gap-2 rounded-lg border px-4 py-2 text-sm font-semibold transition-all hover:shadow-sm"
+      >
+        API Integration Guide
+      </a>
+    </div>
+  </div>
+</div>

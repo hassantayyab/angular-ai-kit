@@ -66,12 +66,20 @@ const SIDEBAR_ICONS = {
 };
 
 /**
- * Component item for docs sidebar
+ * Navigation link item for docs sidebar
  */
-interface ComponentItem {
+interface NavItem {
   name: string;
   label: string;
   route: string;
+}
+
+/**
+ * Navigation category with links
+ */
+interface NavCategory {
+  label: string;
+  items: NavItem[];
 }
 
 /**
@@ -159,62 +167,130 @@ export class SidebarComponent {
   // Check if we're on the docs page
   isDocsPage = computed(() => this.currentUrl()?.startsWith('/docs') ?? false);
 
-  // AI Components list for docs sidebar
-  readonly components: ComponentItem[] = [
+  // Documentation navigation categories
+  readonly docsNavigation: NavCategory[] = [
     {
-      name: 'AiResponse',
-      label: 'AI Response',
-      route: '/docs/components/ai-response',
+      label: 'Getting Started',
+      items: [
+        { name: 'introduction', label: 'Introduction', route: '/docs' },
+        {
+          name: 'installation',
+          label: 'Installation',
+          route: '/docs/guides/getting-started',
+        },
+      ],
     },
     {
-      name: 'UserMessage',
-      label: 'User Message',
-      route: '/docs/components/user-message',
+      label: 'Components',
+      items: [
+        { name: 'overview', label: 'Overview', route: '/docs/components' },
+        {
+          name: 'AiResponse',
+          label: 'AI Response',
+          route: '/docs/components/ai-response',
+        },
+        {
+          name: 'UserMessage',
+          label: 'User Message',
+          route: '/docs/components/user-message',
+        },
+        {
+          name: 'ChatInput',
+          label: 'Chat Input',
+          route: '/docs/components/chat-input',
+        },
+        {
+          name: 'StreamingText',
+          label: 'Streaming Text',
+          route: '/docs/components/streaming-text',
+        },
+        {
+          name: 'TypingIndicator',
+          label: 'Typing Indicator',
+          route: '/docs/components/typing-indicator',
+        },
+        {
+          name: 'CodeBlock',
+          label: 'Code Block',
+          route: '/docs/components/code-block',
+        },
+        {
+          name: 'MarkdownRenderer',
+          label: 'Markdown Renderer',
+          route: '/docs/components/markdown-renderer',
+        },
+        {
+          name: 'FeedbackButtons',
+          label: 'Feedback Buttons',
+          route: '/docs/components/feedback-buttons',
+        },
+        {
+          name: 'ResponseActions',
+          label: 'Response Actions',
+          route: '/docs/components/response-actions',
+        },
+        {
+          name: 'MessageActions',
+          label: 'Message Actions',
+          route: '/docs/components/message-actions',
+        },
+        {
+          name: 'PromptSuggestions',
+          label: 'Prompt Suggestions',
+          route: '/docs/components/prompt-suggestions',
+        },
+      ],
     },
     {
-      name: 'ChatInput',
-      label: 'Chat Input',
-      route: '/docs/components/chat-input',
+      label: 'Guides',
+      items: [
+        { name: 'theming', label: 'Theming', route: '/docs/guides/theming' },
+        {
+          name: 'building-chat-app',
+          label: 'Building a Chat App',
+          route: '/docs/guides/building-chat-app',
+        },
+        {
+          name: 'api-integration',
+          label: 'API Integration',
+          route: '/docs/guides/api-integration',
+        },
+        {
+          name: 'customization',
+          label: 'Customization',
+          route: '/docs/guides/customization',
+        },
+      ],
     },
     {
-      name: 'StreamingText',
-      label: 'Streaming Text',
-      route: '/docs/components/streaming-text',
+      label: 'Examples',
+      items: [
+        {
+          name: 'full-chat',
+          label: 'Full Chat',
+          route: '/docs/examples/full-chat',
+        },
+      ],
     },
     {
-      name: 'TypingIndicator',
-      label: 'Typing Indicator',
-      route: '/docs/components/typing-indicator',
+      label: 'API Reference',
+      items: [
+        { name: 'types', label: 'Types', route: '/docs/api/types' },
+        { name: 'tokens', label: 'Tokens', route: '/docs/api/tokens' },
+        { name: 'utilities', label: 'Utilities', route: '/docs/api/utilities' },
+        { name: 'services', label: 'Services', route: '/docs/api/services' },
+      ],
     },
     {
-      name: 'CodeBlock',
-      label: 'Code Block',
-      route: '/docs/components/code-block',
-    },
-    {
-      name: 'MarkdownRenderer',
-      label: 'Markdown Renderer',
-      route: '/docs/components/markdown-renderer',
-    },
-    {
-      name: 'FeedbackButtons',
-      label: 'Feedback Buttons',
-      route: '/docs/components/feedback-buttons',
-    },
-    {
-      name: 'ResponseActions',
-      label: 'Response Actions',
-      route: '/docs/components/response-actions',
-    },
-    {
-      name: 'MessageActions',
-      label: 'Message Actions',
-      route: '/docs/components/message-actions',
-    },
-    {
-      name: 'PromptSuggestions',
-      label: 'Prompt Suggestions',
-      route: '/docs/components/prompt-suggestions',
+      label: 'Help',
+      items: [
+        { name: 'faq', label: 'FAQ', route: '/docs/guides/faq' },
+        {
+          name: 'troubleshooting',
+          label: 'Troubleshooting',
+          route: '/docs/guides/troubleshooting',
+        },
+      ],
     },
   ];
 

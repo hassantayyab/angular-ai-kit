@@ -15,8 +15,8 @@ Built with **Tailwind CSS v4**, TypeScript strict mode, and full SSR/hydration s
 
 - 🚀 **Angular v21** - Latest features with signals, control flow, and zoneless support
 - 🎨 **Tailwind CSS v4** - Modern utility-first styling with CSS-only (no SCSS)
-- 📦 **Nx Monorepo** - Scalable workspace with optimized builds
-- ♿ **Accessible** - WCAG AA compliant components
+- 🧩 **Spartan UI** - Built on [Spartan UI](https://www.spartan.ng/) primitives (Spartan handles Angular CDK integration)
+- ♿ **Accessible** - WCAG AA compliant with keyboard navigation and screen reader support
 - 🌙 **Dark Mode** - Built-in theme support with CSS custom properties
 - 🔧 **TypeScript** - Fully typed with strict mode enabled
 - 🌐 **SSR Compatible** - Server-side rendering and hydration ready

@@ -81,34 +81,61 @@
 
     <div
       hlmSidebarSeparator
-      class="mx-auto group-data-[collapsible=icon]:hidden"
+      class="mx-auto mb-0 group-data-[collapsible=icon]:hidden"
     ></div>
 
     @if (isDocsPage()) {
-      <!-- Components Section (for Docs page) - Hidden when collapsed -->
-      <div hlmSidebarGroup class="flex-1 group-data-[collapsible=icon]:hidden">
-        <div hlmSidebarGroupLabel>Components</div>
+      <!-- Documentation Navigation (for Docs page) - Hidden when collapsed -->
+      <div
+        hlmSidebarGroup
+        class="mt-0 flex-1 overflow-y-auto group-data-[collapsible=icon]:hidden"
+      >
         <div hlmSidebarGroupContent>
-          <ul hlmSidebarMenu>
-            @for (component of components; track component.name) {
-              <li hlmSidebarMenuItem>
-                <a
-                  hlmSidebarMenuButton
-                  [routerLink]="component.route"
-                  routerLinkActive="bg-accent"
-                  [title]="component.label"
-                  (click)="handleComponentSelect(component.route)"
-                >
-                  {{ component.label }}
-                </a>
-              </li>
-            }
-          </ul>
+          @for (category of docsNavigation; track category.label) {
+            <hlm-collapsible [expanded]="true" class="group/collapsible">
+              <ul hlmSidebarMenu>
+                <li hlmSidebarMenuItem>
+                  <button
+                    hlmCollapsibleTrigger
+                    hlmSidebarMenuButton
+                    class="w-full"
+                  >
+                    <span class="font-medium">{{ category.label }}</span>
+                    <ng-icon
+                      hlm
+                      name="lucideChevronRight"
+                      size="sm"
+                      class="ml-auto transition-transform group-data-[state=open]/collapsible:rotate-90"
+                    />
+                  </button>
+
+                  <hlm-collapsible-content>
+                    <ul hlmSidebarMenuSub>
+                      @for (item of category.items; track item.name) {
+                        <li hlmSidebarMenuSubItem>
+                          <a
+                            hlmSidebarMenuSubButton
+                            [routerLink]="item.route"
+                            routerLinkActive="bg-accent"
+                            [routerLinkActiveOptions]="{ exact: true }"
+                            [title]="item.label"
+                            (click)="handleComponentSelect(item.route)"
+                          >
+                            {{ item.label }}
+                          </a>
+                        </li>
+                      }
+                    </ul>
+                  </hlm-collapsible-content>
+                </li>
+              </ul>
+            </hlm-collapsible>
+          }
         </div>
       </div>
     } @else {
       <!-- Chat Section (for Chat page) -->
-      <div hlmSidebarGroup class="flex-1">
+      <div hlmSidebarGroup class="mt-0 flex-1">
         <div hlmSidebarGroupLabel>Chat</div>
         <div hlmSidebarGroupContent>
           <ul hlmSidebarMenu>

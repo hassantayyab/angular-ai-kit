@@ -1,0 +1,258 @@
+<div class="building-chat-app-container space-y-12">
+  <!-- Header -->
+  <div>
+    <h1 class="text-foreground mb-4 text-4xl font-bold">Building a Chat App</h1>
+    <p class="text-muted-foreground text-lg">
+      Step-by-step guide to building a complete AI chat application with Angular
+      AI Kit.
+    </p>
+  </div>
+
+  <!-- Overview -->
+  <app-doc-section
+    title="What We'll Build"
+    description="Features of the complete chat application"
+  >
+    <div class="text-foreground space-y-4">
+      <p>By the end of this guide, you'll have a chat app with:</p>
+      <ul class="list-disc space-y-2 pl-6">
+        <li>
+          <strong>Message display</strong> - User and AI messages with proper
+          styling
+        </li>
+        <li>
+          <strong>Streaming responses</strong> - Real-time text streaming with
+          typing indicator
+        </li>
+        <li>
+          <strong>Message actions</strong> - Copy, edit, regenerate, and
+          feedback
+        </li>
+        <li>
+          <strong>Conversation management</strong> - Multiple conversations with
+          sidebar
+        </li>
+        <li>
+          <strong>Prompt suggestions</strong> - Empty state with starter prompts
+        </li>
+      </ul>
+    </div>
+  </app-doc-section>
+
+  <!-- Step 1 -->
+  <app-doc-section
+    title="Step 1: Basic Chat Container"
+    description="Create the foundation with message display and input"
+  >
+    <div class="space-y-4">
+      <p class="text-foreground">
+        Start by creating a basic chat component that displays messages and
+        accepts user input:
+      </p>
+      <app-doc-code-block [code]="step1Code" language="typescript" />
+      <div class="border-border bg-muted/50 rounded-lg border p-4">
+        <p class="text-foreground mb-2 text-sm font-semibold">Key Points</p>
+        <ul class="text-muted-foreground list-disc space-y-1 pl-5 text-sm">
+          <li>
+            Use <code class="text-xs">signal()</code> for reactive state
+            management
+          </li>
+          <li>Track messages by ID for efficient rendering</li>
+          <li>Show typing indicator while loading</li>
+          <li>Disable input during AI response</li>
+        </ul>
+      </div>
+    </div>
+  </app-doc-section>
+
+  <!-- Step 2 -->
+  <app-doc-section
+    title="Step 2: Add Streaming Support"
+    description="Display AI responses as they stream in"
+  >
+    <div class="space-y-4">
+      <p class="text-foreground">
+        Add a service to handle streaming responses and update the UI in
+        real-time:
+      </p>
+      <app-doc-code-block [code]="step2Code" language="typescript" />
+      <div class="border-border bg-muted/50 rounded-lg border p-4">
+        <p class="text-foreground mb-2 text-sm font-semibold">Streaming Tips</p>
+        <ul class="text-muted-foreground list-disc space-y-1 pl-5 text-sm">
+          <li>Use a separate signal for streaming content</li>
+          <li>Show the response as it arrives, character by character</li>
+          <li>Clear streaming content after completing</li>
+          <li>
+            The <code class="text-xs">isStreaming</code> prop shows a cursor
+            animation
+          </li>
+        </ul>
+      </div>
+    </div>
+  </app-doc-section>
+
+  <!-- Step 3 -->
+  <app-doc-section
+    title="Step 3: Add Message Actions"
+    description="Enable copy, edit, regenerate, and feedback"
+  >
+    <div class="space-y-4">
+      <p class="text-foreground">
+        Add interactive actions to messages for a better user experience:
+      </p>
+      <app-doc-code-block [code]="step3Code" language="typescript" />
+      <div class="border-border bg-muted/50 rounded-lg border p-4">
+        <p class="text-foreground mb-2 text-sm font-semibold">
+          Action Handlers
+        </p>
+        <ul class="text-muted-foreground list-disc space-y-1 pl-5 text-sm">
+          <li>
+            <strong>Copy:</strong> Use
+            <code class="text-xs">navigator.clipboard.writeText()</code>
+          </li>
+          <li>
+            <strong>Edit:</strong> Update message and optionally regenerate
+          </li>
+          <li>
+            <strong>Regenerate:</strong> Find previous user message and resend
+          </li>
+          <li><strong>Feedback:</strong> Track thumbs up/down for analytics</li>
+        </ul>
+      </div>
+    </div>
+  </app-doc-section>
+
+  <!-- Step 4 -->
+  <app-doc-section
+    title="Step 4: Conversation Management"
+    description="Support multiple conversations with a sidebar"
+  >
+    <div class="space-y-4">
+      <p class="text-foreground">
+        Create a service to manage multiple conversations:
+      </p>
+      <app-doc-code-block [code]="step4Code" language="typescript" />
+      <div class="border-border bg-muted/50 rounded-lg border p-4">
+        <p class="text-foreground mb-2 text-sm font-semibold">
+          Conversation Features
+        </p>
+        <ul class="text-muted-foreground list-disc space-y-1 pl-5 text-sm">
+          <li>Create, select, and delete conversations</li>
+          <li>Auto-generate title from first message</li>
+          <li>Track active conversation with computed signal</li>
+          <li>Persist to localStorage (optional enhancement)</li>
+        </ul>
+      </div>
+    </div>
+  </app-doc-section>
+
+  <!-- Step 5 -->
+  <app-doc-section
+    title="Step 5: Final Layout"
+    description="Put it all together with sidebar and main area"
+  >
+    <div class="space-y-4">
+      <p class="text-foreground">
+        Create the final layout with conversation sidebar and prompt
+        suggestions:
+      </p>
+      <app-doc-code-block [code]="step5Code" language="typescript" />
+    </div>
+  </app-doc-section>
+
+  <!-- Styling -->
+  <app-doc-section
+    title="Styling Tips"
+    description="CSS patterns for chat interfaces"
+  >
+    <div class="space-y-4">
+      <p class="text-foreground">Key CSS patterns for a polished chat UI:</p>
+      <app-doc-code-block [code]="stylingCode" language="css" />
+      <div class="grid gap-4 sm:grid-cols-2">
+        <div class="border-border bg-card rounded-lg border p-4">
+          <p class="text-foreground mb-2 text-sm font-semibold">Auto-Scroll</p>
+          <p class="text-muted-foreground text-sm">
+            Scroll to bottom when new messages arrive using
+            <code class="text-xs">scrollTop = scrollHeight</code>
+          </p>
+        </div>
+        <div class="border-border bg-card rounded-lg border p-4">
+          <p class="text-foreground mb-2 text-sm font-semibold">Fixed Input</p>
+          <p class="text-muted-foreground text-sm">
+            Keep the input fixed at the bottom using flex layout with
+            <code class="text-xs">flex-shrink: 0</code>
+          </p>
+        </div>
+      </div>
+    </div>
+  </app-doc-section>
+
+  <!-- Best Practices -->
+  <app-doc-section
+    title="Best Practices"
+    description="Tips for production-ready chat apps"
+  >
+    <div class="grid gap-4 sm:grid-cols-2">
+      <div class="border-border bg-card rounded-lg border p-4">
+        <p class="text-foreground mb-2 text-sm font-semibold">Error Handling</p>
+        <ul class="text-muted-foreground list-disc space-y-1 pl-5 text-sm">
+          <li>Show error states gracefully</li>
+          <li>Allow retry on failed requests</li>
+          <li>Don't lose user input on errors</li>
+        </ul>
+      </div>
+      <div class="border-border bg-card rounded-lg border p-4">
+        <p class="text-foreground mb-2 text-sm font-semibold">Performance</p>
+        <ul class="text-muted-foreground list-disc space-y-1 pl-5 text-sm">
+          <li>Use <code class="text-xs">track</code> in &#64;for loops</li>
+          <li>Virtual scroll for long conversations</li>
+          <li>Lazy load conversation history</li>
+        </ul>
+      </div>
+      <div class="border-border bg-card rounded-lg border p-4">
+        <p class="text-foreground mb-2 text-sm font-semibold">Accessibility</p>
+        <ul class="text-muted-foreground list-disc space-y-1 pl-5 text-sm">
+          <li>Use <code class="text-xs">aria-live</code> for new messages</li>
+          <li>Keyboard navigation support</li>
+          <li>Screen reader announcements</li>
+        </ul>
+      </div>
+      <div class="border-border bg-card rounded-lg border p-4">
+        <p class="text-foreground mb-2 text-sm font-semibold">Persistence</p>
+        <ul class="text-muted-foreground list-disc space-y-1 pl-5 text-sm">
+          <li>Save to localStorage or IndexedDB</li>
+          <li>Sync with backend API</li>
+          <li>Handle offline gracefully</li>
+        </ul>
+      </div>
+    </div>
+  </app-doc-section>
+
+  <!-- Next Steps -->
+  <div class="border-border bg-muted/50 rounded-lg border p-6">
+    <h3 class="text-foreground mb-2 text-lg font-semibold">Next Steps</h3>
+    <p class="text-muted-foreground mb-4 text-sm">
+      Now that you have a working chat app, explore more:
+    </p>
+    <div class="flex flex-wrap gap-3">
+      <a
+        routerLink="/docs/guides/api-integration"
+        class="border-border bg-card text-foreground hover:border-border-hover inline-flex items-center gap-2 rounded-lg border px-4 py-2 text-sm font-semibold transition-all hover:shadow-sm"
+      >
+        API Integration
+      </a>
+      <a
+        routerLink="/docs/guides/customization"
+        class="border-border bg-card text-foreground hover:border-border-hover inline-flex items-center gap-2 rounded-lg border px-4 py-2 text-sm font-semibold transition-all hover:shadow-sm"
+      >
+        Customization
+      </a>
+      <a
+        routerLink="/docs/examples/full-chat"
+        class="border-border bg-card text-foreground hover:border-border-hover inline-flex items-center gap-2 rounded-lg border px-4 py-2 text-sm font-semibold transition-all hover:shadow-sm"
+      >
+        Full Chat Example
+      </a>
+    </div>
+  </div>
+</div>

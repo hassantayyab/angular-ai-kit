@@ -1,0 +1,172 @@
+<!-- Hero Section -->
+<div class="my-12 text-center">
+  <h1
+    class="text-foreground mb-4 text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl"
+  >
+    Angular AI Kit Documentation
+  </h1>
+  <p class="text-muted-foreground mx-auto max-w-3xl text-lg sm:text-xl">
+    A modern, signal-based component library for building AI chat interfaces in
+    Angular v21. Built with Tailwind CSS v4, TypeScript strict mode, and full
+    SSR/hydration support.
+  </p>
+</div>
+
+<div
+  class="docs-home-container mx-auto max-w-7xl space-y-8 px-4 py-12 sm:px-6 lg:px-8"
+>
+  <!-- Quick Start Section -->
+  <div>
+    <h1 class="text-3xl font-bold">Quick Start</h1>
+    <p class="text-muted-foreground mt-2">
+      Get started with Angular AI Kit in minutes
+    </p>
+  </div>
+
+  <!-- Installation Section -->
+  <app-doc-section title="Installation">
+    <div class="space-y-6">
+      <!-- Installation -->
+      <app-doc-code-block [code]="installCode" language="bash" />
+
+      <!-- First Component -->
+      <div>
+        <h3 class="text-foreground mb-3 text-lg font-semibold">
+          Your First Component
+        </h3>
+        <app-doc-code-block [code]="quickStartCode" language="typescript" />
+      </div>
+
+      <!-- CLI Option -->
+      <div>
+        <h3 class="text-foreground mb-3 text-lg font-semibold">
+          Or Use the CLI (Shadcn-style)
+        </h3>
+        <app-doc-code-block [code]="cliCode" language="bash" />
+      </div>
+    </div>
+  </app-doc-section>
+
+  <!-- Main Navigation Cards -->
+  <app-doc-section
+    title="Explore Documentation"
+    description="Find what you need"
+  >
+    <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+      @for (card of mainCards; track card.title) {
+        <a
+          [routerLink]="card.link"
+          class="group border-border bg-card hover:border-border-hover block rounded-lg border p-6 shadow-sm transition-all hover:shadow-md"
+        >
+          <div
+            class="bg-primary/10 mb-4 flex h-12 w-12 items-center justify-center rounded-lg"
+          >
+            <svg
+              class="text-primary h-6 w-6"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              [attr.aria-hidden]="true"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                [attr.d]="card.icon"
+              />
+            </svg>
+          </div>
+          <h3
+            class="text-foreground group-hover:text-primary mb-2 text-lg font-semibold"
+          >
+            {{ card.title }}
+          </h3>
+          <p class="text-muted-foreground text-sm">
+            {{ card.description }}
+          </p>
+        </a>
+      }
+    </div>
+  </app-doc-section>
+
+  <!-- Features Grid -->
+  <app-doc-section
+    title="Features"
+    description="Everything you need for AI chat interfaces"
+  >
+    <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      @for (feature of features; track feature.title) {
+        <div class="border-border bg-card rounded-lg border p-6">
+          <h3 class="text-foreground mb-2 text-lg font-semibold">
+            {{ feature.title }}
+          </h3>
+          <p class="text-muted-foreground text-sm">
+            {{ feature.description }}
+          </p>
+        </div>
+      }
+    </div>
+  </app-doc-section>
+
+  <!-- Quick Links -->
+  <app-doc-section
+    title="Popular Topics"
+    description="Frequently accessed pages"
+  >
+    <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      @for (link of quickLinks; track link.title) {
+        <a
+          [routerLink]="link.link"
+          class="group border-border bg-card hover:border-border-hover block rounded-lg border p-4 transition-all hover:shadow-sm"
+        >
+          <h4
+            class="text-foreground group-hover:text-primary mb-1 text-sm font-semibold"
+          >
+            {{ link.title }}
+          </h4>
+          <p class="text-muted-foreground text-xs">
+            {{ link.description }}
+          </p>
+        </a>
+      }
+    </div>
+  </app-doc-section>
+
+  <!-- Footer CTA -->
+  <div class="border-border bg-muted/50 rounded-lg border p-8 text-center">
+    <h2 class="text-foreground mb-4 text-2xl font-bold">
+      Ready to get started?
+    </h2>
+    <p class="text-muted-foreground mx-auto mb-6 max-w-2xl">
+      Explore our components, follow the guides, and build amazing AI chat
+      experiences.
+    </p>
+    <div class="flex flex-wrap justify-center gap-4">
+      <a
+        routerLink="/docs/guides/getting-started"
+        class="bg-primary text-primary-foreground hover:bg-primary/90 inline-flex items-center gap-2 rounded-lg px-6 py-3 text-sm font-semibold transition-colors"
+      >
+        Get Started
+        <svg
+          class="h-4 w-4"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M13 7l5 5m0 0l-5 5m5-5H6"
+          />
+        </svg>
+      </a>
+      <a
+        routerLink="/docs/components"
+        class="border-border bg-card text-foreground hover:border-border-hover inline-flex items-center gap-2 rounded-lg border px-6 py-3 text-sm font-semibold transition-all hover:shadow-sm"
+      >
+        Browse Components
+      </a>
+    </div>
+  </div>
+</div>

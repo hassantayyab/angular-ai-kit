@@ -43,15 +43,15 @@
   :root {
     /* Core Colors */
     --background: theme('colors.white');
-    --foreground: theme('colors.zinc.950');
+    --foreground: theme('colors.zinc.800');
 
     /* Card */
     --card: theme('colors.zinc.50');
-    --card-foreground: theme('colors.zinc.950');
+    --card-foreground: theme('colors.zinc.900');
 
     /* Popover */
     --popover: theme('colors.white');
-    --popover-foreground: theme('colors.zinc.950');
+    --popover-foreground: theme('colors.zinc.800');
 
     /* Muted */
     --muted: theme('colors.zinc.100');
@@ -85,12 +85,12 @@
     --ring: theme('colors.zinc.400');
 
     /* Primary */
-    --primary: theme('colors.zinc.900');
+    --primary: theme('colors.zinc.800');
     --primary-foreground: theme('colors.zinc.50');
 
     /* Secondary */
     --secondary: theme('colors.zinc.100');
-    --secondary-foreground: theme('colors.zinc.900');
+    --secondary-foreground: theme('colors.zinc.800');
 
     /* Destructive */
     --destructive: theme('colors.red.500');
@@ -104,15 +104,15 @@
   .dark {
     /* Core Colors */
     --background: theme('colors.zinc.950');
-    --foreground: theme('colors.zinc.50');
+    --foreground: theme('colors.zinc.200');
 
     /* Card */
     --card: theme('colors.zinc.900');
-    --card-foreground: theme('colors.zinc.50');
+    --card-foreground: theme('colors.zinc.100');
 
     /* Popover */
     --popover: theme('colors.zinc.900');
-    --popover-foreground: theme('colors.zinc.50');
+    --popover-foreground: theme('colors.zinc.100');
 
     /* Muted */
     --muted: theme('colors.zinc.900');
@@ -146,7 +146,7 @@
     --ring: theme('colors.zinc.500');
 
     /* Primary */
-    --primary: theme('colors.zinc.50');
+    --primary: theme('colors.zinc.100');
     --primary-foreground: theme('colors.zinc.900');
 
     /* Secondary */

@@ -1,0 +1,170 @@
+<div class="types-reference-container space-y-12">
+  <!-- Header -->
+  <div>
+    <h1 class="text-foreground mb-4 text-4xl font-bold">Types Reference</h1>
+    <p class="text-muted-foreground text-lg">
+      Complete TypeScript type definitions exported by Angular AI Kit.
+    </p>
+  </div>
+
+  <!-- Overview -->
+  <app-doc-section
+    title="Overview"
+    description="Type categories in Angular AI Kit"
+  >
+    <div class="text-foreground grid gap-4 sm:grid-cols-2">
+      <div class="border-border bg-card rounded-lg border p-4">
+        <p class="mb-2 text-sm font-semibold">Message Types</p>
+        <p class="text-muted-foreground text-sm">
+          ChatMessage, MessageRole, UserMessage, AssistantMessage
+        </p>
+      </div>
+      <div class="border-border bg-card rounded-lg border p-4">
+        <p class="mb-2 text-sm font-semibold">Conversation Types</p>
+        <p class="text-muted-foreground text-sm">
+          Conversation, ConversationMetadata
+        </p>
+      </div>
+      <div class="border-border bg-card rounded-lg border p-4">
+        <p class="mb-2 text-sm font-semibold">Streaming Types</p>
+        <p class="text-muted-foreground text-sm">
+          StreamingOptions, StreamChunk
+        </p>
+      </div>
+      <div class="border-border bg-card rounded-lg border p-4">
+        <p class="mb-2 text-sm font-semibold">Configuration Types</p>
+        <p class="text-muted-foreground text-sm">
+          AiKitConfig, AvatarConfig, ThemeConfig
+        </p>
+      </div>
+    </div>
+  </app-doc-section>
+
+  <!-- Message Types -->
+  <app-doc-section title="Message Types" description="Types for chat messages">
+    <div class="space-y-4">
+      <app-doc-code-block [code]="messageTypesCode" language="typescript" />
+      <div class="border-border bg-muted/50 rounded-lg border p-4">
+        <p class="text-foreground mb-2 text-sm font-semibold">Usage Example</p>
+        <pre class="text-muted-foreground text-sm">
+const message: ChatMessage = {{ '{' }}
+  id: crypto.randomUUID(),
+  role: 'user',
+  content: 'Hello!',
+  timestamp: new Date(),
+{{ '}' }};</pre
+        >
+      </div>
+    </div>
+  </app-doc-section>
+
+  <!-- Conversation Types -->
+  <app-doc-section
+    title="Conversation Types"
+    description="Types for managing conversations"
+  >
+    <app-doc-code-block [code]="conversationTypesCode" language="typescript" />
+  </app-doc-section>
+
+  <!-- Token Types -->
+  <app-doc-section
+    title="Token Usage Types"
+    description="Types for tracking token usage"
+  >
+    <app-doc-code-block [code]="tokenTypesCode" language="typescript" />
+  </app-doc-section>
+
+  <!-- Streaming Types -->
+  <app-doc-section
+    title="Streaming Types"
+    description="Types for streaming responses"
+  >
+    <app-doc-code-block [code]="streamingTypesCode" language="typescript" />
+  </app-doc-section>
+
+  <!-- Component Input Types -->
+  <app-doc-section
+    title="Component Input Types"
+    description="Input types for components"
+  >
+    <app-doc-code-block [code]="componentInputsCode" language="typescript" />
+  </app-doc-section>
+
+  <!-- Event Types -->
+  <app-doc-section title="Event Types" description="Types for component events">
+    <app-doc-code-block [code]="eventTypesCode" language="typescript" />
+  </app-doc-section>
+
+  <!-- Configuration Types -->
+  <app-doc-section
+    title="Configuration Types"
+    description="Types for library configuration"
+  >
+    <app-doc-code-block [code]="configTypesCode" language="typescript" />
+  </app-doc-section>
+
+  <!-- Utility Types -->
+  <app-doc-section
+    title="Utility Types"
+    description="Helper types for common patterns"
+  >
+    <app-doc-code-block [code]="utilityTypesCode" language="typescript" />
+  </app-doc-section>
+
+  <!-- Import Guide -->
+  <app-doc-section
+    title="Importing Types"
+    description="How to import types in your project"
+  >
+    <div class="space-y-4">
+      <div class="border-border bg-card rounded-lg border p-4">
+        <p class="text-foreground mb-2 text-sm font-semibold">
+          From &#64;angular-ai-kit/core
+        </p>
+        <pre class="text-muted-foreground text-sm">
+import type {{ '{' }}
+  ChatMessage,
+  MessageRole,
+  Conversation,
+  StreamingOptions,
+{{ '}' }} from '&#64;angular-ai-kit/core';</pre
+        >
+      </div>
+      <div class="border-border bg-muted/50 rounded-lg border p-4">
+        <p class="text-foreground mb-2 text-sm font-semibold">Best Practices</p>
+        <ul class="text-muted-foreground list-disc space-y-1 pl-5 text-sm">
+          <li>
+            Use <code class="text-xs">import type</code> for type-only imports
+          </li>
+          <li>Import specific types, not the entire module</li>
+          <li>Define your own types extending the base types if needed</li>
+        </ul>
+      </div>
+    </div>
+  </app-doc-section>
+
+  <!-- Next Steps -->
+  <div class="border-border bg-muted/50 rounded-lg border p-6">
+    <h3 class="text-foreground mb-2 text-lg font-semibold">Related</h3>
+    <div class="flex flex-wrap gap-3">
+      <a
+        routerLink="/docs/api/tokens"
+        class="border-border bg-card text-foreground hover:border-border-hover inline-flex items-center gap-2 rounded-lg border px-4 py-2 text-sm font-semibold transition-all hover:shadow-sm"
+      >
+        DI Tokens
+      </a>
+      <a
+        routerLink="/docs/api/utilities"
+        class="border-border bg-card text-foreground hover:border-border-hover inline-flex items-center gap-2 rounded-lg border px-4 py-2 text-sm font-semibold transition-all hover:shadow-sm"
+      >
+        Utilities
+      </a>
+      <a
+        routerLink="/docs/api/services"
+        class="border-border bg-card text-foreground hover:border-border-hover inline-flex items-center gap-2 rounded-lg border px-4 py-2 text-sm font-semibold transition-all hover:shadow-sm"
+      >
+        Services
+      </a>
+    </div>
+  </div>
+</div>

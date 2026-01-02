@@ -1,0 +1,256 @@
+<div class="getting-started-container space-y-12">
+  <!-- Header -->
+  <div>
+    <h1 class="text-foreground mb-4 text-4xl font-bold">Getting Started</h1>
+    <p class="text-muted-foreground text-lg">
+      Learn how to install and use Angular AI Kit in your Angular v21+
+      application.
+    </p>
+  </div>
+
+  <!-- Prerequisites -->
+  <app-doc-section
+    title="Prerequisites"
+    description="Before you begin, ensure you have the following installed"
+  >
+    <ul class="text-foreground list-disc space-y-2 pl-6">
+      <li><strong>Node.js</strong> >= 20.0.0</li>
+      <li><strong>Angular</strong> v21 or higher</li>
+      <li><strong>Tailwind CSS</strong> v4 (recommended)</li>
+    </ul>
+  </app-doc-section>
+
+  <!-- Built With -->
+  <app-doc-section
+    title="Built With"
+    description="Angular AI Kit leverages modern, well-tested libraries"
+  >
+    <div class="space-y-4">
+      <div class="border-border bg-card rounded-lg border p-4">
+        <h4 class="text-foreground mb-2 text-sm font-semibold">
+          <a
+            href="https://www.spartan.ng/"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="hover:text-primary"
+          >
+            Spartan UI
+          </a>
+        </h4>
+        <p class="text-muted-foreground text-sm">
+          Built on top of <strong>Spartan UI</strong> primitives, a collection
+          of accessible, unstyled Angular components. Spartan UI uses
+          <strong>Angular CDK</strong> internally to provide proper
+          accessibility (WCAG AA compliance), keyboard navigation, and screen
+          reader support out of the box.
+        </p>
+      </div>
+
+      <div class="border-border bg-card rounded-lg border p-4">
+        <h4 class="text-foreground mb-2 text-sm font-semibold">
+          Modern Angular v21
+        </h4>
+        <p class="text-muted-foreground text-sm">
+          Built with <strong>Angular v21</strong> using signals, standalone
+          components, new control flow syntax (&#64;if, &#64;for), and zoneless
+          change detection for optimal performance.
+        </p>
+      </div>
+
+      <div class="border-border bg-card rounded-lg border p-4">
+        <h4 class="text-foreground mb-2 text-sm font-semibold">
+          Tailwind CSS v4
+        </h4>
+        <p class="text-muted-foreground text-sm">
+          Styled with <strong>Tailwind CSS v4</strong> using modern
+          utility-first CSS, design tokens, and full dark mode support with no
+          SCSS required.
+        </p>
+      </div>
+    </div>
+  </app-doc-section>
+
+  <!-- Installation -->
+  <app-doc-section
+    title="Installation"
+    description="Install Angular AI Kit packages"
+  >
+    <div class="space-y-4">
+      <p class="text-foreground">Install the core packages using npm:</p>
+      <app-doc-code-block [code]="installCode" language="bash" />
+    </div>
+  </app-doc-section>
+
+  <!-- Tailwind Setup -->
+  <app-doc-section
+    title="Setup Tailwind CSS v4"
+    description="Angular AI Kit requires Tailwind CSS v4"
+  >
+    <div class="space-y-6">
+      <div>
+        <h3 class="text-foreground mb-3 text-lg font-semibold">
+          1. Install Tailwind CSS v4
+        </h3>
+        <app-doc-code-block [code]="tailwindInstall" language="bash" />
+      </div>
+
+      <div>
+        <h3 class="text-foreground mb-3 text-lg font-semibold">
+          2. Create PostCSS config
+        </h3>
+        <p class="text-muted-foreground mb-3 text-sm">
+          Create
+          <code class="bg-muted rounded px-1.5 py-0.5 text-xs"
+            >.postcssrc.json</code
+          >
+          in your project root:
+        </p>
+        <app-doc-code-block [code]="postcssConfig" language="json" />
+      </div>
+
+      <div>
+        <h3 class="text-foreground mb-3 text-lg font-semibold">
+          3. Import Tailwind in styles.css
+        </h3>
+        <p class="text-muted-foreground mb-3 text-sm">
+          Add to your global
+          <code class="bg-muted rounded px-1.5 py-0.5 text-xs">styles.css</code
+          >:
+        </p>
+        <app-doc-code-block [code]="stylesImport" language="css" />
+      </div>
+    </div>
+  </app-doc-section>
+
+  <!-- Your First Component -->
+  <app-doc-section
+    title="Your First Component"
+    description="Create a simple chat interface"
+  >
+    <div class="space-y-4">
+      <p class="text-foreground">
+        Let's create a basic chat component using
+        <code class="bg-muted rounded px-1.5 py-0.5 text-xs"
+          >ChatInputComponent</code
+        >:
+      </p>
+      <app-doc-code-block [code]="firstComponentCode" language="typescript" />
+      <div class="border-border bg-card rounded-lg border p-4">
+        <p class="text-foreground mb-2 text-sm font-semibold">✅ That's it!</p>
+        <p class="text-muted-foreground text-sm">
+          You now have a working chat input with auto-resize, keyboard
+          shortcuts, and accessibility features.
+        </p>
+      </div>
+    </div>
+  </app-doc-section>
+
+  <!-- Alternative: Using CLI -->
+  <app-doc-section
+    title="Alternative: Using the CLI"
+    description="Shadcn-style component installation"
+  >
+    <div class="space-y-6">
+      <p class="text-foreground">
+        Angular AI Kit provides a CLI tool (similar to Shadcn UI) that copies
+        components directly into your project:
+      </p>
+
+      <div>
+        <h3 class="text-foreground mb-3 text-lg font-semibold">
+          1. Initialize
+        </h3>
+        <app-doc-code-block [code]="cliInit" language="bash" />
+        <p class="text-muted-foreground mt-2 text-sm">
+          This creates
+          <code class="bg-muted rounded px-1.5 py-0.5 text-xs"
+            >angular-ai-kit.config.json</code
+          >
+          and sets up your project.
+        </p>
+      </div>
+
+      <div>
+        <h3 class="text-foreground mb-3 text-lg font-semibold">
+          2. Add Components
+        </h3>
+        <app-doc-code-block [code]="cliAdd" language="bash" />
+        <p class="text-muted-foreground mt-2 text-sm">
+          Components are copied to your project with all dependencies
+          automatically resolved.
+        </p>
+      </div>
+
+      <div class="border-border bg-muted/50 rounded-lg border p-4">
+        <p class="text-foreground mb-2 text-sm font-semibold">
+          💡 Why use the CLI?
+        </p>
+        <ul class="text-muted-foreground list-disc space-y-1 pl-5 text-sm">
+          <li>Full control over component code</li>
+          <li>Easy customization</li>
+          <li>No version lock-in</li>
+          <li>Tree-shakable by default</li>
+        </ul>
+      </div>
+    </div>
+  </app-doc-section>
+
+  <!-- Using Multiple Components -->
+  <app-doc-section
+    title="Using Multiple Components"
+    description="Build a complete chat interface"
+  >
+    <div class="space-y-4">
+      <p class="text-foreground">
+        Here's a more complete example using multiple components together:
+      </p>
+      <app-doc-code-block
+        [code]="multipleComponentsCode"
+        language="typescript"
+      />
+    </div>
+  </app-doc-section>
+
+  <!-- Next Steps -->
+  <app-doc-section title="Next Steps" description="Continue learning">
+    <div class="grid gap-4 sm:grid-cols-3">
+      @for (step of nextSteps; track step.title) {
+        <a
+          [routerLink]="step.link"
+          class="group border-border bg-card hover:border-border-hover rounded-lg border p-4 transition-all hover:shadow-md"
+        >
+          <h3
+            class="text-foreground group-hover:text-primary mb-2 font-semibold"
+          >
+            {{ step.title }}
+          </h3>
+          <p class="text-muted-foreground text-sm">
+            {{ step.description }}
+          </p>
+        </a>
+      }
+    </div>
+  </app-doc-section>
+
+  <!-- Help Section -->
+  <div class="border-border bg-muted/50 rounded-lg border p-6">
+    <h3 class="text-foreground mb-2 text-lg font-semibold">Need Help?</h3>
+    <p class="text-muted-foreground mb-4 text-sm">
+      Check out the FAQ or browse the complete component documentation.
+    </p>
+    <div class="flex flex-wrap gap-3">
+      <a
+        routerLink="/docs/guides/faq"
+        class="border-border bg-card text-foreground hover:border-border-hover inline-flex items-center gap-2 rounded-lg border px-4 py-2 text-sm font-semibold transition-all hover:shadow-sm"
+      >
+        View FAQ
+      </a>
+      <a
+        routerLink="/docs/components"
+        class="border-border bg-card text-foreground hover:border-border-hover inline-flex items-center gap-2 rounded-lg border px-4 py-2 text-sm font-semibold transition-all hover:shadow-sm"
+      >
+        Browse Components
+      </a>
+    </div>
+  </div>
+</div>

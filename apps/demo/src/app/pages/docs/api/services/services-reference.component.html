@@ -1,0 +1,177 @@
+<div class="services-reference-container space-y-12">
+  <!-- Header -->
+  <div>
+    <h1 class="text-foreground mb-4 text-4xl font-bold">Services Reference</h1>
+    <p class="text-muted-foreground text-lg">
+      Angular services provided by Angular AI Kit for common functionality.
+    </p>
+  </div>
+
+  <!-- Overview -->
+  <app-doc-section title="Overview" description="Available services">
+    <div class="text-foreground grid gap-4 sm:grid-cols-2">
+      <div class="border-border bg-card rounded-lg border p-4">
+        <p class="mb-1 font-mono text-sm font-semibold">MarkdownService</p>
+        <p class="text-muted-foreground text-sm">
+          Parse and render markdown content
+        </p>
+      </div>
+      <div class="border-border bg-card rounded-lg border p-4">
+        <p class="mb-1 font-mono text-sm font-semibold">CodeHighlightService</p>
+        <p class="text-muted-foreground text-sm">
+          Syntax highlighting for code
+        </p>
+      </div>
+      <div class="border-border bg-card rounded-lg border p-4">
+        <p class="mb-1 font-mono text-sm font-semibold">ThemeService</p>
+        <p class="text-muted-foreground text-sm">
+          Theme management (light/dark)
+        </p>
+      </div>
+      <div class="border-border bg-card rounded-lg border p-4">
+        <p class="mb-1 font-mono text-sm font-semibold">ClipboardService</p>
+        <p class="text-muted-foreground text-sm">
+          Clipboard copy/paste operations
+        </p>
+      </div>
+      <div class="border-border bg-card rounded-lg border p-4">
+        <p class="mb-1 font-mono text-sm font-semibold">StorageService</p>
+        <p class="text-muted-foreground text-sm">Local storage wrapper</p>
+      </div>
+    </div>
+  </app-doc-section>
+
+  <!-- MarkdownService -->
+  <app-doc-section
+    title="MarkdownService"
+    description="Parse and render markdown content"
+  >
+    <app-doc-code-block [code]="markdownServiceCode" language="typescript" />
+  </app-doc-section>
+
+  <!-- CodeHighlightService -->
+  <app-doc-section
+    title="CodeHighlightService"
+    description="Syntax highlighting for code blocks"
+  >
+    <app-doc-code-block
+      [code]="codeHighlightServiceCode"
+      language="typescript"
+    />
+  </app-doc-section>
+
+  <!-- ThemeService -->
+  <app-doc-section title="ThemeService" description="Manage light/dark theme">
+    <app-doc-code-block [code]="themeServiceCode" language="typescript" />
+  </app-doc-section>
+
+  <!-- ClipboardService -->
+  <app-doc-section title="ClipboardService" description="Clipboard operations">
+    <app-doc-code-block [code]="clipboardServiceCode" language="typescript" />
+  </app-doc-section>
+
+  <!-- StorageService -->
+  <app-doc-section
+    title="StorageService"
+    description="Local storage wrapper with type safety"
+  >
+    <app-doc-code-block [code]="storageServiceCode" language="typescript" />
+  </app-doc-section>
+
+  <!-- Creating Custom Services -->
+  <app-doc-section
+    title="Creating Custom Services"
+    description="Build your own services following Angular AI Kit patterns"
+  >
+    <div class="space-y-4">
+      <p class="text-foreground">
+        You can create your own services following Angular AI Kit patterns.
+        Here's an example of a conversation management service:
+      </p>
+      <app-doc-code-block [code]="customServiceCode" language="typescript" />
+    </div>
+  </app-doc-section>
+
+  <!-- Best Practices -->
+  <app-doc-section
+    title="Best Practices"
+    description="Tips for using services effectively"
+  >
+    <div class="grid gap-4 sm:grid-cols-2">
+      <div class="border-border bg-card rounded-lg border p-4">
+        <p class="text-foreground mb-2 text-sm font-semibold">Use inject()</p>
+        <p class="text-muted-foreground text-sm">
+          Prefer <code class="text-xs">inject()</code> over constructor
+          injection
+        </p>
+      </div>
+      <div class="border-border bg-card rounded-lg border p-4">
+        <p class="text-foreground mb-2 text-sm font-semibold">
+          Signal-Based State
+        </p>
+        <p class="text-muted-foreground text-sm">
+          Use signals for reactive state in services
+        </p>
+      </div>
+      <div class="border-border bg-card rounded-lg border p-4">
+        <p class="text-foreground mb-2 text-sm font-semibold">
+          Provide at Root
+        </p>
+        <p class="text-muted-foreground text-sm">
+          Use <code class="text-xs">providedIn: 'root'</code> for singletons
+        </p>
+      </div>
+      <div class="border-border bg-card rounded-lg border p-4">
+        <p class="text-foreground mb-2 text-sm font-semibold">
+          Readonly Signals
+        </p>
+        <p class="text-muted-foreground text-sm">
+          Expose signals as readonly to prevent external mutations
+        </p>
+      </div>
+    </div>
+  </app-doc-section>
+
+  <!-- Import Guide -->
+  <app-doc-section
+    title="Importing Services"
+    description="How to import services in your project"
+  >
+    <div class="border-border bg-card rounded-lg border p-4">
+      <pre class="text-foreground text-sm">
+import {{ '{' }}
+  MarkdownService,
+  CodeHighlightService,
+  ThemeService,
+  ClipboardService,
+  StorageService,
+{{ '}' }} from '&#64;angular-ai-kit/core';</pre
+      >
+    </div>
+  </app-doc-section>
+
+  <!-- Next Steps -->
+  <div class="border-border bg-muted/50 rounded-lg border p-6">
+    <h3 class="text-foreground mb-2 text-lg font-semibold">Related</h3>
+    <div class="flex flex-wrap gap-3">
+      <a
+        routerLink="/docs/api/types"
+        class="border-border bg-card text-foreground hover:border-border-hover inline-flex items-center gap-2 rounded-lg border px-4 py-2 text-sm font-semibold transition-all hover:shadow-sm"
+      >
+        Types Reference
+      </a>
+      <a
+        routerLink="/docs/api/tokens"
+        class="border-border bg-card text-foreground hover:border-border-hover inline-flex items-center gap-2 rounded-lg border px-4 py-2 text-sm font-semibold transition-all hover:shadow-sm"
+      >
+        DI Tokens
+      </a>
+      <a
+        routerLink="/docs/guides/building-chat-app"
+        class="border-border bg-card text-foreground hover:border-border-hover inline-flex items-center gap-2 rounded-lg border px-4 py-2 text-sm font-semibold transition-all hover:shadow-sm"
+      >
+        Building a Chat App
+      </a>
+    </div>
+  </div>
+</div>

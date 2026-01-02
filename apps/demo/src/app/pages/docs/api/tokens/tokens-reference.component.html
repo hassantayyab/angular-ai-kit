@@ -1,0 +1,177 @@
+<div class="tokens-reference-container space-y-12">
+  <!-- Header -->
+  <div>
+    <h1 class="text-foreground mb-4 text-4xl font-bold">DI Tokens Reference</h1>
+    <p class="text-muted-foreground text-lg">
+      Dependency injection tokens for configuring Angular AI Kit globally.
+    </p>
+  </div>
+
+  <!-- Overview -->
+  <app-doc-section
+    title="Overview"
+    description="Available configuration tokens"
+  >
+    <div class="text-foreground space-y-4">
+      <p>
+        Angular AI Kit uses DI tokens for global configuration. These tokens let
+        you customize behavior across all components without passing props.
+      </p>
+      <div class="grid gap-4 sm:grid-cols-2">
+        <div class="border-border bg-card rounded-lg border p-4">
+          <p class="mb-1 font-mono text-sm font-semibold">AI_AVATAR_CONFIG</p>
+          <p class="text-muted-foreground text-sm">Avatar display settings</p>
+        </div>
+        <div class="border-border bg-card rounded-lg border p-4">
+          <p class="mb-1 font-mono text-sm font-semibold">
+            AI_CODE_HIGHLIGHT_CONFIG
+          </p>
+          <p class="text-muted-foreground text-sm">Code highlighting options</p>
+        </div>
+        <div class="border-border bg-card rounded-lg border p-4">
+          <p class="mb-1 font-mono text-sm font-semibold">AI_MARKDOWN_CONFIG</p>
+          <p class="text-muted-foreground text-sm">
+            Markdown rendering options
+          </p>
+        </div>
+        <div class="border-border bg-card rounded-lg border p-4">
+          <p class="mb-1 font-mono text-sm font-semibold">AI_THEME_CONFIG</p>
+          <p class="text-muted-foreground text-sm">
+            Theme and appearance settings
+          </p>
+        </div>
+      </div>
+    </div>
+  </app-doc-section>
+
+  <!-- Token Definitions -->
+  <app-doc-section
+    title="Token Definitions"
+    description="How tokens are defined"
+  >
+    <app-doc-code-block [code]="tokenDefinitionsCode" language="typescript" />
+  </app-doc-section>
+
+  <!-- AI_AVATAR_CONFIG -->
+  <app-doc-section
+    title="AI_AVATAR_CONFIG"
+    description="Configure avatar display for messages"
+  >
+    <app-doc-code-block [code]="avatarConfigCode" language="typescript" />
+  </app-doc-section>
+
+  <!-- AI_CODE_HIGHLIGHT_CONFIG -->
+  <app-doc-section
+    title="AI_CODE_HIGHLIGHT_CONFIG"
+    description="Configure syntax highlighting for code blocks"
+  >
+    <app-doc-code-block
+      [code]="codeHighlightConfigCode"
+      language="typescript"
+    />
+  </app-doc-section>
+
+  <!-- AI_MARKDOWN_CONFIG -->
+  <app-doc-section
+    title="AI_MARKDOWN_CONFIG"
+    description="Configure markdown rendering"
+  >
+    <app-doc-code-block [code]="markdownConfigCode" language="typescript" />
+  </app-doc-section>
+
+  <!-- AI_THEME_CONFIG -->
+  <app-doc-section
+    title="AI_THEME_CONFIG"
+    description="Configure theming and appearance"
+  >
+    <app-doc-code-block [code]="themeConfigCode" language="typescript" />
+  </app-doc-section>
+
+  <!-- AI_MESSAGE_TEMPLATES -->
+  <app-doc-section
+    title="AI_MESSAGE_TEMPLATES"
+    description="Customize UI text and messages"
+  >
+    <app-doc-code-block [code]="messageTemplatesCode" language="typescript" />
+  </app-doc-section>
+
+  <!-- Using Tokens -->
+  <app-doc-section
+    title="Using Tokens in Components"
+    description="How to inject and use configuration tokens"
+  >
+    <app-doc-code-block [code]="usingTokensCode" language="typescript" />
+  </app-doc-section>
+
+  <!-- Default Values -->
+  <app-doc-section
+    title="Default Values"
+    description="Default configuration values"
+  >
+    <div class="space-y-4">
+      <p class="text-foreground">
+        If no provider is specified, these defaults are used:
+      </p>
+      <app-doc-code-block [code]="defaultValuesCode" language="typescript" />
+    </div>
+  </app-doc-section>
+
+  <!-- Best Practices -->
+  <app-doc-section
+    title="Best Practices"
+    description="Tips for using DI tokens effectively"
+  >
+    <div class="grid gap-4 sm:grid-cols-2">
+      <div class="border-border bg-card rounded-lg border p-4">
+        <p class="text-foreground mb-2 text-sm font-semibold">
+          Provide at Root
+        </p>
+        <p class="text-muted-foreground text-sm">
+          Provide tokens in your app config or root component for global
+          settings
+        </p>
+      </div>
+      <div class="border-border bg-card rounded-lg border p-4">
+        <p class="text-foreground mb-2 text-sm font-semibold">
+          Override Locally
+        </p>
+        <p class="text-muted-foreground text-sm">
+          Provide tokens in specific components to override for that subtree
+        </p>
+      </div>
+      <div class="border-border bg-card rounded-lg border p-4">
+        <p class="text-foreground mb-2 text-sm font-semibold">Use Optional</p>
+        <p class="text-muted-foreground text-sm">
+          Inject with
+          <code class="text-xs">{{ '{' }} optional: true {{ '}' }}</code> to
+          handle missing providers
+        </p>
+      </div>
+      <div class="border-border bg-card rounded-lg border p-4">
+        <p class="text-foreground mb-2 text-sm font-semibold">Type Safety</p>
+        <p class="text-muted-foreground text-sm">
+          Use the exported interfaces for type-safe configuration
+        </p>
+      </div>
+    </div>
+  </app-doc-section>
+
+  <!-- Next Steps -->
+  <div class="border-border bg-muted/50 rounded-lg border p-6">
+    <h3 class="text-foreground mb-2 text-lg font-semibold">Related</h3>
+    <div class="flex flex-wrap gap-3">
+      <a
+        routerLink="/docs/api/types"
+        class="border-border bg-card text-foreground hover:border-border-hover inline-flex items-center gap-2 rounded-lg border px-4 py-2 text-sm font-semibold transition-all hover:shadow-sm"
+      >
+        Types Reference
+      </a>
+      <a
+        routerLink="/docs/guides/customization"
+        class="border-border bg-card text-foreground hover:border-border-hover inline-flex items-center gap-2 rounded-lg border px-4 py-2 text-sm font-semibold transition-all hover:shadow-sm"
+      >
+        Customization Guide
+      </a>
+    </div>
+  </div>
+</div>

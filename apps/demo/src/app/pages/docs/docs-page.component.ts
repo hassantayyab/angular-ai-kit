@@ -9,6 +9,7 @@ import { RouterOutlet } from '@angular/router';
  * DocsPage Component
  *
  * Documentation page layout with router outlet for child routes.
+ * Sidebar navigation is handled by the main layout.
  */
 @Component({
   selector: 'app-docs-page',
