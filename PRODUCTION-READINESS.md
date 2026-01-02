@@ -26,7 +26,7 @@ Transform Angular AI Kit from a development project into a **production-ready, d
 | ---------------------- | ------- | ---------------------------------------- |
 | **Library Build**      | ✅ 100% | All packages build successfully          |
 | **npm Publishing**     | ✅ 100% | Published to npm registry as v0.1.0      |
-| **CLI Tool**           | 0%      | No `npx` installation command            |
+| **CLI Tool**           | ✅ 100% | Published to npm as v0.1.1               |
 | **Schematics**         | 0%      | No `ng add` support                      |
 | **Documentation Site** | 75%     | Demo app deployed to Vercel              |
 | **Theming Guide**      | 50%     | SETUP.md created with basic theming info |
@@ -168,15 +168,15 @@ This gives developers the best of both worlds:
 
 ---
 
-## Phase 2: CLI Tool Development (Week 2)
+## Phase 2: CLI Tool Development (Week 2) ✅ COMPLETE
 
 **Goal:** Create `@angular-ai-kit/cli` for easy component installation
 
 ### 2.1 CLI Package Setup
 
-- [ ] Create `packages/cli/` directory
-- [ ] Initialize with `nx generate @nx/js:library cli`
-- [ ] Add CLI dependencies:
+- [x] Create `packages/cli/` directory
+- [x] Initialize with `nx generate @nx/js:library cli`
+- [x] Add CLI dependencies:
   ```json
   {
     "dependencies": {
@@ -184,69 +184,66 @@ This gives developers the best of both worlds:
       "chalk": "^5.3.0",
       "ora": "^8.0.0",
       "prompts": "^2.4.2",
-      "fs-extra": "^11.2.0"
+      "fs-extra": "^11.2.0",
+      "glob": "^11.0.0"
     }
   }
   ```
 
 ### 2.2 CLI Commands
 
-- [ ] **`init`** - Initialize Angular AI Kit in a project
+- [x] **`init`** - Initialize Angular AI Kit in a project
 
   ```bash
   npx @angular-ai-kit/cli init
   ```
 
-  - Detect Angular version
+  - Detect Angular version (v19+ required)
   - Check Tailwind CSS setup
   - Create `angular-ai-kit.config.json`
   - Add CSS variables to styles
-  - Install peer dependencies
+  - Create components directory with barrel export
 
-- [ ] **`add <component>`** - Add a component to the project
+- [x] **`add <component>`** - Add a component to the project
 
   ```bash
-  npx @angular-ai-kit/cli add chat-input
+  npx @angular-ai-kit/cli add icon-button
   npx @angular-ai-kit/cli add ai-response
-  npx @angular-ai-kit/cli add --all
+  npx @angular-ai-kit/cli add chat-container message-list
   ```
 
   - Copy component files to user's project
+  - Resolve and install dependencies automatically
   - Update barrel exports
-  - Install required dependencies
+  - Show peer dependencies to install
 
-- [ ] **`diff <component>`** - Show changes since last add
+- [ ] **`diff <component>`** - Show changes since last add (future feature)
 
   ```bash
   npx @angular-ai-kit/cli diff chat-input
   ```
 
-- [ ] **`list`** - List available components
+- [x] **`list`** - List available components
   ```bash
   npx @angular-ai-kit/cli list
+  npx @angular-ai-kit/cli list --installed
+  npx @angular-ai-kit/cli list --category chat
   ```
 
 ### 2.3 Component Registry
 
-- [ ] Create component registry JSON:
-  ```json
-  {
-    "components": {
-      "chat-input": {
-        "name": "ChatInput",
-        "files": ["chat-input.component.ts", "chat-input.component.html"],
-        "dependencies": ["@angular-ai-kit/utils"],
-        "peerDependencies": ["@ng-icons/lucide"]
-      }
-    }
-  }
-  ```
+- [x] Create component registry JSON with all 12 components:
+  - Chat: chat-container, message-list, user-message, message-actions, prompt-suggestions, conversation-list
+  - Display: ai-response, markdown-renderer, code-block, feedback-buttons, response-actions
+  - UI: icon-button
+  - Includes dependencies, services, npm packages, and peer dependencies
 
 ### 2.4 Deliverables
 
-- [ ] Working CLI with `init`, `add`, `list` commands
-- [ ] Component registry with all components
-- [ ] Published to npm as `@angular-ai-kit/cli`
+- [x] Working CLI with `init`, `add`, `list` commands
+- [x] Component registry with all 12 components
+- [x] Published to npm as `@angular-ai-kit/cli@0.1.1`
+- [x] README documentation for CLI usage
 
 ---
 
@@ -493,12 +490,12 @@ dist/packages/
 
 ### Bundle Size Targets
 
-| Package                | Target Size    | Actual Size | Status                               |
-| ---------------------- | -------------- | ----------- | ------------------------------------ |
-| @angular-ai-kit/core   | < 50KB gzipped | 75.6 KB     | ⚠️ Over target (acceptable for v0.1) |
-| @angular-ai-kit/utils  | < 5KB gzipped  | 15.7 KB     | ⚠️ Over target (includes formatters) |
-| @angular-ai-kit/tokens | < 10KB gzipped | 7.3 KB      | ✅ Within target (includes all CSS)  |
-| @angular-ai-kit/cli    | < 100KB        | TBD         | 🔄 Not built yet                     |
+| Package                | Target Size    | Actual Size (unpacked) | Status                               |
+| ---------------------- | -------------- | ---------------------- | ------------------------------------ |
+| @angular-ai-kit/core   | < 50KB gzipped | 75.6 KB                | ⚠️ Over target (acceptable for v0.1) |
+| @angular-ai-kit/utils  | < 5KB gzipped  | 15.7 KB                | ⚠️ Over target (includes formatters) |
+| @angular-ai-kit/tokens | < 10KB gzipped | 7.3 KB                 | ✅ Within target (includes all CSS)  |
+| @angular-ai-kit/cli    | < 100KB        | 78.5 KB                | ✅ Within target                     |
 
 ### Browser Support
 
@@ -521,7 +518,7 @@ dist/packages/
 - [x] All packages build successfully
 - [x] Basic documentation (SETUP.md, README.md)
 - [x] Demo app working
-- [ ] CLI is tested (not built yet)
+- [x] CLI is tested and working
 - [x] README is polished with npm badges
 - [ ] CHANGELOG is generated (future)
 - [x] License is in place (MIT)
@@ -548,14 +545,14 @@ dist/packages/
 
 ## Timeline Summary
 
-| Phase                   | Duration | Key Deliverable                     |
-| ----------------------- | -------- | ----------------------------------- |
-| Phase 1: Library Build  | Week 1   | Packages build successfully         |
-| Phase 2: CLI Tool       | Week 2   | `npx @angular-ai-kit/cli add` works |
-| Phase 3: npm Publishing | Week 2-3 | Packages on npm                     |
-| Phase 4: Documentation  | Week 3-4 | Complete docs site                  |
-| Phase 5: DX Polish      | Week 4   | `ng add` schematic                  |
-| Phase 6: CI/CD          | Week 4-5 | Automated releases                  |
+| Phase                   | Duration | Status      | Key Deliverable                     |
+| ----------------------- | -------- | ----------- | ----------------------------------- |
+| Phase 1: Library Build  | Week 1   | ✅ Complete | Packages build successfully         |
+| Phase 2: CLI Tool       | Week 2   | ✅ Complete | `npx @angular-ai-kit/cli add` works |
+| Phase 3: npm Publishing | Week 2-3 | ✅ Complete | Packages on npm                     |
+| Phase 4: Documentation  | Week 3-4 | 🔄 Next     | Complete docs site                  |
+| Phase 5: DX Polish      | Week 4   | ⏳ Pending  | `ng add` schematic                  |
+| Phase 6: CI/CD          | Week 4-5 | ⏳ Pending  | Automated releases                  |
 
 **Total Timeline: 4-5 weeks to production**
 
@@ -662,7 +659,7 @@ npm view @angular-ai-kit/tokens
 ---
 
 _Last Updated: January 2, 2026_
-_Status: v0.1.0 Published to npm ✅ | GitHub Release Created ✅ | Demo Deployed to Vercel ✅_
+_Status: v0.1.0 Published to npm ✅ | CLI v0.1.1 Published ✅ | GitHub Release Created ✅ | Demo Deployed to Vercel ✅_
 
 ---
 
@@ -673,6 +670,7 @@ _Status: v0.1.0 Published to npm ✅ | GitHub Release Created ✅ | Demo Deploye
 | npm: @angular-ai-kit/core   | ✅ Published | [npmjs.com](https://www.npmjs.com/package/@angular-ai-kit/core)              |
 | npm: @angular-ai-kit/utils  | ✅ Published | [npmjs.com](https://www.npmjs.com/package/@angular-ai-kit/utils)             |
 | npm: @angular-ai-kit/tokens | ✅ Published | [npmjs.com](https://www.npmjs.com/package/@angular-ai-kit/tokens)            |
+| npm: @angular-ai-kit/cli    | ✅ Published | [npmjs.com](https://www.npmjs.com/package/@angular-ai-kit/cli)               |
 | GitHub Release              | ✅ v0.1.0    | [GitHub](https://github.com/hassantayyab/angular-ai-kit/releases/tag/v0.1.0) |
 | Demo Site                   | ✅ Deployed  | Vercel                                                                       |
 | Setup Guide                 | ✅ Created   | [SETUP.md](./SETUP.md)                                                       |
