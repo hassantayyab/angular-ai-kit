@@ -1,6 +1,6 @@
 export { ChatInputComponent } from './chat-input.component';
 export type {
-  ChatSuggestion,
   ModelOption,
-  SuggestionsPosition,
+  ContextItem,
+  SourceOption,
 } from './chat-input.component';

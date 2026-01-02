@@ -15,6 +15,7 @@
             [content]="message.content"
             [isStreaming]="message.status === 'streaming'"
             [showActions]="true"
+            [actionsAlwaysVisible]="true"
             (copy)="handleMessageCopy($event, message)"
             (regenerate)="handleMessageRegenerate(message)"
           />

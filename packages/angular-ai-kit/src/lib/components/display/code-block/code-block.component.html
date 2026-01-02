@@ -1,0 +1,43 @@
+<div [class]="wrapperClasses()">
+  <!-- Header Bar -->
+  <div class="ai-code-block-header">
+    <!-- Language Label -->
+    <span class="ai-code-block-language">{{ displayLanguage() }}</span>
+
+    <!-- Spacer -->
+    <div class="flex-1"></div>
+
+    <!-- Copy Button -->
+    @if (showCopyButton()) {
+      <ai-icon-button
+        [icon]="copyIcon()"
+        [ariaLabel]="copyLabel()"
+        size="sm"
+        [customClasses]="copyButtonClasses()"
+        (clicked)="handleCopy()"
+      />
+    }
+  </div>
+
+  <!-- Code Content -->
+  <div class="ai-code-block-content">
+    @if (showLineNumbers()) {
+      <!-- With Line Numbers -->
+      <div class="ai-code-block-with-lines">
+        <div class="ai-code-block-line-numbers" aria-hidden="true">
+          @for (line of codeLines(); track $index; let i = $index) {
+            <span class="ai-code-block-line-number">{{ i + 1 }}</span>
+          }
+        </div>
+        <pre
+          class="ai-code-block-pre"
+        ><code #codeElement class="hljs language-{{ language() }}" [innerHTML]="highlightedCode()"></code></pre>
+      </div>
+    } @else {
+      <!-- Without Line Numbers -->
+      <pre
+        class="ai-code-block-pre"
+      ><code #codeElement class="hljs language-{{ language() }}" [innerHTML]="highlightedCode()"></code></pre>
+    }
+  </div>
+</div>

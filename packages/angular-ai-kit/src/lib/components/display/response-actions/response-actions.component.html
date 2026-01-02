@@ -1,0 +1,33 @@
+<div [class]="containerClasses()">
+  <!-- Copy Button -->
+  @if (showCopy()) {
+    <ai-icon-button
+      [icon]="copyIcon()"
+      [ariaLabel]="copyLabel()"
+      [customClasses]="copyButtonClasses()"
+      (clicked)="handleCopy()"
+    />
+  }
+
+  <!-- Regenerate Button -->
+  @if (showRegenerate()) {
+    <ai-icon-button
+      icon="lucideRefreshCw"
+      ariaLabel="Regenerate response"
+      (clicked)="handleRegenerate()"
+    />
+  }
+
+  <!-- Spacer -->
+  @if (showFeedback()) {
+    <div class="flex-1"></div>
+  }
+
+  <!-- Feedback Buttons -->
+  @if (showFeedback()) {
+    <ai-feedback-buttons
+      [value]="feedbackValue()"
+      (valueChange)="handleFeedbackChange($event)"
+    />
+  }
+</div>

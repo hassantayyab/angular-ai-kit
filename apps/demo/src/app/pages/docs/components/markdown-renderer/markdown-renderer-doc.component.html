@@ -1,0 +1,32 @@
+<div class="space-y-8">
+  <div>
+    <h1 class="text-3xl font-bold">Markdown Renderer</h1>
+    <p class="text-muted-foreground mt-2">
+      Renders markdown content with syntax highlighting and copy buttons on code
+      blocks.
+    </p>
+  </div>
+
+  <app-doc-section title="Installation">
+    <app-doc-code-block [code]="installCode" language="typescript" />
+  </app-doc-section>
+
+  <app-doc-section title="Live Demo">
+    <app-doc-demo-card>
+      <div class="ai-response-content">
+        <ai-markdown-renderer [content]="demoMarkdown" />
+      </div>
+    </app-doc-demo-card>
+  </app-doc-section>
+
+  <app-doc-features-list title="Features" [items]="features" />
+
+  <app-doc-section title="API Reference">
+    <app-doc-api-table title="Inputs" [properties]="inputs" />
+    <app-doc-api-table title="Outputs" [properties]="outputs" class="mt-4" />
+  </app-doc-section>
+
+  <app-doc-section title="Usage Example">
+    <app-doc-code-block [code]="usageCode" [multiline]="true" language="html" />
+  </app-doc-section>
+</div>

@@ -1,0 +1,89 @@
+<div class="space-y-8">
+  <!-- Header -->
+  <div>
+    <h1 class="text-3xl font-bold">Code Block</h1>
+    <p class="text-muted-foreground mt-2">
+      Displays code with syntax highlighting, language label, and copy
+      functionality. Uses highlight.js for 50+ language support.
+    </p>
+  </div>
+
+  <!-- Installation -->
+  <app-doc-section title="Installation">
+    <app-doc-code-block [code]="installCode" language="typescript" />
+  </app-doc-section>
+
+  <!-- Live Demo -->
+  <app-doc-section title="Live Demo">
+    <app-doc-demo-card>
+      <div class="mb-4">
+        <ai-code-block
+          [code]="demoCode"
+          [language]="selectedLanguage()"
+          [showCopyButton]="showCopyButton()"
+          [showLineNumbers]="showLineNumbers()"
+          (copy)="handleCopy($event)"
+        />
+      </div>
+
+      <!-- Language selector -->
+      <div class="mt-4 flex gap-2">
+        <button
+          type="button"
+          class="rounded-md px-3 py-1.5 text-sm transition-colors"
+          [class.bg-primary]="selectedLanguage() === 'typescript'"
+          [class.text-primary-foreground]="selectedLanguage() === 'typescript'"
+          [class.bg-muted]="selectedLanguage() !== 'typescript'"
+          (click)="selectedLanguage.set('typescript')"
+        >
+          TypeScript
+        </button>
+        <button
+          type="button"
+          class="rounded-md px-3 py-1.5 text-sm transition-colors"
+          [class.bg-primary]="selectedLanguage() === 'html'"
+          [class.text-primary-foreground]="selectedLanguage() === 'html'"
+          [class.bg-muted]="selectedLanguage() !== 'html'"
+          (click)="selectedLanguage.set('html')"
+        >
+          HTML
+        </button>
+      </div>
+    </app-doc-demo-card>
+  </app-doc-section>
+
+  <!-- Configuration -->
+  <app-doc-section title="Configuration">
+    <app-doc-demo-card>
+      <div class="grid gap-4 md:grid-cols-2">
+        <app-doc-control-toggle
+          label="Show Copy Button"
+          [checked]="showCopyButton()"
+          (checkedChange)="showCopyButton.set($event)"
+        />
+        <app-doc-control-toggle
+          label="Show Line Numbers"
+          [checked]="showLineNumbers()"
+          (checkedChange)="showLineNumbers.set($event)"
+        />
+      </div>
+    </app-doc-demo-card>
+  </app-doc-section>
+
+  <!-- Features -->
+  <app-doc-features-list title="Features" [items]="features" />
+
+  <!-- API Reference -->
+  <app-doc-section title="API Reference">
+    <app-doc-api-table title="Inputs" [properties]="inputs" />
+    <app-doc-api-table title="Outputs" [properties]="outputs" class="mt-4" />
+  </app-doc-section>
+
+  <!-- Usage Example -->
+  <app-doc-section title="Usage Example">
+    <app-doc-code-block [code]="usageCode" [multiline]="true" language="html" />
+  </app-doc-section>
+
+  <!-- Accessibility -->
+  <app-doc-features-list title="Accessibility" [items]="accessibility" />
+</div>

@@ -1,0 +1,20 @@
+<div [class]="containerClasses()" [attr.aria-hidden]="!actionsVisible()">
+  <!-- Copy Button -->
+  @if (showCopy()) {
+    <ai-icon-button
+      [icon]="copyIcon()"
+      ariaLabel="Copy message"
+      [customClasses]="copyButtonClasses()"
+      (clicked)="handleCopy()"
+    />
+  }
+
+  <!-- Edit Button -->
+  @if (showEdit()) {
+    <ai-icon-button
+      icon="lucidePencil"
+      ariaLabel="Edit message"
+      (clicked)="handleEdit()"
+    />
+  }
+</div>

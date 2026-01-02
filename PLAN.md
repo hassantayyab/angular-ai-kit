@@ -12,10 +12,10 @@
 
 | Release             | Status         | Progress |
 | ------------------- | -------------- | -------- |
-| **MVP (v1.0)**      | 🔄 In Progress | 90%      |
+| **MVP (v1.0)**      | 🔄 In Progress | 95%      |
 | **Post-MVP (v1.x)** | ⏳ Planned     | 0%       |
 
-**Last Updated:** December 27, 2025
+**Last Updated:** January 1, 2026
 
 ---
 
@@ -177,21 +177,30 @@ Text input with modern toolbar.
 | **@Mentions**     | Context pills for adding files/docs             |
 | **Research Mode** | Toggle for web search integration               |
 
-## Display Components 🏷️ Coming Soon
+## Display Components ✅ Done
 
 | Component            | Description                                                      |
 | -------------------- | ---------------------------------------------------------------- |
 | **CodeBlock**        | Syntax highlighting with highlight.js, copy button, line numbers |
 | **MarkdownRenderer** | Parse & render markdown, code block integration, sanitization    |
-| **TokenCounter**     | Display token usage, limit indicator, warning states             |
+| **FeedbackButtons**  | Thumbs up/down toggle buttons for AI response feedback           |
+| **ResponseActions**  | Copy, regenerate, and feedback buttons for AI responses          |
+
+## Chat Components ✅ Done
+
+| Component             | Description                                                 |
+| --------------------- | ----------------------------------------------------------- |
+| **MessageActions**    | Copy and edit action buttons for user messages              |
+| **PromptSuggestions** | Badge/chip list for suggested prompts and quick actions     |
+| **ConversationList**  | Grouped conversation history with date labels and selection |
 
 ## Control Components 🏷️ Coming Soon
 
-| Component            | Description                                        |
-| -------------------- | -------------------------------------------------- |
-| **ModelSelector**    | Dropdown for model selection (GPT-4, Claude, etc.) |
-| **ConversationList** | Sidebar with chat history, search, delete          |
-| **RegenerateButton** | Retry button with loading state                    |
+| Component            | Description                                          |
+| -------------------- | ---------------------------------------------------- |
+| **TokenCounter**     | Display token usage, limit indicator, warning states |
+| **ModelSelector**    | Dropdown for model selection (GPT-4, Claude, etc.)   |
+| **RegenerateButton** | Retry button with loading state                      |
 
 ## Advanced Features 🏷️ Coming Soon
 
@@ -255,7 +264,7 @@ angular-ai-kit/
 
 # 🎯 MVP Checklist
 
-**Components (6/6)** ✅
+**Core Components (6/6)** ✅
 
 - [x] ChatContainer
 - [x] MessageList
@@ -263,6 +272,16 @@ angular-ai-kit/
 - [x] StreamingText
 - [x] TypingIndicator
 - [x] ChatInput
+
+**Sub-Components (7/7)** ✅
+
+- [x] CodeBlock
+- [x] MarkdownRenderer
+- [x] FeedbackButtons
+- [x] ResponseActions
+- [x] MessageActions
+- [x] PromptSuggestions
+- [x] ConversationList
 
 **Infrastructure (4/4)** ✅
 
@@ -280,4 +299,4 @@ angular-ai-kit/
 
 ---
 
-_Last Updated: December 27, 2025_
+_Last Updated: January 1, 2026_

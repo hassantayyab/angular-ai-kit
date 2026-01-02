@@ -9,36 +9,14 @@
     aria-hidden="true"
   />
 
-  <!-- Suggestions Template -->
-  <ng-template #suggestionsTemplate>
-    <div
-      class="flex flex-wrap items-center justify-center gap-2"
-      role="group"
-      aria-label="Suggested prompts"
-    >
-      @for (suggestion of suggestions(); track suggestion.label) {
-        <button
-          type="button"
-          hlmBtn
-          variant="outline"
-          class="rounded-full px-3 text-xs"
-          (click)="handleSuggestionClick(suggestion)"
-          [attr.aria-label]="'Use suggestion: ' + suggestion.label"
-        >
-          @if (suggestion.icon) {
-            <span>{{ suggestion.icon }}</span>
-          }
-          {{ suggestion.label }}
-        </button>
-      }
-    </div>
-  </ng-template>
-
   <!-- Quick Suggestions (top position) -->
   @if (suggestionsVisible() && suggestionsPosition() === 'top') {
-    <div class="mb-3">
-      <ng-container *ngTemplateOutlet="suggestionsTemplate" />
-    </div>
+    <ai-prompt-suggestions
+      [suggestions]="suggestions()"
+      position="top"
+      customClasses="mb-3"
+      (select)="handleSuggestionSelect($event)"
+    />
   }
 
   <!-- Main Input Group -->
@@ -340,8 +318,11 @@
 
   <!-- Quick Suggestions (bottom position) -->
   @if (suggestionsVisible() && suggestionsPosition() === 'bottom') {
-    <div class="mt-3">
-      <ng-container *ngTemplateOutlet="suggestionsTemplate" />
-    </div>
+    <ai-prompt-suggestions
+      [suggestions]="suggestions()"
+      position="bottom"
+      customClasses="mt-3"
+      (select)="handleSuggestionSelect($event)"
+    />
   }
 </div>

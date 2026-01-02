@@ -32,6 +32,16 @@ const ICONS = {
     'M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10',
   fileUpload:
     'M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12',
+  feedbackButtons:
+    'M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L7 11v9m7-10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.5',
+  responseActions:
+    'M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z',
+  messageActions:
+    'M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z',
+  promptSuggestions:
+    'M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z',
+  conversationList:
+    'M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10',
 };
 
 /** Component card data structure */
@@ -98,21 +108,52 @@ export class DocsOverviewComponent {
       description: 'Animated bouncing dots indicating AI is processing.',
       link: 'components/typing-indicator',
     },
-  ];
-
-  /** Coming soon components (disabled) */
-  comingSoonComponents: ComponentInfo[] = [
     {
       iconPath: ICONS.codeBlock,
       title: 'Code Block',
       description:
         'Syntax highlighted code display with copy button and line numbers.',
-      badge: 'Coming Soon',
+      link: 'components/code-block',
     },
     {
       iconPath: ICONS.markdownRenderer,
       title: 'Markdown Renderer',
       description: 'Rich markdown rendering with code blocks and sanitization.',
+      link: 'components/markdown-renderer',
+    },
+    {
+      iconPath: ICONS.feedbackButtons,
+      title: 'Feedback Buttons',
+      description: 'Thumbs up/down toggle buttons for AI response feedback.',
+      link: 'components/feedback-buttons',
+    },
+    {
+      iconPath: ICONS.responseActions,
+      title: 'Response Actions',
+      description: 'Copy, regenerate, and feedback buttons for AI responses.',
+      link: 'components/response-actions',
+    },
+    {
+      iconPath: ICONS.messageActions,
+      title: 'Message Actions',
+      description: 'Copy and edit action buttons for user messages.',
+      link: 'components/message-actions',
+    },
+    {
+      iconPath: ICONS.promptSuggestions,
+      title: 'Prompt Suggestions',
+      description: 'Badge/chip list for suggested prompts and quick actions.',
+      link: 'components/prompt-suggestions',
+    },
+  ];
+
+  /** Coming soon components (disabled) */
+  comingSoonComponents: ComponentInfo[] = [
+    {
+      iconPath: ICONS.conversationList,
+      title: 'Conversation List',
+      description:
+        'Grouped conversation history with date labels and selection.',
       badge: 'Coming Soon',
     },
     {
@@ -132,13 +173,6 @@ export class DocsOverviewComponent {
       iconPath: ICONS.fileUpload,
       title: 'File Upload',
       description: 'Drag and drop file attachment with preview and validation.',
-      badge: 'Coming Soon',
-    },
-    {
-      iconPath: ICONS.modelSelector,
-      title: 'Conversation List',
-      description:
-        'Sidebar with chat history, search, and conversation management.',
       badge: 'Coming Soon',
     },
   ];

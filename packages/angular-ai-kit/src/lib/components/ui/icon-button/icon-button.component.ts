@@ -46,7 +46,7 @@ export type IconButtonVariant = 'ghost' | 'outline' | 'default';
       [disabled]="disabled()"
       (click)="handleClick($event)"
     >
-      <ng-icon hlm [name]="icon()" [size]="iconSize()" />
+      <ng-icon [name]="icon()" [size]="iconSize()" class="shrink-0" />
     </button>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -54,7 +54,7 @@ export type IconButtonVariant = 'ghost' | 'outline' | 'default';
   imports: [NgIcon],
   viewProviders: [provideIcons(AI_ICONS)],
   host: {
-    class: 'ai-icon-button-host inline-flex',
+    class: 'ai-icon-button-host contents',
   },
 })
 export class IconButtonComponent {
@@ -94,12 +94,12 @@ export class IconButtonComponent {
   // Computed Properties
   // ==========================================
 
-  /** Icon size based on button size */
+  /** Icon size in pixels based on button size */
   iconSize = computed(() => {
     const sizeMap: Record<IconButtonSize, string> = {
-      sm: 'xs',
-      md: 'sm',
-      lg: 'base',
+      sm: '12px', // xs
+      md: '16px', // sm
+      lg: '24px', // base
     };
     return sizeMap[this.size()];
   });
@@ -112,8 +112,8 @@ export class IconButtonComponent {
       'rounded',
       'cursor-pointer',
       'transition-colors duration-150',
-      // Focus styles
-      'focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 focus:ring-offset-background',
+      // Focus styles - subtle, no ring
+      'focus:outline-none focus-visible:outline-none',
       // Size variants
       {
         'h-6 w-6': this.size() === 'sm',

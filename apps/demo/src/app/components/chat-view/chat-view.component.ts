@@ -1,4 +1,4 @@
-import { ChatMessage } from '@angular-ai-kit/core';
+import { ChatMessage, PromptSuggestion } from '@angular-ai-kit/core';
 import {
   HlmSidebarService,
   HlmSidebarTrigger,
@@ -19,10 +19,7 @@ import {
   viewChild,
 } from '@angular/core';
 import { ChatService } from '../../services/chat.service';
-import {
-  ChatInputComponent,
-  ChatSuggestion,
-} from '../chat-input/chat-input.component';
+import { ChatInputComponent } from '../chat-input/chat-input.component';
 import { EmptyStateComponent } from '../empty-state/empty-state.component';
 import { MessageListComponent } from '../message-list';
 
@@ -67,7 +64,7 @@ export class ChatViewComponent implements AfterViewInit {
   isEmpty = this.chatService.isEmptyConversation;
 
   // Quick suggestions (shown only when conversation is empty)
-  chatSuggestions = signal<ChatSuggestion[]>([
+  chatSuggestions = signal<PromptSuggestion[]>([
     {
       icon: '💡',
       label: 'Explain components',

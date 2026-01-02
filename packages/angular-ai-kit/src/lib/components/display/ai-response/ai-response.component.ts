@@ -1,42 +1,29 @@
 import { cn } from '@angular-ai-kit/utils';
-import { isPlatformBrowser } from '@angular/common';
 import {
-  AfterViewInit,
   ChangeDetectionStrategy,
   Component,
-  ElementRef,
-  PLATFORM_ID,
   ViewEncapsulation,
   computed,
-  effect,
-  inject,
   input,
   output,
   signal,
-  viewChild,
 } from '@angular/core';
-import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
-import { MarkdownService } from '../../../services/markdown.service';
-import { IconButtonComponent } from '../../ui/icon-button';
+import { MarkdownRendererComponent } from '../markdown-renderer';
+import { ResponseActionsComponent } from '../response-actions';
 
 /**
  * AI Response Component
  *
- * Displays AI response content as plain text with markdown rendering,
- * syntax highlighting, streaming cursor, and action buttons.
- * The component has no card or wrapper styling - just the text content.
+ * Displays AI response content with markdown rendering, syntax highlighting,
+ * streaming cursor, and action buttons. Uses MarkdownRenderer and ResponseActions
+ * sub-components for a clean, composable architecture.
  *
  * Features:
- * - Plain text display (no card/wrapper)
- * - Full markdown support (GFM)
+ * - Full markdown support (GFM) via MarkdownRenderer
  * - Code blocks with syntax highlighting
  * - Copy button on each code block
  * - Streaming cursor indicator
- * - Action buttons: copy, regenerate, thumbs up/down
- *
- * Note: Streaming animation is handled by the service providing the content.
- * This component simply renders the content it receives with a cursor when
- * isStreaming is true.
+ * - Action buttons: copy, regenerate, thumbs up/down via ResponseActions
  *
  * @example
  * ```html
@@ -55,7 +42,7 @@ import { IconButtonComponent } from '../../ui/icon-button';
   templateUrl: './ai-response.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
-  imports: [IconButtonComponent],
+  imports: [MarkdownRendererComponent, ResponseActionsComponent],
   host: {
     class: 'ai-response-host block',
     '[attr.aria-live]': '"polite"',
@@ -66,14 +53,7 @@ import { IconButtonComponent } from '../../ui/icon-button';
     '(focusout)': 'handleFocusOut()',
   },
 })
-export class AiResponseComponent implements AfterViewInit {
-  private platformId = inject(PLATFORM_ID);
-  private markdownService = inject(MarkdownService);
-  private sanitizer = inject(DomSanitizer);
-
-  // View children
-  private contentRef = viewChild<ElementRef<HTMLDivElement>>('contentArea');
-
+export class AiResponseComponent {
   // ==========================================
   // Inputs
   // ==========================================
@@ -90,6 +70,18 @@ export class AiResponseComponent implements AfterViewInit {
   /** Whether to show the streaming cursor */
   showCursor = input<boolean>(true);
 
+  /** Whether to show the copy button */
+  showCopy = input<boolean>(true);
+
+  /** Whether to show the regenerate button */
+  showRegenerate = input<boolean>(true);
+
+  /** Whether to show feedback buttons */
+  showFeedback = input<boolean>(true);
+
+  /** Whether actions are always visible (vs hover/focus) */
+  actionsAlwaysVisible = input<boolean>(false);
+
   /** Custom CSS classes */
   customClasses = input<string>('');
 
@@ -99,6 +91,9 @@ export class AiResponseComponent implements AfterViewInit {
 
   /** Emitted when copy button is clicked with full content */
   copy = output<string>();
+
+  /** Emitted when a code block is copied */
+  codeBlockCopy = output<string>();
 
   /** Emitted when regenerate button is clicked */
   regenerate = output<void>();
@@ -119,55 +114,16 @@ export class AiResponseComponent implements AfterViewInit {
   private _isFocused = signal(false);
   isFocused = this._isFocused.asReadonly();
 
-  /** Whether copy was just clicked (for feedback) */
-  justCopied = signal(false);
-
-  /** Thumbs up selected state */
-  thumbsUpSelected = signal(false);
-
-  /** Thumbs down selected state */
-  thumbsDownSelected = signal(false);
-
-  /** Icon to show for copy button */
-  copyIcon = computed(() => (this.justCopied() ? 'lucideCheck' : 'lucideCopy'));
-
   // ==========================================
   // Computed Properties
   // ==========================================
 
-  /** Whether actions should be visible */
-  actionsVisible = computed(
-    () => this.showActions() || this.isHovered() || this.isFocused()
-  );
-
-  /**
-   * Rendered HTML from markdown.
-   *
-   * Renders content() directly - the streaming is handled by the service
-   * that provides the content, not by this component.
-   *
-   * @security This uses `bypassSecurityTrustHtml` to allow interactive elements
-   * (copy buttons) in rendered code blocks. This is safe ONLY when:
-   * - Content comes from trusted sources (your own AI backend, not user input)
-   * - The MarkdownService properly sanitizes HTML before rendering
-   * - You control the markdown parsing pipeline
-   *
-   * NEVER use this component with untrusted/unsanitized user-generated content.
-   * If displaying user content, use a sanitized markdown renderer instead.
-   */
-  renderedHtml = computed((): SafeHtml => {
-    const html = this.markdownService.parse(this.content());
-    // Bypass Angular sanitization to allow copy buttons in code blocks
-    // See @security note above for usage requirements
-    return this.sanitizer.bypassSecurityTrustHtml(html);
-  });
-
-  /** Container classes - no card/wrapper, just plain text */
+  /** Container classes */
   containerClasses = computed(() =>
     cn('ai-response relative', this.customClasses())
   );
 
-  /** Content area classes */
+  /** Content wrapper classes */
   contentClasses = computed(() =>
     cn('ai-response-content text-sm leading-relaxed text-foreground')
   );
@@ -177,121 +133,36 @@ export class AiResponseComponent implements AfterViewInit {
     cn('ai-response-cursor inline-block ml-0.5 text-foreground animate-pulse')
   );
 
-  /** Actions container classes */
-  actionsClasses = computed(() =>
-    cn(
-      'ai-response-actions flex items-center gap-1 mt-2',
-      'transition-opacity duration-200',
-      {
-        'opacity-100 visible': this.actionsVisible(),
-        'opacity-0 invisible': !this.actionsVisible(),
-      }
-    )
-  );
-
-  constructor() {
-    // Add copy buttons when streaming completes
-    effect(() => {
-      const streaming = this.isStreaming();
-      if (!streaming && isPlatformBrowser(this.platformId)) {
-        // Content is complete, add copy buttons to code blocks
-        // Use setTimeout to ensure DOM is updated
-        setTimeout(() => this.addCodeBlockCopyButtons(), 0);
-      }
-    });
-  }
-
-  ngAfterViewInit(): void {
-    // Add copy buttons to code blocks after view init
-    if (!this.isStreaming()) {
-      this.addCodeBlockCopyButtons();
-    }
-  }
-
-  // ==========================================
-  // Private Methods
-  // ==========================================
-
-  /** Attach click handlers to code block copy buttons */
-  private addCodeBlockCopyButtons(): void {
-    if (!isPlatformBrowser(this.platformId)) return;
-
-    const contentEl = this.contentRef()?.nativeElement;
-    if (!contentEl) return;
-
-    // Find all copy buttons generated by the markdown renderer
-    const copyButtons = contentEl.querySelectorAll<HTMLButtonElement>(
-      '.ai-code-block-copy'
-    );
-    copyButtons.forEach((btn) => {
-      // Skip if already has a handler attached
-      if (btn.dataset['handlerAttached']) return;
-      btn.dataset['handlerAttached'] = 'true';
-
-      btn.addEventListener('click', () => {
-        const encodedCode = btn.dataset['code'];
-        if (encodedCode) {
-          const code = decodeURIComponent(encodedCode);
-          navigator.clipboard.writeText(code).then(() => {
-            // Update button to show checkmark icon
-            const originalHtml = btn.innerHTML;
-            btn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>`;
-            btn.classList.add('copied');
-
-            setTimeout(() => {
-              btn.innerHTML = originalHtml;
-              btn.classList.remove('copied');
-            }, 2000);
-          });
-        }
-      });
-    });
-  }
+  /** Actions wrapper classes */
+  actionsWrapperClasses = computed(() => cn('mt-2'));
 
   // ==========================================
   // Event Handlers
   // ==========================================
 
-  /** Handle copy button click */
-  handleCopy(): void {
-    const content = this.content();
+  /** Handle copy from ResponseActions */
+  handleCopy(content: string): void {
     this.copy.emit(content);
-
-    if (isPlatformBrowser(this.platformId) && navigator.clipboard) {
-      navigator.clipboard.writeText(content).then(() => {
-        this.justCopied.set(true);
-        setTimeout(() => this.justCopied.set(false), 2000);
-      });
-    }
   }
 
-  /** Handle regenerate button click */
+  /** Handle code block copy from MarkdownRenderer */
+  handleCodeBlockCopy(code: string): void {
+    this.codeBlockCopy.emit(code);
+  }
+
+  /** Handle regenerate from ResponseActions */
   handleRegenerate(): void {
     this.regenerate.emit();
   }
 
-  /** Handle thumbs up click */
+  /** Handle thumbs up from ResponseActions */
   handleThumbsUp(): void {
-    const wasSelected = this.thumbsUpSelected();
-    this.thumbsUpSelected.set(!wasSelected);
-    if (this.thumbsDownSelected()) {
-      this.thumbsDownSelected.set(false);
-    }
-    if (!wasSelected) {
-      this.thumbsUp.emit();
-    }
+    this.thumbsUp.emit();
   }
 
-  /** Handle thumbs down click */
+  /** Handle thumbs down from ResponseActions */
   handleThumbsDown(): void {
-    const wasSelected = this.thumbsDownSelected();
-    this.thumbsDownSelected.set(!wasSelected);
-    if (this.thumbsUpSelected()) {
-      this.thumbsUpSelected.set(false);
-    }
-    if (!wasSelected) {
-      this.thumbsDown.emit();
-    }
+    this.thumbsDown.emit();
   }
 
   /** Handle mouse enter */

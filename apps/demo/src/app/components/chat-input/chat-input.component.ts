@@ -12,6 +12,11 @@ import {
   lucideSearch,
   lucideX,
 } from '@ng-icons/lucide';
+import {
+  PromptSuggestion,
+  PromptSuggestionsComponent,
+  SuggestionsPosition,
+} from '@angular-ai-kit/core';
 import { HlmAvatarImports } from '@angular-ai-kit/spartan-ui/avatar';
 import { HlmBadge } from '@angular-ai-kit/spartan-ui/badge';
 import { HlmButton } from '@angular-ai-kit/spartan-ui/button';
@@ -22,7 +27,7 @@ import { HlmInputGroupImports } from '@angular-ai-kit/spartan-ui/input-group';
 import { HlmPopoverImports } from '@angular-ai-kit/spartan-ui/popover';
 import { HlmSwitch } from '@angular-ai-kit/spartan-ui/switch';
 import { cn } from '@angular-ai-kit/utils';
-import { NgTemplateOutlet, isPlatformBrowser } from '@angular/common';
+import { isPlatformBrowser } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -50,23 +55,6 @@ export interface SourceOption {
 }
 
 /**
- * Suggestion item for quick prompts
- */
-export interface ChatSuggestion {
-  /** Short display text for badge */
-  label: string;
-  /** Full prompt text to fill input */
-  prompt: string;
-  /** Optional emoji/icon */
-  icon?: string;
-}
-
-/**
- * Position of suggestion badges relative to the input
- */
-export type SuggestionsPosition = 'top' | 'bottom';
-
-/**
  * Model option for the model selector dropdown
  */
 export interface ModelOption {
@@ -88,6 +76,7 @@ export interface ContextItem {
  *
  * Auto-resizing textarea with send button for chat input.
  * Supports Enter to send, Shift+Enter for newline.
+ * Uses PromptSuggestions component for quick prompt suggestions.
  *
  * @example
  * ```html
@@ -114,9 +103,9 @@ export interface ContextItem {
     HlmBadge,
     HlmSwitch,
     NgIcon,
-    NgTemplateOutlet,
     BrnPopoverImports,
     BrnCommandEmpty,
+    PromptSuggestionsComponent,
   ],
   providers: [
     provideIcons({
@@ -155,15 +144,15 @@ export class ChatInputComponent {
   showModelName = input<boolean>(true);
   showMicButton = input<boolean>(true);
 
-  // Suggestions feature
-  suggestions = input<ChatSuggestion[]>([]);
+  // Suggestions feature (uses library types)
+  suggestions = input<PromptSuggestion[]>([]);
   showSuggestions = input<boolean>(true);
   suggestionsPosition = input<SuggestionsPosition>('bottom');
 
   // Outputs
   messageSend = output<string>();
   inputCleared = output<void>();
-  suggestionSelect = output<ChatSuggestion>();
+  suggestionSelect = output<PromptSuggestion>();
 
   // Button action outputs
   contextClick = output<void>();
@@ -215,8 +204,6 @@ export class ChatInputComponent {
 
   // Computed: check if has contexts
   hasContext = computed(() => this.selectedContexts().length > 0);
-
-  // Context button uses icon-sm when has context, otherwise sm (handled in template)
 
   // Computed: available context items (not already selected)
   availableContextItems = computed(() => {
@@ -290,8 +277,8 @@ export class ChatInputComponent {
     this.resetTextarea();
   }
 
-  /** Handle suggestion badge click */
-  handleSuggestionClick(suggestion: ChatSuggestion): void {
+  /** Handle suggestion selection from PromptSuggestions component */
+  handleSuggestionSelect(suggestion: PromptSuggestion): void {
     this.inputValue.set(suggestion.prompt);
     this.suggestionSelect.emit(suggestion);
     this.focus();

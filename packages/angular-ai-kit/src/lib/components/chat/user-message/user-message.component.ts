@@ -1,20 +1,17 @@
 import { cn } from '@angular-ai-kit/utils';
-import { isPlatformBrowser } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
   ElementRef,
-  PLATFORM_ID,
   ViewEncapsulation,
   computed,
-  inject,
   input,
   output,
   signal,
   viewChild,
 } from '@angular/core';
 import { UserMessage } from '../../../types';
-import { IconButtonComponent } from '../../ui/icon-button';
+import { MessageActionsComponent } from '../message-actions';
 import { EditEvent } from './user-message.types';
 
 /**
@@ -22,11 +19,12 @@ import { EditEvent } from './user-message.types';
  *
  * Displays user chat messages with a compact card style, hover actions,
  * inline editing, and text truncation with "show more" functionality.
+ * Uses MessageActions sub-component for copy/edit buttons.
  *
  * Features:
  * - Compact card (not full-width), right-aligned
  * - No avatar
- * - Copy and Edit buttons appear on hover below the card
+ * - Copy and Edit buttons via MessageActions on hover
  * - Inline editing with Save/Cancel
  * - Truncation with "Show more/less" for long messages
  *
@@ -44,7 +42,7 @@ import { EditEvent } from './user-message.types';
   templateUrl: './user-message.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
-  imports: [IconButtonComponent],
+  imports: [MessageActionsComponent],
   host: {
     class: 'ai-user-message-host block',
     '(mouseenter)': 'handleMouseEnter()',
@@ -54,8 +52,6 @@ import { EditEvent } from './user-message.types';
   },
 })
 export class UserMessageComponent {
-  private platformId = inject(PLATFORM_ID);
-
   // View children
   private editTextarea =
     viewChild<ElementRef<HTMLTextAreaElement>>('editTextarea');
@@ -69,6 +65,12 @@ export class UserMessageComponent {
 
   /** Maximum characters before truncation */
   maxChars = input<number>(200);
+
+  /** Whether to show the copy button */
+  showCopy = input<boolean>(true);
+
+  /** Whether to show the edit button */
+  showEdit = input<boolean>(true);
 
   /** Custom CSS classes */
   customClasses = input<string>('');
@@ -92,9 +94,8 @@ export class UserMessageComponent {
   private _isExpanded = signal(false);
   private _isEditing = signal(false);
   private _editContent = signal('');
-  private _isCopied = signal(false);
 
-  // Readonly signals
+  // Readonly signals for template
   isHovered = this._isHovered.asReadonly();
   isFocused = this._isFocused.asReadonly();
   isExpanded = this._isExpanded.asReadonly();
@@ -128,9 +129,6 @@ export class UserMessageComponent {
     }
     return content.substring(0, this.maxChars()) + '...';
   });
-
-  /** Icon to show for copy button */
-  copyIcon = computed(() => (this._isCopied() ? 'lucideCheck' : 'lucideCopy'));
 
   /** ARIA label for screen readers */
   ariaLabel = computed(() => {
@@ -172,18 +170,8 @@ export class UserMessageComponent {
     )
   );
 
-  /** Actions container classes */
-  actionsClasses = computed(() =>
-    cn(
-      'ai-user-message-actions',
-      'flex gap-1 mt-1.5',
-      'transition-opacity duration-200',
-      {
-        'opacity-100': this.actionsVisible(),
-        'opacity-0 pointer-events-none': !this.actionsVisible(),
-      }
-    )
-  );
+  /** Actions wrapper classes */
+  actionsWrapperClasses = computed(() => cn('mt-1.5'));
 
   /** Textarea classes for edit mode */
   textareaClasses = computed(() =>
@@ -206,17 +194,9 @@ export class UserMessageComponent {
     this._isExpanded.update((v) => !v);
   }
 
-  /** Handle copy button click */
+  /** Handle copy from MessageActions */
   handleCopy(): void {
-    const content = this.message().content;
-    this.copy.emit(content);
-
-    if (isPlatformBrowser(this.platformId) && navigator.clipboard) {
-      navigator.clipboard.writeText(content).then(() => {
-        this._isCopied.set(true);
-        setTimeout(() => this._isCopied.set(false), 2000);
-      });
-    }
+    this.copy.emit(this.message().content);
   }
 
   /** Start editing mode */

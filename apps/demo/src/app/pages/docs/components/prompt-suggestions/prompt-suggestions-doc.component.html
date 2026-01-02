@@ -1,0 +1,61 @@
+<div class="space-y-8">
+  <!-- Header -->
+  <div>
+    <h1 class="text-3xl font-bold">Prompt Suggestions</h1>
+    <p class="text-muted-foreground mt-2">
+      Displays suggestion badges/chips for quick prompts. Designed to be placed
+      above or below a chat input for quick actions.
+    </p>
+  </div>
+
+  <!-- Installation -->
+  <app-doc-section title="Installation">
+    <app-doc-code-block [code]="installCode" language="typescript" />
+  </app-doc-section>
+
+  <!-- Live Demo -->
+  <app-doc-section title="Live Demo">
+    <app-doc-demo-card>
+      <ai-prompt-suggestions
+        [suggestions]="demoSuggestions"
+        position="bottom"
+        (select)="handleSelect($event)"
+      />
+
+      @if (selectedSuggestion()) {
+        <div class="bg-muted mt-4 rounded-lg p-3">
+          <p class="text-sm font-medium">Selected:</p>
+          <p class="text-muted-foreground text-sm">
+            {{ selectedSuggestion()?.prompt }}
+          </p>
+        </div>
+      }
+    </app-doc-demo-card>
+  </app-doc-section>
+
+  <!-- Features -->
+  <app-doc-features-list title="Features" [items]="features" />
+
+  <!-- API Reference -->
+  <app-doc-section title="API Reference">
+    <app-doc-api-table title="Inputs" [properties]="inputs" />
+    <app-doc-api-table title="Outputs" [properties]="outputs" class="mt-4" />
+  </app-doc-section>
+
+  <!-- Interface -->
+  <app-doc-section title="TypeScript Interface">
+    <app-doc-code-block
+      [code]="interfaceCode"
+      [multiline]="true"
+      language="typescript"
+    />
+  </app-doc-section>
+
+  <!-- Usage Example -->
+  <app-doc-section title="Usage Example">
+    <app-doc-code-block [code]="usageCode" [multiline]="true" language="html" />
+  </app-doc-section>
+
+  <!-- Accessibility -->
+  <app-doc-features-list title="Accessibility" [items]="accessibility" />
+</div>

@@ -51,23 +51,16 @@
     }
   </div>
 
-  <!-- Action Buttons (visible on hover) -->
+  <!-- Action Buttons via MessageActions -->
   @if (!isEditing()) {
-    <div [class]="actionsClasses()" [attr.aria-hidden]="!actionsVisible()">
-      <!-- Copy Button -->
-      <ai-icon-button
-        [icon]="copyIcon()"
-        ariaLabel="Copy message"
-        size="sm"
-        (clicked)="handleCopy()"
-      />
-
-      <!-- Edit Button -->
-      <ai-icon-button
-        icon="lucidePencil"
-        ariaLabel="Edit message"
-        size="sm"
-        (clicked)="startEdit()"
+    <div [class]="actionsWrapperClasses()">
+      <ai-message-actions
+        [content]="message().content"
+        [showCopy]="showCopy()"
+        [showEdit]="showEdit()"
+        [isVisible]="actionsVisible()"
+        (copy)="handleCopy()"
+        (edit)="startEdit()"
       />
     </div>
   }

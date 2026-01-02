@@ -167,9 +167,9 @@ export class SidebarComponent {
       route: '/docs/components/ai-response',
     },
     {
-      name: 'MessageBubble',
-      label: 'Message Bubble',
-      route: '/docs/components/message-bubble',
+      name: 'UserMessage',
+      label: 'User Message',
+      route: '/docs/components/user-message',
     },
     {
       name: 'ChatInput',
@@ -185,6 +185,36 @@ export class SidebarComponent {
       name: 'TypingIndicator',
       label: 'Typing Indicator',
       route: '/docs/components/typing-indicator',
+    },
+    {
+      name: 'CodeBlock',
+      label: 'Code Block',
+      route: '/docs/components/code-block',
+    },
+    {
+      name: 'MarkdownRenderer',
+      label: 'Markdown Renderer',
+      route: '/docs/components/markdown-renderer',
+    },
+    {
+      name: 'FeedbackButtons',
+      label: 'Feedback Buttons',
+      route: '/docs/components/feedback-buttons',
+    },
+    {
+      name: 'ResponseActions',
+      label: 'Response Actions',
+      route: '/docs/components/response-actions',
+    },
+    {
+      name: 'MessageActions',
+      label: 'Message Actions',
+      route: '/docs/components/message-actions',
+    },
+    {
+      name: 'PromptSuggestions',
+      label: 'Prompt Suggestions',
+      route: '/docs/components/prompt-suggestions',
     },
   ];
 

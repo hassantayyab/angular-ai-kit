@@ -1,56 +1,30 @@
 <div [class]="containerClasses()">
-  <!-- Content Area -->
-  <div #contentArea>
-    <!-- Always render markdown (progressively during streaming) -->
-    <div [class]="contentClasses()">
-      <span [innerHTML]="renderedHtml()"></span>
-      @if (isStreaming() && showCursor()) {
-        <span [class]="cursorClasses()">▊</span>
-      }
-    </div>
+  <!-- Content Area with Markdown Rendering -->
+  <div [class]="contentClasses()">
+    <ai-markdown-renderer
+      [content]="content()"
+      (codeBlockCopy)="handleCodeBlockCopy($event)"
+    />
+    @if (isStreaming() && showCursor()) {
+      <span [class]="cursorClasses()">▊</span>
+    }
   </div>
 
   <!-- Action Bar -->
   @if (showActions()) {
-    <div [class]="actionsClasses()">
-      <!-- Copy Button -->
-      <ai-icon-button
-        [icon]="copyIcon()"
-        [ariaLabel]="justCopied() ? 'Copied!' : 'Copy response'"
-        [customClasses]="justCopied() ? 'text-emerald-500' : ''"
-        (clicked)="handleCopy()"
-      />
-
-      <!-- Regenerate Button -->
-      <ai-icon-button
-        icon="lucideRefreshCw"
-        ariaLabel="Regenerate response"
-        (clicked)="handleRegenerate()"
-      />
-
-      <!-- Spacer -->
-      <div class="flex-1"></div>
-
-      <!-- Thumbs Up Button -->
-      <ai-icon-button
-        icon="lucideThumbsUp"
-        [ariaLabel]="
-          thumbsUpSelected() ? 'Remove positive feedback' : 'Good response'
-        "
-        [ariaPressed]="thumbsUpSelected()"
-        [customClasses]="thumbsUpSelected() ? 'text-emerald-500' : ''"
-        (clicked)="handleThumbsUp()"
-      />
-
-      <!-- Thumbs Down Button -->
-      <ai-icon-button
-        icon="lucideThumbsDown"
-        [ariaLabel]="
-          thumbsDownSelected() ? 'Remove negative feedback' : 'Bad response'
-        "
-        [ariaPressed]="thumbsDownSelected()"
-        [customClasses]="thumbsDownSelected() ? 'text-red-500' : ''"
-        (clicked)="handleThumbsDown()"
+    <div [class]="actionsWrapperClasses()">
+      <ai-response-actions
+        [content]="content()"
+        [showCopy]="showCopy()"
+        [showRegenerate]="showRegenerate()"
+        [showFeedback]="showFeedback()"
+        [alwaysVisible]="actionsAlwaysVisible()"
+        [isHovered]="isHovered()"
+        [isFocused]="isFocused()"
+        (copy)="handleCopy($event)"
+        (regenerate)="handleRegenerate()"
+        (thumbsUp)="handleThumbsUp()"
+        (thumbsDown)="handleThumbsDown()"
       />
     </div>
   }

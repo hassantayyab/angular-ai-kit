@@ -1,0 +1,19 @@
+<!-- Thumbs Up Button -->
+<ai-icon-button
+  icon="lucideThumbsUp"
+  [ariaLabel]="thumbsUpLabel()"
+  [ariaPressed]="isThumbsUpSelected()"
+  [disabled]="disabled()"
+  [customClasses]="thumbsUpClasses()"
+  (clicked)="handleThumbsUp()"
+/>
+
+<!-- Thumbs Down Button -->
+<ai-icon-button
+  icon="lucideThumbsDown"
+  [ariaLabel]="thumbsDownLabel()"
+  [ariaPressed]="isThumbsDownSelected()"
+  [disabled]="disabled()"
+  [customClasses]="thumbsDownClasses()"
+  (clicked)="handleThumbsDown()"
+/>

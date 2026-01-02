@@ -1,0 +1,15 @@
+<div [class]="containerClasses()" role="group" aria-label="Suggested prompts">
+  @for (suggestion of suggestions(); track suggestion.label) {
+    <button
+      type="button"
+      [class]="buttonClasses()"
+      (click)="handleClick(suggestion)"
+      [attr.aria-label]="'Use suggestion: ' + suggestion.label"
+    >
+      @if (suggestion.icon) {
+        <span>{{ suggestion.icon }}</span>
+      }
+      {{ suggestion.label }}
+    </button>
+  }
+</div>

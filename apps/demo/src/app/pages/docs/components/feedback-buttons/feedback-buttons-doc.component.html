@@ -1,0 +1,66 @@
+<div class="space-y-8">
+  <!-- Header -->
+  <div>
+    <h1 class="text-3xl font-bold">Feedback Buttons</h1>
+    <p class="text-muted-foreground mt-2">
+      Thumbs up/down toggle buttons for collecting user feedback on AI
+      responses. Supports mutual exclusivity and visual feedback states.
+    </p>
+  </div>
+
+  <!-- Installation -->
+  <app-doc-section title="Installation">
+    <app-doc-code-block [code]="installCode" language="typescript" />
+  </app-doc-section>
+
+  <!-- Live Demo -->
+  <app-doc-section title="Live Demo">
+    <app-doc-demo-card>
+      <div class="flex items-center gap-4">
+        <ai-feedback-buttons
+          [value]="feedbackValue()"
+          [disabled]="disabled()"
+          (valueChange)="handleValueChange($event)"
+        />
+        <span class="text-muted-foreground text-sm">
+          Current: {{ feedbackValue() || 'none' }}
+        </span>
+        <button
+          type="button"
+          class="text-muted-foreground text-sm underline"
+          (click)="resetDemo()"
+        >
+          Reset
+        </button>
+      </div>
+    </app-doc-demo-card>
+  </app-doc-section>
+
+  <!-- Configuration -->
+  <app-doc-section title="Configuration">
+    <app-doc-demo-card>
+      <app-doc-control-toggle
+        label="Disabled"
+        [checked]="disabled()"
+        (checkedChange)="disabled.set($event)"
+      />
+    </app-doc-demo-card>
+  </app-doc-section>
+
+  <!-- Features -->
+  <app-doc-features-list title="Features" [items]="features" />
+
+  <!-- API Reference -->
+  <app-doc-section title="API Reference">
+    <app-doc-api-table title="Inputs" [properties]="inputs" />
+    <app-doc-api-table title="Outputs" [properties]="outputs" class="mt-4" />
+  </app-doc-section>
+
+  <!-- Usage Example -->
+  <app-doc-section title="Usage Example">
+    <app-doc-code-block [code]="usageCode" [multiline]="true" language="html" />
+  </app-doc-section>
+
+  <!-- Accessibility -->
+  <app-doc-features-list title="Accessibility" [items]="accessibility" />
+</div>

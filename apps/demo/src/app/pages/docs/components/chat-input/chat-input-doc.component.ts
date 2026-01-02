@@ -1,3 +1,4 @@
+import { PromptSuggestion, SuggestionsPosition } from '@angular-ai-kit/core';
 import { HlmButton } from '@angular-ai-kit/spartan-ui/button';
 import {
   ChangeDetectionStrategy,
@@ -5,11 +6,7 @@ import {
   ViewEncapsulation,
   signal,
 } from '@angular/core';
-import {
-  ChatInputComponent,
-  ChatSuggestion,
-  SuggestionsPosition,
-} from '../../../../components/chat-input';
+import { ChatInputComponent } from '../../../../components/chat-input';
 import {
   ApiProperty,
   DocApiTableComponent,
@@ -78,7 +75,7 @@ const INPUTS: ApiProperty[] = [
   },
   {
     name: 'suggestions',
-    type: 'ChatSuggestion[]',
+    type: 'PromptSuggestion[]',
     default: '[]',
     description:
       'Array of suggestion objects with label, prompt, and optional icon',
@@ -112,7 +109,7 @@ const OUTPUTS: ApiProperty[] = [
   },
   {
     name: 'suggestionSelect',
-    type: 'ChatSuggestion',
+    type: 'PromptSuggestion',
     description: 'Emitted when a suggestion badge is clicked',
   },
 ];
@@ -198,7 +195,7 @@ export class ChatInputDocComponent {
   suggestionsPosition = signal<SuggestionsPosition>('bottom');
 
   // Demo suggestions data
-  demoSuggestions = signal<ChatSuggestion[]>([
+  demoSuggestions = signal<PromptSuggestion[]>([
     {
       icon: '💡',
       label: 'Explain components',
