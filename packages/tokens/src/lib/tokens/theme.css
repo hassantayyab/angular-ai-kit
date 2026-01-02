@@ -1,0 +1,180 @@
+/**
+ * Angular AI Kit - Design Tokens
+ * CSS Custom Properties for theming
+ *
+ * Usage:
+ * @import '@angular-ai-kit/tokens/tokens/theme.css';
+ *
+ * These variables are compatible with Tailwind CSS v4 semantic classes
+ * like bg-background, text-foreground, border-border, etc.
+ */
+
+/* ============================================
+   Light Theme (Default)
+   ============================================ */
+:root {
+  /* Core Colors */
+  --background: #ffffff;
+  --foreground: #09090b;
+
+  /* Card */
+  --card: #fafafa;
+  --card-foreground: #09090b;
+
+  /* Popover */
+  --popover: #ffffff;
+  --popover-foreground: #09090b;
+
+  /* Muted */
+  --muted: #f4f4f5;
+  --muted-foreground: #71717a;
+
+  /* Accent */
+  --accent: #f4f4f5;
+  --accent-foreground: #18181b;
+
+  /* Border & Input */
+  --border: #e4e4e7;
+  --border-hover: #d4d4d8;
+  --input: #fafafa;
+
+  /* Code blocks */
+  --code: #f4f4f5;
+  --code-foreground: #18181b;
+
+  /* Message bubble role colors */
+  --message-user-bg: #f4f4f5;
+  --message-assistant-bg: #ffffff;
+  --message-system-bg: #fafafa;
+  --avatar-user: #3f3f46;
+  --avatar-assistant: #27272a;
+  --avatar-system: #a1a1aa;
+
+  /* Foreground variants */
+  --foreground-muted: #71717a;
+
+  /* Ring (focus) */
+  --ring: #a1a1aa;
+
+  /* Primary */
+  --primary: #18181b;
+  --primary-foreground: #fafafa;
+
+  /* Secondary */
+  --secondary: #f4f4f5;
+  --secondary-foreground: #18181b;
+
+  /* Destructive */
+  --destructive: #ef4444;
+  --destructive-foreground: #fafafa;
+
+  /* Border Radius */
+  --radius: 0.5rem;
+}
+
+/* ============================================
+   Dark Theme
+   ============================================ */
+.dark {
+  /* Core Colors */
+  --background: #09090b;
+  --foreground: #fafafa;
+
+  /* Card */
+  --card: #18181b;
+  --card-foreground: #fafafa;
+
+  /* Popover */
+  --popover: #18181b;
+  --popover-foreground: #fafafa;
+
+  /* Muted */
+  --muted: #18181b;
+  --muted-foreground: #a1a1aa;
+
+  /* Accent */
+  --accent: #27272a;
+  --accent-foreground: #fafafa;
+
+  /* Border & Input */
+  --border: #27272a;
+  --border-hover: #52525b;
+  --input: #18181b;
+
+  /* Code blocks */
+  --code: #18181b;
+  --code-foreground: #f4f4f5;
+
+  /* Message bubble role colors */
+  --message-user-bg: #27272a;
+  --message-assistant-bg: #18181b;
+  --message-system-bg: rgba(39, 39, 42, 0.5);
+  --avatar-user: #52525b;
+  --avatar-assistant: #3f3f46;
+  --avatar-system: #71717a;
+
+  /* Foreground variants */
+  --foreground-muted: #71717a;
+
+  /* Ring (focus) */
+  --ring: #71717a;
+
+  /* Primary */
+  --primary: #fafafa;
+  --primary-foreground: #18181b;
+
+  /* Secondary */
+  --secondary: #27272a;
+  --secondary-foreground: #fafafa;
+}
+
+/* ============================================
+   Base HTML Styles
+   ============================================ */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Selection */
+::selection {
+  background-color: var(--primary);
+  color: var(--primary-foreground);
+}
+
+/* Focus Ring */
+:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--muted-foreground);
+}
+
+/* Firefox scrollbar */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--border) transparent;
+}

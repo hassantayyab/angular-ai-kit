@@ -8,58 +8,91 @@ Design tokens and theming for Angular AI Kit. CSS custom properties for consiste
 npm install @angular-ai-kit/tokens
 ```
 
-## Usage
+## Quick Start
 
-Import the CSS file in your application's styles:
+Import all styles at once:
 
 ```css
 /* styles.css */
-@import '@angular-ai-kit/tokens/theme.css';
+@import '@angular-ai-kit/tokens/tokens/index.css';
 ```
 
-Or import in angular.json:
+Or import individual files as needed:
 
-```json
-{
-  "styles": ["@angular-ai-kit/tokens/theme.css", "src/styles.css"]
-}
+```css
+/* styles.css */
+@import '@angular-ai-kit/tokens/tokens/theme.css'; /* Required: CSS variables */
+@import '@angular-ai-kit/tokens/tokens/code-theme.css'; /* Syntax highlighting */
+@import '@angular-ai-kit/tokens/tokens/prose.css'; /* Markdown typography */
+@import '@angular-ai-kit/tokens/tokens/animations.css'; /* Animations */
 ```
+
+## CSS Files
+
+| File             | Description                         | Size             |
+| ---------------- | ----------------------------------- | ---------------- |
+| `theme.css`      | CSS variables for light/dark themes | Required         |
+| `code-theme.css` | Syntax highlighting (highlight.js)  | For code blocks  |
+| `prose.css`      | Typography for markdown content     | For AI responses |
+| `animations.css` | Typing indicators, cursors          | For animations   |
+| `index.css`      | All of the above combined           | Full bundle      |
 
 ## CSS Variables
-
-The tokens package provides semantic color variables that work with Tailwind CSS v4:
 
 ### Background Colors
 
 | Variable       | Light Mode | Dark Mode | Usage             |
 | -------------- | ---------- | --------- | ----------------- |
-| `--background` | zinc-50    | zinc-950  | Page background   |
-| `--card`       | white      | zinc-900  | Card backgrounds  |
-| `--muted`      | zinc-100   | zinc-800  | Muted backgrounds |
-| `--accent`     | zinc-100   | zinc-800  | Hover states      |
+| `--background` | #ffffff    | #09090b   | Page background   |
+| `--card`       | #fafafa    | #18181b   | Card backgrounds  |
+| `--muted`      | #f4f4f5    | #18181b   | Muted backgrounds |
+| `--accent`     | #f4f4f5    | #27272a   | Hover states      |
 
 ### Text Colors
 
 | Variable             | Light Mode | Dark Mode | Usage          |
 | -------------------- | ---------- | --------- | -------------- |
-| `--foreground`       | zinc-950   | zinc-50   | Primary text   |
-| `--muted-foreground` | zinc-500   | zinc-400  | Secondary text |
-| `--card-foreground`  | zinc-950   | zinc-50   | Text on cards  |
+| `--foreground`       | #09090b    | #fafafa   | Primary text   |
+| `--muted-foreground` | #71717a    | #a1a1aa   | Secondary text |
+| `--card-foreground`  | #09090b    | #fafafa   | Text on cards  |
 
 ### Border Colors
 
 | Variable         | Light Mode | Dark Mode | Usage           |
 | ---------------- | ---------- | --------- | --------------- |
-| `--border`       | zinc-200   | zinc-700  | Default borders |
-| `--border-hover` | zinc-300   | zinc-600  | Hover borders   |
-| `--ring`         | zinc-400   | zinc-400  | Focus rings     |
+| `--border`       | #e4e4e7    | #27272a   | Default borders |
+| `--border-hover` | #d4d4d8    | #52525b   | Hover borders   |
+| `--ring`         | #a1a1aa    | #71717a   | Focus rings     |
 
 ## Usage with Tailwind CSS v4
 
-Use the semantic Tailwind classes in your templates:
+For full Tailwind integration, add to your `styles.css`:
+
+```css
+@import 'tailwindcss';
+@import '@angular-ai-kit/tokens/tokens/index.css';
+
+/* Enable Tailwind semantic color classes */
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-border: var(--border);
+  --color-ring: var(--ring);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+}
+```
+
+Then use semantic Tailwind classes:
 
 ```html
-<div class="bg-card border-border text-foreground rounded-lg border p-4">
+<div class="bg-card text-card-foreground border-border rounded-lg border p-4">
   <p class="text-muted-foreground">Secondary content</p>
 </div>
 ```

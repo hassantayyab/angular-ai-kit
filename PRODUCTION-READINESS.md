@@ -515,7 +515,7 @@ dist/packages/
 | ---------------------- | -------------- | ----------- | ------------------------------------ |
 | @angular-ai-kit/core   | < 50KB gzipped | 75.6 KB     | ⚠️ Over target (acceptable for v0.1) |
 | @angular-ai-kit/utils  | < 5KB gzipped  | 15.7 KB     | ⚠️ Over target (includes formatters) |
-| @angular-ai-kit/tokens | < 2KB gzipped  | 3.6 KB      | ⚠️ Slightly over                     |
+| @angular-ai-kit/tokens | < 10KB gzipped | 7.3 KB      | ✅ Within target (includes all CSS)  |
 | @angular-ai-kit/cli    | < 100KB        | TBD         | 🔄 Not built yet                     |
 
 ### Browser Support

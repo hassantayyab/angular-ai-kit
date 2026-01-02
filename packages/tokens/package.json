@@ -34,5 +34,25 @@
   ],
   "publishConfig": {
     "access": "public"
+  },
+  "exports": {
+    "./tokens/index.css": {
+      "default": "./tokens/index.css"
+    },
+    "./tokens/theme.css": {
+      "default": "./tokens/theme.css"
+    },
+    "./tokens/code-theme.css": {
+      "default": "./tokens/code-theme.css"
+    },
+    "./tokens/prose.css": {
+      "default": "./tokens/prose.css"
+    },
+    "./tokens/animations.css": {
+      "default": "./tokens/animations.css"
+    },
+    "./tokens/*": {
+      "default": "./tokens/*"
+    }
   }
 }

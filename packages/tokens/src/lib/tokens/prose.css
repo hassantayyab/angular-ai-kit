@@ -1,0 +1,178 @@
+/**
+ * Angular AI Kit - Prose/Typography Styling
+ * Styles for rendered markdown content in AI responses
+ *
+ * Usage:
+ * @import '@angular-ai-kit/tokens/tokens/prose.css';
+ */
+
+/* ============================================
+   AI Response Content Typography
+   ============================================ */
+
+.ai-response-content {
+  line-height: 1.7;
+}
+
+/* Headers */
+.ai-response-content h1 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+  margin-top: 1.5rem;
+}
+
+.ai-response-content h2 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  margin-top: 1.25rem;
+}
+
+.ai-response-content h3 {
+  font-size: 1.125rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  margin-top: 1rem;
+}
+
+.ai-response-content h4,
+.ai-response-content h5,
+.ai-response-content h6 {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  margin-top: 1rem;
+}
+
+/* Paragraphs */
+.ai-response-content p {
+  margin-bottom: 0.75rem;
+  line-height: 1.7;
+}
+
+/* Lists */
+.ai-response-content ul,
+.ai-response-content ol {
+  margin-top: 0.5rem;
+  margin-bottom: 0.75rem;
+  padding-left: 1.5rem;
+}
+
+.ai-response-content li {
+  margin-bottom: 0.25rem;
+  line-height: 1.6;
+}
+
+.ai-response-content ul {
+  list-style-type: disc;
+}
+
+.ai-response-content ol {
+  list-style-type: decimal;
+}
+
+/* Nested lists */
+.ai-response-content li > ul,
+.ai-response-content li > ol {
+  margin-top: 0.25rem;
+  margin-bottom: 0.25rem;
+}
+
+/* Blockquotes */
+.ai-response-content blockquote {
+  border-left: 4px solid #d4d4d8; /* zinc-300 */
+  padding-left: 1rem;
+  margin: 1rem 0;
+  color: #52525b; /* zinc-600 */
+  font-style: italic;
+}
+
+.dark .ai-response-content blockquote {
+  border-left-color: #52525b; /* zinc-600 */
+  color: #a1a1aa; /* zinc-400 */
+}
+
+/* Links */
+.ai-response-content a {
+  color: #2563eb; /* blue-600 */
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.dark .ai-response-content a {
+  color: #60a5fa; /* blue-400 */
+}
+
+.ai-response-content a:hover {
+  color: #1e40af; /* blue-800 */
+}
+
+.dark .ai-response-content a:hover {
+  color: #93c5fd; /* blue-300 */
+}
+
+/* Bold and italic */
+.ai-response-content strong {
+  font-weight: 600;
+}
+
+.ai-response-content em {
+  font-style: italic;
+}
+
+/* Horizontal rule */
+.ai-response-content hr {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 1.5rem 0;
+}
+
+/* Tables */
+.ai-response-content table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1rem 0;
+}
+
+.ai-response-content th,
+.ai-response-content td {
+  border: 1px solid var(--border);
+  padding: 0.5rem 0.75rem;
+  text-align: left;
+}
+
+.ai-response-content th {
+  background-color: var(--muted);
+  font-weight: 600;
+}
+
+/* First element no top margin */
+.ai-response-content > *:first-child {
+  margin-top: 0;
+}
+
+/* Last element no bottom margin */
+.ai-response-content > *:last-child {
+  margin-bottom: 0;
+}
+
+/* ============================================
+   Task Lists (GFM)
+   ============================================ */
+
+.ai-response-content ul.contains-task-list {
+  list-style: none;
+  padding-left: 0;
+}
+
+.ai-response-content li.task-list-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+}
+
+.ai-response-content li.task-list-item input[type='checkbox'] {
+  margin-top: 0.25rem;
+  accent-color: var(--primary);
+}

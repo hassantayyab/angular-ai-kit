@@ -1,0 +1,18 @@
+/**
+ * Angular AI Kit - All Design Tokens
+ * Complete styling bundle
+ *
+ * Usage:
+ * @import '@angular-ai-kit/tokens/tokens/index.css';
+ *
+ * Or import individual files:
+ * @import '@angular-ai-kit/tokens/tokens/theme.css';
+ * @import '@angular-ai-kit/tokens/tokens/code-theme.css';
+ * @import '@angular-ai-kit/tokens/tokens/prose.css';
+ * @import '@angular-ai-kit/tokens/tokens/animations.css';
+ */
+
+@import './theme.css';
+@import './code-theme.css';
+@import './prose.css';
+@import './animations.css';

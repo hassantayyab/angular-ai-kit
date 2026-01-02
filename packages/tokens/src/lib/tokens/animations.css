@@ -1,0 +1,116 @@
+/**
+ * Angular AI Kit - Animation Utilities
+ * CSS animations for chat components
+ *
+ * Usage:
+ * @import '@angular-ai-kit/tokens/tokens/animations.css';
+ */
+
+/* ============================================
+   Typing Indicator Animations
+   ============================================ */
+
+/* Bouncing dots animation */
+.typing-dot {
+  animation: typing-bounce 1.4s infinite ease-in-out both;
+}
+
+@keyframes typing-bounce {
+  0%,
+  80%,
+  100% {
+    transform: scale(0.6);
+    opacity: 0.4;
+  }
+  40% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* Wave variant */
+.typing-dot-wave {
+  animation: typing-wave 1s infinite ease-in-out;
+}
+
+@keyframes typing-wave {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-4px);
+  }
+}
+
+/* ============================================
+   Cursor Animations
+   ============================================ */
+
+/* Blinking cursor for streaming text */
+.animate-cursor-blink {
+  animation: cursor-blink 1s step-end infinite;
+}
+
+@keyframes cursor-blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+
+/* ============================================
+   Dialog/Overlay Animations
+   ============================================ */
+
+/* Overlay fade in */
+@keyframes overlay-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Dialog slide in */
+@keyframes dialog-slide-in {
+  from {
+    opacity: 0;
+    transform: scale(0.95) translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+/* ============================================
+   Utility Classes
+   ============================================ */
+
+/* Hide scrollbar */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* ============================================
+   Reduced Motion Support
+   ============================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  .typing-dot,
+  .typing-dot-wave,
+  .animate-cursor-blink {
+    animation: none;
+    opacity: 1;
+  }
+}
