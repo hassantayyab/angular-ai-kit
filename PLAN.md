@@ -139,28 +139,59 @@ Text input with modern toolbar.
 
 ## Production Readiness ⏳ Remaining
 
-> Required to make the library installable by developers.
+> Required to make the library installable by developers. See [PRODUCTION-READINESS.md](./PRODUCTION-READINESS.md) for full details.
 
-- [ ] **Package Build Setup**
-  - [ ] Configure ng-packagr for library build
-  - [ ] Verify tree-shaking works
-  - [ ] Bundle size optimization
+### Phase 1: Library Build & Packaging
 
-- [ ] **npm Configuration**
-  - [ ] package.json with proper metadata
-  - [ ] Peer dependencies (Angular, Tailwind)
-  - [ ] .npmignore file
+- [ ] Configure ng-packagr for all packages
+- [ ] Add secondary entry points for tree-shaking
+- [ ] Update package.json with proper metadata
+- [ ] Verify TypeScript declarations generated
+- [ ] Test build output and bundle sizes
 
-- [ ] **Documentation**
-  - [ ] Installation instructions in README
-  - [ ] Basic usage examples
-  - [ ] API reference for each component
+### Phase 2: CLI Tool Development
 
-- [ ] **Demo App Polish**
-  - [ ] Working chat with mock AI responses
-  - [x] Showcase all MVP components (doc pages created)
-  - [x] Interactive component playgrounds with controls
-  - [ ] Mobile responsive
+- [ ] Create `@angular-ai-kit/cli` package
+- [ ] Implement `init` command
+- [ ] Implement `add <component>` command
+- [ ] Create component registry
+- [ ] Publish CLI to npm
+
+### Phase 3: npm Publishing
+
+- [ ] Create npm organization `@angular-ai-kit`
+- [ ] Configure Nx release
+- [ ] Set up semantic versioning
+- [ ] Publish first release (v0.1.0)
+
+### Phase 4: Documentation
+
+- [ ] Complete getting started guide
+- [ ] Document all components with examples
+- [ ] Create theming guide
+- [ ] Add API reference
+- [ ] Interactive playground (StackBlitz)
+
+### Phase 5: Developer Experience
+
+- [ ] Create `ng add` schematic
+- [ ] Add VS Code snippets
+- [ ] Create example repositories
+- [ ] Add migration guides
+
+### Phase 6: CI/CD
+
+- [ ] GitHub Actions for CI
+- [ ] Automated npm releases
+- [ ] Bundle size monitoring
+- [ ] Quality gates
+
+### Demo App Polish
+
+- [ ] Working chat with mock AI responses
+- [x] Showcase all MVP components (doc pages created)
+- [x] Interactive component playgrounds with controls
+- [ ] Mobile responsive
 
 ---
 
