@@ -3,6 +3,7 @@
 [![npm @angular-ai-kit/core](https://img.shields.io/npm/v/@angular-ai-kit/core?label=%40angular-ai-kit%2Fcore&color=dd0031)](https://www.npmjs.com/package/@angular-ai-kit/core)
 [![npm @angular-ai-kit/utils](https://img.shields.io/npm/v/@angular-ai-kit/utils?label=%40angular-ai-kit%2Futils&color=dd0031)](https://www.npmjs.com/package/@angular-ai-kit/utils)
 [![npm @angular-ai-kit/tokens](https://img.shields.io/npm/v/@angular-ai-kit/tokens?label=%40angular-ai-kit%2Ftokens&color=dd0031)](https://www.npmjs.com/package/@angular-ai-kit/tokens)
+[![npm @angular-ai-kit/cli](https://img.shields.io/npm/v/@angular-ai-kit/cli?label=%40angular-ai-kit%2Fcli&color=dd0031)](https://www.npmjs.com/package/@angular-ai-kit/cli)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Angular](https://img.shields.io/badge/Angular-v21-dd0031?logo=angular)](https://angular.dev)
 
@@ -26,6 +27,7 @@ Built with **Tailwind CSS v4**, TypeScript strict mode, and full SSR/hydration s
 - `@angular-ai-kit/core` - Core components, directives, and types
 - `@angular-ai-kit/tokens` - Design tokens and theming
 - `@angular-ai-kit/utils` - Utility functions and helpers
+- `@angular-ai-kit/cli` - CLI tool to add components (Shadcn-style)
 
 ## 🚀 Quick Start
 
