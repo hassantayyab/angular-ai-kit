@@ -50,18 +50,28 @@
     <div hlmSidebarGroup>
       <div hlmSidebarGroupContent>
         <ul hlmSidebarMenu>
-          <!-- Documentation -->
-          <li hlmSidebarMenuItem>
-            <a
-              hlmSidebarMenuButton
-              routerLink="/docs"
-              routerLinkActive="bg-accent"
-              [routerLinkActiveOptions]="{ exact: true }"
-            >
-              <ng-icon hlm name="lucideBook" size="sm" />
-              <span>Documentation</span>
-            </a>
-          </li>
+          @if (isDocsPage()) {
+            <!-- Live Demo (shown on docs pages) -->
+            <li hlmSidebarMenuItem>
+              <a hlmSidebarMenuButton routerLink="/">
+                <ng-icon hlm name="lucideSparkles" size="sm" />
+                <span>Live Demo</span>
+              </a>
+            </li>
+          } @else {
+            <!-- Documentation (shown on chat page) -->
+            <li hlmSidebarMenuItem>
+              <a
+                hlmSidebarMenuButton
+                routerLink="/docs"
+                routerLinkActive="bg-accent"
+                [routerLinkActiveOptions]="{ exact: true }"
+              >
+                <ng-icon hlm name="lucideBook" size="sm" />
+                <span>Documentation</span>
+              </a>
+            </li>
+          }
 
           <!-- GitHub -->
           <li hlmSidebarMenuItem>
@@ -81,7 +91,7 @@
 
     <div
       hlmSidebarSeparator
-      class="mx-auto mt-2 group-data-[collapsible=icon]:hidden"
+      class="mx-auto mb-0 group-data-[collapsible=icon]:hidden"
     ></div>
 
     @if (isDocsPage()) {
