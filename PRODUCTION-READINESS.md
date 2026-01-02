@@ -611,6 +611,57 @@ export class ChatComponent {
 
 ---
 
+## Publishing to npm (Quick Reference)
+
+When ready to publish, follow these steps:
+
+### 1. Create npm Organization
+
+1. Go to [npmjs.com](https://www.npmjs.com/)
+2. Sign in or create an account
+3. Create organization: `@angular-ai-kit`
+4. Enable 2FA for publishing (recommended)
+
+### 2. Authenticate
+
+```bash
+npm login
+```
+
+### 3. First Release
+
+```bash
+# Dry run first to verify
+npm run release:dry-run
+
+# Actual release
+npm run release --first-release
+```
+
+### 4. Subsequent Releases
+
+```bash
+# Patch release (0.1.0 -> 0.1.1)
+npm run release
+
+# Minor release (0.1.0 -> 0.2.0)
+npm run release -- --release-as minor
+
+# Major release (0.1.0 -> 1.0.0)
+npm run release -- --release-as major
+```
+
+### 5. Verify Publication
+
+```bash
+# Check packages are published
+npm view @angular-ai-kit/core
+npm view @angular-ai-kit/utils
+npm view @angular-ai-kit/tokens
+```
+
+---
+
 ## Resources & References
 
 - [ng-packagr Documentation](https://github.com/ng-packagr/ng-packagr)
@@ -622,4 +673,4 @@ export class ChatComponent {
 ---
 
 _Last Updated: January 2, 2026_
-_Status: Planning Phase_
+_Status: Phase 1 Complete - Ready for npm Publishing_
