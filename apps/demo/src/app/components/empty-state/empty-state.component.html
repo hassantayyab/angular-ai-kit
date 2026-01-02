@@ -27,17 +27,18 @@
     @for (prompt of suggestedPrompts(); track prompt.title) {
       <button
         type="button"
-        hlmCard
-        class="flex cursor-pointer flex-col items-start gap-1 p-4 text-left transition-all duration-200 hover:shadow-md"
+        [class]="promptCardClasses()"
         (click)="handlePromptClick(prompt.prompt)"
       >
-        <span [class]="promptIconClasses()">{{ prompt.icon }}</span>
-        <span class="text-foreground text-sm font-medium">
-          {{ prompt.title }}
-        </span>
-        <span class="text-foreground-muted line-clamp-2 text-xs">
-          {{ prompt.prompt }}
-        </span>
+        <div class="flex flex-col items-start gap-1 text-left">
+          <span [class]="promptIconClasses()">{{ prompt.icon }}</span>
+          <span class="text-foreground text-sm font-medium">
+            {{ prompt.title }}
+          </span>
+          <span class="text-muted-foreground line-clamp-2 text-xs">
+            {{ prompt.prompt }}
+          </span>
+        </div>
       </button>
     }
   </div>

@@ -1,4 +1,3 @@
-import { HlmCard } from '@angular-ai-kit/spartan-ui/card';
 import { cn } from '@angular-ai-kit/utils';
 import {
   ChangeDetectionStrategy,
@@ -36,7 +35,7 @@ interface SuggestedPrompt {
   templateUrl: './empty-state.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
-  imports: [HlmCard],
+  imports: [],
   host: {
     class:
       'app-empty-state-host flex flex-col items-center justify-center flex-1 p-8',
@@ -112,18 +111,12 @@ export class EmptyStateComponent {
 
   promptCardClasses = computed(() => {
     return cn(
-      'flex flex-col items-start gap-1',
-      'p-4',
-      'rounded-xl',
-      'border border-border',
+      'block rounded-lg border p-4',
       'bg-card',
-      'text-left',
       'transition-all duration-200',
-      'hover:border-border-hover',
-      'hover:bg-accent',
-      'hover:shadow-md',
-      'cursor-pointer',
-      'focus:outline-none focus:ring-2 focus:ring-ring'
+      'cursor-pointer border-border',
+      'hover:ring-2 hover:ring-primary/20 hover:shadow-md',
+      'focus:outline-none focus:ring-2 focus:ring-primary/20'
     );
   });
 
