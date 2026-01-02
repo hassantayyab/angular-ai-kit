@@ -1,5 +1,11 @@
 # 🤖 Angular AI Kit
 
+[![npm @angular-ai-kit/core](https://img.shields.io/npm/v/@angular-ai-kit/core?label=%40angular-ai-kit%2Fcore&color=dd0031)](https://www.npmjs.com/package/@angular-ai-kit/core)
+[![npm @angular-ai-kit/utils](https://img.shields.io/npm/v/@angular-ai-kit/utils?label=%40angular-ai-kit%2Futils&color=dd0031)](https://www.npmjs.com/package/@angular-ai-kit/utils)
+[![npm @angular-ai-kit/tokens](https://img.shields.io/npm/v/@angular-ai-kit/tokens?label=%40angular-ai-kit%2Ftokens&color=dd0031)](https://www.npmjs.com/package/@angular-ai-kit/tokens)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Angular](https://img.shields.io/badge/Angular-v21-dd0031?logo=angular)](https://angular.dev)
+
 A modern, **signal-based** component library for building AI chat interfaces in **Angular v21**.
 
 Built with **Tailwind CSS v4**, TypeScript strict mode, and full SSR/hydration support.
@@ -177,7 +183,7 @@ We welcome contributions! Please see [CONTRIBUTING.md](CONTRIBUTING.md) for guid
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/angular-ai-kit.git
+git clone https://github.com/hassantayyab/angular-ai-kit.git
 
 # Install dependencies
 npm install
@@ -202,8 +208,8 @@ MIT License - see [LICENSE](LICENSE) for details.
 
 ## 🔗 Links
 
-- [Documentation](https://github.com/yourusername/angular-ai-kit#readme)
-- [Issues](https://github.com/yourusername/angular-ai-kit/issues)
+- [Documentation](https://github.com/hassantayyab/angular-ai-kit#readme)
+- [Issues](https://github.com/hassantayyab/angular-ai-kit/issues)
 - [Nx Documentation](https://nx.dev)
 - [Angular Documentation](https://angular.dev)
 - [Tailwind CSS v4](https://tailwindcss.com)
