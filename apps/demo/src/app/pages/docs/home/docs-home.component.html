@@ -58,11 +58,9 @@
           [routerLink]="card.link"
           class="group border-border bg-card hover:border-border-hover block rounded-lg border p-6 shadow-sm transition-all hover:shadow-md"
         >
-          <div
-            class="bg-primary/10 mb-4 flex h-12 w-12 items-center justify-center rounded-lg"
-          >
+          <div class="mb-4 flex items-center gap-3">
             <svg
-              class="text-primary h-6 w-6"
+              class="text-muted-foreground group-hover:text-primary h-5 w-5 shrink-0 transition-colors"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -75,13 +73,11 @@
                 [attr.d]="card.icon"
               />
             </svg>
+            <h3 class="text-foreground text-lg font-semibold">
+              {{ card.title }}
+            </h3>
           </div>
-          <h3
-            class="text-foreground group-hover:text-primary mb-2 text-lg font-semibold"
-          >
-            {{ card.title }}
-          </h3>
-          <p class="text-muted-foreground text-sm">
+          <p class="text-muted-foreground text-sm text-pretty">
             {{ card.description }}
           </p>
         </a>
