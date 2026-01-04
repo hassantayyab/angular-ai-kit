@@ -28,7 +28,7 @@ import {
   lucidePlus,
   lucideRefreshCw,
   lucideSettings,
-  lucideSparkles,
+  lucideSparkle,
   lucideThumbsDown,
   lucideThumbsUp,
   lucideTrash2,
@@ -54,7 +54,7 @@ export const AI_ICONS = {
 
   // Avatars/Roles
   lucideUser,
-  lucideSparkles,
+  lucideSparkle,
   lucideSettings,
 
   // Navigation
@@ -80,7 +80,7 @@ export type AiIconName = keyof typeof AI_ICONS;
  */
 export const ROLE_ICONS = {
   user: 'lucideUser',
-  assistant: 'lucideSparkles',
+  assistant: 'lucideSparkle',
   system: 'lucideSettings',
 } as const;
 
