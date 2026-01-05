@@ -7,6 +7,7 @@ import {
   output,
   signal,
 } from '@angular/core';
+import { LogoComponent } from '../logo';
 
 /**
  * Suggested prompt interface
@@ -35,7 +36,7 @@ interface SuggestedPrompt {
   templateUrl: './empty-state.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
-  imports: [],
+  imports: [LogoComponent],
   host: {
     class:
       'app-empty-state-host flex flex-col items-center justify-center flex-1 p-8',

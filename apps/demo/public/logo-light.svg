@@ -1,0 +1,13 @@
+<svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Simple "A" letter with star - zinc-800 for light theme -->
+  <path
+    d="M50 20 L75 80 L65 80 L60 67 L40 67 L35 80 L25 80 Z M45 58 L55 58 L50 35 Z"
+    fill="#27272a"
+  />
+
+  <!-- Star icon at top center - same color -->
+  <path
+    d="M50 8 L52 14 L58 15 L53.5 19 L55 25 L50 21.5 L45 25 L46.5 19 L42 15 L48 14 Z"
+    fill="#27272a"
+  />
+</svg>

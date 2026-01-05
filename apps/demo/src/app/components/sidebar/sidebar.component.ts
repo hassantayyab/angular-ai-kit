@@ -6,7 +6,6 @@ import {
   lucideGithub,
   lucideMenu,
   lucidePlus,
-  lucideSparkle,
   lucideTrash2,
 } from '@ng-icons/lucide';
 import { IconButtonComponent } from '@angular-ai-kit/core';
@@ -50,6 +49,7 @@ import {
 } from '@angular/router';
 import { filter, map, startWith } from 'rxjs';
 import { ChatService, Conversation } from '../../services';
+import { LogoComponent } from '../logo';
 import { SearchTriggerComponent } from '../search-trigger';
 import { ThemeToggleComponent } from '../theme-toggle';
 
@@ -61,7 +61,6 @@ const SIDEBAR_ICONS = {
   lucideGithub,
   lucideMenu,
   lucidePlus,
-  lucideSparkle,
   lucideTrash2,
 };
 
@@ -136,6 +135,7 @@ interface ConversationDisplay {
     HlmCollapsibleContent,
     HlmIconImports,
     IconButtonComponent,
+    LogoComponent,
     ThemeToggleComponent,
     SearchTriggerComponent,
     RouterLink,

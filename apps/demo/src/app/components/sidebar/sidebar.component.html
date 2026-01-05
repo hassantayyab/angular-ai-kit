@@ -14,16 +14,8 @@
       </button>
 
       <!-- Logo + Title (clickable, hidden when collapsed) -->
-      <a
-        routerLink="/"
-        class="flex items-center gap-2 group-data-[collapsible=icon]:hidden"
-      >
-        <div
-          class="bg-primary text-primary-foreground flex h-8 w-8 shrink-0 items-center justify-center rounded-lg"
-        >
-          <ng-icon hlm name="lucideSparkle" size="sm" />
-        </div>
-        <span class="text-sm font-semibold">Angular AI Kit</span>
+      <a routerLink="/" class="group-data-[collapsible=icon]:hidden">
+        <app-logo size="md" [showText]="true" />
       </a>
 
       <!-- Spacer (hidden when collapsed) -->
