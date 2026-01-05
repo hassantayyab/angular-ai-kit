@@ -1,8 +1,4 @@
 import { ChatMessage, PromptSuggestion } from '@angular-ai-kit/core';
-import {
-  HlmSidebarService,
-  HlmSidebarTrigger,
-} from '@angular-ai-kit/spartan-ui/sidebar';
 import { cn } from '@angular-ai-kit/utils';
 import { isPlatformBrowser } from '@angular/common';
 import {
@@ -22,6 +18,7 @@ import { ChatService } from '../../services/chat.service';
 import { ChatInputComponent } from '../chat-input/chat-input.component';
 import { EmptyStateComponent } from '../empty-state/empty-state.component';
 import { MessageListComponent } from '../message-list';
+import { TopNavComponent } from '../top-nav';
 
 /**
  * ChatViewComponent
@@ -43,7 +40,7 @@ import { MessageListComponent } from '../message-list';
     MessageListComponent,
     ChatInputComponent,
     EmptyStateComponent,
-    HlmSidebarTrigger,
+    TopNavComponent,
   ],
   host: {
     class: 'app-chat-view-host flex flex-col h-full',
@@ -52,7 +49,6 @@ import { MessageListComponent } from '../message-list';
 export class ChatViewComponent implements AfterViewInit {
   private chatService = inject(ChatService);
   private platformId = inject(PLATFORM_ID);
-  protected sidebarService = inject(HlmSidebarService);
 
   // Scroll container reference
   private scrollContainer =
@@ -92,22 +88,9 @@ export class ChatViewComponent implements AfterViewInit {
     return conversation?.title ?? 'New conversation';
   });
 
-  // Check if mobile
-  isMobile = this.sidebarService.isMobile;
-
   // Computed classes
   containerClasses = computed(() => {
     return cn('app-chat-view', 'flex flex-col', 'h-full', 'bg-background');
-  });
-
-  headerClasses = computed(() => {
-    return cn(
-      'flex items-center gap-2',
-      'px-4 py-3',
-      'border-b border-border',
-      'bg-background',
-      'md:hidden' // Only show on mobile
-    );
   });
 
   scrollAreaClasses = computed(() => {

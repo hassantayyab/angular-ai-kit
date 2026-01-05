@@ -4,6 +4,7 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { TopNavComponent } from '../../components';
 
 /**
  * DocsPage Component
@@ -16,7 +17,7 @@ import { RouterOutlet } from '@angular/router';
   templateUrl: './docs-page.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
-  imports: [RouterOutlet],
+  imports: [RouterOutlet, TopNavComponent],
   host: {
     class: 'app-docs-page block h-full',
   },

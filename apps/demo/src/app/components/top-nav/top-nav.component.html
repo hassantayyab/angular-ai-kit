@@ -1,0 +1,16 @@
+<header [class]="containerClasses()">
+  <!-- Sidebar Toggle Button -->
+  @if (showSidebarToggle()) {
+    <button hlmSidebarTrigger aria-label="Open sidebar menu"></button>
+  }
+
+  <!-- Title (centered) -->
+  <h1 class="text-foreground flex-1 truncate text-center text-sm font-medium">
+    {{ title() }}
+  </h1>
+
+  <!-- Spacer for centering when sidebar toggle is present -->
+  @if (showSidebarToggle()) {
+    <div class="w-7"></div>
+  }
+</header>

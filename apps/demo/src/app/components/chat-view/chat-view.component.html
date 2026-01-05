@@ -1,19 +1,6 @@
 <div [class]="containerClasses()">
-  <!-- Header (Mobile only - shows menu button) -->
-  @if (isMobile()) {
-    <header [class]="headerClasses()">
-      <button hlmSidebarTrigger aria-label="Open sidebar menu"></button>
-
-      <h1
-        class="text-foreground flex-1 truncate text-center text-sm font-medium"
-      >
-        {{ conversationTitle() }}
-      </h1>
-
-      <!-- Spacer for centering -->
-      <div class="w-7"></div>
-    </header>
-  }
+  <!-- Mobile Top Nav -->
+  <app-top-nav [title]="conversationTitle()" />
 
   <!-- Scrollable Chat Area -->
   <div #scrollContainer [class]="scrollAreaClasses()">

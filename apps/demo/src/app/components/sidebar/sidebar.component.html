@@ -45,7 +45,7 @@
           @if (isDocsPage()) {
             <!-- Live Demo (shown on docs pages) -->
             <li hlmSidebarMenuItem>
-              <a hlmSidebarMenuButton routerLink="/">
+              <a hlmSidebarMenuButton routerLink="/" (click)="handleNavClick()">
                 <ng-icon hlm name="lucideSparkle" size="sm" />
                 <span>Live Demo</span>
               </a>
@@ -58,6 +58,7 @@
                 routerLink="/docs"
                 routerLinkActive="bg-accent"
                 [routerLinkActiveOptions]="{ exact: true }"
+                (click)="handleNavClick()"
               >
                 <ng-icon hlm name="lucideBook" size="sm" />
                 <span>Documentation</span>

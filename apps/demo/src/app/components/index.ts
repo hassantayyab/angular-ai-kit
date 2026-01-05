@@ -9,4 +9,5 @@ export { SearchTriggerComponent } from './search-trigger';
 export { SidebarComponent } from './sidebar';
 export { StreamingTextComponent } from './streaming-text';
 export { ThemeToggleComponent } from './theme-toggle';
+export { TopNavComponent } from './top-nav';
 export { TypingIndicatorComponent } from './typing-indicator';

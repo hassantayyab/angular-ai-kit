@@ -350,6 +350,13 @@ export class SidebarComponent {
   });
 
   // Methods
+  /** Close sidebar on mobile when any navigation item is clicked */
+  handleNavClick(): void {
+    if (this.sidebarService.isMobile()) {
+      this.sidebarService.setOpenMobile(false);
+    }
+  }
+
   handleNewConversation(): void {
     this.chatService.createConversation();
     // Navigate to chat if on docs page
