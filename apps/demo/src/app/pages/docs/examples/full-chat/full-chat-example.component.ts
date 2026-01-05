@@ -1,7 +1,6 @@
 import {
   AiResponseComponent,
   AssistantMessage,
-  FeedbackButtonsComponent,
   PromptSuggestionsComponent,
   UserMessage,
   UserMessageComponent,
@@ -47,7 +46,6 @@ type Message = UserMessage | AssistantMessage;
     ChatInputComponent,
     TypingIndicatorComponent,
     PromptSuggestionsComponent,
-    FeedbackButtonsComponent,
   ],
 })
 export class FullChatExampleComponent {
@@ -177,11 +175,6 @@ Key points:
       this.messages.set(msgs.slice(0, lastUserMsgIndex + 1));
       this.simulateStreamingResponse();
     }
-  }
-
-  /** Handle feedback */
-  handleFeedback(type: 'up' | 'down'): void {
-    console.log('Feedback:', type);
   }
 
   /** Simulate streaming response */

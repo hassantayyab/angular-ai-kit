@@ -21,7 +21,7 @@
       >
         <span class="text-foreground text-sm font-medium">Chat Demo</span>
         <button
-          class="text-muted-foreground hover:bg-accent hover:text-foreground rounded px-2 py-1 text-xs"
+          class="text-muted-foreground hover:bg-accent hover:text-foreground cursor-pointer rounded px-2 py-1 text-xs"
           (click)="clearChat()"
         >
           Clear
@@ -31,7 +31,7 @@
       <!-- Chat Container (matching real app layout) -->
       <div class="bg-background flex h-[600px] flex-col">
         <!-- Scrollable Messages Area -->
-        <div class="flex-1 overflow-x-hidden overflow-y-auto">
+        <div class="flex-1 overflow-x-hidden overflow-y-auto py-6">
           @if (isEmpty()) {
             <!-- Empty State - Centered (matching real app) -->
             <div class="flex min-h-full items-center justify-center p-4">
@@ -91,21 +91,11 @@
                       (copy)="handleCopy($event)"
                     />
                   } @else {
-                    <div class="group">
-                      <ai-response
-                        [content]="message.content"
-                        (copy)="handleCopy($event)"
-                        (regenerate)="handleRegenerate()"
-                      />
-                      <div
-                        class="mt-2 flex items-center gap-2 opacity-0 transition-opacity group-hover:opacity-100"
-                      >
-                        <ai-feedback-buttons
-                          (thumbsUp)="handleFeedback('up')"
-                          (thumbsDown)="handleFeedback('down')"
-                        />
-                      </div>
-                    </div>
+                    <ai-response
+                      [content]="message.content"
+                      (copy)="handleCopy($event)"
+                      (regenerate)="handleRegenerate()"
+                    />
                   }
                 }
 
@@ -127,14 +117,12 @@
         </div>
 
         <!-- Fixed Input Area (matching real app) -->
-        <div class="border-border bg-background shrink-0 border-t">
-          <div class="mx-auto w-full max-w-3xl">
-            <app-chat-input
-              placeholder="Message Angular AI Kit..."
-              [disabled]="isLoading() || !!streamingContent()"
-              (messageSend)="handleSubmit($event)"
-            />
-          </div>
+        <div class="mx-auto w-full max-w-3xl">
+          <app-chat-input
+            placeholder="Message Angular AI Kit..."
+            [disabled]="isLoading() || !!streamingContent()"
+            (messageSend)="handleSubmit($event)"
+          />
         </div>
       </div>
     </div>
