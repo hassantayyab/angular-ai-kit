@@ -4,6 +4,7 @@
     #fileInput
     type="file"
     multiple
+    accept="image/*,.pdf,.doc,.docx,.txt,.csv,.json,.xml"
     hidden
     (change)="handleFileSelect($event)"
     aria-hidden="true"
@@ -120,10 +121,27 @@
       </div>
     }
 
+    <!-- Attachments Display -->
+    @if (hasAttachments()) {
+      <div hlmInputGroupAddon align="block-start">
+        <div
+          class="no-scrollbar -m-2 flex gap-3 overflow-y-auto px-2 pt-2 pb-4"
+        >
+          @for (file of attachments(); track file.name + file.size) {
+            <app-attachment-card
+              [file]="file"
+              (remove)="removeAttachment(file)"
+            />
+          }
+        </div>
+      </div>
+    }
+
     <!-- Textarea -->
     <textarea
       hlmInputGroupTextarea
       #textareaRef
+      class="max-h-96"
       [placeholder]="placeholder()"
       [disabled]="disabled()"
       [value]="inputValue()"

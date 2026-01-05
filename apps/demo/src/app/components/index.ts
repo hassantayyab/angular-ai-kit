@@ -1,3 +1,4 @@
+export { AttachmentCardComponent } from './attachment-card';
 export { ChatInputComponent } from './chat-input';
 export { ChatViewComponent } from './chat-view';
 export { EmptyStateComponent } from './empty-state';

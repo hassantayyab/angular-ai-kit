@@ -44,6 +44,7 @@ import {
 } from '@angular/core';
 import { BrnCommandEmpty } from '@spartan-ng/brain/command';
 import { BrnPopoverImports } from '@spartan-ng/brain/popover';
+import { AttachmentCardComponent } from '../attachment-card';
 
 /**
  * Source option for the sources dropdown
@@ -106,6 +107,7 @@ export interface ContextItem {
     BrnPopoverImports,
     BrnCommandEmpty,
     PromptSuggestionsComponent,
+    AttachmentCardComponent,
   ],
   providers: [
     provideIcons({
@@ -134,7 +136,7 @@ export class ChatInputComponent {
   // Inputs
   placeholder = input<string>('Message Angular AI Kit...');
   disabled = input<boolean>(false);
-  maxHeight = input<number>(200);
+  maxHeight = input<number>(120);
 
   // Visibility toggles - all default to true
   showContextButton = input<boolean>(true);
@@ -163,6 +165,7 @@ export class ChatInputComponent {
 
   // State
   inputValue = signal('');
+  attachments = signal<File[]>([]);
 
   // Button states
   researchMode = signal(false);
@@ -205,6 +208,9 @@ export class ChatInputComponent {
   // Computed: check if has contexts
   hasContext = computed(() => this.selectedContexts().length > 0);
 
+  // Computed: check if has attachments
+  hasAttachments = computed(() => this.attachments().length > 0);
+
   // Computed: available context items (not already selected)
   availableContextItems = computed(() => {
     const selected = this.selectedContexts().map((c) => c.title);
@@ -237,7 +243,12 @@ export class ChatInputComponent {
 
   // Computed classes
   containerClasses = computed(() => {
-    return cn('app-chat-input', 'w-full', '-mt-3', 'px-4 pb-4');
+    return cn(
+      'app-chat-input',
+      'w-full max-w-4xl mx-auto',
+      '-mt-3',
+      'px-4 pb-4'
+    );
   });
 
   // Methods
@@ -274,6 +285,7 @@ export class ChatInputComponent {
     const message = this.inputValue().trim();
     this.messageSend.emit(message);
     this.inputValue.set('');
+    this.attachments.set([]); // Clear attachments after sending
     this.resetTextarea();
   }
 
@@ -331,6 +343,8 @@ export class ChatInputComponent {
     const input = event.target as HTMLInputElement;
     if (input.files && input.files.length > 0) {
       const files = Array.from(input.files);
+      // Add to attachments
+      this.attachments.update((current) => [...current, ...files]);
       this.fileSelect.emit(files);
       // Reset input so same file can be selected again
       input.value = '';
@@ -380,5 +394,12 @@ export class ChatInputComponent {
   toggleMic(): void {
     this.isRecording.update((v) => !v);
     this.recordingChange.emit(this.isRecording());
+  }
+
+  /** Remove an attachment */
+  removeAttachment(file: File): void {
+    this.attachments.update((attachments) =>
+      attachments.filter((f) => f !== file)
+    );
   }
 }

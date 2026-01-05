@@ -1,0 +1,48 @@
+<div
+  class="group border-border bg-card hover:border-border-hover relative flex max-w-[220px] items-center gap-2 rounded-lg border p-2 transition-all hover:shadow-sm"
+>
+  @if (isImageFile()) {
+    <!-- Image Preview -->
+    <div class="bg-muted relative h-12 w-12 shrink-0 overflow-hidden rounded">
+      <img
+        [src]="getFilePreviewUrl()"
+        [alt]="file().name"
+        class="h-full w-full object-cover"
+      />
+    </div>
+  } @else {
+    <!-- File Icon -->
+    <div
+      class="bg-muted flex h-12 w-12 shrink-0 items-center justify-center rounded"
+    >
+      <ng-icon
+        hlm
+        name="lucideFile"
+        size="base"
+        class="text-muted-foreground"
+      />
+    </div>
+  }
+
+  <!-- File Info -->
+  <div class="min-w-0 flex-1 pr-6">
+    <p
+      class="text-foreground truncate text-xs font-medium"
+      [title]="file().name"
+    >
+      {{ file().name }}
+    </p>
+    <p class="text-muted-foreground text-xs">
+      {{ formatFileSize(file().size) }}
+    </p>
+  </div>
+
+  <!-- Remove Button (visible on hover) -->
+  <button
+    class="border-border bg-muted hover:bg-accent hover:text-accent-foreground absolute -top-[7px] -right-[7px] z-10 flex size-4 cursor-pointer items-center justify-center rounded-full border opacity-0 shadow-sm transition-all group-hover:opacity-100"
+    [attr.aria-label]="'Remove ' + file().name"
+    (click)="handleRemove()"
+  >
+    <ng-icon hlm name="lucideX" size="xs" class="text-foreground/70" />
+  </button>
+</div>
