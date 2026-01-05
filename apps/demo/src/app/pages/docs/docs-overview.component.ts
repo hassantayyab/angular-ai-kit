@@ -79,71 +79,71 @@ export class DocsOverviewComponent {
       title: 'AI Response',
       description:
         'Rich markdown with syntax highlighting, streaming, and actions.',
-      link: 'components/ai-response',
+      link: '/docs/components/ai-response',
     },
     {
       iconPath: ICONS.messageBubble,
       title: 'User Message',
       description:
         'Compact user message card with inline editing and truncation.',
-      link: 'components/user-message',
+      link: '/docs/components/user-message',
     },
     {
       iconPath: ICONS.chatInput,
       title: 'Chat Input',
       description:
         'Message input with auto-resize, toolbar, and keyboard shortcuts.',
-      link: 'components/chat-input',
+      link: '/docs/components/chat-input',
     },
     {
       iconPath: ICONS.streamingText,
       title: 'Streaming Text',
       description:
         'Typewriter effect for streaming AI responses with cursor animation.',
-      link: 'components/streaming-text',
+      link: '/docs/components/streaming-text',
     },
     {
       iconPath: ICONS.typingIndicator,
       title: 'Typing Indicator',
       description: 'Animated bouncing dots indicating AI is processing.',
-      link: 'components/typing-indicator',
+      link: '/docs/components/typing-indicator',
     },
     {
       iconPath: ICONS.codeBlock,
       title: 'Code Block',
       description:
         'Syntax highlighted code display with copy button and line numbers.',
-      link: 'components/code-block',
+      link: '/docs/components/code-block',
     },
     {
       iconPath: ICONS.markdownRenderer,
       title: 'Markdown Renderer',
       description: 'Rich markdown rendering with code blocks and sanitization.',
-      link: 'components/markdown-renderer',
+      link: '/docs/components/markdown-renderer',
     },
     {
       iconPath: ICONS.feedbackButtons,
       title: 'Feedback Buttons',
       description: 'Thumbs up/down toggle buttons for AI response feedback.',
-      link: 'components/feedback-buttons',
+      link: '/docs/components/feedback-buttons',
     },
     {
       iconPath: ICONS.responseActions,
       title: 'Response Actions',
       description: 'Copy, regenerate, and feedback buttons for AI responses.',
-      link: 'components/response-actions',
+      link: '/docs/components/response-actions',
     },
     {
       iconPath: ICONS.messageActions,
       title: 'Message Actions',
       description: 'Copy and edit action buttons for user messages.',
-      link: 'components/message-actions',
+      link: '/docs/components/message-actions',
     },
     {
       iconPath: ICONS.promptSuggestions,
       title: 'Prompt Suggestions',
       description: 'Badge/chip list for suggested prompts and quick actions.',
-      link: 'components/prompt-suggestions',
+      link: '/docs/components/prompt-suggestions',
     },
   ];
 
