@@ -44,3 +44,7 @@ Thumbs.db
 .angular
 
 __screenshots__/
+
+# Environment variables
+.env
+.env.local

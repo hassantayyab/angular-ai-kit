@@ -1,0 +1,11 @@
+# robots.txt for Angular AI Kit
+# https://angular-ai-kit.vercel.app/robots.txt
+
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://angular-ai-kit.vercel.app/sitemap.xml
+
+# Crawl-delay (optional - helps prevent server overload)
+Crawl-delay: 1
