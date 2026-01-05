@@ -6,6 +6,7 @@ import {
   lucideGithub,
   lucideMenu,
   lucidePlus,
+  lucideSparkle,
   lucideTrash2,
 } from '@ng-icons/lucide';
 import { IconButtonComponent } from '@angular-ai-kit/core';
@@ -61,6 +62,7 @@ const SIDEBAR_ICONS = {
   lucideGithub,
   lucideMenu,
   lucidePlus,
+  lucideSparkle,
   lucideTrash2,
 };
 

@@ -1,6 +1,6 @@
 # @angular-ai-kit/core
 
-AI-focused UI components for Angular v21. Build beautiful chat interfaces with streaming text, markdown rendering, and more.
+AI-focused UI components for Angular v21. Build beautiful chat interfaces with markdown rendering, code highlighting, and more.
 
 ## Installation
 
@@ -25,59 +25,76 @@ npm install @ng-icons/core @ng-icons/lucide
 ```typescript
 import {
   AIResponseComponent,
-  ChatInputComponent,
+  ChatContainerComponent,
   MessageListComponent,
+  UserMessageComponent,
 } from '@angular-ai-kit/core';
 import { Component, signal } from '@angular/core';
 
 @Component({
   selector: 'app-chat',
-  imports: [ChatInputComponent, AIResponseComponent, MessageListComponent],
+  imports: [
+    ChatContainerComponent,
+    MessageListComponent,
+    UserMessageComponent,
+    AIResponseComponent,
+  ],
   template: `
-    <ai-message-list [messages]="messages()" [loading]="loading()" />
-    <ai-chat-input (send)="handleSend($event)" [disabled]="loading()" />
+    <ai-chat-container>
+      <ai-message-list [messages]="messages()" [loading]="loading()" />
+    </ai-chat-container>
   `,
 })
 export class ChatComponent {
   messages = signal<ChatMessage[]>([]);
   loading = signal(false);
-
-  handleSend(content: string) {
-    // Add user message
-    this.messages.update((m) => [
-      ...m,
-      { id: crypto.randomUUID(), role: 'user', content, timestamp: new Date() },
-    ]);
-
-    // Send to your AI backend...
-  }
 }
 ```
 
 ## Components
 
-### Core Components
+### Chat Components
 
-| Component               | Description                         |
-| ----------------------- | ----------------------------------- |
-| `<ai-chat-container>`   | Main layout wrapper for chat        |
-| `<ai-message-list>`     | Scrollable message display          |
-| `<ai-response>`         | AI response with markdown rendering |
-| `<ai-user-message>`     | User message display                |
-| `<ai-chat-input>`       | Text input with toolbar             |
-| `<ai-streaming-text>`   | Typewriter effect for AI responses  |
-| `<ai-typing-indicator>` | Animated "AI is thinking" indicator |
+| Component                    | Selector                  | Description                        |
+| ---------------------------- | ------------------------- | ---------------------------------- |
+| `ChatContainerComponent`     | `<ai-chat-container>`     | Main layout wrapper for chat       |
+| `MessageListComponent`       | `<ai-message-list>`       | Scrollable message display         |
+| `UserMessageComponent`       | `<ai-user-message>`       | User message bubble with edit/copy |
+| `MessageActionsComponent`    | `<ai-message-actions>`    | Copy and edit action buttons       |
+| `PromptSuggestionsComponent` | `<ai-prompt-suggestions>` | Suggested prompt badges            |
+| `ConversationListComponent`  | `<ai-conversation-list>`  | Conversation history sidebar       |
 
 ### Display Components
 
-| Component                 | Description                        |
-| ------------------------- | ---------------------------------- |
-| `<ai-code-block>`         | Syntax highlighting with copy      |
-| `<ai-markdown-renderer>`  | Parse and render markdown          |
-| `<ai-feedback-buttons>`   | Thumbs up/down toggle buttons      |
-| `<ai-response-actions>`   | Copy, regenerate, feedback buttons |
-| `<ai-message-actions>`    | Copy and edit action buttons       |
-| `<ai-prompt-suggestions>` | Suggested prompt badges            |
+| Component                   | Selector                 | Description                          |
+| --------------------------- | ------------------------ | ------------------------------------ |
+| `AIResponseComponent`       | `<ai-response>`          | AI response with markdown rendering  |
+| `CodeBlockComponent`        | `<ai-code-block>`        | Syntax highlighting with copy button |
+| `MarkdownRendererComponent` | `<ai-markdown-renderer>` | Parse and render markdown            |
+| `FeedbackButtonsComponent`  | `<ai-feedback-buttons>`  | Thumbs up/down toggle buttons        |
+| `ResponseActionsComponent`  | `<ai-response-actions>`  | Copy, regenerate, feedback buttons   |
+
+### UI Components
+
+| Component             | Selector           | Description          |
+| --------------------- | ------------------ | -------------------- |
+| `IconButtonComponent` | `<ai-icon-button>` | Reusable icon button |
+
+### Directives
+
+| Directive                  | Selector              | Description                   |
+| -------------------------- | --------------------- | ----------------------------- |
+| `CopyToClipboardDirective` | `[aiCopyToClipboard]` | Copy text to clipboard        |
+| `AutoResizeDirective`      | `[aiAutoResize]`      | Auto-resize textarea          |
+| `ClickOutsideDirective`    | `[aiClickOutside]`    | Detect clicks outside element |
+| `FocusTrapDirective`       | `[aiFocusTrap]`       | Trap focus within element     |
+
+### Services
+
+| Service                | Description                                 |
+| ---------------------- | ------------------------------------------- |
+| `MarkdownService`      | Parse markdown with syntax highlighting     |
+| `CodeHighlightService` | Syntax highlighting with language detection |
 
 ## Features
 
@@ -102,7 +119,8 @@ Or use with Tailwind CSS v4 semantic classes like `bg-card`, `text-foreground`, 
 
 ## Documentation
 
-Full documentation: [https://github.com/hassantayyab/angular-ai-kit](https://github.com/hassantayyab/angular-ai-kit)
+- **Demo & Docs**: [https://angular-ai-kit.vercel.app](https://angular-ai-kit.vercel.app)
+- **GitHub**: [https://github.com/hassantayyab/angular-ai-kit](https://github.com/hassantayyab/angular-ai-kit)
 
 ## License
 
