@@ -2,6 +2,10 @@
   "name": "@angular-ai-kit/core",
   "version": "0.1.0",
   "description": "AI-focused UI components for Angular v21 - Chat interfaces, streaming text, markdown rendering, and more",
+  "schematics": "./collection.json",
+  "ng-add": {
+    "save": "dependencies"
+  },
   "keywords": [
     "angular",
     "angular21",

@@ -28,6 +28,25 @@
       },
       "defaultConfiguration": "production"
     },
+    "build-schematics": {
+      "executor": "nx:run-commands",
+      "dependsOn": ["build"],
+      "outputs": ["{workspaceRoot}/dist/{projectRoot}/schematics"],
+      "options": {
+        "command": "npx tsc -p packages/angular-ai-kit/schematics/tsconfig.json"
+      }
+    },
+    "package": {
+      "executor": "nx:run-commands",
+      "outputs": ["{workspaceRoot}/dist/{projectRoot}"],
+      "options": {
+        "commands": [
+          "nx run @angular-ai-kit/core:build",
+          "nx run @angular-ai-kit/core:build-schematics"
+        ],
+        "parallel": false
+      }
+    },
     "nx-release-publish": {
       "options": {
         "packageRoot": "dist/{projectRoot}"

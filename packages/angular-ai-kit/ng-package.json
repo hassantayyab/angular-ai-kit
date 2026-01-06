@@ -3,5 +3,6 @@
   "dest": "../../dist/packages/angular-ai-kit",
   "lib": {
     "entryFile": "src/index.ts"
-  }
+  },
+  "assets": ["collection.json", "schematics/**/*.json"]
 }

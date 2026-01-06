@@ -5,49 +5,58 @@ AI-focused UI components for Angular v21. Build beautiful chat interfaces with m
 ## Installation
 
 ```bash
-npm install @angular-ai-kit/core @angular-ai-kit/utils @angular-ai-kit/tokens
+ng add @angular-ai-kit/core
 ```
 
-### Peer Dependencies
+That's it! Everything is configured automatically:
 
-```bash
-npm install tailwindcss@^4 highlight.js marked dompurify
-```
+- All dependencies installed
+- Tailwind CSS v4 configured
+- PostCSS configured
+- Styles and theming set up
+- Dark mode auto-detects your system preference
 
-### Optional (for icons)
-
-```bash
-npm install @ng-icons/core @ng-icons/lucide
-```
-
-## Quick Start
+## Usage
 
 ```typescript
 import {
-  AIResponseComponent,
-  ChatContainerComponent,
-  MessageListComponent,
+  AiResponseComponent,
+  UserMessage,
   UserMessageComponent,
 } from '@angular-ai-kit/core';
 import { Component, signal } from '@angular/core';
 
 @Component({
   selector: 'app-chat',
-  imports: [
-    ChatContainerComponent,
-    MessageListComponent,
-    UserMessageComponent,
-    AIResponseComponent,
-  ],
+  imports: [UserMessageComponent, AiResponseComponent],
   template: `
-    <ai-chat-container>
-      <ai-message-list [messages]="messages()" [loading]="loading()" />
-    </ai-chat-container>
+    <div class="bg-background min-h-screen p-8">
+      <ai-user-message [message]="userMessage()" />
+      <ai-response [content]="aiContent()" [isStreaming]="false" />
+    </div>
   `,
 })
 export class ChatComponent {
-  messages = signal<ChatMessage[]>([]);
-  loading = signal(false);
+  userMessage = signal<UserMessage>({
+    id: '1',
+    role: 'user',
+    content: 'Hello! How can you help me?',
+    timestamp: new Date(),
+  });
+
+  aiContent = signal(`## Welcome!
+
+I can help you with many things:
+
+- Answer questions
+- Write code
+- Explain concepts
+
+\`\`\`typescript
+const greeting = "Hello, World!";
+console.log(greeting);
+\`\`\`
+  `);
 }
 ```
 
@@ -68,17 +77,11 @@ export class ChatComponent {
 
 | Component                   | Selector                 | Description                          |
 | --------------------------- | ------------------------ | ------------------------------------ |
-| `AIResponseComponent`       | `<ai-response>`          | AI response with markdown rendering  |
+| `AiResponseComponent`       | `<ai-response>`          | AI response with markdown rendering  |
 | `CodeBlockComponent`        | `<ai-code-block>`        | Syntax highlighting with copy button |
 | `MarkdownRendererComponent` | `<ai-markdown-renderer>` | Parse and render markdown            |
 | `FeedbackButtonsComponent`  | `<ai-feedback-buttons>`  | Thumbs up/down toggle buttons        |
 | `ResponseActionsComponent`  | `<ai-response-actions>`  | Copy, regenerate, feedback buttons   |
-
-### UI Components
-
-| Component             | Selector           | Description          |
-| --------------------- | ------------------ | -------------------- |
-| `IconButtonComponent` | `<ai-icon-button>` | Reusable icon button |
 
 ### Directives
 
@@ -89,33 +92,27 @@ export class ChatComponent {
 | `ClickOutsideDirective`    | `[aiClickOutside]`    | Detect clicks outside element |
 | `FocusTrapDirective`       | `[aiFocusTrap]`       | Trap focus within element     |
 
-### Services
-
-| Service                | Description                                 |
-| ---------------------- | ------------------------------------------- |
-| `MarkdownService`      | Parse markdown with syntax highlighting     |
-| `CodeHighlightService` | Syntax highlighting with language detection |
-
 ## Features
 
 - **Signal-based**: Built with Angular v21 signals for optimal performance
 - **Standalone**: No NgModules required
 - **Tailwind CSS v4**: Modern styling with CSS variables
-- **Dark Mode**: Automatic theme switching support
+- **Dark Mode**: Auto-detects system preference (or use `class="dark"` on html)
 - **Accessible**: WCAG AA compliant with keyboard navigation
 - **SSR Compatible**: Works with Angular SSR/Hydration
 - **Zoneless**: Compatible with zoneless change detection
 
-## Theming
+## Manual Installation
 
-Components use CSS custom properties for theming. Import the design tokens:
+If you prefer manual setup:
 
-```css
-/* In your styles.css */
-@import '@angular-ai-kit/tokens/theme.css';
+```bash
+npm install @angular-ai-kit/core @angular-ai-kit/utils @angular-ai-kit/tokens
+npm install tailwindcss@^4 @tailwindcss/postcss highlight.js marked dompurify
+npm install @ng-icons/core @ng-icons/lucide
 ```
 
-Or use with Tailwind CSS v4 semantic classes like `bg-card`, `text-foreground`, `border-border`.
+Then see the [full setup guide](https://github.com/hassantayyab/angular-ai-kit#manual-setup) for CSS configuration.
 
 ## Documentation
 
