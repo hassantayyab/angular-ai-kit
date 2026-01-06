@@ -20,9 +20,9 @@ interface NgAddOptions {
 
 // Dependency versions
 const DEPENDENCIES: Record<string, string> = {
-  '@angular-ai-kit/core': '^0.1.0',
-  '@angular-ai-kit/utils': '^0.1.0',
-  '@angular-ai-kit/tokens': '^0.1.0',
+  '@angular-ai-kit/core': '^0.1.1',
+  '@angular-ai-kit/utils': '^0.1.1',
+  '@angular-ai-kit/tokens': '^0.1.1',
   tailwindcss: '^4.0.0',
   '@tailwindcss/postcss': '^4.0.0',
   'highlight.js': '^11.0.0',

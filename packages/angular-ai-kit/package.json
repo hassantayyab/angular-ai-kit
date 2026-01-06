@@ -1,6 +1,6 @@
 {
   "name": "@angular-ai-kit/core",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "AI-focused UI components for Angular v21 - Chat interfaces, streaming text, markdown rendering, and more",
   "schematics": "./collection.json",
   "ng-add": {
@@ -39,8 +39,8 @@
   "peerDependencies": {
     "@angular/common": "^21.0.0",
     "@angular/core": "^21.0.0",
-    "@angular-ai-kit/tokens": "^0.1.0",
-    "@angular-ai-kit/utils": "^0.1.0",
+    "@angular-ai-kit/tokens": "^0.1.1",
+    "@angular-ai-kit/utils": "^0.1.1",
     "tailwindcss": "^4.0.0",
     "highlight.js": "^11.0.0",
     "marked": "^17.0.0",
