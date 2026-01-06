@@ -1,0 +1,4 @@
+<span [class]="contentClasses()">{{ displayedText() }}</span>
+@if (isStreaming() && showCursor()) {
+  <span [class]="cursorClasses()" aria-hidden="true">{{ cursorChar() }}</span>
+}

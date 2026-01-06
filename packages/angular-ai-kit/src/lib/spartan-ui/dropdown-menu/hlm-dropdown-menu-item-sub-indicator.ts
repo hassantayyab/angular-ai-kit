@@ -1,0 +1,17 @@
+import { NgIcon, provideIcons } from '@ng-icons/core';
+import { lucideChevronRight } from '@ng-icons/lucide';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { classes } from '../utils';
+
+@Component({
+  selector: 'hlm-dropdown-menu-item-sub-indicator',
+  imports: [NgIcon],
+  providers: [provideIcons({ lucideChevronRight })],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  template: ` <ng-icon name="lucideChevronRight" class="text-base" /> `,
+})
+export class HlmDropdownMenuItemSubIndicator {
+  constructor() {
+    classes(() => 'ml-auto size-4');
+  }
+}

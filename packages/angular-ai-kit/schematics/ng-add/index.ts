@@ -20,9 +20,10 @@ interface NgAddOptions {
 
 // Dependency versions
 const DEPENDENCIES: Record<string, string> = {
-  '@angular-ai-kit/core': '^0.1.1',
+  '@angular-ai-kit/core': '^0.1.3',
   '@angular-ai-kit/utils': '^0.1.1',
   '@angular-ai-kit/tokens': '^0.1.1',
+  '@angular/cdk': '^21.0.0',
   tailwindcss: '^4.0.0',
   '@tailwindcss/postcss': '^4.0.0',
   'highlight.js': '^11.0.0',
@@ -32,6 +33,18 @@ const DEPENDENCIES: Record<string, string> = {
   '@ng-icons/lucide': '^32.0.0',
   clsx: '^2.1.0',
   'tailwind-merge': '^3.0.0',
+  'class-variance-authority': '^0.7.0',
+  // Spartan UI Brain primitives
+  '@spartan-ng/brain/avatar': '^0.0.1-alpha.528',
+  '@spartan-ng/brain/button': '^0.0.1-alpha.528',
+  '@spartan-ng/brain/command': '^0.0.1-alpha.528',
+  '@spartan-ng/brain/core': '^0.0.1-alpha.528',
+  '@spartan-ng/brain/dialog': '^0.0.1-alpha.528',
+  '@spartan-ng/brain/form-field': '^0.0.1-alpha.528',
+  '@spartan-ng/brain/forms': '^0.0.1-alpha.528',
+  '@spartan-ng/brain/menu': '^0.0.1-alpha.528',
+  '@spartan-ng/brain/popover': '^0.0.1-alpha.528',
+  '@spartan-ng/brain/switch': '^0.0.1-alpha.528',
 };
 
 // PostCSS config content
