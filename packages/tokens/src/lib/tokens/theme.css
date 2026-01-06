@@ -148,8 +148,38 @@ body {
   color: var(--primary-foreground);
 }
 
-/* Focus Ring */
-:focus-visible {
+/* Focus Ring - for non-form elements */
+:focus-visible:not(input):not(textarea):not(select):not(button) {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+}
+
+/* ============================================
+   Form Elements Base Styles
+   ============================================ */
+input,
+textarea,
+select {
+  outline: none;
+  border: 1px solid var(--border);
+  background-color: var(--background);
+  color: var(--foreground);
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  border-color: var(--ring);
+  box-shadow: 0 0 0 1px var(--ring);
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: var(--muted-foreground);
+}
+
+/* Button focus */
+button:focus-visible {
   outline: 2px solid var(--ring);
   outline-offset: 2px;
 }
