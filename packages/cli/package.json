@@ -1,6 +1,6 @@
 {
   "name": "@angular-ai-kit/cli",
-  "version": "0.1.8",
+  "version": "0.1.9",
   "description": "CLI tool to add Angular AI Kit components to your project - similar to Shadcn UI",
   "keywords": [
     "angular",
