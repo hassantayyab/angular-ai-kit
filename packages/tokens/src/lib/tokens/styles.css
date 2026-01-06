@@ -1,0 +1,51 @@
+/**
+ * Angular AI Kit - Complete Styles
+ * Single import for all Angular AI Kit styling
+ *
+ * Usage in your styles.css:
+ * @import 'tailwindcss';
+ * @import '@angular-ai-kit/tokens/tokens/styles.css';
+ *
+ * That's it! Dark mode works automatically via prefers-color-scheme
+ * or by adding class="dark" to your <html> element.
+ */
+
+/* Scan Angular AI Kit classes in node_modules */
+@source '../../node_modules/@angular-ai-kit';
+
+/* Map CSS variables to Tailwind color utilities */
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-border: var(--border);
+  --color-border-hover: var(--border-hover);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-code: var(--code);
+  --color-code-foreground: var(--code-foreground);
+  --color-foreground-muted: var(--foreground-muted);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+}
+
+/* Import all design tokens and component styles */
+@import './theme.css';
+@import './code-theme.css';
+@import './prose.css';
+@import './animations.css';
