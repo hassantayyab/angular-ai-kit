@@ -222,11 +222,7 @@ type GroupedItems = {
           <hlm-dropdown-menu class="w-75 [--radius:1rem]">
             <hlm-dropdown-menu-group>
               <button hlmDropdownMenuItem (click)="$event.stopPropagation()">
-                <label
-                  for="web-search"
-                  (click)="$event.stopPropagation()"
-                  class="flex flex-1 items-center"
-                >
+                <label for="web-search" class="flex flex-1 items-center">
                   <ng-icon hlm name="lucideGlobe" class="mr-2" size="sm" />
                   Web Search
                   <hlm-switch
@@ -241,11 +237,7 @@ type GroupedItems = {
             <hlm-dropdown-menu-separator />
             <hlm-dropdown-menu-group>
               <button hlmDropdownMenuItem (click)="$event.stopPropagation()">
-                <label
-                  for="app-integrations"
-                  class="flex flex-1"
-                  (click)="$event.stopPropagation()"
-                >
+                <label for="app-integrations" class="flex flex-1">
                   <ng-icon hlm name="lucideBlocks" class="mr-2" size="sm" />
                   Apps and Integrations
                   <hlm-switch

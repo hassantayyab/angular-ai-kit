@@ -22,7 +22,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
                 class="flex flex-row flex-wrap gap-2 [--radius:9999rem]"
               >
                 @for (option of _options; track option.value) {
-                  <label hlmFieldLabel class="!w-fit">
+                  <label hlmFieldLabel [for]="option.value" class="!w-fit">
                     <div
                       hlmField
                       orientation="horizontal"
