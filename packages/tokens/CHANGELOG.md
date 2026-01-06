@@ -1,3 +1,13 @@
+## 0.1.10 (2026-01-06)
+
+### 🩹 Fixes
+
+- **tokens:** add base styles for form elements to remove default outline ([bab8db7](https://github.com/hassantayyab/angular-ai-kit/commit/bab8db7))
+
+### ❤️ Thank You
+
+- Hassan Tayyab @hassantayyab
+
 ## 0.1.9 (2026-01-06)
 
 This was a version bump only for @angular-ai-kit/tokens to align it with other projects, there were no code changes.

@@ -1,3 +1,7 @@
+## 0.1.10 (2026-01-06)
+
+This was a version bump only for @angular-ai-kit/core to align it with other projects, there were no code changes.
+
 ## 0.1.9 (2026-01-06)
 
 This was a version bump only for @angular-ai-kit/core to align it with other projects, there were no code changes.
