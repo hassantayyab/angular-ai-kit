@@ -30,6 +30,8 @@ const DEPENDENCIES: Record<string, string> = {
   dompurify: '^3.0.0',
   '@ng-icons/core': '^32.0.0',
   '@ng-icons/lucide': '^32.0.0',
+  clsx: '^2.1.0',
+  'tailwind-merge': '^3.0.0',
 };
 
 // PostCSS config content
