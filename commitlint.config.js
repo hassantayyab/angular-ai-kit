@@ -42,9 +42,10 @@ module.exports = {
         'docs', // Documentation
         'config', // Configuration
         'deps', // Dependencies
+        'release', // Release/versioning
       ],
     ],
-    'subject-case': [2, 'always', 'sentence-case'],
+    'subject-case': [0],
     'header-max-length': [2, 'always', 100],
     'body-max-line-length': [0], // Disable body line length limit - commit bodies can have longer descriptive lines
   },

@@ -1,3 +1,29 @@
+## 0.1.6 (2026-01-06)
+
+### 🚀 Features
+
+- Add @angular-ai-kit/cli package ([96aef49](https://github.com/hassantayyab/angular-ai-kit/commit/96aef49))
+- Add README.md for @angular-ai-kit/cli package and include it in package.json files list ([4b62332](https://github.com/hassantayyab/angular-ai-kit/commit/4b62332))
+- Enhance sidebar navigation and update documentation page layout ([a0bd90d](https://github.com/hassantayyab/angular-ai-kit/commit/a0bd90d))
+- Add logo and favicon assets for Angular AI Kit ([16c0be2](https://github.com/hassantayyab/angular-ai-kit/commit/16c0be2))
+- Add Open Graph and Twitter meta tags to index.html and include component library image ([33dd7b7](https://github.com/hassantayyab/angular-ai-kit/commit/33dd7b7))
+- Add SEO configuration files and update index.html for improved search engine visibility ([2dc7ef0](https://github.com/hassantayyab/angular-ai-kit/commit/2dc7ef0))
+- Add AttachmentCard component for file attachment display in chat input ([d26cc6a](https://github.com/hassantayyab/angular-ai-kit/commit/d26cc6a))
+- Introduce TopNavComponent for mobile navigation and update chat and docs pages ([b22daa7](https://github.com/hassantayyab/angular-ai-kit/commit/b22daa7))
+- Implement Angular AI Kit schematics for easy installation and configuration ([fc90fac](https://github.com/hassantayyab/angular-ai-kit/commit/fc90fac))
+
+### 🩹 Fixes
+
+- Adjust sidebar component styles for improved layout ([44eaf91](https://github.com/hassantayyab/angular-ai-kit/commit/44eaf91))
+- Update sidebar link to point to the correct GitHub repository ([20e8066](https://github.com/hassantayyab/angular-ai-kit/commit/20e8066))
+- Update icon references in sidebar and AI icons ([c0c6145](https://github.com/hassantayyab/angular-ai-kit/commit/c0c6145))
+- Update component links in DocsOverviewComponent for correct routing ([b06fe26](https://github.com/hassantayyab/angular-ai-kit/commit/b06fe26))
+- Update ESLint configuration and clean up HTML components ([f8529be](https://github.com/hassantayyab/angular-ai-kit/commit/f8529be))
+
+### ❤️ Thank You
+
+- Hassan Tayyab @hassantayyab
+
 # Changelog
 
 All notable changes to this project will be documented in this file.
