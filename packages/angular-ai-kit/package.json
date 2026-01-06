@@ -1,6 +1,6 @@
 {
   "name": "@angular-ai-kit/core",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "AI-focused UI components for Angular v21 - Chat interfaces, streaming text, markdown rendering, and more",
   "schematics": "./collection.json",
   "ng-add": {
@@ -58,7 +58,7 @@
     "@spartan-ng/ui-switch-brain": "^0.0.1-alpha.528",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.0.0",
-    "tailwind-merge": "^2.0.0"
+    "tailwind-merge": "^3.0.0"
   },
   "optionalDependencies": {
     "@ng-icons/core": ">=32.0.0",
