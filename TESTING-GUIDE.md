@@ -85,10 +85,11 @@ Replace the contents of `src/styles.css` with:
 ```css
 /* Angular AI Kit */
 @import 'tailwindcss';
+@source '../node_modules/@angular-ai-kit';
 @import '@angular-ai-kit/tokens/tokens/styles.css';
 ```
 
-**That's it!** All theme variables, component styles, and dark mode support are included.
+**That's it!** The `@source` directive tells Tailwind where to find the component classes. All theme variables, component styles, and dark mode support are included.
 
 ---
 
@@ -101,9 +102,9 @@ Your `package.json` should include these dependencies:
 ```json
 {
   "dependencies": {
-    "@angular-ai-kit/core": "^0.1.7",
-    "@angular-ai-kit/utils": "^0.1.7",
-    "@angular-ai-kit/tokens": "^0.1.7",
+    "@angular-ai-kit/core": "^0.1.8",
+    "@angular-ai-kit/utils": "^0.1.8",
+    "@angular-ai-kit/tokens": "^0.1.8",
     "@angular/cdk": "^21.0.0",
     "tailwindcss": "^4.0.0",
     "@tailwindcss/postcss": "^4.0.0"
@@ -114,7 +115,7 @@ Your `package.json` should include these dependencies:
 ### Verify configuration files
 
 - `.postcssrc.json` - Contains Tailwind PostCSS plugin config
-- `src/styles.css` - Contains the 2-line import
+- `src/styles.css` - Contains the 3-line import (tailwindcss, @source, tokens)
 
 ---
 
@@ -279,8 +280,9 @@ Add `dark` class to `<html>` in `src/index.html`:
 ### Styles Not Loading
 
 1. Check `.postcssrc.json` exists
-2. Check `styles.css` has the 2 imports
-3. Restart `ng serve`
+2. Check `styles.css` has all 3 lines (tailwindcss, @source, tokens import)
+3. Ensure `@source` path points to `"../node_modules/@angular-ai-kit"`
+4. Restart `ng serve`
 
 ### Component Not Found
 
@@ -289,7 +291,7 @@ Error: 'ChatInputComponent' is not exported from '@angular-ai-kit/core'
 ```
 
 1. Check package version: `npm list @angular-ai-kit/core`
-2. Should be `0.1.7` or higher
+2. Should be `0.1.8` or higher
 3. Try: `npm install @angular-ai-kit/core@latest`
 
 ### Icons Not Showing
@@ -337,11 +339,12 @@ import {
 
 ## Version History
 
-| Version | Date       | Changes                                     |
-| ------- | ---------- | ------------------------------------------- |
-| 0.1.7   | 2026-01-06 | Simplified setup - styles come from library |
-| 0.1.6   | 2026-01-06 | Fixed ng-add schematic                      |
-| 0.1.5   | 2026-01-06 | Updated dependencies                        |
+| Version | Date       | Changes                                             |
+| ------- | ---------- | --------------------------------------------------- |
+| 0.1.8   | 2026-01-06 | Fixed @source directive for Tailwind class scanning |
+| 0.1.7   | 2026-01-06 | Simplified setup - styles come from library         |
+| 0.1.6   | 2026-01-06 | Fixed ng-add schematic                              |
+| 0.1.5   | 2026-01-06 | Updated dependencies                                |
 
 ---
 

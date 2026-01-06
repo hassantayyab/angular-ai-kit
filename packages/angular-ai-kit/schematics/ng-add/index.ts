@@ -20,9 +20,9 @@ interface NgAddOptions {
 
 // Dependency versions
 const DEPENDENCIES: Record<string, string> = {
-  '@angular-ai-kit/core': '^0.1.7',
-  '@angular-ai-kit/utils': '^0.1.7',
-  '@angular-ai-kit/tokens': '^0.1.7',
+  '@angular-ai-kit/core': '^0.1.8',
+  '@angular-ai-kit/utils': '^0.1.8',
+  '@angular-ai-kit/tokens': '^0.1.8',
   '@angular/cdk': '^21.0.0',
   tailwindcss: '^4.0.0',
   '@tailwindcss/postcss': '^4.0.0',
@@ -46,9 +46,10 @@ const POSTCSS_CONFIG = `{
 }
 `;
 
-// Minimal styles.css content - just imports from the library
+// Minimal styles.css content - imports from the library with @source directive
 const STYLES_CSS = `/* Angular AI Kit */
 @import 'tailwindcss';
+@source "../node_modules/@angular-ai-kit";
 @import '@angular-ai-kit/tokens/tokens/styles.css';
 `;
 

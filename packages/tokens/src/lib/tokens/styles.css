@@ -4,14 +4,12 @@
  *
  * Usage in your styles.css:
  * @import 'tailwindcss';
+ * @source "../node_modules/@angular-ai-kit";
  * @import '@angular-ai-kit/tokens/tokens/styles.css';
  *
- * That's it! Dark mode works automatically via prefers-color-scheme
+ * Dark mode works automatically via prefers-color-scheme
  * or by adding class="dark" to your <html> element.
  */
-
-/* Scan Angular AI Kit classes in node_modules */
-@source '../../node_modules/@angular-ai-kit';
 
 /* Map CSS variables to Tailwind color utilities */
 @theme inline {
