@@ -35,16 +35,16 @@ const DEPENDENCIES: Record<string, string> = {
   'tailwind-merge': '^3.0.0',
   'class-variance-authority': '^0.7.0',
   // Spartan UI Brain primitives
-  '@spartan-ng/brain/avatar': '^0.0.1-alpha.528',
-  '@spartan-ng/brain/button': '^0.0.1-alpha.528',
-  '@spartan-ng/brain/command': '^0.0.1-alpha.528',
-  '@spartan-ng/brain/core': '^0.0.1-alpha.528',
-  '@spartan-ng/brain/dialog': '^0.0.1-alpha.528',
-  '@spartan-ng/brain/form-field': '^0.0.1-alpha.528',
-  '@spartan-ng/brain/forms': '^0.0.1-alpha.528',
-  '@spartan-ng/brain/menu': '^0.0.1-alpha.528',
-  '@spartan-ng/brain/popover': '^0.0.1-alpha.528',
-  '@spartan-ng/brain/switch': '^0.0.1-alpha.528',
+  '@spartan-ng/ui-avatar-brain': '^0.0.1-alpha.528',
+  '@spartan-ng/ui-button-brain': '^0.0.1-alpha.528',
+  '@spartan-ng/ui-command-brain': '^0.0.1-alpha.528',
+  '@spartan-ng/ui-core': '^0.0.1-alpha.528',
+  '@spartan-ng/ui-dialog-brain': '^0.0.1-alpha.528',
+  '@spartan-ng/ui-formfield-brain': '^0.0.1-alpha.528',
+  '@spartan-ng/ui-forms-brain': '^0.0.1-alpha.528',
+  '@spartan-ng/ui-menu-brain': '^0.0.1-alpha.528',
+  '@spartan-ng/ui-popover-brain': '^0.0.1-alpha.528',
+  '@spartan-ng/ui-switch-brain': '^0.0.1-alpha.528',
 };
 
 // PostCSS config content
