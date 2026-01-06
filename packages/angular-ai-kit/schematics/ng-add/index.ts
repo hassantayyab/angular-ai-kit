@@ -20,7 +20,7 @@ interface NgAddOptions {
 
 // Dependency versions
 const DEPENDENCIES: Record<string, string> = {
-  '@angular-ai-kit/core': '^0.1.3',
+  '@angular-ai-kit/core': '^0.1.5',
   '@angular-ai-kit/utils': '^0.1.1',
   '@angular-ai-kit/tokens': '^0.1.1',
   '@angular/cdk': '^21.0.0',

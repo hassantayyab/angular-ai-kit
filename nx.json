@@ -80,7 +80,7 @@
       "@angular-ai-kit/cli"
     ],
     "version": {
-      "preVersionCommand": "npx nx run-many -t build --projects=@angular-ai-kit/core,@angular-ai-kit/utils,@angular-ai-kit/tokens,@angular-ai-kit/cli",
+      "preVersionCommand": "npx nx run @angular-ai-kit/core:package && npx nx run-many -t build --projects=@angular-ai-kit/utils,@angular-ai-kit/tokens,@angular-ai-kit/cli",
       "conventionalCommits": true
     },
     "changelog": {
