@@ -1,6 +1,6 @@
 {
   "name": "@angular-ai-kit/core",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "AI-focused UI components for Angular v21 - Chat interfaces, streaming text, markdown rendering, and more",
   "schematics": "./collection.json",
   "ng-add": {
@@ -46,16 +46,7 @@
     "highlight.js": "^11.0.0",
     "marked": "^17.0.0",
     "dompurify": "^3.0.0",
-    "@spartan-ng/ui-avatar-brain": "^0.0.1-alpha.528",
-    "@spartan-ng/ui-button-brain": "^0.0.1-alpha.528",
-    "@spartan-ng/ui-command-brain": "^0.0.1-alpha.528",
-    "@spartan-ng/ui-core": "^0.0.1-alpha.528",
-    "@spartan-ng/ui-dialog-brain": "^0.0.1-alpha.528",
-    "@spartan-ng/ui-formfield-brain": "^0.0.1-alpha.528",
-    "@spartan-ng/ui-forms-brain": "^0.0.1-alpha.528",
-    "@spartan-ng/ui-menu-brain": "^0.0.1-alpha.528",
-    "@spartan-ng/ui-popover-brain": "^0.0.1-alpha.528",
-    "@spartan-ng/ui-switch-brain": "^0.0.1-alpha.528",
+    "@spartan-ng/brain": "^0.0.1-alpha.597",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.0.0",
     "tailwind-merge": "^3.0.0"

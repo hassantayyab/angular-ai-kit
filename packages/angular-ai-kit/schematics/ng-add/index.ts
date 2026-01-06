@@ -34,17 +34,8 @@ const DEPENDENCIES: Record<string, string> = {
   clsx: '^2.1.0',
   'tailwind-merge': '^3.0.0',
   'class-variance-authority': '^0.7.0',
-  // Spartan UI Brain primitives
-  '@spartan-ng/ui-avatar-brain': '^0.0.1-alpha.528',
-  '@spartan-ng/ui-button-brain': '^0.0.1-alpha.528',
-  '@spartan-ng/ui-command-brain': '^0.0.1-alpha.528',
-  '@spartan-ng/ui-core': '^0.0.1-alpha.528',
-  '@spartan-ng/ui-dialog-brain': '^0.0.1-alpha.528',
-  '@spartan-ng/ui-formfield-brain': '^0.0.1-alpha.528',
-  '@spartan-ng/ui-forms-brain': '^0.0.1-alpha.528',
-  '@spartan-ng/ui-menu-brain': '^0.0.1-alpha.528',
-  '@spartan-ng/ui-popover-brain': '^0.0.1-alpha.528',
-  '@spartan-ng/ui-switch-brain': '^0.0.1-alpha.528',
+  // Spartan UI Brain (single package with subpath exports)
+  '@spartan-ng/brain': '^0.0.1-alpha.597',
 };
 
 // PostCSS config content
