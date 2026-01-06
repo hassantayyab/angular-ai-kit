@@ -20,7 +20,7 @@ Please be respectful and professional in all interactions.
 2. Clone your fork:
 
    ```bash
-   git clone https://github.com/yourusername/angular-ai-kit.git
+   git clone https://github.com/hassantayyab/angular-ai-kit.git
    cd angular-ai-kit
    ```
 

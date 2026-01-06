@@ -199,7 +199,7 @@ Inline code is also supported: \`const greeting = "Hello, World!";\`
 
 - [Angular Documentation](https://angular.dev)
 - [Tailwind CSS](https://tailwindcss.com)
-- [GitHub Repository](https://github.com/angular-ai-kit)
+- [GitHub Repository](https://github.com/hassantayyab/angular-ai-kit)
 
 ## Horizontal Rules
 
