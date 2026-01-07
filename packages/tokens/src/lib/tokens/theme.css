@@ -156,21 +156,37 @@ body {
 
 /* ============================================
    Form Elements Base Styles
+   Note: Elements inside input-group are excluded
+   as the group handles its own styling
    ============================================ */
-input,
-textarea,
-select {
+input:not([data-slot='input-group-control']),
+textarea:not([data-slot='input-group-control']),
+select:not([data-slot]) {
   outline: none;
   border: 1px solid var(--border);
   background-color: var(--background);
   color: var(--foreground);
 }
 
-input:focus,
-textarea:focus,
-select:focus {
+input:not([data-slot='input-group-control']):focus,
+textarea:not([data-slot='input-group-control']):focus,
+select:not([data-slot]):focus {
   border-color: var(--ring);
   box-shadow: 0 0 0 1px var(--ring);
+}
+
+/* Input-group controls should have no border/shadow */
+[data-slot='input-group-control'] {
+  outline: none;
+  border: none;
+  background-color: transparent;
+  box-shadow: none;
+}
+
+[data-slot='input-group-control']:focus {
+  outline: none;
+  border: none;
+  box-shadow: none;
 }
 
 input::placeholder,
