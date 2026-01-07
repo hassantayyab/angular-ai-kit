@@ -1,3 +1,13 @@
+## 0.1.11 (2026-01-07)
+
+### 🩹 Fixes
+
+- **core:** remove 3px ring from input-group focus state ([993725b](https://github.com/hassantayyab/angular-ai-kit/commit/993725b))
+
+### ❤️ Thank You
+
+- Hassan Tayyab @hassantayyab
+
 ## 0.1.10 (2026-01-06)
 
 ### 🩹 Fixes
