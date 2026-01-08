@@ -256,6 +256,11 @@
   color: var(--primary);
 }
 
+/* Code content container */
+.ai-code-block-content {
+  overflow-x: auto;
+}
+
 /* Code content inside wrapper */
 .ai-code-block-wrapper pre {
   margin: 0 !important;
@@ -274,6 +279,49 @@
     'Liberation Mono', 'Courier New', monospace;
   background: transparent !important;
   padding: 0 !important;
+}
+
+/* ============================================
+   Line Numbers Styling
+   ============================================ */
+
+/* Container for code with line numbers */
+.ai-code-block-with-lines {
+  display: flex;
+  overflow-x: auto;
+}
+
+/* Line numbers column */
+.ai-code-block-line-numbers {
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  padding: 1rem 0;
+  padding-right: 1rem;
+  padding-left: 1rem;
+  text-align: right;
+  user-select: none;
+  border-right: 1px solid var(--border);
+}
+
+/* Individual line number */
+.ai-code-block-line-number {
+  display: block;
+  font-size: 0.875rem;
+  line-height: 1.7;
+  color: var(--muted-foreground);
+  font-family:
+    ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Monaco, Consolas,
+    'Liberation Mono', 'Courier New', monospace;
+  min-width: 1.5rem;
+}
+
+/* Adjust pre when inside with-lines container */
+.ai-code-block-with-lines .ai-code-block-pre {
+  flex: 1;
+  margin: 0 !important;
+  padding: 1rem !important;
+  overflow-x: visible;
 }
 
 /* Inline code styling */
