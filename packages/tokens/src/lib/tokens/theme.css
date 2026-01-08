@@ -230,3 +230,16 @@ button:focus-visible {
   scrollbar-width: thin;
   scrollbar-color: var(--border) transparent;
 }
+
+/* ============================================
+   Utility: Hide Scrollbar
+   Hides scrollbar while maintaining scroll functionality
+   ============================================ */
+.no-scrollbar {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}

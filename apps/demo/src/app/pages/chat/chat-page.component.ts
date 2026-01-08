@@ -3,7 +3,7 @@ import {
   Component,
   ViewEncapsulation,
 } from '@angular/core';
-import { ChatViewComponent } from '../../components/chat-view/chat-view.component';
+import { ChatViewComponent } from '../../components';
 
 /**
  * ChatPage Component

@@ -238,7 +238,516 @@ export class AppComponent {
 
 ---
 
-## 7. Run the App
+## 7. Component Testing Phases
+
+Test components in this order to build a complete chat application:
+
+### Phase 2: Display Components
+
+#### 7.1 TypingIndicatorComponent
+
+```typescript
+import { TypingIndicatorComponent } from '@angular-ai-kit/core';
+
+@Component({
+  imports: [TypingIndicatorComponent],
+  template: `
+    <div class="p-8">
+      <h2 class="mb-4 font-bold">Typing Indicator</h2>
+      <ai-typing-indicator />
+    </div>
+  `
+})
+```
+
+**Expected:** Three animated bouncing dots
+**Check:** Animation is smooth, sizing looks correct
+
+#### 7.2 StreamingTextComponent
+
+```typescript
+import { StreamingTextComponent } from '@angular-ai-kit/core';
+import { signal } from '@angular/core';
+
+@Component({
+  imports: [StreamingTextComponent],
+  template: `
+    <div class="p-8">
+      <h2 class="mb-4 font-bold">Streaming Text</h2>
+      <button
+        (click)="startStream()"
+        class="mb-4 rounded bg-blue-500 px-4 py-2 text-white"
+      >
+        Start Stream
+      </button>
+      <ai-streaming-text [text]="streamText()" [isStreaming]="isStreaming()" />
+    </div>
+  `,
+})
+export class TestComponent {
+  streamText = signal('');
+  isStreaming = signal(false);
+
+  startStream() {
+    const fullText = 'Hello! I am an AI assistant. How can I help you today?';
+    this.streamText.set('');
+    this.isStreaming.set(true);
+    let i = 0;
+    const interval = setInterval(() => {
+      if (i < fullText.length) {
+        this.streamText.update((t) => t + fullText[i]);
+        i++;
+      } else {
+        clearInterval(interval);
+        this.isStreaming.set(false);
+      }
+    }, 50);
+  }
+}
+```
+
+**Expected:** Text reveals character-by-character with blinking cursor
+**Check:** Smooth animation, cursor visible during stream, disappears after
+
+#### 7.3 MarkdownRendererComponent
+
+```typescript
+import { MarkdownRendererComponent } from '@angular-ai-kit/core';
+
+@Component({
+  imports: [MarkdownRendererComponent],
+  template: `
+    <div class="p-8">
+      <h2 class="mb-4 font-bold">Markdown Renderer</h2>
+      <ai-markdown-renderer [content]="markdownContent" />
+    </div>
+  `,
+})
+export class TestComponent {
+  markdownContent = `
+# Heading 1
+## Heading 2
+### Heading 3
+
+**Bold text** and *italic text* and ~~strikethrough~~.
+
+- Unordered list item 1
+- Unordered list item 2
+  - Nested item
+
+1. Ordered list item 1
+2. Ordered list item 2
+
+> This is a blockquote
+
+Inline \`code\` example.
+
+\`\`\`typescript
+const greeting = 'Hello, World!';
+console.log(greeting);
+
+function fibonacci(n: number): number {
+  if (n <= 1) return n;
+  return fibonacci(n - 1) + fibonacci(n - 2);
+}
+\`\`\`
+
+| Column 1 | Column 2 |
+|----------|----------|
+| Cell 1   | Cell 2   |
+| Cell 3   | Cell 4   |
+
+[Link example](https://angular.dev)
+`;
+}
+```
+
+**Expected:** Proper heading styles, code with syntax highlighting, tables render
+**Check:** All markdown elements render correctly, code blocks have copy button
+
+#### 7.4 CodeBlockComponent
+
+```typescript
+import { CodeBlockComponent } from '@angular-ai-kit/core';
+
+@Component({
+  imports: [CodeBlockComponent],
+  template: `
+    <div class="p-8">
+      <h2 class="mb-4 font-bold">Code Block</h2>
+      <ai-code-block [code]="codeSnippet" [language]="'typescript'" />
+    </div>
+  `,
+})
+export class TestComponent {
+  codeSnippet = `import { Component, signal } from '@angular/core';
+
+@Component({
+  selector: 'app-example',
+  template: \`<h1>{{ title() }}</h1>\`
+})
+export class ExampleComponent {
+  title = signal('Hello Angular!');
+}`;
+}
+```
+
+**Expected:** Syntax highlighted code with language label and copy button
+**Check:** Copy button works (copies to clipboard), language shows in header
+
+---
+
+### Phase 3: Message Components
+
+#### 7.5 UserMessageComponent
+
+```typescript
+import { UserMessage, UserMessageComponent } from '@angular-ai-kit/core';
+
+@Component({
+  imports: [UserMessageComponent],
+  template: `
+    <div class="p-8">
+      <h2 class="mb-4 font-bold">User Message</h2>
+      <ai-user-message [message]="userMessage" (edit)="onEdit($event)" />
+    </div>
+  `,
+})
+export class TestComponent {
+  userMessage: UserMessage = {
+    id: '1',
+    role: 'user',
+    content:
+      'Hello! Can you help me write a function that calculates the factorial of a number?',
+    timestamp: new Date(),
+  };
+
+  onEdit(event: { id: string; content: string }) {
+    console.log('Edit:', event);
+    this.userMessage = { ...this.userMessage, content: event.content };
+  }
+}
+```
+
+**Expected:** Message bubble with user styling (right-aligned or styled differently)
+**Check:** Edit button appears on hover, edit mode works, copy works
+
+#### 7.6 AiResponseComponent
+
+```typescript
+import { AiResponseComponent, AssistantMessage } from '@angular-ai-kit/core';
+
+@Component({
+  imports: [AiResponseComponent],
+  template: `
+    <div class="p-8">
+      <h2 class="mb-4 font-bold">AI Response</h2>
+      <ai-response [message]="assistantMessage" [isStreaming]="false" />
+    </div>
+  `,
+})
+export class TestComponent {
+  assistantMessage: AssistantMessage = {
+    id: '2',
+    role: 'assistant',
+    content: `Here's a factorial function in TypeScript:
+
+\`\`\`typescript
+function factorial(n: number): number {
+  if (n <= 1) return 1;
+  return n * factorial(n - 1);
+}
+\`\`\`
+
+This uses **recursion** to calculate the factorial. For n=5, it returns 120.`,
+    timestamp: new Date(),
+    model: 'gpt-4',
+  };
+}
+```
+
+**Expected:** Plain text response (no bubble), markdown rendered, actions on hover
+**Check:** Copy, regenerate buttons work, markdown renders properly
+
+#### 7.7 MessageActionsComponent
+
+```typescript
+import { MessageActionsComponent } from '@angular-ai-kit/core';
+
+@Component({
+  imports: [MessageActionsComponent],
+  template: `
+    <div class="p-8">
+      <h2 class="mb-4 font-bold">Message Actions</h2>
+      <ai-message-actions
+        [showCopy]="true"
+        [showRegenerate]="true"
+        [showDelete]="true"
+        (copy)="onCopy()"
+        (regenerate)="onRegenerate()"
+        (delete)="onDelete()"
+      />
+    </div>
+  `,
+})
+export class TestComponent {
+  onCopy() {
+    console.log('Copy clicked');
+  }
+  onRegenerate() {
+    console.log('Regenerate clicked');
+  }
+  onDelete() {
+    console.log('Delete clicked');
+  }
+}
+```
+
+**Expected:** Icon buttons for copy, regenerate, delete
+**Check:** All buttons clickable, events fire correctly
+
+#### 7.8 FeedbackButtonsComponent
+
+```typescript
+import { FeedbackButtonsComponent } from '@angular-ai-kit/core';
+import { signal } from '@angular/core';
+
+@Component({
+  imports: [FeedbackButtonsComponent],
+  template: `
+    <div class="p-8">
+      <h2 class="mb-4 font-bold">Feedback Buttons</h2>
+      <ai-feedback-buttons
+        [value]="feedbackValue()"
+        (feedbackChange)="onFeedback($event)"
+      />
+      <p class="mt-4">Current feedback: {{ feedbackValue() || 'none' }}</p>
+    </div>
+  `,
+})
+export class TestComponent {
+  feedbackValue = signal<'up' | 'down' | null>(null);
+
+  onFeedback(value: 'up' | 'down') {
+    this.feedbackValue.set(value);
+    console.log('Feedback:', value);
+  }
+}
+```
+
+**Expected:** Thumbs up/down buttons
+**Check:** Selection state persists, visual feedback on click
+
+---
+
+### Phase 4: Container & List Components
+
+#### 7.9 ChatContainerComponent (Full Integration)
+
+```typescript
+import { ChatContainerComponent, ChatMessage } from '@angular-ai-kit/core';
+import { signal } from '@angular/core';
+
+@Component({
+  imports: [ChatContainerComponent],
+  template: `
+    <div class="h-screen">
+      <ai-chat-container
+        [messages]="messages()"
+        [loading]="isLoading()"
+        [suggestions]="suggestions"
+        (messageSend)="sendMessage($event)"
+      />
+    </div>
+  `,
+})
+export class TestComponent {
+  messages = signal<ChatMessage[]>([]);
+  isLoading = signal(false);
+
+  suggestions = [
+    { label: 'Write code', prompt: 'Help me write a function' },
+    { label: 'Explain', prompt: 'Explain this concept' },
+  ];
+
+  sendMessage(content: string) {
+    // Add user message
+    const userMsg: ChatMessage = {
+      id: Date.now().toString(),
+      role: 'user',
+      content,
+      timestamp: new Date(),
+    };
+    this.messages.update((msgs) => [...msgs, userMsg]);
+
+    // Simulate AI response
+    this.isLoading.set(true);
+    setTimeout(() => {
+      const aiMsg: ChatMessage = {
+        id: (Date.now() + 1).toString(),
+        role: 'assistant',
+        content: 'This is a simulated AI response to: ' + content,
+        timestamp: new Date(),
+      };
+      this.messages.update((msgs) => [...msgs, aiMsg]);
+      this.isLoading.set(false);
+    }, 1500);
+  }
+}
+```
+
+**Expected:** Full chat interface with input, messages, auto-scroll
+**Check:** Messages appear, loading state shows, auto-scrolls to bottom
+
+#### 7.10 ConversationListComponent
+
+```typescript
+import { Conversation, ConversationListComponent } from '@angular-ai-kit/core';
+import { signal } from '@angular/core';
+
+@Component({
+  imports: [ConversationListComponent],
+  template: `
+    <div class="w-64 border-r p-4">
+      <ai-conversation-list
+        [conversations]="conversations"
+        [activeId]="activeId()"
+        (select)="selectConversation($event)"
+        (delete)="deleteConversation($event)"
+      />
+    </div>
+  `,
+})
+export class TestComponent {
+  activeId = signal('1');
+
+  conversations: Conversation[] = [
+    { id: '1', title: 'Chat about Angular', updatedAt: new Date() },
+    {
+      id: '2',
+      title: 'Help with TypeScript',
+      updatedAt: new Date(Date.now() - 86400000),
+    },
+    {
+      id: '3',
+      title: 'Code review',
+      updatedAt: new Date(Date.now() - 172800000),
+    },
+  ];
+
+  selectConversation(id: string) {
+    this.activeId.set(id);
+    console.log('Selected:', id);
+  }
+
+  deleteConversation(id: string) {
+    console.log('Delete:', id);
+  }
+}
+```
+
+**Expected:** Grouped conversation list (Today, Yesterday, etc.)
+**Check:** Selection highlights, delete button works
+
+#### 7.11 PromptSuggestionsComponent
+
+```typescript
+import {
+  PromptSuggestion,
+  PromptSuggestionsComponent,
+} from '@angular-ai-kit/core';
+
+@Component({
+  imports: [PromptSuggestionsComponent],
+  template: `
+    <div class="p-8">
+      <h2 class="mb-4 font-bold">Prompt Suggestions</h2>
+      <ai-prompt-suggestions
+        [suggestions]="suggestions"
+        (select)="onSelect($event)"
+      />
+    </div>
+  `,
+})
+export class TestComponent {
+  suggestions: PromptSuggestion[] = [
+    { label: 'Write code', prompt: 'Help me write a function that...' },
+    { label: 'Explain concept', prompt: 'Explain how async/await works' },
+    { label: 'Debug issue', prompt: 'I have a bug where...' },
+    { label: 'Review code', prompt: 'Please review this code' },
+  ];
+
+  onSelect(suggestion: PromptSuggestion) {
+    console.log('Selected:', suggestion);
+  }
+}
+```
+
+**Expected:** Clickable suggestion chips/buttons
+**Check:** Click fires event with correct suggestion data
+
+---
+
+### Phase 5: Advanced Components
+
+#### 7.12 AttachmentCardComponent
+
+```typescript
+import { AttachmentCardComponent } from '@angular-ai-kit/core';
+
+@Component({
+  imports: [AttachmentCardComponent],
+  template: `
+    <div class="p-8">
+      <h2 class="mb-4 font-bold">Attachment Card</h2>
+      <div class="flex gap-4">
+        <ai-attachment-card [file]="pdfFile" (remove)="onRemove('pdf')" />
+        <ai-attachment-card [file]="imageFile" (remove)="onRemove('image')" />
+      </div>
+    </div>
+  `,
+})
+export class TestComponent {
+  pdfFile = new File([''], 'document.pdf', { type: 'application/pdf' });
+  imageFile = new File([''], 'photo.png', { type: 'image/png' });
+
+  onRemove(type: string) {
+    console.log('Remove:', type);
+  }
+}
+```
+
+**Expected:** File preview cards with appropriate icons and remove button
+**Check:** Different file types show different icons, remove button works
+
+#### 7.13 CopyToClipboardDirective
+
+```typescript
+import { CopyToClipboardDirective } from '@angular-ai-kit/core';
+
+@Component({
+  imports: [CopyToClipboardDirective],
+  template: `
+    <div class="p-8">
+      <h2 class="mb-4 font-bold">Copy to Clipboard Directive</h2>
+      <button
+        aiCopyToClipboard
+        [text]="'Hello, this text will be copied!'"
+        class="rounded bg-blue-500 px-4 py-2 text-white"
+      >
+        Click to Copy
+      </button>
+    </div>
+  `
+})
+```
+
+**Expected:** Clicking copies text to clipboard
+**Check:** Text is copied, visual feedback shows
+
+---
+
+## 8. Run the App
 
 ```bash
 ng serve
@@ -315,24 +824,81 @@ npm install @ng-icons/core @ng-icons/lucide
 ```typescript
 // Components
 import {
+  // Display Components
+  AiResponseComponent,
+  // Input Components
   AttachmentCardComponent,
+  // Chat Components
+  ChatContainerComponent,
   ChatInputComponent,
+  CodeBlockComponent,
+  ConversationListComponent,
   CopyButtonComponent,
-  MessageBubbleComponent,
+  FeedbackButtonsComponent,
+  // UI Components
+  IconButtonComponent,
+  MarkdownRendererComponent,
+  // Action Components
+  MessageActionsComponent,
+  MessageListComponent,
   PromptSuggestionsComponent,
   StreamingTextComponent,
   TypingIndicatorComponent,
+  UserMessageComponent,
 } from '@angular-ai-kit/core';
 // Types
 import {
+  AssistantMessage,
   ChatMessage,
-  ContextItem,
-  MessageRole,
-  ModelOption,
+  ChatRole,
+  Conversation,
+  MessageStatus,
+  ModelInfo,
   PromptSuggestion,
-  SourceOption,
-  SuggestionsPosition,
+  StreamingOptions,
+  SystemMessage,
+  UserMessage,
 } from '@angular-ai-kit/core';
+// Directives
+import {
+  AutoResizeDirective,
+  ClickOutsideDirective,
+  CopyToClipboardDirective,
+  FocusTrapDirective,
+} from '@angular-ai-kit/core';
+// Spartan UI Components
+import {
+  HlmAvatarImports,
+  HlmBadgeImports,
+  HlmButtonImports,
+  HlmCommandImports,
+  HlmDropdownMenuImports,
+  HlmInputGroupImports,
+  HlmPopoverImports,
+} from '@angular-ai-kit/core';
+// Services
+import { CodeHighlightService, MarkdownService } from '@angular-ai-kit/core';
+// Tokens (for DI)
+import {
+  CHAT_SERVICE,
+  MARKDOWN_OPTIONS,
+  STREAMING_SERVICE,
+} from '@angular-ai-kit/core';
+```
+
+---
+
+## 11. Issue Reporting Format
+
+When reporting issues, use this format:
+
+```
+## Component: [ComponentName]
+## Issue: [Brief description]
+## Expected: [What should happen]
+## Actual: [What actually happens]
+## Screenshot: [If applicable]
+## Console Errors: [If any]
 ```
 
 ---
@@ -341,6 +907,9 @@ import {
 
 | Version | Date       | Changes                                             |
 | ------- | ---------- | --------------------------------------------------- |
+| 0.1.13  | 2026-01-08 | Fixed input-group focus styles, form element styles |
+| 0.1.12  | 2026-01-07 | Removed border/shadow from input-group controls     |
+| 0.1.11  | 2026-01-07 | Removed 3px ring from input-group focus state       |
 | 0.1.8   | 2026-01-06 | Fixed @source directive for Tailwind class scanning |
 | 0.1.7   | 2026-01-06 | Simplified setup - styles come from library         |
 | 0.1.6   | 2026-01-06 | Fixed ng-add schematic                              |
