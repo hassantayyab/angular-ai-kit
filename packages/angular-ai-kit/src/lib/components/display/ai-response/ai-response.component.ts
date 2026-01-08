@@ -1,3 +1,5 @@
+import { NgIcon, provideIcons } from '@ng-icons/core';
+import { lucideSparkle } from '@ng-icons/lucide';
 import { cn } from '@angular-ai-kit/utils';
 import {
   ChangeDetectionStrategy,
@@ -8,6 +10,8 @@ import {
   output,
   signal,
 } from '@angular/core';
+import { HlmAvatar, HlmAvatarFallback } from '../../../spartan-ui/avatar';
+import { HlmIcon } from '../../../spartan-ui/icon';
 import { MarkdownRendererComponent } from '../markdown-renderer';
 import { ResponseActionsComponent } from '../response-actions';
 
@@ -42,7 +46,15 @@ import { ResponseActionsComponent } from '../response-actions';
   templateUrl: './ai-response.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
-  imports: [MarkdownRendererComponent, ResponseActionsComponent],
+  imports: [
+    MarkdownRendererComponent,
+    ResponseActionsComponent,
+    HlmAvatar,
+    HlmAvatarFallback,
+    HlmIcon,
+    NgIcon,
+  ],
+  viewProviders: [provideIcons({ lucideSparkle })],
   host: {
     class: 'ai-response-host block',
     '[attr.aria-live]': '"polite"',
@@ -82,6 +94,9 @@ export class AiResponseComponent {
   /** Whether actions are always visible (vs hover/focus) */
   actionsAlwaysVisible = input<boolean>(false);
 
+  /** Whether to show an avatar */
+  showAvatar = input<boolean>(false);
+
   /** Custom CSS classes */
   customClasses = input<string>('');
 
@@ -120,8 +135,15 @@ export class AiResponseComponent {
 
   /** Container classes */
   containerClasses = computed(() =>
-    cn('ai-response relative', this.customClasses())
+    cn(
+      'ai-response relative',
+      { 'flex gap-3': this.showAvatar() },
+      this.customClasses()
+    )
   );
+
+  /** Avatar classes */
+  avatarClasses = computed(() => cn('ai-response-avatar shrink-0'));
 
   /** Content wrapper classes */
   contentClasses = computed(() =>

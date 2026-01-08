@@ -280,7 +280,10 @@ import { signal } from '@angular/core';
       >
         Start Stream
       </button>
-      <ai-streaming-text [text]="streamText()" [isStreaming]="isStreaming()" />
+      <ai-streaming-text
+        [content]="streamText()"
+        [isStreaming]="isStreaming()"
+      />
     </div>
   `,
 })
@@ -422,9 +425,9 @@ export class TestComponent {
     timestamp: new Date(),
   };
 
-  onEdit(event: { id: string; content: string }) {
+  onEdit(event: { originalContent: string; newContent: string }) {
     console.log('Edit:', event);
-    this.userMessage = { ...this.userMessage, content: event.content };
+    this.userMessage = { ...this.userMessage, content: event.newContent };
   }
 }
 ```
@@ -442,7 +445,7 @@ import { AiResponseComponent, AssistantMessage } from '@angular-ai-kit/core';
   template: `
     <div class="p-8">
       <h2 class="mb-4 font-bold">AI Response</h2>
-      <ai-response [message]="assistantMessage" [isStreaming]="false" />
+      <ai-response [content]="assistantMessage.content" [isStreaming]="false" />
     </div>
   `,
 })
@@ -480,12 +483,12 @@ import { MessageActionsComponent } from '@angular-ai-kit/core';
     <div class="p-8">
       <h2 class="mb-4 font-bold">Message Actions</h2>
       <ai-message-actions
+        [content]="'Test content to copy'"
         [showCopy]="true"
-        [showRegenerate]="true"
-        [showDelete]="true"
+        [showEdit]="true"
+        [alwaysVisible]="true"
         (copy)="onCopy()"
-        (regenerate)="onRegenerate()"
-        (delete)="onDelete()"
+        (edit)="onEdit()"
       />
     </div>
   `,
@@ -494,17 +497,14 @@ export class TestComponent {
   onCopy() {
     console.log('Copy clicked');
   }
-  onRegenerate() {
-    console.log('Regenerate clicked');
-  }
-  onDelete() {
-    console.log('Delete clicked');
+  onEdit() {
+    console.log('Edit clicked');
   }
 }
 ```
 
-**Expected:** Icon buttons for copy, regenerate, delete
-**Check:** All buttons clickable, events fire correctly
+**Expected:** Icon buttons for copy and edit actions
+**Check:** All buttons clickable, events fire correctly, copy copies content to clipboard
 
 #### 7.8 FeedbackButtonsComponent
 
@@ -519,7 +519,9 @@ import { signal } from '@angular/core';
       <h2 class="mb-4 font-bold">Feedback Buttons</h2>
       <ai-feedback-buttons
         [value]="feedbackValue()"
-        (feedbackChange)="onFeedback($event)"
+        (valueChange)="onFeedback($event)"
+        (thumbsUp)="onThumbsUp()"
+        (thumbsDown)="onThumbsDown()"
       />
       <p class="mt-4">Current feedback: {{ feedbackValue() || 'none' }}</p>
     </div>
@@ -528,9 +530,17 @@ import { signal } from '@angular/core';
 export class TestComponent {
   feedbackValue = signal<'up' | 'down' | null>(null);
 
-  onFeedback(value: 'up' | 'down') {
+  onFeedback(value: 'up' | 'down' | null) {
     this.feedbackValue.set(value);
-    console.log('Feedback:', value);
+    console.log('Feedback changed:', value);
+  }
+
+  onThumbsUp() {
+    console.log('Thumbs up clicked');
+  }
+
+  onThumbsDown() {
+    console.log('Thumbs down clicked');
   }
 }
 ```
@@ -555,8 +565,14 @@ import { signal } from '@angular/core';
       <ai-chat-container
         [messages]="messages()"
         [loading]="isLoading()"
-        [suggestions]="suggestions"
+        [title]="'Test Chat'"
+        [showHeader]="true"
+        [showFooter]="true"
+        [showAvatars]="true"
+        [autoScroll]="true"
         (messageSend)="sendMessage($event)"
+        (messageCopy)="onMessageCopy($event)"
+        (messageRegenerate)="onMessageRegenerate($event)"
       />
     </div>
   `,
@@ -564,11 +580,6 @@ import { signal } from '@angular/core';
 export class TestComponent {
   messages = signal<ChatMessage[]>([]);
   isLoading = signal(false);
-
-  suggestions = [
-    { label: 'Write code', prompt: 'Help me write a function' },
-    { label: 'Explain', prompt: 'Explain this concept' },
-  ];
 
   sendMessage(content: string) {
     // Add user message
@@ -592,6 +603,14 @@ export class TestComponent {
       this.messages.update((msgs) => [...msgs, aiMsg]);
       this.isLoading.set(false);
     }, 1500);
+  }
+
+  onMessageCopy(event: { content: string; message: ChatMessage }) {
+    console.log('Message copied:', event.content);
+  }
+
+  onMessageRegenerate(message: ChatMessage) {
+    console.log('Regenerate requested for:', message.id);
   }
 }
 ```
@@ -731,15 +750,25 @@ import { CopyToClipboardDirective } from '@angular-ai-kit/core';
     <div class="p-8">
       <h2 class="mb-4 font-bold">Copy to Clipboard Directive</h2>
       <button
-        aiCopyToClipboard
-        [text]="'Hello, this text will be copied!'"
+        [aiCopyToClipboard]="'Hello, this text will be copied!'"
+        (copied)="onCopied($event)"
+        (copyError)="onCopyError($event)"
         class="rounded bg-blue-500 px-4 py-2 text-white"
       >
         Click to Copy
       </button>
     </div>
-  `
+  `,
 })
+export class TestComponent {
+  onCopied(text: string) {
+    console.log('Copied:', text);
+  }
+
+  onCopyError(error: Error) {
+    console.error('Copy failed:', error);
+  }
+}
 ```
 
 **Expected:** Clicking copies text to clipboard

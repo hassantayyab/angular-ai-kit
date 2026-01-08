@@ -158,11 +158,15 @@ export class StreamingTextComponent implements OnInit {
   }
 
   /**
-   * Reset animation state (useful for testing)
+   * Reset and restart animation from the beginning
    */
   reset(): void {
     this.cancelAnimation();
     this.currentIndex = 0;
     this.displayedText.set('');
+    // If streaming is active, restart the animation
+    if (this.isStreaming()) {
+      this.animateText(this.content());
+    }
   }
 }

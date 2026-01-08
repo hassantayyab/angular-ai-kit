@@ -1,3 +1,5 @@
+import { NgIcon, provideIcons } from '@ng-icons/core';
+import { lucideUser } from '@ng-icons/lucide';
 import { cn } from '@angular-ai-kit/utils';
 import {
   ChangeDetectionStrategy,
@@ -10,6 +12,8 @@ import {
   signal,
   viewChild,
 } from '@angular/core';
+import { HlmAvatar, HlmAvatarFallback } from '../../../spartan-ui/avatar';
+import { HlmIcon } from '../../../spartan-ui/icon';
 import { UserMessage } from '../../../types';
 import { MessageActionsComponent } from '../message-actions';
 import { EditEvent } from './user-message.types';
@@ -23,7 +27,7 @@ import { EditEvent } from './user-message.types';
  *
  * Features:
  * - Compact card (not full-width), right-aligned
- * - No avatar
+ * - Optional avatar (hidden by default, controlled via showAvatar)
  * - Copy and Edit buttons via MessageActions on hover
  * - Inline editing with Save/Cancel
  * - Truncation with "Show more/less" for long messages
@@ -32,6 +36,7 @@ import { EditEvent } from './user-message.types';
  * ```html
  * <ai-user-message
  *   [message]="userMessage"
+ *   [showAvatar]="true"
  *   (copy)="handleCopy($event)"
  *   (edit)="handleEdit($event)"
  * />
@@ -42,7 +47,14 @@ import { EditEvent } from './user-message.types';
   templateUrl: './user-message.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
-  imports: [MessageActionsComponent],
+  imports: [
+    MessageActionsComponent,
+    HlmAvatar,
+    HlmAvatarFallback,
+    HlmIcon,
+    NgIcon,
+  ],
+  viewProviders: [provideIcons({ lucideUser })],
   host: {
     class: 'ai-user-message-host block',
     '(mouseenter)': 'handleMouseEnter()',
@@ -71,6 +83,9 @@ export class UserMessageComponent {
 
   /** Whether to show the edit button */
   showEdit = input<boolean>(true);
+
+  /** Whether to show an avatar */
+  showAvatar = input<boolean>(false);
 
   /** Custom CSS classes */
   customClasses = input<string>('');
@@ -141,11 +156,16 @@ export class UserMessageComponent {
   containerClasses = computed(() =>
     cn(
       'ai-user-message',
-      'flex flex-col items-end',
       'group',
+      this.showAvatar()
+        ? 'flex flex-row-reverse gap-3 items-start'
+        : 'flex flex-col items-end',
       this.customClasses()
     )
   );
+
+  /** Avatar classes */
+  avatarClasses = computed(() => cn('ai-user-message-avatar shrink-0'));
 
   /** Card classes (the message bubble) */
   cardClasses = computed(() =>

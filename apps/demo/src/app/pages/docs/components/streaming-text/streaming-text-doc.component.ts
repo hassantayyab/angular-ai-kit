@@ -117,8 +117,8 @@ export class StreamingTextDocComponent {
 
   // Restart streaming demo
   restartDemo(): void {
-    this.streamingText()?.reset();
     this.isStreaming.set(true);
+    this.streamingText()?.reset();
   }
 
   // Toggle streaming

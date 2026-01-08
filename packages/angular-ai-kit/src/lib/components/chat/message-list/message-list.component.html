@@ -16,6 +16,7 @@
           [content]="message.content"
           [isStreaming]="message.status === 'streaming'"
           [showActions]="true"
+          [showAvatar]="showAvatars()"
           (copy)="handleMessageCopy($event, message)"
           (regenerate)="handleMessageRegenerate(message)"
         />
@@ -23,6 +24,7 @@
         <!-- User message component -->
         <ai-user-message
           [message]="message"
+          [showAvatar]="showAvatars()"
           (copy)="handleMessageCopy($event, message)"
           (edit)="handleMessageEdit($event, message)"
         />

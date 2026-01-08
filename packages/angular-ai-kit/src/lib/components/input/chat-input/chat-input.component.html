@@ -2,6 +2,8 @@
   <!-- Hidden file input for attachments -->
   <input
     #fileInput
+    id="ai-chat-file-input"
+    name="ai-chat-file-input"
     type="file"
     multiple
     accept="image/*,.pdf,.doc,.docx,.txt,.csv,.json,.xml"
@@ -54,6 +56,8 @@
                   class="shrink-0 opacity-50"
                 />
                 <input
+                  id="ai-context-search"
+                  name="ai-context-search"
                   type="text"
                   hlm-command-search-input
                   placeholder="Search pages, files..."
@@ -141,6 +145,8 @@
     <textarea
       hlmInputGroupTextarea
       #textareaRef
+      id="ai-chat-message-input"
+      name="ai-chat-message-input"
       class="max-h-96"
       [placeholder]="placeholder()"
       [disabled]="disabled()"
