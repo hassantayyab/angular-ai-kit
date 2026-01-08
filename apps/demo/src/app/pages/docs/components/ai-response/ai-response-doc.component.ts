@@ -44,6 +44,36 @@ const INPUTS: ApiProperty[] = [
     description: 'Show blinking cursor during streaming',
   },
   {
+    name: 'showCopy',
+    type: 'boolean',
+    default: 'true',
+    description: 'Show copy button',
+  },
+  {
+    name: 'showRegenerate',
+    type: 'boolean',
+    default: 'true',
+    description: 'Show regenerate button',
+  },
+  {
+    name: 'showFeedback',
+    type: 'boolean',
+    default: 'true',
+    description: 'Show feedback buttons (thumbs up/down)',
+  },
+  {
+    name: 'actionsAlwaysVisible',
+    type: 'boolean',
+    default: 'false',
+    description: 'Always show actions (vs hover)',
+  },
+  {
+    name: 'showAvatar',
+    type: 'boolean',
+    default: 'true',
+    description: 'Show AI avatar',
+  },
+  {
     name: 'customClasses',
     type: 'string',
     default: "''",
@@ -58,6 +88,12 @@ const OUTPUTS: ApiProperty[] = [
     type: 'string',
     default: '-',
     description: 'Emits full content when copy is clicked',
+  },
+  {
+    name: 'codeBlockCopy',
+    type: 'string',
+    default: '-',
+    description: 'Emits code content when a code block is copied',
   },
   {
     name: 'regenerate',
@@ -93,7 +129,7 @@ const ACCESSIBILITY = [
 ];
 
 /** Code example */
-const USAGE_CODE = `<app-ai-response
+const USAGE_CODE = `<ai-response
   [content]="response"
   [isStreaming]="isLoading"
   [showActions]="true"

@@ -29,6 +29,12 @@ const INPUTS: ApiProperty[] = [
     default: 'false',
     description: 'Whether the buttons are disabled',
   },
+  {
+    name: 'customClasses',
+    type: 'string',
+    default: "''",
+    description: 'Additional CSS classes',
+  },
 ];
 
 /** API Output properties */

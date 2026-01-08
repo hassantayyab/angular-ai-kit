@@ -66,6 +66,24 @@ const INPUTS: ApiProperty[] = [
     description: 'Empty state message',
   },
   {
+    name: 'showHeaderActions',
+    type: 'boolean',
+    default: 'true',
+    description: 'Show action buttons in header',
+  },
+  {
+    name: 'messagesMaxHeight',
+    type: 'string',
+    default: "''",
+    description: 'Maximum height for message list area',
+  },
+  {
+    name: 'hasFooterContent',
+    type: 'boolean',
+    default: 'false',
+    description: 'Whether footer has projected content',
+  },
+  {
     name: 'customClasses',
     type: 'string',
     default: "''",

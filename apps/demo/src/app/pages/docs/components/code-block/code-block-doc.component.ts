@@ -41,6 +41,12 @@ const INPUTS: ApiProperty[] = [
     default: 'false',
     description: 'Whether to show line numbers',
   },
+  {
+    name: 'customClasses',
+    type: 'string',
+    default: "''",
+    description: 'Additional CSS classes',
+  },
 ];
 
 /** API Output properties */

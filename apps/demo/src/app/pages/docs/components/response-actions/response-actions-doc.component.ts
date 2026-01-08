@@ -59,6 +59,12 @@ const INPUTS: ApiProperty[] = [
     default: 'false',
     description: 'Parent focus state',
   },
+  {
+    name: 'customClasses',
+    type: 'string',
+    default: "''",
+    description: 'Additional CSS classes',
+  },
 ];
 
 /** API Output properties */
@@ -86,6 +92,12 @@ const OUTPUTS: ApiProperty[] = [
     type: 'EventEmitter<void>',
     default: '-',
     description: 'Thumbs down clicked',
+  },
+  {
+    name: 'feedbackChange',
+    type: "EventEmitter<'up' | 'down' | null>",
+    default: '-',
+    description: 'Emitted when feedback value changes',
   },
 ];
 

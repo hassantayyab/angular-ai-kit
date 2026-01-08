@@ -92,6 +92,12 @@ const INPUTS: ApiProperty[] = [
     default: "'bottom'",
     description: 'Position of suggestion badges relative to the input',
   },
+  {
+    name: 'customClasses',
+    type: 'string',
+    default: "''",
+    description: 'Additional CSS classes',
+  },
 ];
 
 /** API Output properties */
@@ -111,6 +117,31 @@ const OUTPUTS: ApiProperty[] = [
     name: 'suggestionSelect',
     type: 'PromptSuggestion',
     description: 'Emitted when a suggestion badge is clicked',
+  },
+  {
+    name: 'contextClick',
+    type: 'void',
+    description: 'Emitted when the context button is clicked',
+  },
+  {
+    name: 'fileSelect',
+    type: 'FileList',
+    description: 'Emitted when files are selected via attachment button',
+  },
+  {
+    name: 'researchModeChange',
+    type: 'boolean',
+    description: 'Emitted when research mode is toggled',
+  },
+  {
+    name: 'sourceChange',
+    type: 'string',
+    description: 'Emitted when the source is changed',
+  },
+  {
+    name: 'recordingChange',
+    type: 'boolean',
+    description: 'Emitted when voice recording state changes',
   },
 ];
 
@@ -133,13 +164,13 @@ const ACCESSIBILITY = [
 /** Code examples */
 const INSTALL_CODE = `import { ChatInputComponent } from '@angular-ai-kit/core';`;
 
-const BASIC_CODE = `<app-chat-input
+const BASIC_CODE = `<ai-chat-input
   [placeholder]="'Type your message...'"
   [disabled]="isLoading()"
   (messageSend)="handleSend($event)"
 />`;
 
-const MINIMAL_CODE = `<app-chat-input
+const MINIMAL_CODE = `<ai-chat-input
   [showContextButton]="false"
   [showAttachmentButton]="false"
   [showResearchButton]="false"

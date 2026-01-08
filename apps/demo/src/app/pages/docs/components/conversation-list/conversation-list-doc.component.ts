@@ -40,6 +40,12 @@ const INPUTS: ApiProperty[] = [
     default: "'No conversations yet'",
     description: 'Message to show when list is empty',
   },
+  {
+    name: 'customClasses',
+    type: 'string',
+    default: "''",
+    description: 'Additional CSS classes',
+  },
 ];
 
 /** API Output properties */

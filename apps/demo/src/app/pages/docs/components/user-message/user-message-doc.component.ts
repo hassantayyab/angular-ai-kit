@@ -33,6 +33,24 @@ const INPUTS: ApiProperty[] = [
     description: 'Maximum characters before truncation',
   },
   {
+    name: 'showCopy',
+    type: 'boolean',
+    default: 'true',
+    description: 'Show copy button',
+  },
+  {
+    name: 'showEdit',
+    type: 'boolean',
+    default: 'true',
+    description: 'Show edit button',
+  },
+  {
+    name: 'showAvatar',
+    type: 'boolean',
+    default: 'true',
+    description: 'Show user avatar',
+  },
+  {
     name: 'customClasses',
     type: 'string',
     default: "''",

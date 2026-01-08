@@ -20,6 +20,12 @@ const INPUTS: ApiProperty[] = [
     default: 'required',
     description: 'Markdown content to render',
   },
+  {
+    name: 'customClasses',
+    type: 'string',
+    default: "''",
+    description: 'Additional CSS classes',
+  },
 ];
 
 const OUTPUTS: ApiProperty[] = [

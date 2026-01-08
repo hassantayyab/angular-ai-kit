@@ -46,6 +46,12 @@ const INPUTS: ApiProperty[] = [
     default: 'false',
     description: 'Always show',
   },
+  {
+    name: 'customClasses',
+    type: 'string',
+    default: "''",
+    description: 'Additional CSS classes',
+  },
 ];
 
 const OUTPUTS: ApiProperty[] = [

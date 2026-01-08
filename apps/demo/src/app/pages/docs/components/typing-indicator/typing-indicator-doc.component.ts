@@ -50,6 +50,12 @@ const INPUTS: ApiProperty[] = [
     default: '3',
     description: 'Number of animated dots (2-5)',
   },
+  {
+    name: 'customClasses',
+    type: 'string',
+    default: "''",
+    description: 'Additional CSS classes',
+  },
 ];
 
 /** Install command */
@@ -65,7 +71,7 @@ const ACCESSIBILITY = [
 ];
 
 /** Code examples */
-const USAGE_CODE = `<app-typing-indicator
+const USAGE_CODE = `<ai-typing-indicator
   [showBackground]="true"
   animation="wave"
   [showAvatar]="true"

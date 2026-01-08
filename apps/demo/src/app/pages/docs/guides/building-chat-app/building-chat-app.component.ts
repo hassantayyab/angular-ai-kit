@@ -53,7 +53,7 @@ interface Message {
       <div class="flex-1 overflow-y-auto p-4 space-y-4">
         @for (message of messages(); track message.id) {
           @if (message.role === 'user') {
-            <ai-user-message [content]="message.content" />
+            <ai-user-message [message]="message" />
           } @else {
             <ai-response [content]="message.content" />
           }
@@ -68,7 +68,7 @@ interface Message {
       <div class="border-t border-border p-4">
         <ai-chat-input
           [disabled]="isLoading()"
-          (messageSubmit)="handleSubmit($event)"
+          (messageSend)="handleSubmit($event)"
         />
       </div>
     </div>
@@ -136,7 +136,7 @@ export class ChatService {
       <div class="flex-1 overflow-y-auto p-4 space-y-4">
         @for (message of messages(); track message.id) {
           @if (message.role === 'user') {
-            <ai-user-message [content]="message.content" />
+            <ai-user-message [message]="message" />
           } @else {
             <ai-response [content]="message.content" />
           }
@@ -158,7 +158,7 @@ export class ChatService {
       <div class="border-t border-border p-4">
         <ai-chat-input
           [disabled]="isLoading()"
-          (messageSubmit)="handleSubmit($event)"
+          (messageSend)="handleSubmit($event)"
         />
       </div>
     </div>
@@ -205,7 +205,7 @@ export class ChatComponent {
         @for (message of messages(); track message.id; let i = $index) {
           @if (message.role === 'user') {
             <ai-user-message
-              [content]="message.content"
+              [message]="message"
               (edit)="handleEdit(i, $event)"
               (copy)="handleCopy($event)"
             />
@@ -229,7 +229,7 @@ export class ChatComponent {
       <div class="border-t border-border p-4">
         <ai-chat-input
           [disabled]="isLoading()"
-          (messageSubmit)="handleSubmit($event)"
+          (messageSend)="handleSubmit($event)"
         />
       </div>
     </div>

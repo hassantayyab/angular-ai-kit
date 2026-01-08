@@ -31,6 +31,12 @@ const INPUTS: ApiProperty[] = [
     default: "'bottom'",
     description: 'Position relative to input (affects margin)',
   },
+  {
+    name: 'customClasses',
+    type: 'string',
+    default: "''",
+    description: 'Additional CSS classes',
+  },
 ];
 
 /** API Output properties */

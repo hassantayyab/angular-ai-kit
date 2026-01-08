@@ -53,7 +53,7 @@ import { ChatInputComponent } from '@angular-ai-kit/core';
       <div class="w-full max-w-2xl">
         <ai-chat-input
           placeholder="Send a message..."
-          (messageSubmit)="handleMessage($event)"
+          (messageSend)="handleMessage($event)"
         />
       </div>
     </div>
@@ -117,7 +117,7 @@ interface ChatMessage {
           <ai-chat-input
             placeholder="Send a message..."
             [disabled]="isLoading()"
-            (messageSubmit)="handleMessage($event)"
+            (messageSend)="handleMessage($event)"
           />
         </div>
       </div>

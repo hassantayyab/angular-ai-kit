@@ -43,6 +43,18 @@ const INPUTS: ApiProperty[] = [
     description: 'Message shown when list is empty',
   },
   {
+    name: 'autoScroll',
+    type: 'boolean',
+    default: 'true',
+    description: 'Auto-scroll to newest message',
+  },
+  {
+    name: 'maxHeight',
+    type: 'string',
+    default: "''",
+    description: 'Maximum height for the message list',
+  },
+  {
     name: 'customClasses',
     type: 'string',
     default: "''",
@@ -61,6 +73,11 @@ const OUTPUTS: ApiProperty[] = [
     name: 'messageRegenerate',
     type: 'ChatMessage',
     description: 'Emitted when regenerate is clicked on a message',
+  },
+  {
+    name: 'messageEdit',
+    type: '{ message: ChatMessage; newContent: string }',
+    description: 'Emitted when a message is edited',
   },
 ];
 
@@ -86,7 +103,7 @@ const INSTALL_CODE =
 
 const USAGE_CODE = `<!-- Parent container handles scrolling -->
 <div class="h-full overflow-y-auto">
-  <app-message-list
+  <ai-message-list
     [messages]="messages()"
     [loading]="isLoading()"
     [showAvatars]="true"

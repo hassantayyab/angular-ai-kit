@@ -50,6 +50,12 @@ const INPUTS: ApiProperty[] = [
     default: "'▊'",
     description: 'Character used for cursor',
   },
+  {
+    name: 'customClasses',
+    type: 'string',
+    default: "''",
+    description: 'Additional CSS classes',
+  },
 ];
 
 /** Install command */
@@ -65,7 +71,7 @@ const ACCESSIBILITY = [
 ];
 
 /** Code examples */
-const USAGE_CODE = `<app-streaming-text
+const USAGE_CODE = `<ai-streaming-text
   [content]="message.content"
   [isStreaming]="message.status === 'streaming'"
   [speed]="30"
