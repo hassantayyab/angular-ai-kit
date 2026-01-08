@@ -1,3 +1,13 @@
+## 0.1.13 (2026-01-08)
+
+### 🩹 Fixes
+
+- **tokens:** remove border/shadow from input-group controls ([1217866](https://github.com/hassantayyab/angular-ai-kit/commit/1217866))
+
+### ❤️ Thank You
+
+- Hassan Tayyab @hassantayyab
+
 ## 0.1.12 (2026-01-07)
 
 This was a version bump only, there were no code changes.

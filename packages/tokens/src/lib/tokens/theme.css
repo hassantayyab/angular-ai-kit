@@ -156,11 +156,11 @@ body {
 
 /* ============================================
    Form Elements Base Styles
-   Note: Elements inside input-group are excluded
-   as the group handles its own styling
+   Note: Elements with data-slot are excluded
+   as library components handle their own styling
    ============================================ */
-input:not([data-slot='input-group-control']),
-textarea:not([data-slot='input-group-control']),
+input:not([data-slot]),
+textarea:not([data-slot]),
 select:not([data-slot]) {
   outline: none;
   border: 1px solid var(--border);
@@ -168,22 +168,28 @@ select:not([data-slot]) {
   color: var(--foreground);
 }
 
-input:not([data-slot='input-group-control']):focus,
-textarea:not([data-slot='input-group-control']):focus,
+input:not([data-slot]):focus,
+textarea:not([data-slot]):focus,
 select:not([data-slot]):focus {
   border-color: var(--ring);
   box-shadow: 0 0 0 1px var(--ring);
 }
 
-/* Input-group controls should have no border/shadow */
-[data-slot='input-group-control'] {
+/* Library components with data-slot handle their own styling */
+[data-slot] input,
+[data-slot] textarea,
+input[data-slot],
+textarea[data-slot] {
   outline: none;
   border: none;
   background-color: transparent;
   box-shadow: none;
 }
 
-[data-slot='input-group-control']:focus {
+[data-slot] input:focus,
+[data-slot] textarea:focus,
+input[data-slot]:focus,
+textarea[data-slot]:focus {
   outline: none;
   border: none;
   box-shadow: none;
