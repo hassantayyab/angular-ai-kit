@@ -7,6 +7,23 @@
  *
  * These variables are compatible with Tailwind CSS v4 semantic classes
  * like bg-background, text-foreground, border-border, etc.
+ *
+ * DESIGN DECISION: Why hex colors instead of Tailwind's theme() function?
+ *
+ * This library package must work STANDALONE for consumers who may not use
+ * Tailwind CSS. Using Tailwind's theme() function would fail for non-Tailwind
+ * users. The hex colors correspond to Tailwind's zinc scale for consistency.
+ *
+ * Color Reference (Tailwind zinc scale):
+ * - #fafafa = zinc-50    - #71717a = zinc-500
+ * - #f4f4f5 = zinc-100   - #52525b = zinc-600
+ * - #e4e4e7 = zinc-200   - #3f3f46 = zinc-700
+ * - #d4d4d8 = zinc-300   - #27272a = zinc-800
+ * - #a1a1aa = zinc-400   - #18181b = zinc-900
+ *                        - #09090b = zinc-950
+ *
+ * For Tailwind CSS users: Override these variables in your styles.css using
+ * theme() values. See the demo app for an example.
  */
 
 /* ============================================
@@ -68,6 +85,13 @@
   --destructive: #ef4444;
   --destructive-foreground: #fafafa;
 
+  /* Link colors (for prose content) */
+  --link: #2563eb; /* blue-600 */
+  --link-hover: #1e40af; /* blue-800 */
+
+  /* Inline code color */
+  --inline-code: #059669; /* emerald-600 */
+
   /* Border Radius */
   --radius: 0.5rem;
 }
@@ -126,6 +150,13 @@
   /* Secondary */
   --secondary: #27272a;
   --secondary-foreground: #fafafa;
+
+  /* Link colors (for prose content) */
+  --link: #60a5fa; /* blue-400 */
+  --link-hover: #93c5fd; /* blue-300 */
+
+  /* Inline code color */
+  --inline-code: #34d399; /* emerald-400 */
 }
 
 /* ============================================
@@ -231,15 +262,4 @@ button:focus-visible {
   scrollbar-color: var(--border) transparent;
 }
 
-/* ============================================
-   Utility: Hide Scrollbar
-   Hides scrollbar while maintaining scroll functionality
-   ============================================ */
-.no-scrollbar {
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
-}
-
-.no-scrollbar::-webkit-scrollbar {
-  display: none; /* Chrome, Safari, Opera */
-}
+/* Note: .no-scrollbar and .scrollbar-hide utilities are defined in animations.css */

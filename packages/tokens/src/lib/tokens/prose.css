@@ -81,35 +81,22 @@
 
 /* Blockquotes */
 .ai-response-content blockquote {
-  border-left: 4px solid #d4d4d8; /* zinc-300 */
+  border-left: 4px solid var(--border-hover);
   padding-left: 1rem;
   margin: 1rem 0;
-  color: #52525b; /* zinc-600 */
+  color: var(--muted-foreground);
   font-style: italic;
 }
 
-.dark .ai-response-content blockquote {
-  border-left-color: #52525b; /* zinc-600 */
-  color: #a1a1aa; /* zinc-400 */
-}
-
-/* Links */
+/* Links - uses --link and --link-hover CSS variables that auto-switch in dark mode */
 .ai-response-content a {
-  color: #2563eb; /* blue-600 */
+  color: var(--link);
   text-decoration: underline;
   text-underline-offset: 2px;
 }
 
-.dark .ai-response-content a {
-  color: #60a5fa; /* blue-400 */
-}
-
 .ai-response-content a:hover {
-  color: #1e40af; /* blue-800 */
-}
-
-.dark .ai-response-content a:hover {
-  color: #93c5fd; /* blue-300 */
+  color: var(--link-hover);
 }
 
 /* Bold and italic */

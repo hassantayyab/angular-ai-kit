@@ -323,16 +323,12 @@
   overflow-x: visible;
 }
 
-/* Inline code styling */
+/* Inline code styling - uses --inline-code CSS variable that auto-switches in dark mode */
 .ai-response-content :not(pre) > code {
   padding: 0.125rem 0.5rem;
   border-radius: 0.375rem;
   background-color: var(--muted);
   font-size: 0.875em;
   font-weight: 500;
-  color: #059669; /* emerald-600 */
-}
-
-.dark .ai-response-content :not(pre) > code {
-  color: #34d399; /* emerald-400 */
+  color: var(--inline-code);
 }

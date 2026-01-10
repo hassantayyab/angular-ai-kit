@@ -92,7 +92,7 @@
    Utility Classes
    ============================================ */
 
-/* Hide scrollbar */
+/* Hide scrollbar - .scrollbar-hide variant */
 .scrollbar-hide {
   -ms-overflow-style: none;
   scrollbar-width: none;
@@ -100,6 +100,16 @@
 
 .scrollbar-hide::-webkit-scrollbar {
   display: none;
+}
+
+/* Hide scrollbar - .no-scrollbar variant (alias) */
+.no-scrollbar {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
 }
 
 /* ============================================
