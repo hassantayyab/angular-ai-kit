@@ -301,7 +301,6 @@
   padding-left: 1rem;
   text-align: right;
   user-select: none;
-  border-right: 1px solid var(--border);
 }
 
 /* Individual line number */
