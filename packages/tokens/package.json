@@ -1,6 +1,6 @@
 {
   "name": "@angular-ai-kit/tokens",
-  "version": "0.1.2",
+  "version": "0.1.15",
   "description": "Design tokens and theming for Angular AI Kit - CSS custom properties, dark mode, and TypeScript interfaces",
   "keywords": [
     "angular",

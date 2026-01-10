@@ -1,6 +1,6 @@
 {
   "name": "@angular-ai-kit/utils",
-  "version": "0.1.1",
+  "version": "0.1.15",
   "description": "Utility functions for Angular AI Kit - Class names (cn), formatters, validators, and token counting",
   "keywords": [
     "angular",
