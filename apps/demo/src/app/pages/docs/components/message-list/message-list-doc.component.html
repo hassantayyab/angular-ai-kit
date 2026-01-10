@@ -17,7 +17,7 @@
   <app-doc-section title="Basic Usage">
     <app-doc-demo-card [padding]="false">
       <div class="h-[400px] overflow-y-auto">
-        <app-message-list
+        <ai-message-list
           [messages]="messages()"
           [loading]="false"
           [showAvatars]="true"
@@ -46,7 +46,7 @@
     </div>
     <app-doc-demo-card [padding]="false">
       <div class="h-[300px] overflow-y-auto">
-        <app-message-list
+        <ai-message-list
           [messages]="messages()"
           [loading]="isLoading()"
           [showAvatars]="true"
@@ -62,7 +62,7 @@
   >
     <app-doc-demo-card [padding]="false">
       <div class="h-[200px]">
-        <app-message-list
+        <ai-message-list
           [messages]="emptyMessages()"
           [loading]="false"
           [emptyMessage]="'Start a conversation by sending a message'"

@@ -1,4 +1,8 @@
-import { PromptSuggestion, SuggestionsPosition } from '@angular-ai-kit/core';
+import {
+  ChatInputComponent,
+  PromptSuggestion,
+  SuggestionsPosition,
+} from '@angular-ai-kit/core';
 import { HlmButton } from '@angular-ai-kit/spartan-ui/button';
 import {
   ChangeDetectionStrategy,
@@ -6,7 +10,6 @@ import {
   ViewEncapsulation,
   signal,
 } from '@angular/core';
-import { ChatInputComponent } from '../../../../components/chat-input';
 import {
   ApiProperty,
   DocApiTableComponent,

@@ -132,6 +132,9 @@ const USAGE_CODE = `<ai-response-actions
     DocControlToggleComponent,
     DocFeaturesListComponent,
   ],
+  host: {
+    class: 'app-response-actions-doc block',
+  },
 })
 export class ResponseActionsDocComponent {
   readonly inputs = INPUTS;

@@ -1,3 +1,4 @@
+import { StreamingTextComponent } from '@angular-ai-kit/core';
 import { HlmButton } from '@angular-ai-kit/spartan-ui/button';
 import {
   ChangeDetectionStrategy,
@@ -16,7 +17,6 @@ import {
   DocSectionComponent,
   DocSliderControlComponent,
 } from '../../../../components/doc-ui';
-import { StreamingTextComponent } from '../../../../components/streaming-text';
 
 /** API Input properties */
 const INPUTS: ApiProperty[] = [

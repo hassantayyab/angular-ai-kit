@@ -86,6 +86,9 @@ console.log(greeting);
     DocApiTableComponent,
     DocFeaturesListComponent,
   ],
+  host: {
+    class: 'app-markdown-renderer-doc block',
+  },
 })
 export class MarkdownRendererDocComponent {
   readonly inputs = INPUTS;

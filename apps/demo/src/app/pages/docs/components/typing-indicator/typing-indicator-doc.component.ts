@@ -1,3 +1,4 @@
+import { TypingIndicatorComponent } from '@angular-ai-kit/core';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -16,7 +17,6 @@ import {
   DocSliderControlComponent,
   SelectOption,
 } from '../../../../components/doc-ui';
-import { TypingIndicatorComponent } from '../../../../components/typing-indicator';
 
 /** API Input properties */
 const INPUTS: ApiProperty[] = [

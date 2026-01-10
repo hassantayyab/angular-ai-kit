@@ -100,6 +100,9 @@ const USAGE_CODE = `<ai-message-actions
     DocControlToggleComponent,
     DocFeaturesListComponent,
   ],
+  host: {
+    class: 'app-message-actions-doc block',
+  },
 })
 export class MessageActionsDocComponent {
   readonly inputs = INPUTS;

@@ -1,4 +1,4 @@
-import { ChatMessage } from '@angular-ai-kit/core';
+import { ChatMessage, MessageListComponent } from '@angular-ai-kit/core';
 import { HlmButton } from '@angular-ai-kit/spartan-ui/button';
 import {
   ChangeDetectionStrategy,
@@ -14,7 +14,6 @@ import {
   DocFeaturesListComponent,
   DocSectionComponent,
 } from '../../../../components/doc-ui';
-import { MessageListComponent } from '../../../../components/message-list';
 
 /** API Input properties */
 const INPUTS: ApiProperty[] = [
