@@ -63,37 +63,82 @@ export class CommandDialogComponent {
     },
   ];
 
-  // Component items
+  // Component items - all available component documentation pages
   readonly componentItems: CommandItem[] = [
     {
-      label: 'MessageBubble',
+      label: 'AI Response',
       icon: 'component',
-      action: () => this.navigateTo('/docs/components/message-bubble'),
+      action: () => this.navigateTo('/docs/components/ai-response'),
     },
     {
-      label: 'MessageList',
-      icon: 'component',
-      action: () => this.navigateTo('/docs/components/message-list'),
-    },
-    {
-      label: 'ChatContainer',
+      label: 'Chat Container',
       icon: 'component',
       action: () => this.navigateTo('/docs/components/chat-container'),
     },
     {
-      label: 'ChatInput',
+      label: 'Chat Input',
       icon: 'component',
       action: () => this.navigateTo('/docs/components/chat-input'),
     },
     {
-      label: 'StreamingText',
+      label: 'Code Block',
+      icon: 'component',
+      action: () => this.navigateTo('/docs/components/code-block'),
+    },
+    {
+      label: 'Conversation List',
+      icon: 'component',
+      action: () => this.navigateTo('/docs/components/conversation-list'),
+    },
+    {
+      label: 'Feedback Buttons',
+      icon: 'component',
+      action: () => this.navigateTo('/docs/components/feedback-buttons'),
+    },
+    {
+      label: 'Markdown Renderer',
+      icon: 'component',
+      action: () => this.navigateTo('/docs/components/markdown-renderer'),
+    },
+    {
+      label: 'Message Actions',
+      icon: 'component',
+      action: () => this.navigateTo('/docs/components/message-actions'),
+    },
+    {
+      label: 'Message Bubble',
+      icon: 'component',
+      action: () => this.navigateTo('/docs/components/message-bubble'),
+    },
+    {
+      label: 'Message List',
+      icon: 'component',
+      action: () => this.navigateTo('/docs/components/message-list'),
+    },
+    {
+      label: 'Prompt Suggestions',
+      icon: 'component',
+      action: () => this.navigateTo('/docs/components/prompt-suggestions'),
+    },
+    {
+      label: 'Response Actions',
+      icon: 'component',
+      action: () => this.navigateTo('/docs/components/response-actions'),
+    },
+    {
+      label: 'Streaming Text',
       icon: 'component',
       action: () => this.navigateTo('/docs/components/streaming-text'),
     },
     {
-      label: 'TypingIndicator',
+      label: 'Typing Indicator',
       icon: 'component',
       action: () => this.navigateTo('/docs/components/typing-indicator'),
+    },
+    {
+      label: 'User Message',
+      icon: 'component',
+      action: () => this.navigateTo('/docs/components/user-message'),
     },
   ];
 
