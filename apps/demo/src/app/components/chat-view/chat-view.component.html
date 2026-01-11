@@ -17,7 +17,7 @@
         <app-message-list
           [messages]="messages()"
           [loading]="isLoading()"
-          [showAvatars]="true"
+          [showAvatars]="false"
           (messageCopy)="handleMessageCopy($event)"
           (messageRegenerate)="handleMessageRegenerate($event)"
         />
