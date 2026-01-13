@@ -157,9 +157,7 @@ export class UserMessageComponent {
     cn(
       'ai-user-message',
       'group',
-      this.showAvatar()
-        ? 'flex flex-row-reverse gap-3 items-start'
-        : 'flex flex-col items-end',
+      this.showAvatar() ? 'flex flex-row-reverse gap-3 items-start' : '',
       this.customClasses()
     )
   );
@@ -183,11 +181,7 @@ export class UserMessageComponent {
 
   /** Content classes */
   contentClasses = computed(() =>
-    cn(
-      'ai-user-message-content',
-      'text-sm leading-relaxed',
-      'whitespace-pre-wrap break-words'
-    )
+    cn('ai-user-message-content', 'text-sm leading-relaxed whitespace-pre-wrap')
   );
 
   /** Actions wrapper classes */

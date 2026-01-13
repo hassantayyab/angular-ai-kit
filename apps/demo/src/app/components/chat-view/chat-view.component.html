@@ -14,10 +14,12 @@
     } @else {
       <!-- Message List (no internal scroll) -->
       <div class="mx-auto w-full max-w-3xl">
-        <app-message-list
+        <ai-message-list
           [messages]="messages()"
           [loading]="isLoading()"
           [showAvatars]="false"
+          [actionsAlwaysVisible]="true"
+          [autoScroll]="false"
           (messageCopy)="handleMessageCopy($event)"
           (messageRegenerate)="handleMessageRegenerate($event)"
         />

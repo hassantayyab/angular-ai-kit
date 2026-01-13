@@ -4,7 +4,6 @@ export { ChatViewComponent } from './chat-view';
 export { EmptyStateComponent } from './empty-state';
 export { KbdComponent } from './kbd';
 export { LogoComponent, type LogoSize } from './logo';
-export { MessageListComponent } from './message-list';
 export { SearchTriggerComponent } from './search-trigger';
 export { SidebarComponent } from './sidebar';
 export { StreamingTextComponent } from './streaming-text';

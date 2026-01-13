@@ -103,6 +103,18 @@ export class MessageListComponent implements AfterViewInit {
    */
   maxHeight = input<string>('100%');
 
+  /**
+   * Whether to show the streaming cursor in AI responses
+   * @default false
+   */
+  showCursor = input<boolean>(false);
+
+  /**
+   * Whether action buttons are always visible (vs hover/focus only)
+   * @default false
+   */
+  actionsAlwaysVisible = input<boolean>(false);
+
   // ==========================================
   // Outputs
   // ==========================================
@@ -145,6 +157,7 @@ export class MessageListComponent implements AfterViewInit {
       'flex flex-col gap-4 p-4',
       'overflow-y-auto overflow-x-hidden',
       'h-full', // Fill parent container height
+      'py-12',
       this.customClasses()
     );
   });

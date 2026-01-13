@@ -1,4 +1,8 @@
-import { ChatMessage, PromptSuggestion } from '@angular-ai-kit/core';
+import {
+  ChatMessage,
+  MessageListComponent,
+  PromptSuggestion,
+} from '@angular-ai-kit/core';
 import { cn } from '@angular-ai-kit/utils';
 import { isPlatformBrowser } from '@angular/common';
 import {
@@ -17,7 +21,6 @@ import {
 import { ChatService } from '../../services/chat.service';
 import { ChatInputComponent } from '../chat-input/chat-input.component';
 import { EmptyStateComponent } from '../empty-state/empty-state.component';
-import { MessageListComponent } from '../message-list';
 import { TopNavComponent } from '../top-nav';
 
 /**

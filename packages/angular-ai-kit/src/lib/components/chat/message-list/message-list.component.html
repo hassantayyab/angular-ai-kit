@@ -17,6 +17,8 @@
           [isStreaming]="message.status === 'streaming'"
           [showActions]="true"
           [showAvatar]="showAvatars()"
+          [showCursor]="showCursor()"
+          [actionsAlwaysVisible]="actionsAlwaysVisible()"
           (copy)="handleMessageCopy($event, message)"
           (regenerate)="handleMessageRegenerate(message)"
         />
