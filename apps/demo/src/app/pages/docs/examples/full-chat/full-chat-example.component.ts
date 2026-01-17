@@ -1,7 +1,9 @@
 import {
   AiResponseComponent,
   AssistantMessage,
+  ChatInputComponent,
   PromptSuggestionsComponent,
+  TypingIndicatorComponent,
   UserMessage,
   UserMessageComponent,
 } from '@angular-ai-kit/core';
@@ -13,10 +15,6 @@ import {
   signal,
 } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import {
-  ChatInputComponent,
-  TypingIndicatorComponent,
-} from '../../../../components';
 import {
   DocCodeBlockComponent,
   DocSectionComponent,

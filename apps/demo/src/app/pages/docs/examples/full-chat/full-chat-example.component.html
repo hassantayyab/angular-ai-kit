@@ -109,7 +109,7 @@
 
                 <!-- Loading Indicator -->
                 @if (isLoading() && !streamingContent()) {
-                  <app-typing-indicator />
+                  <ai-typing-indicator />
                 }
               </div>
             </div>
@@ -118,7 +118,7 @@
 
         <!-- Fixed Input Area (matching real app) -->
         <div class="mx-auto w-full max-w-3xl">
-          <app-chat-input
+          <ai-chat-input
             placeholder="Message Angular AI Kit..."
             [disabled]="isLoading() || !!streamingContent()"
             (messageSend)="handleSubmit($event)"

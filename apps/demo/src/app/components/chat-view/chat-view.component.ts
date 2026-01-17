@@ -1,4 +1,5 @@
 import {
+  ChatInputComponent,
   ChatMessage,
   MessageListComponent,
   PromptSuggestion,
@@ -19,7 +20,6 @@ import {
   viewChild,
 } from '@angular/core';
 import { ChatService } from '../../services/chat.service';
-import { ChatInputComponent } from '../chat-input/chat-input.component';
 import { EmptyStateComponent } from '../empty-state/empty-state.component';
 import { TopNavComponent } from '../top-nav';
 

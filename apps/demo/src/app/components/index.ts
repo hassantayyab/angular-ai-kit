@@ -1,12 +1,8 @@
-export { AttachmentCardComponent } from './attachment-card';
-export { ChatInputComponent } from './chat-input';
 export { ChatViewComponent } from './chat-view';
 export { EmptyStateComponent } from './empty-state';
 export { KbdComponent } from './kbd';
 export { LogoComponent, type LogoSize } from './logo';
 export { SearchTriggerComponent } from './search-trigger';
 export { SidebarComponent } from './sidebar';
-export { StreamingTextComponent } from './streaming-text';
 export { ThemeToggleComponent } from './theme-toggle';
 export { TopNavComponent } from './top-nav';
-export { TypingIndicatorComponent } from './typing-indicator';
