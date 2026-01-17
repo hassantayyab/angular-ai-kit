@@ -1,3 +1,12 @@
+---
+name: styling-architecture
+description: Use when working with CSS variables, theming, or colors. Triggers on "CSS variable", "theme", "dark mode", "light mode", "color token", "semantic color", "--background", "--foreground", "theme()", or color questions.
+allowed-tools:
+  - Read
+  - Glob
+  - Grep
+---
+
 # Styling Architecture & CSS Variables
 
 **This document defines our CSS architecture, color system, and styling patterns.**
@@ -9,13 +18,9 @@
 We use **only Tailwind's built-in zinc scale** for all colors. No custom hex codes.
 
 ```
-┌─────────────────────────────────────────────────────────────┐
-│  Tailwind Built-in Colors (zinc-50 to zinc-950)             │
-│  ↓                                                          │
-│  CSS Variables (semantic tokens via theme() function)       │
-│  ↓                                                          │
-│  Tailwind Utility Classes (bg-background, text-foreground)  │
-└─────────────────────────────────────────────────────────────┘
+Tailwind Built-in Colors (zinc-50 to zinc-950)
+  -> CSS Variables (semantic tokens via theme() function)
+  -> Tailwind Utility Classes (bg-background, text-foreground)
 ```
 
 ### Color Scale Reference
@@ -33,8 +38,6 @@ We use **only Tailwind's built-in zinc scale** for all colors. No custom hex cod
 | `zinc-800` | -                | Muted/Accent             |
 | `zinc-900` | Primary, Cards   | Cards                    |
 | `zinc-950` | Foreground/Text  | Background               |
-
----
 
 ## CSS Variables
 
@@ -73,19 +76,17 @@ Variables follow Spartan UI conventions for compatibility:
 Always use `theme()` function to reference Tailwind colors:
 
 ```css
-/* ✅ Correct: Use theme() function */
+/* Correct: Use theme() function */
 --background: theme('colors.zinc.50');
 --border: theme('colors.zinc.200');
 
-/* ❌ Wrong: Never use hex codes */
+/* Wrong: Never use hex codes */
 --background: #fafafa;
 --border: #e4e4e7;
 
-/* ❌ Wrong: Never use rgb/hsl */
+/* Wrong: Never use rgb/hsl */
 --background: rgb(250 250 250);
 ```
-
----
 
 ## Using Variables in Components
 
@@ -107,18 +108,18 @@ Use `var()` for CSS variable references:
 Use Tailwind semantic color classes directly:
 
 ```html
-<!-- ✅ Correct: Tailwind semantic color classes -->
+<!-- Correct: Tailwind semantic color classes -->
 <div class="border-border bg-card text-foreground">
   <div class="bg-muted text-muted-foreground">Muted content</div>
 </div>
 
-<!-- ❌ Wrong: var() syntax in Tailwind classes -->
+<!-- Wrong: var() syntax in Tailwind classes -->
 <div class="border-[var(--border)] bg-[var(--card)]"></div>
 
-<!-- ❌ Wrong: dark: prefix -->
+<!-- Wrong: dark: prefix -->
 <div class="bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-100"></div>
 
-<!-- ❌ Wrong: Hardcoded hex colors -->
+<!-- Wrong: Hardcoded hex colors -->
 <div class="border-[#3f3f46] bg-[#18181b]"></div>
 ```
 
@@ -135,8 +136,6 @@ cardClasses = computed(() => {
   );
 });
 ```
-
----
 
 ## Light/Dark Mode
 
@@ -161,7 +160,7 @@ Dark mode is controlled by the `.dark` class on `<html>`. CSS variables automati
 Components automatically adapt via Tailwind semantic classes. **NEVER use the `dark:` prefix.**
 
 ```typescript
-// ✅ Correct: Tailwind semantic classes auto-switch light/dark
+// Correct: Tailwind semantic classes auto-switch light/dark
 containerClasses = computed(() =>
   cn(
     'bg-background', // Auto-switches light/dark
@@ -170,7 +169,7 @@ containerClasses = computed(() =>
   )
 );
 
-// ❌ NEVER use dark: prefix
+// NEVER use dark: prefix
 containerClasses = computed(() =>
   cn(
     'bg-white dark:bg-gray-900', // WRONG!
@@ -185,8 +184,6 @@ containerClasses = computed(() =>
 2. `dark:` prefix creates maintenance burden
 3. Components become theme-aware without extra code
 4. Single source of truth for colors in `styles.css`
-
----
 
 ## Semantic Token Usage Guide
 
@@ -222,19 +219,17 @@ containerClasses = computed(() =>
 | `--input`        | Input field borders   |
 | `--ring`         | Focus rings           |
 
----
-
-## ❌ What NOT to Do
+## What NOT to Do
 
 ### NEVER Use dark: Prefix
 
 ```typescript
-// ❌ WRONG: dark: prefix
+// WRONG: dark: prefix
 'bg-white dark:bg-gray-900';
 'text-gray-900 dark:text-gray-100';
 'border-gray-200 dark:border-gray-800';
 
-// ✅ CORRECT: Tailwind semantic classes
+// CORRECT: Tailwind semantic classes
 'bg-card';
 'text-foreground';
 'border-border';
@@ -243,12 +238,12 @@ containerClasses = computed(() =>
 ### NEVER Use var() in Tailwind Classes
 
 ```typescript
-// ❌ WRONG: var() syntax
+// WRONG: var() syntax
 'bg-[var(--card)]';
 'text-[var(--foreground)]';
 'border-[var(--border)]';
 
-// ✅ CORRECT: Tailwind semantic classes
+// CORRECT: Tailwind semantic classes
 'bg-card';
 'text-foreground';
 'border-border';
@@ -257,11 +252,11 @@ containerClasses = computed(() =>
 ### Never Use Hex Codes
 
 ```css
-/* ❌ Wrong */
+/* Wrong */
 --background: #09090b;
 --border: #27272a;
 
-/* ✅ Correct */
+/* Correct */
 --background: theme('colors.zinc.950');
 --border: theme('colors.zinc.800');
 ```
@@ -269,47 +264,14 @@ containerClasses = computed(() =>
 ### Never Create Custom Color Scales
 
 ```css
-/* ❌ Wrong: Custom color tokens */
+/* Wrong: Custom color tokens */
 --ai-blue-500: #3b82f6;
 --ai-gray-800: #1f2937;
 
-/* ✅ Correct: Use semantic tokens */
+/* Correct: Use semantic tokens */
 --primary: theme('colors.zinc.900');
 --muted: theme('colors.zinc.800');
 ```
-
-### Never Duplicate Variables
-
-```css
-/* ❌ Wrong: Variables in multiple files */
-/* packages/tokens/theme.css */
---ai-background: #fff;
-
-/* apps/demo/styles.css */
---background: #fff;
-
-/* ✅ Correct: One source of truth */
-/* apps/demo/styles.css only */
---background: theme('colors.white');
-```
-
----
-
-## File Organization
-
-```
-apps/demo/src/
-├── styles.css          # ALL CSS variables defined here
-│   ├── @theme          # Tailwind v4 color extensions
-│   ├── @layer base     # Semantic tokens + base HTML
-│   ├── @layer components # Component styles (dialogs, etc.)
-│   └── @layer utilities # Animation utilities
-
-packages/tokens/src/lib/
-└── theme.css           # EMPTY (intentionally)
-```
-
----
 
 ## Quick Reference: Common Patterns
 
@@ -362,8 +324,6 @@ inputClasses = computed(() =>
 // Ghost
 'bg-transparent hover:bg-accent text-foreground';
 ```
-
----
 
 ## Checklist: Before Committing CSS Changes
 

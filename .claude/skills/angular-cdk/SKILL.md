@@ -1,3 +1,14 @@
+---
+name: angular-cdk
+description: Use when implementing complex UI patterns. Triggers on "CDK", "dialog", "modal", "overlay", "dropdown", "tooltip", "virtual scroll", "drag drop", "focus trap", "portal", or CDK questions.
+allowed-tools:
+  - Read
+  - Edit
+  - Write
+  - Glob
+  - Grep
+---
+
 # Angular CDK Usage Guidelines
 
 **IMPORTANT: Always prefer Angular CDK primitives over custom implementations for common UI patterns.**
@@ -216,7 +227,7 @@ export class SortableListComponent {
 ## What NOT to Do
 
 ```typescript
-// ❌ Bad: Custom overlay implementation
+// Bad: Custom overlay implementation
 @Component({
   template: `
     @if (isOpen) {
@@ -233,7 +244,7 @@ export class CustomDialogComponent {
   }
 }
 
-// ✅ Good: Use CDK Dialog
+// Good: Use CDK Dialog
 @Component({})
 export class DialogTriggerComponent {
   private dialog = inject(Dialog);

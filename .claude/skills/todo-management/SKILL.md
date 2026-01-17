@@ -1,10 +1,18 @@
+---
+name: todo-management
+description: Use when managing project tasks or tracking progress. Triggers on "TODO", "PLAN", "phase", "progress", "task tracking", "milestone", "archive phase", or project management questions.
+allowed-tools:
+  - Read
+  - Edit
+  - Write
+  - Glob
+---
+
 # TODO Management Best Practices
 
 **Purpose:** Track phase progress in real-time and maintain accurate project status
 
----
-
-## 📋 Core Principles
+## Core Principles
 
 ### 1. Create TODO.md at Phase Start
 
@@ -20,21 +28,19 @@ cp .claude/TODO-TEMPLATE.md TODO.md
 
 ### 2. Update in Real-Time
 
-- ✅ Mark tasks as [x] **immediately** after completion
-- ✅ Update progress percentages after each session
-- ✅ Add newly discovered tasks as they arise
-- ✅ Move tasks between sections (Pending → In Progress → Completed)
+- Mark tasks as [x] **immediately** after completion
+- Update progress percentages after each session
+- Add newly discovered tasks as they arise
+- Move tasks between sections (Pending -> In Progress -> Completed)
 
 ### 3. Keep PLAN.md Synchronized
 
 - After updating TODO.md, update corresponding sections in PLAN.md
-- Mark completed phases with ✅ in PLAN.md
+- Mark completed phases in PLAN.md
 - Update phase completion percentages
 - Keep both files showing the same status
 
----
-
-## 🎯 When to Update TODO.md
+## When to Update TODO.md
 
 ### Start of Phase
 
@@ -63,7 +69,7 @@ cp .claude/TODO-TEMPLATE.md TODO.md
 
 - [ ] Mark all remaining tasks as complete [x]
 - [ ] Update progress to 100%
-- [ ] Update PLAN.md phase status to ✅ COMPLETE
+- [ ] Update PLAN.md phase status to COMPLETE
 - [ ] **ARCHIVE current TODO.md as `TODO-Phase-X.X.md`**
 - [ ] **CREATE FRESH TODO.md for next phase from template**
 - [ ] Commit both archived and new TODO files
@@ -76,25 +82,23 @@ cp .claude/TODO-TEMPLATE.md TODO.md
 - Clear start/end boundaries for phases
 - Easy to review what was accomplished in each phase
 
----
-
-## 📝 TODO.md Structure
+## TODO.md Structure
 
 ### Required Sections
 
-#### 1. Completed Tasks ✅
+#### 1. Completed Tasks
 
 ```markdown
-## ✅ Completed Tasks
+## Completed Tasks
 
 - [x] Task 1
 - [x] Task 2
 ```
 
-#### 2. In Progress 🔄
+#### 2. In Progress
 
 ```markdown
-## 🔄 In Progress
+## In Progress
 
 ### 1. Category Name
 
@@ -103,19 +107,19 @@ cp .claude/TODO-TEMPLATE.md TODO.md
 - [ ] Subtask 3 (pending)
 ```
 
-#### 3. Progress Summary 📊
+#### 3. Progress Summary
 
 ```markdown
-## 📊 Progress Summary
+## Progress Summary
 
 **Phase:** 0.2 - Core Chat Components
 **Status:** In Progress
 **Overall Progress:** 60% Complete
 
 **Total Tasks:** 5 major categories
-**Completed:** 3 ✅
-**In Progress:** 1 🔄
-**Pending:** 1 ⏳
+**Completed:** 3
+**In Progress:** 1
+**Pending:** 1
 ```
 
 #### 4. Timestamp
@@ -125,9 +129,7 @@ _Last Updated: 2025-12-24_
 _Progress tracked in real-time during implementation_
 ```
 
----
-
-## ✅ Quality Checklist
+## Quality Checklist
 
 Before considering TODO.md complete:
 
@@ -141,11 +143,9 @@ Before considering TODO.md complete:
 - [ ] In Progress tasks are clear
 - [ ] Progress summary is up to date
 
----
+## Common Mistakes to Avoid
 
-## 🚫 Common Mistakes to Avoid
-
-### ❌ DON'T
+### DON'T
 
 - Don't wait until end of phase to update TODO.md
 - Don't forget to mark tasks as complete [x]
@@ -154,7 +154,7 @@ Before considering TODO.md complete:
 - Don't forget to commit TODO.md changes
 - Don't leave outdated timestamps
 
-### ✅ DO
+### DO
 
 - Update TODO.md immediately after each task
 - Keep progress summary accurate in real-time
@@ -163,23 +163,21 @@ Before considering TODO.md complete:
 - Commit TODO.md changes to git
 - Use TODO.md as source of truth for progress
 
----
-
-## 📊 Progress Calculation
+## Progress Calculation
 
 ### Percentage Formula
 
 ```
-Progress % = (Completed Tasks / Total Tasks) × 100
+Progress % = (Completed Tasks / Total Tasks) x 100
 ```
 
 ### Example
 
 ```markdown
 **Total Tasks:** 10 major categories
-**Completed:** 8 ✅
-**In Progress:** 1 🔄
-**Pending:** 1 ⏳
+**Completed:** 8
+**In Progress:** 1
+**Pending:** 1
 
 **Overall Progress:** 80% Complete
 ```
@@ -190,33 +188,9 @@ Progress % = (Completed Tasks / Total Tasks) × 100
 - **26-50%:** In Progress
 - **51-75%:** Making Good Progress
 - **76-99%:** Nearly Complete
-- **100%:** Complete ✅
+- **100%:** Complete
 
----
-
-## 🔗 Integration with Other Files
-
-### PLAN.md
-
-- Copy phase tasks from PLAN.md to TODO.md
-- Update PLAN.md phase status when TODO.md changes
-- Keep phase completion percentages synchronized
-
-### README.md
-
-- Update README.md if new features are added
-- Reflect completed phases in README.md
-- Keep documentation in sync with progress
-
-### TESTING.md
-
-- Create/update TESTING.md as features are built
-- Add test instructions for new components
-- Update test status in TESTING.md
-
----
-
-## 🎯 Example Workflow
+## Example Workflow
 
 ### Completing Phase 0.1 and Starting Phase 0.2
 
@@ -263,11 +237,11 @@ git commit -m "docs: create TODO.md for Phase 0.2"
 ```markdown
 # In PLAN.md, update:
 
-## 🎯 Phase 0.1: Project Setup & Foundation ✅ 100% COMPLETE
+## Phase 0.1: Project Setup & Foundation - 100% COMPLETE
 
-**Status:** ✅ Complete - All foundation tasks done
+**Status:** Complete - All foundation tasks done
 
-## 🎯 Phase 0.2: Core Chat Components 🔄 0% IN PROGRESS
+## Phase 0.2: Core Chat Components - 0% IN PROGRESS
 
 **Status:** In Progress - Starting component development
 ```
@@ -276,65 +250,15 @@ git commit -m "docs: create TODO.md for Phase 0.2"
 
 ```
 angular-ai-kit/
-├── TODO.md                    # Current phase (Phase 0.2)
-├── TODO-Phase-0.1.md         # Archived (100% complete)
-├── TODO-Phase-0.2.md         # Archived (when 0.2 is done)
-├── PLAN.md                    # Overall project plan
-└── .claude/
-    └── TODO-TEMPLATE.md       # Template for new phases
+  TODO.md                    # Current phase (Phase 0.2)
+  TODO-Phase-0.1.md         # Archived (100% complete)
+  TODO-Phase-0.2.md         # Archived (when 0.2 is done)
+  PLAN.md                    # Overall project plan
+  .claude/
+    TODO-TEMPLATE.md       # Template for new phases
 ```
 
-### During Implementation
-
-```markdown
-# Before starting task
-
-## 🔄 In Progress
-
-- [ ] Build MessageBubble component
-
-# After completing task
-
-## ✅ Completed Tasks
-
-- [x] Build MessageBubble component
-
-# Update progress
-
-**Overall Progress:** 33% Complete (was 25%)
-```
-
-### Ending Session
-
-```bash
-# 1. Update TODO.md
-# - Mark completed tasks [x]
-# - Update progress %
-# - Update timestamp
-
-# 2. Update PLAN.md
-# - Mark corresponding tasks [x]
-# - Update phase status
-
-# 3. Commit changes
-git add TODO.md PLAN.md
-git commit -m "docs: update progress - 80% Phase 0.1 complete"
-```
-
----
-
-## 🎓 Best Practices
-
-1. **Be Specific:** Break down vague tasks into concrete actions
-2. **Be Realistic:** Don't over-commit, track actual progress
-3. **Be Consistent:** Use the same format across all phases
-4. **Be Timely:** Update immediately, not later
-5. **Be Accurate:** Progress % should reflect reality
-6. **Be Synchronized:** Keep TODO.md and PLAN.md aligned
-
----
-
-## 📋 TODO.md vs TodoWrite Tool
+## TODO.md vs TodoWrite Tool
 
 ### TODO.md (Project-Level)
 
@@ -377,9 +301,7 @@ git commit -m "docs: update progress - 80% Phase 0.1 complete"
 3. When task is done, mark it [x] in TODO.md
 4. Repeat for next task
 
----
-
-## 🎯 Quick Reference: Phase Transition Checklist
+## Phase Transition Checklist
 
 **Use this checklist when moving from one phase to another:**
 
@@ -387,7 +309,7 @@ git commit -m "docs: update progress - 80% Phase 0.1 complete"
 
 - [ ] All tasks in TODO.md marked as [x]
 - [ ] Progress summary shows 100%
-- [ ] PLAN.md updated with ✅ COMPLETE status
+- [ ] PLAN.md updated with COMPLETE status
 - [ ] Final timestamp updated
 - [ ] All work committed to git
 
@@ -410,9 +332,9 @@ git commit -m "docs: update progress - 80% Phase 0.1 complete"
 
 ### Updating PLAN.md
 
-- [ ] Mark completed phase with ✅ 100% COMPLETE
-- [ ] Add status line: "✅ Complete - All tasks done"
-- [ ] Mark new phase with 🔄 IN PROGRESS
+- [ ] Mark completed phase with 100% COMPLETE
+- [ ] Add status line: "Complete - All tasks done"
+- [ ] Mark new phase with IN PROGRESS
 - [ ] Add status line: "In Progress - Starting [phase name]"
 - [ ] Update progress summary at top of PLAN.md
 - [ ] Run: `git add PLAN.md`
@@ -424,7 +346,7 @@ git commit -m "docs: update progress - 80% Phase 0.1 complete"
 - [ ] `TODO-Phase-X.X.md` archived file exists
 - [ ] PLAN.md shows correct phase statuses
 - [ ] All changes committed to git
-- [ ] Ready to start work on new phase! 🚀
+- [ ] Ready to start work on new phase!
 
 ---
 

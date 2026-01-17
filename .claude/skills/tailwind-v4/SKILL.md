@@ -1,5 +1,12 @@
 ---
-paths: '**/*.{ts,css}'
+name: tailwind-v4
+description: Use when styling with Tailwind CSS v4. Triggers on "Tailwind", "CSS", "styling", "cn()", "classes", "responsive", "dark mode", "mobile-first", "@import tailwindcss", or Tailwind utility questions.
+allowed-tools:
+  - Read
+  - Edit
+  - Write
+  - Glob
+  - Grep
 ---
 
 # Tailwind CSS v4 Styling Guidelines

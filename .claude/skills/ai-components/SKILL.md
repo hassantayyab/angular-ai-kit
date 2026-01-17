@@ -1,8 +1,17 @@
+---
+name: ai-components
+description: Use when building AI chat interfaces. Triggers on "chat", "message", "AI", "streaming", "typing indicator", "message bubble", "chat input", "Spartan UI", "hlmBtn", "hlmAvatar", or chat component questions.
+allowed-tools:
+  - Read
+  - Edit
+  - Write
+  - Glob
+  - Grep
+---
+
 # AI Component Specific Rules
 
 **This library is focused on AI chat interfaces. All components should be designed with AI use cases in mind.**
-
----
 
 ## Spartan UI Components (Preferred)
 
@@ -35,17 +44,6 @@ Spartan UI provides accessible, well-designed primitives that integrate seamless
 | `@angular-ai-kit/spartan-ui/switch`        | Toggle switches                     |
 | `@angular-ai-kit/spartan-ui/textarea`      | Multiline text inputs               |
 
-### Example Components (Reference)
-
-See `apps/demo/src/app/components/spartan-components/` for working examples:
-
-- **NotionPrompt** - AI chat input with mentions, model selection, sources
-- **InputGroupDemo** - Various input group patterns
-- **ButtonGroupDemo** - Button grouping patterns
-- **ItemDemo** - List item patterns with actions
-- **SpinnerEmpty** - Loading/empty state patterns
-- **AppearanceSettings** - Settings panel pattern
-
 ### Usage Pattern
 
 ```typescript
@@ -76,22 +74,20 @@ export class ChatInputComponent {}
 
 ### When to Use Spartan UI
 
-- ✅ Form inputs (use `hlmInput`, `hlmInputGroup`, `hlmField`)
-- ✅ Buttons and actions (use `hlmBtn`, `hlmButtonGroup`)
-- ✅ Dropdowns and menus (use `hlmDropdownMenu`, `hlmPopover`)
-- ✅ Avatars (use `hlmAvatar`)
-- ✅ Badges and labels (use `hlmBadge`)
-- ✅ Loading states (use `hlmSpinner`)
-- ✅ Empty states (use `hlmEmpty`)
-- ✅ List items (use `hlmItem`)
+- Form inputs (use `hlmInput`, `hlmInputGroup`, `hlmField`)
+- Buttons and actions (use `hlmBtn`, `hlmButtonGroup`)
+- Dropdowns and menus (use `hlmDropdownMenu`, `hlmPopover`)
+- Avatars (use `hlmAvatar`)
+- Badges and labels (use `hlmBadge`)
+- Loading states (use `hlmSpinner`)
+- Empty states (use `hlmEmpty`)
+- List items (use `hlmItem`)
 
 ### When to Build Custom
 
-- ❌ Spartan doesn't have an equivalent component
-- ❌ Need highly specialized AI-specific behavior
-- ❌ Performance-critical streaming components
-
----
+- Spartan doesn't have an equivalent component
+- Need highly specialized AI-specific behavior
+- Performance-critical streaming components
 
 ## Chat Components
 
@@ -246,7 +242,7 @@ isStreaming = input(false);
 
 // Show cursor while streaming
 @if (isStreaming()) {
-  <span class="typing-cursor">▊</span>
+  <span class="typing-cursor">cursor</span>
 }
 ```
 

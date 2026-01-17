@@ -1,3 +1,12 @@
+---
+name: architecture
+description: Use when organizing code or making architectural decisions. Triggers on "barrel export", "index.ts", "file structure", "naming convention", "module boundary", "dependency injection", "InjectionToken", "scalability", or organization questions.
+allowed-tools:
+  - Read
+  - Glob
+  - Grep
+---
+
 # Architecture: Scalability & Maintainability Principles
 
 **This library must be SCALABLE and MAINTAINABLE for long-term success.**
@@ -13,7 +22,7 @@
 **Example:**
 
 ```typescript
-// ✅ Good: Composition with host directives
+// Good: Composition with host directives
 @Component({
   selector: 'ai-copyable-code-block',
   hostDirectives: [
@@ -25,7 +34,7 @@
 })
 export class CopyableCodeBlockComponent {}
 
-// ❌ Avoid: Deep inheritance hierarchies
+// Avoid: Deep inheritance hierarchies
 class BaseComponent {}
 class InteractiveComponent extends BaseComponent {}
 class CopyableComponent extends InteractiveComponent {}
@@ -41,10 +50,10 @@ class CopyableComponent extends InteractiveComponent {}
 **Example:**
 
 ```typescript
-// ❌ Avoid: Hardcoded dependencies
+// Avoid: Hardcoded dependencies
 import { SpecificChatService } from '../../../services/specific-chat.service';
 
-// ✅ Good: Use injection tokens
+// Good: Use injection tokens
 export const CHAT_CONFIG = new InjectionToken<ChatConfig>('ChatConfig');
 
 @Component({
@@ -65,12 +74,12 @@ export class ChatComponent {
 **Example:**
 
 ```typescript
-// ✅ Good: Efficient computed signals
+// Good: Efficient computed signals
 containerClasses = computed(() => {
   return cn('base-class', { active: this.isActive() });
 });
 
-// ❌ Avoid: Nested computed signals
+// Avoid: Nested computed signals
 containerClasses = computed(() => {
   const nestedComputed = computed(() => this.isActive());
   return cn('base-class', { active: nestedComputed() });
@@ -83,22 +92,6 @@ containerClasses = computed(() => {
 - Use semantic versioning
 - Deprecate gracefully (don't break existing users)
 - Keep internal APIs private (use TypeScript private/protected)
-
-**Example:**
-
-```typescript
-// Public API
-export interface ChatComponentAPI {
-  sendMessage(content: string): void;
-  clearMessages(): void;
-}
-
-// Internal implementation details (not exported)
-interface InternalChatState {
-  messageQueue: string[];
-  processingMessage: boolean;
-}
-```
 
 ## Maintainability Principles
 
@@ -113,10 +106,10 @@ interface InternalChatState {
 
 ```text
 message-bubble/
-├── message-bubble.component.ts (max 500 lines)
-├── message-bubble.types.ts
-├── message-bubble-helpers.ts
-└── index.ts
+  message-bubble.component.ts (max 500 lines)
+  message-bubble.types.ts
+  message-bubble-helpers.ts
+  index.ts
 ```
 
 ### 2. Type Safety
@@ -163,25 +156,18 @@ async function loadMessages() {
 }
 ```
 
-### 6. Testability (Future Consideration)
-
-- Write components to be testable (even if no tests now)
-- Avoid tight coupling
-- Use dependency injection
-- Keep business logic separate from UI logic
-
 ## Dependency Injection Patterns
 
 ### Service Injection
 
 ```typescript
-// ✅ Use inject() function
+// Use inject() function
 export class ChatComponent {
   private chatService = inject(ChatService);
   private config = inject(CHAT_CONFIG);
 }
 
-// ❌ Don't use constructor injection
+// Don't use constructor injection
 export class ChatComponent {
   constructor(private chatService: ChatService) {}
 }
@@ -249,7 +235,7 @@ export * from './lib/components';
 export * from './lib/directives';
 export * from './lib/types';
 
-// ❌ Don't re-export internal helpers
+// Don't re-export internal helpers
 export * from './internal-helper'; // Keep internal
 ```
 
@@ -257,10 +243,10 @@ export * from './internal-helper'; // Keep internal
 
 ```text
 message-bubble/
-├── message-bubble.component.ts
-├── message-bubble.component.html
-├── message-bubble.types.ts (optional)
-└── index.ts                 ← REQUIRED
+  message-bubble.component.ts
+  message-bubble.component.html
+  message-bubble.types.ts (optional)
+  index.ts                 <- REQUIRED
 ```
 
 ## Naming Conventions

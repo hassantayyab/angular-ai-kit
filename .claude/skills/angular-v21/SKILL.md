@@ -1,5 +1,12 @@
 ---
-paths: '**/*.ts'
+name: angular-v21
+description: Use when writing Angular v21 code. Triggers on "Angular", "component", "service", "signal", "inject", "standalone", "OnPush", "zoneless", "@if", "@for", "input()", "output()", "computed()", "effect()", or Angular v21 questions.
+allowed-tools:
+  - Read
+  - Edit
+  - Write
+  - Glob
+  - Grep
 ---
 
 # Angular v21 Best Practices
@@ -36,13 +43,13 @@ paths: '**/*.ts'
 - Use the `inject()` function instead of constructor injection
 
 ```typescript
-// ✅ Use inject() function instead of constructor injection
+// Use inject() function instead of constructor injection
 export class ComponentName {
   private service = inject(SomeService);
   private config = inject(APP_CONFIG);
 }
 
-// ❌ Don't use constructor injection
+// Don't use constructor injection
 export class ComponentName {
   constructor(private service: SomeService) {}
 }
@@ -79,12 +86,12 @@ constructor() {
   });
 }
 
-// Signal Updates - ❌ Don't use mutate
+// Signal Updates - Don't use mutate
 this.state.mutate((value) => {
   value.property = newValue;
 });
 
-// ✅ Use update or set instead
+// Use update or set instead
 this.state.update((value) => ({
   ...value,
   property: newValue,

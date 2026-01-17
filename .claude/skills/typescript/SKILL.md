@@ -1,5 +1,12 @@
 ---
-paths: '**/*.ts'
+name: typescript
+description: Use when writing TypeScript code. Triggers on "TypeScript", "interface", "type", "generic", "type guard", "discriminated union", "strict mode", "any type", or TypeScript type questions.
+allowed-tools:
+  - Read
+  - Edit
+  - Write
+  - Glob
+  - Grep
 ---
 
 # TypeScript Best Practices
@@ -278,12 +285,12 @@ export class MessageBubbleComponent {
 ## Avoid Common Pitfalls
 
 ```typescript
-// ❌ Don't use any
+// Don't use any
 function processData(data: any) {
   return data.value;
 }
 
-// ✅ Use unknown and type guards
+// Use unknown and type guards
 function processData(data: unknown) {
   if (typeof data === 'object' && data !== null && 'value' in data) {
     return (data as { value: string }).value;
@@ -291,19 +298,19 @@ function processData(data: unknown) {
   throw new Error('Invalid data format');
 }
 
-// ❌ Don't use non-null assertion unless absolutely necessary
+// Don't use non-null assertion unless absolutely necessary
 const element = document.querySelector('.chat')!;
 
-// ✅ Handle null case
+// Handle null case
 const element = document.querySelector('.chat');
 if (element) {
   // Use element
 }
 
-// ❌ Don't use type assertions without reason
+// Don't use type assertions without reason
 const message = data as ChatMessage;
 
-// ✅ Use type guards
+// Use type guards
 if (isChatMessage(data)) {
   const message = data;
 }

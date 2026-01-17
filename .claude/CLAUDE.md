@@ -52,37 +52,46 @@ packages/angular-ai-kit/src/lib/
 
 ---
 
-## Rule Files (IMPORTANT)
+## Skills (Model-Invoked Capabilities)
 
-**Detailed rules are organized in `.claude/rules/`. When adding new rules, put them in the appropriate file - NOT in this CLAUDE.md.**
+**Specialized knowledge is organized as Skills in `.claude/skills/`. Skills are automatically loaded when relevant to your task.**
 
-| File                      | Purpose                                                      |
-| ------------------------- | ------------------------------------------------------------ |
-| `accessibility.md`        | WCAG, ARIA, keyboard navigation, screen readers              |
-| `angular-cdk.md`          | Angular CDK primitives for dialogs, overlays, a11y           |
-| `angular-v21.md`          | Angular-specific patterns, signals, standalone components    |
-| `architecture.md`         | Scalability, barrel exports, naming conventions, file limits |
-| `component-patterns.md`   | Component structure, templates, inputs/outputs               |
-| `styling-architecture.md` | CSS variables, color system, theme() usage, dark mode        |
-| `tailwind-v4.md`          | Tailwind v4 setup, cn() utility, responsive design           |
-| `todo-management.md`      | Phase tracking, TODO.md management                           |
-| `typescript.md`           | Type safety, interfaces, error handling                      |
-| `ai-components.md`        | AI chat rules, Spartan UI components guide                   |
+Unlike always-loaded rules, Skills are **model-invoked** - Claude automatically decides when to use them based on the task at hand. This keeps context efficient while providing deep expertise when needed.
 
-### When to Update Which File
+| Skill                  | Triggers When                                                |
+| ---------------------- | ------------------------------------------------------------ |
+| `angular-v21`          | Writing Angular code, components, services, signals          |
+| `component-patterns`   | Creating/modifying components, inputs/outputs, templates     |
+| `tailwind-v4`          | Styling with Tailwind, cn() utility, responsive design       |
+| `typescript`           | Writing TypeScript, types, interfaces, error handling        |
+| `accessibility`        | Implementing a11y, ARIA, keyboard navigation, screen readers |
+| `styling-architecture` | CSS variables, color system, theme() usage, dark mode        |
+| `architecture`         | Code organization, barrel exports, naming conventions        |
+| `angular-cdk`          | Dialogs, overlays, focus management, virtual scrolling       |
+| `ai-components`        | AI chat interfaces, Spartan UI, streaming, message patterns  |
+| `todo-management`      | Phase tracking, TODO.md management, progress updates         |
 
-- **Component structure questions?** → `component-patterns.md`
-- **CSS variables/colors/theming?** → `styling-architecture.md`
-- **Tailwind v4 setup/utilities?** → `tailwind-v4.md`
-- **Angular patterns?** → `angular-v21.md`
-- **File organization/naming?** → `architecture.md`
-- **Accessibility?** → `accessibility.md`
-- **AI chat features / Spartan UI?** → `ai-components.md`
-- **TypeScript types?** → `typescript.md`
-- **Task tracking?** → `todo-management.md`
-- **Dialogs/Overlays/Focus?** → `angular-cdk.md`
+### How Skills Work
 
-**DO NOT dump all rules into CLAUDE.md. Keep it lean and reference-focused.**
+1. **Automatic Discovery**: Claude reads skill names and descriptions at startup
+2. **Context Matching**: When your task matches a skill's description, Claude loads it
+3. **Deep Expertise**: Full skill content is loaded only when relevant
+4. **Efficient Context**: Unused skills don't consume context tokens
+
+### Skill Directory Structure
+
+```text
+.claude/skills/
+├── angular-v21/
+│   └── SKILL.md
+├── component-patterns/
+│   └── SKILL.md
+├── tailwind-v4/
+│   └── SKILL.md
+└── ... (10 skills total)
+```
+
+**DO NOT dump all rules into CLAUDE.md. Skills handle specialized knowledge.**
 
 ---
 
@@ -171,4 +180,4 @@ Before considering code complete:
 
 ---
 
-_For detailed rules, see `.claude/rules/` directory._
+_Skills provide deep expertise when needed. See `.claude/skills/` directory._
